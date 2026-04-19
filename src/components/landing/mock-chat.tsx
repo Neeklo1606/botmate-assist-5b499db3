@@ -71,10 +71,7 @@ export function MockChat({
 
       {/* Messages */}
       <div
-        className={cn(
-          "space-y-2.5 px-4 py-5",
-          isDark ? "bg-foreground" : "bg-surface-muted/40",
-        )}
+        className={cn("space-y-2.5 px-4 py-5", isDark ? "bg-foreground" : "bg-surface-muted/40")}
       >
         {messages.map((msg) => {
           const isBot = msg.role === "bot";

@@ -15,7 +15,7 @@ export function ChannelsSection() {
         <SectionHeading
           eyebrow="Каналы"
           title="Все, где пишут ваши клиенты"
-          description="Один ассистент работает сразу везде. История диалогов и CRM-связки — общие."
+          description="Один ассистент работает сразу везде. История диалогов и CRM-связки общие."
         />
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

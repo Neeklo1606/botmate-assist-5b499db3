@@ -20,17 +20,21 @@ export function FaqSection() {
   return (
     <Section tone="default" size="md">
       <Container>
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Что обычно спрашивают"
-          align="left"
-        />
+        <SectionHeading eyebrow="FAQ" title="Что обычно спрашивают" align="left" />
 
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-8">
-            <Accordion type="single" collapsible className="rounded-xl border border-border bg-surface">
+            <Accordion
+              type="single"
+              collapsible
+              className="rounded-xl border border-border bg-surface"
+            >
               {items.map((item) => (
-                <AccordionItem key={item.id} value={item.id} className="border-border px-5 last:border-b-0">
+                <AccordionItem
+                  key={item.id}
+                  value={item.id}
+                  className="border-border px-5 last:border-b-0"
+                >
                   <AccordionTrigger className="py-4 text-left text-[15px] font-medium hover:no-underline">
                     {item.question}
                   </AccordionTrigger>
@@ -48,7 +52,7 @@ export function FaqSection() {
                 Не нашли ответ?
               </div>
               <p className="mt-2 text-sm text-ink-muted">
-                Напишите в Telegram — отвечаем в течение 30 минут в рабочее время.
+                Напишите в Telegram, отвечаем в течение 30 минут в рабочее время.
               </p>
               <div className="mt-4 space-y-2 text-sm">
                 <a

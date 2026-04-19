@@ -4,15 +4,7 @@
  * Дата-driven через useFirst100Stats / useFirst100Benefits / useFirst100Math.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Wrench,
-  Percent,
-  User,
-  Sparkles,
-  ArrowRight,
-  Check,
-  type LucideIcon,
-} from "lucide-react";
+import { Wrench, Percent, User, Sparkles, ArrowRight, Check, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { Section, SectionHeading } from "@/components/layout/section";
@@ -23,17 +15,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { DemoForm } from "@/components/landing/demo-form";
-import {
-  useFirst100Benefits,
-  useFirst100Math,
-  useFirst100Stats,
-} from "@/lib/hooks/use-first100";
+import { useFirst100Benefits, useFirst100Math, useFirst100Stats } from "@/lib/hooks/use-first100";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_marketing/first-100")({
   head: () => ({
     meta: [
-      { title: "Первые 100 клиентов botme — настройка под ключ за 150 000 ₽" },
+      { title: "Первые 100 клиентов botme: настройка под ключ за 150 000 ₽" },
       {
         name: "description",
         content:
@@ -67,26 +55,23 @@ const programFaq = [
   {
     id: "f1",
     question: "Что если не подойдёт?",
-    answer:
-      "Возврат 100% в первые 14 дней. Без вопросов. Дальше — работа по договору.",
+    answer: "Возврат 100% в первые 14 дней. Без вопросов. Дальше работаем по договору.",
   },
   {
     id: "f2",
     question: "Сколько времени займёт настройка?",
-    answer:
-      "От 3 до 5 рабочих дней с момента, когда вы дадите доступы к каналам и базе знаний.",
+    answer: "От 3 до 5 рабочих дней с момента, когда вы дадите доступы к каналам и базе знаний.",
   },
   {
     id: "f3",
     question: "Когда закончится скидка?",
     answer:
-      "Когда наберём 100 клиентов в программе. Если попали — цена не меняется, пока вы клиент.",
+      "Когда наберём 100 клиентов в программе. Если попали, цена не меняется, пока вы клиент.",
   },
   {
     id: "f4",
     question: "Можно ли платить частями?",
-    answer:
-      "Да: 50% предоплата, 50% после запуска и приёмки. По договору, на юрлицо или ИП.",
+    answer: "Да: 50% предоплата, 50% после запуска и приёмки. По договору, на юрлицо или ИП.",
   },
 ];
 
@@ -119,12 +104,12 @@ function First100Hero() {
               Программа для первых 100 клиентов
             </div>
             <h1 className="font-display text-[34px] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground md:text-[52px]">
-              Соберём вашего ассистента руками. За{" "}
-              <span className="tabular">150 000 ₽</span> один раз.
+              Соберём вашего ассистента руками. За <span className="tabular">150 000 ₽</span> один
+              раз.
             </h1>
             <p className="mt-5 max-w-[560px] text-[15px] text-ink-muted md:text-[17px]">
-              Команда neeklo настраивает ассистента под ваш бизнес лично. Pro-подписка
-              навсегда со скидкой 40%. Только для первых 100 клиентов.
+              Команда neeklo настраивает ассистента под ваш бизнес лично. Pro-подписка навсегда со
+              скидкой 40%. Только для первых 100 клиентов.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -194,10 +179,7 @@ function First100Benefits() {
           {benefits.map((b) => {
             const Icon = iconMap[b.icon] ?? Sparkles;
             return (
-              <div
-                key={b.id}
-                className="flex gap-4 rounded-xl border border-border bg-surface p-5"
-              >
+              <div key={b.id} className="flex gap-4 rounded-xl border border-border bg-surface p-5">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-foreground text-background">
                   <Icon className="h-5 w-5" strokeWidth={1.5} />
                 </div>
@@ -225,7 +207,7 @@ function First100Math() {
         <SectionHeading
           eyebrow="Математика оффера"
           title="Сколько вы экономите за первый год"
-          description="После 100 клиентов цены вернутся к стандартным. Сейчас — окно для тех, кто готов работать с нами вдолгую."
+          description="После 100 клиентов цены вернутся к стандартным. Сейчас открыто окно для тех, кто готов работать с нами вдолгую."
         />
 
         <div className="overflow-hidden rounded-xl border border-border">
@@ -300,11 +282,7 @@ function First100Faq() {
       <Container>
         <SectionHeading eyebrow="Частые вопросы" title="Что обычно спрашивают про программу" />
 
-        <Accordion
-          type="single"
-          collapsible
-          className="rounded-xl border border-border bg-surface"
-        >
+        <Accordion type="single" collapsible className="rounded-xl border border-border bg-surface">
           {programFaq.map((item) => (
             <AccordionItem
               key={item.id}
@@ -335,25 +313,21 @@ function First100Final() {
               Заявка в программу
             </div>
             <h2 className="font-display text-3xl font-semibold tracking-[-0.02em] md:text-4xl">
-              Заберите место — пока есть свободные
+              Заберите место, пока есть свободные
             </h2>
             <p className="mt-4 text-[15px] text-background/70 md:text-base">
-              Менеджер свяжется в течение 30 минут в рабочее время, обсудит вашу нишу
-              и закрепит за вами место в программе.
+              Менеджер свяжется в течение 30 минут в рабочее время, обсудит вашу нишу и закрепит за
+              вами место в программе.
             </p>
 
             <div className="mt-6 space-y-2 text-sm text-background/80">
               <Bullet>Возврат 100% в первые 14 дней</Bullet>
               <Bullet>Договор и оплата на ИП или юрлицо</Bullet>
-              <Bullet>Приёмка после запуска — без скрытых условий</Bullet>
+              <Bullet>Приёмка после запуска без скрытых условий</Bullet>
             </div>
           </div>
 
-          <DemoForm
-            source="first-100"
-            variant="dark"
-            ctaLabel="Хочу в программу первых 100"
-          />
+          <DemoForm source="first-100" variant="dark" ctaLabel="Хочу в программу первых 100" />
         </div>
       </Container>
     </Section>

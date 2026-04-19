@@ -29,10 +29,7 @@ export function SiteHeader() {
             <BotmeLogo />
           </Link>
 
-          <nav
-            aria-label="Главное меню"
-            className="hidden items-center gap-1 md:flex"
-          >
+          <nav aria-label="Главное меню" className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
               <Link
                 key={item.to}
@@ -63,23 +60,21 @@ export function SiteHeader() {
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={open}
           >
-            {open ? <X className="h-5 w-5" strokeWidth={1.5} /> : <Menu className="h-5 w-5" strokeWidth={1.5} />}
+            {open ? (
+              <X className="h-5 w-5" strokeWidth={1.5} />
+            ) : (
+              <Menu className="h-5 w-5" strokeWidth={1.5} />
+            )}
           </button>
         </div>
       </Container>
 
       {/* Mobile drawer */}
       <div
-        className={cn(
-          "border-t border-border bg-background md:hidden",
-          open ? "block" : "hidden",
-        )}
+        className={cn("border-t border-border bg-background md:hidden", open ? "block" : "hidden")}
       >
         <Container>
-          <nav
-            aria-label="Мобильное меню"
-            className="flex flex-col gap-1 py-3"
-          >
+          <nav aria-label="Мобильное меню" className="flex flex-col gap-1 py-3">
             {navItems.map((item) => (
               <Link
                 key={item.to}

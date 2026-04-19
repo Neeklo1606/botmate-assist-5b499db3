@@ -24,14 +24,15 @@ export function Hero() {
             </div>
 
             <h1 className="font-display text-[34px] font-semibold leading-[1.05] tracking-[-0.02em] text-foreground md:text-[56px]">
-              AI-ассистент,<br className="hidden sm:inline" /> который{" "}
-              <span className="rounded-md bg-accent px-2 text-accent-ink">не теряет</span>{" "}
-              ваших клиентов
+              AI-ассистент,
+              <br className="hidden sm:inline" /> который{" "}
+              <span className="rounded-md bg-accent px-2 text-accent-ink">не теряет</span> ваших
+              клиентов
             </h1>
 
             <p className="mt-5 max-w-[560px] text-[15px] text-ink-muted md:text-[17px]">
-              Отвечает за 7 секунд в Telegram, на сайте, в Avito. Квалифицирует лида,
-              записывает в CRM, доводит до сделки. Без выгорания, ночью и в выходные.
+              Отвечает за 7 секунд в Telegram, на сайте, в Avito. Квалифицирует лида, записывает в
+              CRM, доводит до сделки. Без выгорания, ночью и в выходные.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -42,7 +43,9 @@ export function Hero() {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/" hash="how">Как это работает</Link>
+                <Link to="/" hash="how">
+                  Как это работает
+                </Link>
               </Button>
             </div>
 
@@ -55,10 +58,7 @@ export function Hero() {
 
           <div className="md:col-span-6 lg:col-span-5">
             <div className="relative">
-              <div
-                aria-hidden
-                className="absolute -inset-3 -z-10 rounded-2xl bg-surface-muted"
-              />
+              <div aria-hidden className="absolute -inset-3 -z-10 rounded-2xl bg-surface-muted" />
               <MockChat messages={messages} />
             </div>
           </div>

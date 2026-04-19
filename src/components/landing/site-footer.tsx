@@ -39,13 +39,19 @@ export function SiteFooter() {
             <div className="mt-6 space-y-1.5 text-sm">
               <div className="text-ink-muted">
                 Telegram:{" "}
-                <a className="text-foreground underline-offset-4 hover:underline" href="https://t.me/botme_support">
+                <a
+                  className="text-foreground underline-offset-4 hover:underline"
+                  href="https://t.me/botme_support"
+                >
                   @botme_support
                 </a>
               </div>
               <div className="text-ink-muted">
                 Email:{" "}
-                <a className="text-foreground underline-offset-4 hover:underline" href="mailto:hello@botme.ru">
+                <a
+                  className="text-foreground underline-offset-4 hover:underline"
+                  href="mailto:hello@botme.ru"
+                >
                   hello@botme.ru
                 </a>
               </div>
