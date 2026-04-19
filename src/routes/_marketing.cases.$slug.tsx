@@ -9,28 +9,35 @@ import { Button } from "@/components/ui/button";
 import { ChannelIcon } from "@/components/brand/channel-icon";
 import { useCaseStudies, useCaseStudy } from "@/lib/hooks/use-marketing";
 import { FinalCTA } from "@/components/landing/sections/final-cta";
+import { repository } from "@/lib/mock/repository";
+import { buildPageMeta, canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/_marketing/cases/$slug")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `Кейс ${params.slug}: botme` },
-      {
-        name: "description",
-        content: `Подробный кейс клиента botme: задача, решение, метрики и результат.`,
-      },
-      { property: "og:title", content: `Кейс ${params.slug}: botme` },
-      {
-        property: "og:description",
-        content: "Реальный кейс клиента botme с цифрами.",
-      },
-    ],
-  }),
   loader: async ({ params }) => {
-    // лёгкий guard: если slug откровенно мусорный, отдаём 404 заранее
     if (!params.slug || params.slug.length > 60) {
       throw notFound();
     }
-    return null;
+    const study = await repository.getCaseBySlug(params.slug);
+    if (!study) throw notFound();
+    return { study };
+  },
+  head: ({ loaderData, params }) => {
+    const study = loaderData?.study;
+    const title = study
+      ? `${study.company} — кейс botme в нише ${study.industry}`
+      : `Кейс — botme`;
+    const description = study
+      ? `${study.summary} Реальные метрики за 30 дней работы AI-ассистента botme.`
+      : "Подробный кейс клиента botme: задача, решение, метрики и результат.";
+    return {
+      meta: buildPageMeta({
+        title,
+        description,
+        path: `/cases/${params.slug}`,
+        type: "article",
+      }),
+      links: [canonicalLink(`/cases/${params.slug}`)],
+    };
   },
   notFoundComponent: () => (
     <Section size="lg">
