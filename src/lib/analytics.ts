@@ -66,12 +66,20 @@ declare global {
 
 /**
  * Отправить событие. Безопасно вызывать на любом этапе (SSR / до загрузки скрипта).
+ * В dev-режиме дублируем в console для отладки — Plausible дропает события
+ * с превью-доменов (host ≠ data-domain).
  */
 export function track<E extends AnalyticsEventName>(
   event: E,
   props?: AnalyticsEventMap[E],
 ): void {
   if (typeof window === "undefined") return;
+
+  if (import.meta.env.DEV) {
+    // eslint-disable-next-line no-console
+    console.info("[analytics]", event, props ?? {});
+  }
+
   const fn = window.plausible;
   if (typeof fn !== "function") return;
   try {
