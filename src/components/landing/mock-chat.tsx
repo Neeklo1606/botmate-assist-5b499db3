@@ -1,54 +1,44 @@
 /**
- * MockChat — статичная mock-переписка в стиле мессенджера.
- * Используется в Hero, Demo и посадочных по нишам.
+ * MockChat — публичный wrapper.
  *
- * UX: чат не «прыгает» — фиксированная высота с внутренним скроллом.
- * Поле ввода disabled. На mobile тап по полю → toast с CTA «оставить заявку».
+ * Зачем lazy:
+ *  — Реализация (mock-chat-impl) тянет sonner toast, состояния, эффекты.
+ *  — На лендинге чат виден сразу, но на /scenarios/$niche он ниже фолда —
+ *    lazy chunk не блокирует первый рендер.
+ *  — Skeleton имеет ту же фиксированную высоту (440px / md:580px), что и
+ *    реальный чат → нулевой layout shift при подгрузке.
  */
-import { Send } from "lucide-react";
-import { toast } from "sonner";
-import type { ChatMessage } from "@/types/entities";
+import { lazy, Suspense } from "react";
 import { cn } from "@/lib/utils";
+import type { MockChatProps } from "./mock-chat-types";
 
-interface MockChatProps {
-  title?: string;
-  subtitle?: string;
-  messages: ChatMessage[];
-  variant?: "light" | "dark";
-  className?: string;
+const MockChatImpl = lazy(() => import("./mock-chat-impl"));
+
+export function MockChat(props: MockChatProps) {
+  return (
+    <Suspense fallback={<MockChatSkeleton variant={props.variant} className={props.className} />}>
+      <MockChatImpl {...props} />
+    </Suspense>
+  );
 }
 
-export function MockChat({
-  title = "Ассистент botme",
-  subtitle = "онлайн",
-  messages,
+function MockChatSkeleton({
   variant = "light",
   className,
-}: MockChatProps) {
+}: {
+  variant?: "light" | "dark";
+  className?: string;
+}) {
   const isDark = variant === "dark";
-
-  const handleDemoTap = () => {
-    toast("Это демо-режим", {
-      description: "Чтобы попробовать настоящего ассистента — оставьте заявку.",
-      action: {
-        label: "Оставить заявку",
-        onClick: () => {
-          const el = document.getElementById("demo");
-          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        },
-      },
-    });
-  };
-
   return (
     <div
+      aria-hidden
       className={cn(
         "flex h-[440px] max-h-[60vh] flex-col overflow-hidden rounded-xl border shadow-lift md:h-[580px] md:max-h-none",
         isDark ? "border-border-strong/40 bg-foreground" : "border-border bg-surface",
         className,
       )}
     >
-      {/* Header (fixed, 64px) */}
       <div
         className={cn(
           "flex h-16 flex-none items-center gap-3 border-b px-4",
@@ -57,113 +47,32 @@ export function MockChat({
       >
         <div
           className={cn(
-            "flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-semibold",
-            isDark ? "bg-accent text-accent-ink" : "bg-foreground text-background",
+            "h-9 w-9 animate-pulse rounded-full",
+            isDark ? "bg-background/10" : "bg-surface-muted",
           )}
-          aria-hidden
-        >
-          bm
-        </div>
-        <div className="min-w-0 flex-1">
+        />
+        <div className="flex-1 space-y-2">
           <div
             className={cn(
-              "truncate text-sm font-medium leading-tight",
-              isDark ? "text-background" : "text-foreground",
+              "h-3 w-32 animate-pulse rounded",
+              isDark ? "bg-background/10" : "bg-surface-muted",
             )}
-          >
-            {title}
-          </div>
+          />
           <div
             className={cn(
-              "mt-0.5 inline-flex items-center gap-1.5 text-xs",
-              isDark ? "text-background/60" : "text-muted-foreground",
+              "h-2 w-20 animate-pulse rounded",
+              isDark ? "bg-background/10" : "bg-surface-muted",
             )}
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
-            {subtitle}
-          </div>
+          />
         </div>
       </div>
-
-      {/* Messages (flex-1, internal scroll) */}
+      <div className={cn("flex-1", isDark ? "bg-foreground" : "bg-surface-muted/40")} />
       <div
         className={cn(
-          "flex-1 space-y-2.5 overflow-y-auto px-4 py-5",
-          isDark ? "bg-foreground" : "bg-surface-muted/40",
+          "h-16 flex-none border-t",
+          isDark ? "border-border-strong/30" : "border-border",
         )}
-      >
-        {messages.map((msg) => {
-          const isBot = msg.role === "bot";
-          return (
-            <div
-              key={msg.id}
-              className={cn("flex w-full", isBot ? "justify-start" : "justify-end")}
-            >
-              <div className="max-w-[78%]">
-                <div
-                  className={cn(
-                    "rounded-2xl px-3.5 py-2 text-[14px] leading-snug",
-                    isBot
-                      ? isDark
-                        ? "rounded-tl-sm bg-background/10 text-background"
-                        : "rounded-tl-sm border border-border bg-surface text-foreground"
-                      : isDark
-                        ? "rounded-tr-sm bg-accent text-accent-ink"
-                        : "rounded-tr-sm bg-foreground text-background",
-                  )}
-                >
-                  {msg.text}
-                </div>
-                {msg.time ? (
-                  <div
-                    className={cn(
-                      "mt-1 px-1 text-[11px] tabular-nums",
-                      isBot ? "text-left" : "text-right",
-                      isDark ? "text-background/40" : "text-ink-subtle",
-                    )}
-                  >
-                    {msg.time}
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Composer — disabled, demo-mode (fixed, 64px) */}
-      <div
-        className={cn(
-          "flex h-16 flex-none items-center gap-2 border-t px-3",
-          isDark ? "border-border-strong/30 bg-foreground" : "border-border bg-surface",
-        )}
-      >
-        <button
-          type="button"
-          onClick={handleDemoTap}
-          className={cn(
-            "flex-1 cursor-pointer rounded-md px-3 py-2 text-left text-[13px] transition-colors",
-            isDark
-              ? "bg-background/10 text-background/40 hover:bg-background/15"
-              : "bg-surface-muted text-ink-subtle hover:bg-surface-muted/80",
-          )}
-        >
-          Демо-режим. Попробуйте вашего ассистента.
-        </button>
-        <button
-          type="button"
-          onClick={handleDemoTap}
-          aria-label="Это демо. Оставьте заявку."
-          className={cn(
-            "flex h-9 w-9 flex-none items-center justify-center rounded-md transition-colors",
-            isDark
-              ? "bg-accent text-accent-ink hover:bg-accent-hover"
-              : "bg-foreground text-background hover:bg-primary-hover",
-          )}
-        >
-          <Send className="h-4 w-4" strokeWidth={1.5} />
-        </button>
-      </div>
+      />
     </div>
   );
 }
