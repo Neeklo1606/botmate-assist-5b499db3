@@ -101,7 +101,7 @@ export default function MockChatImpl({
           isDark ? "bg-foreground" : "bg-surface-muted/40",
         )}
       >
-        {messages.map((msg) => {
+        {visibleMessages.map((msg: ChatMessage) => {
           const isBot = msg.role === "bot";
           return (
             <div
@@ -138,6 +138,21 @@ export default function MockChatImpl({
             </div>
           );
         })}
+
+        {lastIsBot && phase === "typing" ? (
+          <div className="flex w-full justify-start" aria-live="polite" aria-label="печатает">
+            <div
+              className={cn(
+                "inline-flex items-center gap-1 rounded-2xl rounded-tl-sm px-3.5 py-2.5",
+                isDark ? "bg-background/10" : "border border-border bg-surface",
+              )}
+            >
+              <TypingDot isDark={isDark} delay="0ms" />
+              <TypingDot isDark={isDark} delay="160ms" />
+              <TypingDot isDark={isDark} delay="320ms" />
+            </div>
+          </div>
+        ) : null}
       </div>
 
       {/* Composer — disabled, demo-mode (fixed, 64px) */}
