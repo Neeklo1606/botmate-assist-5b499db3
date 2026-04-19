@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { MockChat } from "@/components/landing/mock-chat";
 import { useScenarioDetail, useCaseStudy } from "@/lib/hooks/use-marketing";
 import { FinalCTA } from "@/components/landing/sections/final-cta";
+import { repository } from "@/lib/mock/repository";
+import { buildPageMeta, canonicalLink } from "@/lib/seo";
 import type { Niche } from "@/types/entities";
 
 const VALID_NICHES: Niche[] = [
@@ -23,28 +25,29 @@ const VALID_NICHES: Niche[] = [
 ];
 
 export const Route = createFileRoute("/_marketing/scenarios/$niche")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `AI-ассистент для ниши ${params.niche}: botme` },
-      {
-        name: "description",
-        content: `Готовый AI-ассистент под нишу ${params.niche}: задачи, диалог, интеграции и кейс клиента.`,
-      },
-      {
-        property: "og:title",
-        content: `AI-ассистент для ниши ${params.niche}: botme`,
-      },
-      {
-        property: "og:description",
-        content: "Сценарий ассистента под индустрию.",
-      },
-    ],
-  }),
   loader: async ({ params }) => {
     if (!VALID_NICHES.includes(params.niche as Niche)) {
       throw notFound();
     }
-    return null;
+    const scenario = await repository.getScenarioByNiche(params.niche as Niche);
+    return { scenario };
+  },
+  head: ({ loaderData, params }) => {
+    const sc = loaderData?.scenario;
+    const title = sc
+      ? `${sc.title} — AI-ассистент botme для ${sc.industry}`
+      : `Сценарий botme — ${params.niche}`;
+    const description = sc
+      ? `${sc.pain} Готовый сценарий ассистента botme: задачи, диалог, интеграции и кейс клиента.`
+      : "Готовый AI-ассистент под нишу: задачи, диалог, интеграции и кейс клиента.";
+    return {
+      meta: buildPageMeta({
+        title,
+        description,
+        path: `/scenarios/${params.niche}`,
+      }),
+      links: [canonicalLink(`/scenarios/${params.niche}`)],
+    };
   },
   notFoundComponent: () => (
     <Section size="lg">
