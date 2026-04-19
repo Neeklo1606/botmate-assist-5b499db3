@@ -21,16 +21,16 @@ function useHashScroll() {
   const location = useLocation();
   const hash = location.hash;
   const pathname = location.pathname;
+  // state.key обновляется на КАЖДЫЙ navigate(), даже если pathname+hash совпадают.
+  // Это позволяет повторно триггерить скролл при повторном клике на тот же #demo
+  // (например, hero CTA, потом FinalCTA — оба ведут к #demo).
+  const navKey = (location.state as { key?: string } | undefined)?.key ?? "";
 
   useEffect(() => {
     if (!hash) {
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
       return;
     }
-    // Lazy-секции (Pricing/Cases/FAQ) грузятся ниже #demo и могут изменять
-    // body.scrollHeight уже после старта smooth-анимации, что в Chromium
-    // прерывает её на промежуточной позиции. Поэтому делаем коррекцию
-    // через 350ms после первого скролла.
     let cancelled = false;
     const HEADER_GAP = 72;
 
@@ -45,6 +45,7 @@ function useHashScroll() {
     const tryScroll = (attempt: number) => {
       if (cancelled) return;
       if (scrollNow()) {
+        // Коррекция после возможной подгрузки lazy-секций — body может «дёрнуться».
         setTimeout(() => {
           if (!cancelled) scrollNow();
         }, 350);
@@ -57,7 +58,7 @@ function useHashScroll() {
     return () => {
       cancelled = true;
     };
-  }, [hash, pathname]);
+  }, [hash, pathname, navKey]);
 }
 
 function MarketingLayout() {
