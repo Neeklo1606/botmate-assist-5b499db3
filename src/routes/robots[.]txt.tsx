@@ -3,7 +3,9 @@
  * Открываем индексацию для всех маркетинговых страниц, закрываем кабинет и auth.
  */
 import { createFileRoute } from "@tanstack/react-router";
-import "@tanstack/react-start";
+// Подтягиваем module augmentation для server.handlers (createFileRoute расширяется
+// типами из @tanstack/start-client-core/serverRoute).
+import type {} from "@tanstack/start-client-core/serverRoute";
 import { getSiteOrigin } from "@/lib/seo";
 
 export const Route = createFileRoute("/robots.txt")({
