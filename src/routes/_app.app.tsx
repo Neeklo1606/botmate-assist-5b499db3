@@ -60,9 +60,16 @@ function DashboardPage() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {kpis?.map((kpi) => <KpiCard key={kpi.label} kpi={kpi} />)}
-          </div>
+          <RevealGroup
+            onMount
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {kpis?.map((kpi) => (
+              <RevealItem key={kpi.label}>
+                <KpiCard kpi={kpi} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
         )}
       </section>
 
