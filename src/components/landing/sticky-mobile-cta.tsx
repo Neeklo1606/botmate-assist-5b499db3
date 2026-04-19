@@ -44,11 +44,11 @@ export function StickyMobileCTA() {
   return (
     <div
       className={`fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 px-4 py-3 backdrop-blur transition-transform duration-200 md:hidden ${
-        visible ? "translate-y-0" : "translate-y-full"
+        visible ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
       aria-hidden={!visible}
     >
-      <Button asChild variant="brand" size="lg" className="w-full">
+      <Button asChild variant="brand" size="lg" className="w-full" tabIndex={visible ? 0 : -1}>
         <Link to="/" hash="demo">
           Запустить за 3 дня
         </Link>
