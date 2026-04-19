@@ -47,8 +47,6 @@ export function StickyMobileCTA() {
         visible ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
       aria-hidden={!visible}
-      // inert для скрытого состояния — убираем из tab-order и a11y-tree.
-      {...(visible ? {} : { inert: "" as unknown as boolean })}
     >
       <Button asChild variant="brand" size="lg" className="w-full" tabIndex={visible ? 0 : -1}>
         <Link to="/" hash="demo">
