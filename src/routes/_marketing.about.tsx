@@ -62,8 +62,8 @@ function AboutPage() {
               Делаем AI-ассистенты, которые приносят выручку
             </h1>
             <p className="mt-5 text-base text-ink-muted md:text-lg">
-              botme — продукт студии neeklo.studio. Мы строим инструменты, которые экономят бизнесу
-              часы и деньги. Без волшебства — на проверенных технологиях.
+              botme: продукт студии neeklo.studio. Мы строим инструменты, которые экономят бизнесу
+              часы и деньги. Без волшебства, на проверенных технологиях.
             </p>
           </div>
         </Container>
@@ -75,7 +75,7 @@ function AboutPage() {
           <SectionHeading
             eyebrow="Принципы"
             title="Что мы считаем правильным"
-            description="Если эти принципы не подходят вашему бизнесу — мы не подойдём друг другу."
+            description="Если эти принципы не подходят вашему бизнесу, мы не подойдём друг другу."
           />
           <div className="grid gap-4 md:grid-cols-3">
             {PRINCIPLES.map((p, i) => (
@@ -120,7 +120,7 @@ function AboutPage() {
               Хотите познакомиться?
             </h3>
             <p className="max-w-md text-sm text-ink-muted">
-              Расскажите о бизнесе — за 30 минут покажем, как ассистент будет работать именно у вас.
+              Расскажите о бизнесе. За 30 минут покажем, как ассистент будет работать именно у вас.
             </p>
             <Button asChild variant="brand" size="lg" className="mt-2">
               <Link to="/" hash="demo">
