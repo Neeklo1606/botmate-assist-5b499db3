@@ -6,8 +6,13 @@ import { Container } from "@/components/layout/container";
 import { BotmeLogo } from "@/components/brand/botme-logo";
 import { useLocale } from "@/lib/i18n/locale";
 
-export function SiteFooter() {
+interface SiteFooterProps {
+  variant?: "light" | "dark";
+}
+
+export function SiteFooter({ variant = "light" }: SiteFooterProps = {}) {
   const { t } = useLocale();
+  const isDark = variant === "dark";
 
   const productLinks = [
     { to: "/assistant" as const, hash: "features", label: t("footer.linkFeatures") },
@@ -30,26 +35,39 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="border-t border-border bg-background">
+    <footer
+      className="border-t"
+      style={{
+        background: isDark ? "var(--bg-base)" : undefined,
+        borderColor: isDark ? "var(--border-dark)" : undefined,
+      }}
+    >
       <Container>
         <div className="grid gap-10 py-12 md:grid-cols-12 md:py-16">
           <div className="md:col-span-4">
-            <BotmeLogo />
-            <p className="mt-3 max-w-[280px] text-sm text-ink-muted">{t("footer.tagline")}</p>
+            <BotmeLogo variant={isDark ? "dark" : "light"} />
+            <p
+              className="mt-3 max-w-[280px] text-sm"
+              style={{ color: isDark ? "var(--ink-dark-muted)" : undefined }}
+            >
+              {t("footer.tagline")}
+            </p>
             <div className="mt-6 space-y-1.5 text-sm">
-              <div className="text-ink-muted">
+              <div style={{ color: isDark ? "var(--ink-dark-muted)" : undefined }}>
                 Telegram:{" "}
                 <a
-                  className="text-foreground underline-offset-4 hover:underline"
+                  className="underline-offset-4 hover:underline"
+                  style={{ color: isDark ? "var(--ink-dark)" : undefined }}
                   href="https://t.me/botme_support"
                 >
                   @botme_support
                 </a>
               </div>
-              <div className="text-ink-muted">
+              <div style={{ color: isDark ? "var(--ink-dark-muted)" : undefined }}>
                 Email:{" "}
                 <a
-                  className="text-foreground underline-offset-4 hover:underline"
+                  className="underline-offset-4 hover:underline"
+                  style={{ color: isDark ? "var(--ink-dark)" : undefined }}
                   href="mailto:hello@botme.ru"
                 >
                   hello@botme.ru
@@ -58,12 +76,18 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <FooterCol title={t("footer.product")} items={productLinks} />
-          <FooterCol title={t("footer.company")} items={companyLinks} />
-          <FooterCol title={t("footer.legal")} items={legalLinks} />
+          <FooterCol title={t("footer.product")} items={productLinks} dark={isDark} />
+          <FooterCol title={t("footer.company")} items={companyLinks} dark={isDark} />
+          <FooterCol title={t("footer.legal")} items={legalLinks} dark={isDark} />
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-3 border-t border-border py-6 text-xs text-ink-subtle md:flex-row md:items-center">
+        <div
+          className="flex flex-col items-start justify-between gap-3 border-t py-6 text-xs md:flex-row md:items-center"
+          style={{
+            borderColor: isDark ? "var(--border-dark)" : undefined,
+            color: isDark ? "var(--ink-dark-subtle)" : undefined,
+          }}
+        >
           <div>
             © {new Date().getFullYear()} botme · {t("footer.copyright")}
           </div>
@@ -77,13 +101,18 @@ export function SiteFooter() {
 function FooterCol({
   title,
   items,
+  dark = false,
 }: {
   title: string;
   items: ReadonlyArray<{ to: string; hash?: string; label: string }>;
+  dark?: boolean;
 }) {
   return (
     <div className="md:col-span-2">
-      <div className="mb-3 text-xs font-medium uppercase tracking-wide text-ink-subtle">
+      <div
+        className="mb-3 text-xs font-medium uppercase tracking-wide"
+        style={{ color: dark ? "var(--ink-dark-subtle)" : undefined }}
+      >
         {title}
       </div>
       <ul className="space-y-2">
@@ -92,7 +121,16 @@ function FooterCol({
             <Link
               to={item.to}
               hash={item.hash}
-              className="text-sm text-foreground/80 transition-colors hover:text-foreground"
+              className="text-sm transition-colors"
+              style={{
+                color: dark ? "var(--ink-dark-muted)" : undefined,
+              }}
+              onMouseEnter={(e) => {
+                if (dark) e.currentTarget.style.color = "var(--ink-dark)";
+              }}
+              onMouseLeave={(e) => {
+                if (dark) e.currentTarget.style.color = "var(--ink-dark-muted)";
+              }}
             >
               {item.label}
             </Link>
