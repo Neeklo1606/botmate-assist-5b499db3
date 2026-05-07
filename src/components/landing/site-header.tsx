@@ -17,11 +17,9 @@ export function SiteHeader() {
   const { t, locale, setLocale } = useLocale();
 
   const navItems = [
-    { to: "/features" as const, label: t("nav.features") },
-    { to: "/cases" as const, label: t("nav.cases") },
-    { to: "/scenarios" as const, label: t("nav.scenarios") },
-    { to: "/pricing" as const, label: t("nav.pricing") },
-    { to: "/faq" as const, label: t("nav.faq") },
+    { to: "/assistant" as const, label: t("nav.assistant") },
+    { to: "/media" as const, label: t("nav.media") },
+    { to: "/site" as const, label: t("nav.site") },
   ];
 
   return (
@@ -53,7 +51,7 @@ export function SiteHeader() {
             </Button>
             <Button asChild variant="brand" size="sm">
               <Link
-                to="/"
+                to="/assistant"
                 hash="demo"
                 onClick={() => track("cta-click", { location: "header", intent: "demo" })}
               >
@@ -104,7 +102,7 @@ export function SiteHeader() {
                   </Link>
                 </Button>
                 <Button asChild variant="brand" size="md" className="flex-1">
-                  <Link to="/" hash="demo" onClick={() => setOpen(false)}>
+                  <Link to="/assistant" hash="demo" onClick={() => setOpen(false)}>
                     {t("nav.demo")}
                   </Link>
                 </Button>
