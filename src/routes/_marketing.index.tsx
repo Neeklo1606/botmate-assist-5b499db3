@@ -229,14 +229,24 @@ function Stat({ label, value, pad }: { label: string; value: string; pad?: boole
 function HeroScene() {
   return (
     <div className="relative w-full max-w-md">
+      {/* Soft accent halo behind main card — depth without color noise */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-6 -z-10 rounded-[32px] opacity-70 blur-2xl"
+        style={{
+          background:
+            "radial-gradient(60% 60% at 70% 30%, var(--color-accent-glow), transparent 70%)",
+        }}
+      />
+
       {/* Main Lead Processing Card — product window */}
-      <div className="relative z-30 translate-x-4 overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
+      <div className="relative z-30 translate-x-4 overflow-hidden rounded-2xl border border-border/80 bg-background shadow-[var(--shadow-lg),var(--shadow-rim)] ring-1 ring-foreground/[0.02]">
         {/* window chrome */}
-        <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-4 py-2.5">
+        <div className="flex items-center justify-between border-b border-border/80 bg-surface-muted/70 px-4 py-2.5">
           <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
           </div>
           <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-subtle">
             neeklo / leads / live
@@ -246,6 +256,7 @@ function HeroScene() {
             live
           </span>
         </div>
+
 
         <div className="p-6">
           <div className="mb-6 flex items-center justify-between">
