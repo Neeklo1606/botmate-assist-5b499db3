@@ -18,7 +18,7 @@ export function NeekloLogo({ className }: Props) {
       <img
         src={logo.url}
         alt="avreya.ru"
-        className="h-16 w-auto md:h-20"
+        className="h-8 w-auto sm:h-9 lg:h-10"
         loading="eager"
         decoding="async"
       />

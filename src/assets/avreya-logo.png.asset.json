@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "asset_id": "5f7d77ea-28d4-4432-8f58-7c305eba77f8",
+  "asset_id": "6e90826a-ec28-4097-a64c-b66061be1484",
   "project_id": "c5266d52-731d-4813-a65e-333c0d9062ac",
-  "url": "/__l5e/assets-v1/5f7d77ea-28d4-4432-8f58-7c305eba77f8/avreya-logo-v2.png",
-  "r2_key": "a/v1/c5266d52-731d-4813-a65e-333c0d9062ac/5f7d77ea-28d4-4432-8f58-7c305eba77f8/avreya-logo-v2.png",
-  "original_filename": "avreya-logo-v2.png",
-  "size": 38738,
+  "url": "/__l5e/assets-v1/6e90826a-ec28-4097-a64c-b66061be1484/avreya-logo-cropped.png",
+  "r2_key": "a/v1/c5266d52-731d-4813-a65e-333c0d9062ac/6e90826a-ec28-4097-a64c-b66061be1484/avreya-logo-cropped.png",
+  "original_filename": "avreya-logo-cropped.png",
+  "size": 27864,
   "content_type": "image/png",
-  "created_at": "2026-06-08T20:32:35Z"
+  "created_at": "2026-06-08T20:43:23Z"
 }

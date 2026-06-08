@@ -112,7 +112,7 @@ export function NeekloHeader() {
     <header
       data-scrolled={scrolled ? "true" : "false"}
       className={cn(
-        "sticky top-0 z-40 w-full",
+        "sticky top-0 z-[80] w-full",
         // Outer vertical breathing — компрессия отступа сверху при скролле
         "transition-[padding] duration-[320ms]",
         scrolled ? "pt-2 md:pt-3" : "pt-3 md:pt-5",
@@ -132,22 +132,22 @@ export function NeekloHeader() {
       >
         <div
           className={cn(
-            "relative grid items-center gap-3 md:gap-4",
+            "relative isolate grid items-center gap-3 overflow-hidden md:gap-4",
             "grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
             "rounded-full border backdrop-blur-xl",
             "transition-[height,padding,background-color,border-color,box-shadow,backdrop-filter]",
             "duration-[320ms]",
             scrolled
               ? [
-                  "h-[64px] md:h-[72px]",
+                  "h-[58px] md:h-[62px]",
                   "px-2.5 md:px-3",
-                  "border-border/70 bg-background/85",
+                  "border-border/75 bg-background",
                   "shadow-[var(--shadow-rim),0_8px_28px_-12px_oklch(0.2_0.01_110/0.18)]",
                 ].join(" ")
               : [
-                  "h-[72px] md:h-[88px]",
+                  "h-[64px] md:h-[72px]",
                   "px-3 md:px-4",
-                  "border-border/45 bg-background/60",
+                  "border-border/55 bg-background",
                   "shadow-[var(--shadow-rim),0_4px_18px_-12px_oklch(0.2_0.01_110/0.12)]",
                 ].join(" "),
           )}
@@ -158,7 +158,7 @@ export function NeekloHeader() {
           <div className="flex min-w-0 items-center">
             <Link
               to="/"
-              className="group inline-flex items-center gap-2.5 rounded-full px-1.5 py-1 transition-opacity duration-200 hover:opacity-85"
+              className="group inline-flex h-10 items-center gap-2.5 rounded-full px-1.5 py-1 transition-opacity duration-200 hover:opacity-85 sm:h-11 lg:h-12"
               aria-label="Avreya, на главную"
             >
               <NeekloLogo />
@@ -168,7 +168,7 @@ export function NeekloHeader() {
           {/* CENTER — pill nav */}
           <nav
             aria-label="Главное меню"
-            className="hidden lg:flex"
+            className="desktop-header-only"
           >
             <ul
               className={cn(
@@ -216,7 +216,7 @@ export function NeekloHeader() {
 
 
           {/* RIGHT — actions cluster */}
-          <div className="hidden items-center justify-end gap-1 lg:flex">
+          <div className="desktop-header-only items-center justify-end gap-1">
             <ThemeToggle />
             <span
               aria-hidden
@@ -271,7 +271,7 @@ export function NeekloHeader() {
           </div>
 
           {/* MOBILE — right column compresses to: theme + burger */}
-          <div className="col-start-3 flex items-center justify-end gap-1 lg:hidden">
+          <div className="mobile-header-only col-start-3 items-center justify-end gap-1">
             <ThemeToggle />
             <button
               type="button"
@@ -308,7 +308,7 @@ export function NeekloHeader() {
       <div
         id="mobile-nav-overlay"
         className={cn(
-          "fixed inset-x-0 bottom-0 top-[72px] z-30 md:hidden",
+          "mobile-header-only fixed inset-x-0 bottom-0 top-[76px] z-[70]",
           "transition-[opacity,transform] duration-[360ms]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
