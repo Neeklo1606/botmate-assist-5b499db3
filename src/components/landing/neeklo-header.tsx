@@ -148,7 +148,7 @@ export function NeekloHeader() {
       {/* Mobile overlay */}
       <div
         className={cn(
-          "fixed inset-x-0 top-[60px] z-30 origin-top border-t border-border bg-background/95 backdrop-blur-xl transition-all duration-300 md:hidden",
+          "fixed inset-x-0 top-14 z-30 origin-top border-t border-border bg-background/95 backdrop-blur-xl transition-all duration-300 md:hidden",
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0",
