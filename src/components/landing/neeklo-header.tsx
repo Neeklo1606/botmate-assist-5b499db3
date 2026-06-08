@@ -132,19 +132,20 @@ export function NeekloHeader() {
       >
         <div
           className={cn(
-            "relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-4",
+            "relative grid items-center gap-3 md:gap-4",
+            "grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
             "rounded-full border backdrop-blur-xl",
             "transition-[height,padding,background-color,border-color,box-shadow,backdrop-filter]",
             "duration-[320ms]",
             scrolled
               ? [
-                  "h-[52px] md:h-[56px]",
+                  "h-[64px] md:h-[72px]",
                   "px-2.5 md:px-3",
                   "border-border/70 bg-background/85",
                   "shadow-[var(--shadow-rim),0_8px_28px_-12px_oklch(0.2_0.01_110/0.18)]",
                 ].join(" ")
               : [
-                  "h-[58px] md:h-[68px]",
+                  "h-[72px] md:h-[88px]",
                   "px-3 md:px-4",
                   "border-border/45 bg-background/60",
                   "shadow-[var(--shadow-rim),0_4px_18px_-12px_oklch(0.2_0.01_110/0.12)]",
@@ -152,6 +153,7 @@ export function NeekloHeader() {
           )}
           style={{ transitionTimingFunction: EASE }}
         >
+
           {/* LEFT — logo */}
           <div className="flex min-w-0 items-center">
             <Link
