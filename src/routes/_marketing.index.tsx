@@ -155,8 +155,8 @@ function Hero() {
 
 
             <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
-              AI-сотрудник для входящих обращений. Принимает заявку с сайта,
-              Telegram и форм, задаёт нужные вопросы и передаёт готовый лид в CRM.
+              ИИ-менеджер заявок отвечает за секунды, собирает данные клиента
+              и передаёт готовый лид в CRM.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-5">
