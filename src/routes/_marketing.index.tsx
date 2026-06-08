@@ -113,7 +113,7 @@ function Hero() {
       />
       <Container>
 
-        <div className="relative grid items-center gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24 lg:py-28">
+        <div className="relative grid items-center gap-12 pt-8 pb-14 md:grid-cols-12 md:gap-10 md:pt-12 md:pb-20 lg:pt-14 lg:pb-24">
           {/* LEFT — strategic hierarchy */}
           <div className="z-10 flex flex-col items-start md:col-span-6">
             <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface/70 py-1 pl-1.5 pr-3 backdrop-blur shadow-xs">
@@ -186,12 +186,6 @@ function Hero() {
               </Link>
             </div>
 
-            {/* Metrics anchor */}
-            <dl className="mt-14 grid w-full max-w-[540px] grid-cols-3 divide-x divide-border border-t border-border pt-7">
-              <Stat label="Ответ" value="7 сек" />
-              <Stat label="Работа" value="24/7" pad />
-              <Stat label="Интеграции" value="TG · CRM" pad />
-            </dl>
           </div>
 
           {/* RIGHT — unified system canvas */}
@@ -216,19 +210,6 @@ function Hero() {
   );
 }
 
-function Stat({ label, value, pad }: { label: string; value: string; pad?: boolean }) {
-  return (
-    <div className={pad ? "pl-5" : ""}>
-      <dt className="mb-1.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
-        <span className="h-1 w-1 rounded-full bg-foreground/30" />
-        {label}
-      </dt>
-      <dd className="font-display text-[22px] font-semibold tabular tracking-[-0.01em] text-foreground md:text-[24px]">
-        {value}
-      </dd>
-    </div>
-  );
-}
 
 function HeroScene() {
   return (
@@ -419,31 +400,27 @@ function TrustBar() {
   const track = [...items, ...items];
 
   return (
-    <section className="border-b border-border bg-surface-sunken/55">
-      <div className="py-7 md:py-9">
+    <section className="border-b border-border bg-surface-sunken/50">
+      <div className="py-3 md:py-3.5">
         <div
           className="marquee-mask pause-on-hover group/marquee relative overflow-hidden"
-          style={{ ["--marquee-duration" as string]: "60s" }}
+          style={{ ["--marquee-duration" as string]: "90s" }}
         >
           <ul
-            className="animate-marquee flex w-max items-center gap-3"
+            className="animate-marquee flex w-max items-center gap-8 md:gap-10"
             aria-label="Преимущества Neeklo"
           >
             {track.map((it, i) => (
               <li
                 key={`${it.t}-${i}`}
-                className="flex flex-none items-center gap-3 rounded-full border border-border/70 bg-background/80 px-5 py-3 backdrop-blur-sm shadow-xs"
+                className="flex flex-none items-center gap-2 text-foreground/75"
                 aria-hidden={i >= items.length ? "true" : undefined}
               >
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-border bg-surface-muted text-foreground">
-                  <it.icon className="h-4 w-4" strokeWidth={1.6} />
+                <it.icon className="h-3.5 w-3.5 text-ink-subtle" strokeWidth={1.75} />
+                <span className="text-[11.5px] font-medium uppercase tracking-[0.14em]">
+                  {it.t}
                 </span>
-                <div className="leading-tight">
-                  <div className="text-[12.5px] font-semibold text-foreground">{it.t}</div>
-                  <div className="text-[10.5px] font-medium uppercase tracking-[0.1em] text-ink-subtle">
-                    {it.s}
-                  </div>
-                </div>
+                <span aria-hidden className="ml-2 h-1 w-1 rounded-full bg-foreground/20" />
               </li>
             ))}
           </ul>
