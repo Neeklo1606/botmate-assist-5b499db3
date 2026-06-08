@@ -94,10 +94,14 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  --shadow-xs: 0 1px 2px 0 oklch(0.15 0.005 250 / 0.04);
-  --shadow-sm: 0 1px 2px 0 oklch(0.15 0.005 250 / 0.06);
-  --shadow-md: 0 4px 12px -2px oklch(0.15 0.005 250 / 0.08);
-  --shadow-lift: 0 1px 2px 0 oklch(0.15 0.005 250 / 0.06), 0 8px 24px -8px oklch(0.15 0.005 250 / 0.12);
+  --shadow-xs: 0 1px 1px 0 oklch(0.15 0.005 250 / 0.03);
+  --shadow-sm: 0 1px 2px 0 oklch(0.15 0.005 250 / 0.05);
+  --shadow-md: 0 4px 14px -4px oklch(0.15 0.005 250 / 0.08);
+  --shadow-lift:
+    0 1px 1px 0 oklch(0.15 0.005 250 / 0.04),
+    0 2px 4px -1px oklch(0.15 0.005 250 / 0.04),
+    0 16px 40px -16px oklch(0.15 0.005 250 / 0.16);
+  --shadow-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.6);
 }
 
 /*
@@ -241,6 +245,15 @@
   --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%,
     oklch(0.95 0.006 85 / 0.05) 0%,
     oklch(0.95 0.006 85 / 0) 60%);
+
+  --shadow-xs: 0 1px 1px 0 oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.35);
+  --shadow-md: 0 6px 18px -6px oklch(0 0 0 / 0.5);
+  --shadow-lift:
+    0 1px 1px 0 oklch(0 0 0 / 0.4),
+    0 2px 6px -1px oklch(0 0 0 / 0.3),
+    0 24px 60px -24px oklch(0 0 0 / 0.55);
+  --shadow-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.04);
 }
 
 @layer base {
@@ -273,15 +286,23 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.55;
     font-weight: 400;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.15;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.035em;
+    line-height: 0.98;
   }
 
   /* Числа — табличные везде по умолчанию */
@@ -324,6 +345,24 @@
     .container-px {
       padding-inline: 48px;
     }
+  }
+
+  /* Тонкая hairline-сетка для премиальных фонов hero / секций */
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in oklab, var(--color-border-strong) 70%, transparent) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Sticky header: тонкая тень и hairline только при скролле */
+  .header-scrolled {
+    border-bottom-color: color-mix(in oklab, var(--color-border) 100%, transparent);
+    box-shadow:
+      0 1px 0 0 color-mix(in oklab, var(--color-border) 60%, transparent),
+      0 6px 24px -16px oklch(0 0 0 / 0.25);
   }
 }
 
