@@ -168,7 +168,7 @@ export function NeekloHeader() {
           {/* CENTER — pill nav */}
           <nav
             aria-label="Главное меню"
-            className="hidden md:flex"
+            className="hidden lg:flex"
           >
             <ul
               className={cn(
@@ -188,8 +188,8 @@ export function NeekloHeader() {
                       data-active={active ? "true" : undefined}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group/nav relative inline-flex h-[30px] items-center gap-1.5 rounded-full px-3.5",
-                        "text-[12.5px] font-medium tracking-[-0.005em]",
+                        "group/nav relative inline-flex h-[30px] items-center gap-1.5 rounded-full px-2.5 xl:px-3.5",
+                        "text-[12.5px] font-medium tracking-[-0.005em] whitespace-nowrap",
                         "transition-colors duration-200",
                         active
                           ? "bg-surface-muted text-foreground"
@@ -200,7 +200,7 @@ export function NeekloHeader() {
                       {item.soon && (
                         <span
                           className={cn(
-                            "rounded-full bg-foreground/[0.05] px-1.5 py-[1px]",
+                            "hidden xl:inline rounded-full bg-foreground/[0.05] px-1.5 py-[1px]",
                             "text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-subtle",
                           )}
                         >
@@ -213,6 +213,7 @@ export function NeekloHeader() {
               })}
             </ul>
           </nav>
+
 
           {/* RIGHT — actions cluster */}
           <div className="hidden items-center justify-end gap-1 md:flex">
