@@ -318,7 +318,7 @@ function HeroScene() {
 
         <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="h-1.5 w-1.5 rounded-full bg-foreground/35" />
             Telegram · вход
           </span>
           <span className="font-mono">14:02</span>
