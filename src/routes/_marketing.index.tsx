@@ -139,11 +139,15 @@ function Hero() {
               упущенной
               <br />
               заявки.{" "}
-              <span className="relative inline-block italic font-medium text-foreground/55">
+              <span className="relative inline-block font-display italic font-semibold tracking-[-0.04em] text-foreground/85">
                 Никогда.
                 <span
                   aria-hidden
-                  className="absolute -bottom-1 left-1 right-2 h-[2px] rounded-full bg-accent/60"
+                  className="absolute -bottom-1.5 left-0.5 right-1.5 h-[3px] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(to right, transparent, var(--color-accent) 22%, var(--color-accent) 78%, transparent)",
+                  }}
                 />
               </span>
             </h1>
