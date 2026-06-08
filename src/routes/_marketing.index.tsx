@@ -792,22 +792,22 @@ function WhyNeeklo() {
     {
       icon: Server,
       title: "Своя инфраструктура",
-      desc: "Менеджер работает на серверах Neeklo, а не поверх чужих API. Доступность и цена под нашим контролем.",
+      desc: "Менеджер работает на серверах Neeklo. Доступность, обновления и цена под нашим контролем.",
     },
     {
       icon: Shield,
       title: "Данные в РФ",
-      desc: "Диалоги, лиды и логи хранятся в российских дата-центрах. Доступ по ролям.",
+      desc: "Диалоги, лиды и логи в российских ДЦ. Доступ по ролям, выгрузка по запросу.",
+    },
+    {
+      icon: Database,
+      title: "Логи и история",
+      desc: "Полная история обращений и решений менеджера. Видно, что и почему он ответил.",
     },
     {
       icon: CreditCard,
       title: "Оплата в рублях",
-      desc: "ЮKassa и российские карты. Без зарубежных подписок и блокировок.",
-    },
-    {
-      icon: Bot,
-      title: "Продуктовая компания",
-      desc: "Мы не агентство. Развиваем один продукт и отвечаем за его качество.",
+      desc: "ЮKassa, карты РФ, закрывающие документы. Без зарубежных подписок и пересчётов.",
     },
   ];
   return (
@@ -816,14 +816,14 @@ function WhyNeeklo() {
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <div className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
-              Почему Neeklo
+              Доверие
             </div>
             <h2 className="mt-3 font-display text-[32px] font-semibold tracking-[-0.02em] text-foreground md:text-[44px]">
               Продукт, который вы контролируете
             </h2>
             <p className="mt-5 text-[15.5px] leading-relaxed text-ink-muted">
-              Мы делаем рабочий инструмент для бизнеса, а не очередную обёртку
-              над зарубежными API. Инфраструктура, данные и расчёты в России.
+              Neeklo это продуктовая компания, а не агентство и не обёртка над
+              зарубежным API. Инфраструктура, данные и расчёты в России.
             </p>
             <div className="mt-7">
               <Button asChild variant="brand" size="md">
