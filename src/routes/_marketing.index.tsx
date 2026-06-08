@@ -1113,80 +1113,109 @@ function Pricing() {
           title="Понятная цена, без скрытых платежей"
           desc="Оплата российскими картами через ЮKassa. Меняйте тариф в любой момент."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {plans.map((p) => (
-            <div
-              key={p.name}
-              className={
-                "flex flex-col rounded-2xl border p-6 " +
-                (p.highlighted
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border bg-surface text-foreground")
-              }
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-display text-[18px] font-semibold">{p.name}</h3>
-                {p.highlighted && (
-                  <span className="rounded-full bg-background px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-foreground">
-                    выгодно
-                  </span>
-                )}
-              </div>
-              <div className="mt-4 flex items-baseline gap-1.5">
-                <span className="font-display text-[32px] font-semibold tabular">
-                  {p.price}
-                </span>
-                {p.period && (
-                  <span
-                    className={
-                      "text-[13px] " +
-                      (p.highlighted ? "text-background/70" : "text-ink-subtle")
-                    }
-                  >
-                    {p.period}
-                  </span>
-                )}
-              </div>
-              <p
+        <div className="relative mt-14 grid gap-4 md:grid-cols-3">
+          {plans.map((p) => {
+            const onPriceColor = p.highlighted ? "text-background/65" : "text-ink-subtle";
+            const onBodyColor = p.highlighted ? "text-background/80" : "text-ink-muted";
+            return (
+              <div
+                key={p.name}
                 className={
-                  "mt-2 text-[13.5px] leading-relaxed " +
-                  (p.highlighted ? "text-background/80" : "text-ink-muted")
+                  "group relative flex flex-col rounded-2xl border p-7 transition-all duration-300 ease-quart " +
+                  (p.highlighted
+                    ? "border-foreground bg-foreground text-background shadow-lift md:-translate-y-2"
+                    : "border-border bg-surface text-foreground hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-sm")
                 }
               >
-                {p.desc}
-              </p>
-              <ul className="mt-6 flex-1 space-y-2.5">
-                {p.features.map((f) => (
-                  <li
-                    key={f}
-                    className={
-                      "flex items-start gap-2.5 text-[13.5px] " +
-                      (p.highlighted ? "text-background" : "text-foreground")
-                    }
-                  >
-                    <Check
+                {p.highlighted && (
+                  <>
+                    {/* accent halo */}
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute -inset-px -z-10 rounded-2xl opacity-60 blur-2xl"
+                      style={{ background: "radial-gradient(60% 80% at 50% 0%, var(--color-accent-glow), transparent 70%)" }}
+                    />
+                    <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
+                  </>
+                )}
+
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center gap-2">
+                    <span
                       className={
-                        "mt-0.5 h-3.5 w-3.5 flex-none " +
+                        "h-1.5 w-1.5 rounded-full " +
+                        (p.highlighted ? "bg-accent" : "bg-border-strong")
+                      }
+                    />
+                    <h3 className="font-display text-[15px] font-semibold uppercase tracking-[0.12em]">
+                      {p.name}
+                    </h3>
+                  </div>
+                  {p.highlighted && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-accent-ink">
+                      рекомендуем
+                    </span>
+                  )}
+                </div>
+
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className="font-display text-[40px] font-semibold tabular leading-none tracking-[-0.025em]">
+                    {p.price}
+                  </span>
+                  {p.period && (
+                    <span className={"text-[12.5px] font-medium " + onPriceColor}>
+                      / {p.period.replace("в ", "")}
+                    </span>
+                  )}
+                </div>
+                <p className={"mt-3 text-[13.5px] leading-relaxed " + onBodyColor}>
+                  {p.desc}
+                </p>
+
+                <div
+                  className={
+                    "mt-6 h-px " +
+                    (p.highlighted ? "bg-background/15" : "bg-border")
+                  }
+                />
+
+                <ul className="mt-5 flex-1 space-y-3">
+                  {p.features.map((f) => (
+                    <li
+                      key={f}
+                      className={
+                        "flex items-start gap-2.5 text-[13.5px] " +
                         (p.highlighted ? "text-background" : "text-foreground")
                       }
-                      strokeWidth={2}
-                    />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6">
-                <Button
-                  asChild
-                  variant={p.highlighted ? "ink" : "outline"}
-                  size="md"
-                  className="w-full"
-                >
-                  <Link to="/onboarding/assistant">{p.cta}</Link>
-                </Button>
+                    >
+                      <span
+                        className={
+                          "mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full " +
+                          (p.highlighted
+                            ? "bg-accent text-accent-ink"
+                            : "bg-accent/15 text-accent")
+                        }
+                      >
+                        <Check className="h-2.5 w-2.5" strokeWidth={3} />
+                      </span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-7">
+                  <Button
+                    asChild
+                    variant={p.highlighted ? "ink" : "outline"}
+                    size="md"
+                    className="w-full"
+                  >
+                    <Link to="/onboarding/assistant">{p.cta}</Link>
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="mt-6 flex items-center justify-center gap-2 text-[12.5px] text-ink-subtle">
           <Globe className="h-3.5 w-3.5" strokeWidth={1.75} />
