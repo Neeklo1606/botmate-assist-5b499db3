@@ -186,12 +186,6 @@ function Hero() {
               </Link>
             </div>
 
-            {/* Metrics anchor */}
-            <dl className="mt-14 grid w-full max-w-[540px] grid-cols-3 divide-x divide-border border-t border-border pt-7">
-              <Stat label="Ответ" value="7 сек" />
-              <Stat label="Работа" value="24/7" pad />
-              <Stat label="Интеграции" value="TG · CRM" pad />
-            </dl>
           </div>
 
           {/* RIGHT — unified system canvas */}
