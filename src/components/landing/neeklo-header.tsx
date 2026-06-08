@@ -168,7 +168,7 @@ export function NeekloHeader() {
           {/* CENTER — pill nav */}
           <nav
             aria-label="Главное меню"
-            className="hidden lg:flex"
+            className="hidden min-[1120px]:flex"
           >
             <ul
               className={cn(
@@ -216,7 +216,7 @@ export function NeekloHeader() {
 
 
           {/* RIGHT — actions cluster */}
-          <div className="hidden items-center justify-end gap-1 lg:flex">
+          <div className="hidden items-center justify-end gap-1 min-[1120px]:flex">
             <ThemeToggle />
             <span
               aria-hidden
@@ -271,7 +271,7 @@ export function NeekloHeader() {
           </div>
 
           {/* MOBILE — right column compresses to: theme + burger */}
-          <div className="col-start-3 flex items-center justify-end gap-1 lg:hidden">
+          <div className="col-start-3 flex items-center justify-end gap-1 min-[1120px]:hidden">
             <ThemeToggle />
             <button
               type="button"
@@ -308,7 +308,7 @@ export function NeekloHeader() {
       <div
         id="mobile-nav-overlay"
         className={cn(
-          "fixed inset-x-0 bottom-0 top-[76px] z-[70] lg:hidden",
+          "fixed inset-x-0 bottom-0 top-[76px] z-[70] min-[1120px]:hidden",
           "transition-[opacity,transform] duration-[360ms]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
