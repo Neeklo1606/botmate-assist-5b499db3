@@ -1,22 +1,30 @@
 /**
- * / — Neeklo. Premium product landing.
- * Только 2 продукта: «Медиа-помощник» и «Сайты».
- * Структура: Hero · Интерактивный превью · Продукты · Как работает · Интерфейс ·
- *            Выгоды · Тарифы (₽) · FAQ · Финальный CTA.
+ * / Neeklo. Главная страница продукта.
+ * Главный продукт: AI-менеджер заявок.
+ * Вторичные (Скоро): Медиа-помощник, Сайты.
+ * Без длинных тире в копирайте.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ArrowRight,
+  Bot,
   Check,
   ChevronDown,
+  Clock,
   CreditCard,
+  Database,
+  Globe,
   Image as ImageIcon,
+  Inbox,
   Layout,
-  Settings2,
+  MessageSquare,
+  Phone,
+  Server,
+  Shield,
   Sparkles,
-  TrendingUp,
-  Wand2,
+  Table2,
+  Workflow,
   Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,9 +34,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Neeklo · Сервис для запуска медиа-помощника и сайта",
+      title: "Neeklo. AI-менеджер заявок для бизнеса",
       description:
-        "Интерактивный сервис: создайте медиа-помощника и сайт в одном кабинете. Оплата в рублях, понятная настройка, готовые сценарии.",
+        "AI-менеджер заявок отвечает 24/7, собирает лиды, квалифицирует обращения и передаёт их в Telegram, CRM и таблицы. На инфраструктуре Neeklo, оплата в рублях.",
       path: "/",
     }),
     links: [canonicalLink("/")],
@@ -43,9 +51,16 @@ export const Route = createFileRoute("/_marketing/")({
               name: "Neeklo",
               url: "https://botme.neeklo.ru",
               description:
-                "Сервис Neeklo: медиа-помощник и сайт в одном кабинете. Оплата в рублях.",
+                "Neeklo. AI-менеджер заявок для бизнеса. Self-hosted инфраструктура, оплата в рублях.",
             },
             { "@type": "WebSite", name: "Neeklo", url: "https://botme.neeklo.ru" },
+            {
+              "@type": "SoftwareApplication",
+              name: "AI-менеджер заявок",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              offers: { "@type": "Offer", price: "2490", priceCurrency: "RUB" },
+            },
           ],
         }),
       },
@@ -58,44 +73,237 @@ function HomePage() {
   return (
     <div className="bg-background">
       <Hero />
-      <TrustStrip />
-      <InteractiveBlock />
-      <ProductCards />
-      <BentoSection />
-      <Pricing />
+      <TrustBar />
+      <ProductScene />
       <HowItWorks />
+      <Benefits />
+      <Integrations />
+      <WhyNeeklo />
+      <Ecosystem />
+      <Pricing />
       <Faq />
       <FinalCta />
     </div>
   );
 }
 
-/* ─────────────────── Interactive 2-col block ─────────────────── */
+/* ─────────────────── Hero ─────────────────── */
 
-function InteractiveBlock() {
-  const [tab, setTab] = useState<"media" | "site" | "panel">("panel");
+function Hero() {
   return (
-    <section id="interface" className="py-20 md:py-28">
+    <section className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{ background: "var(--gradient-hero)" }}
+      />
+      <Container>
+        <div className="relative grid items-center gap-12 py-16 md:grid-cols-12 md:gap-16 md:py-24">
+          <div className="md:col-span-7">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[12px] font-medium text-ink-muted">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-foreground" />
+              </span>
+              Neeklo. Продукт для работы с заявками
+            </div>
+
+            <h1 className="font-display text-[40px] font-semibold leading-[1.04] tracking-[-0.025em] text-foreground md:text-[64px]">
+              AI-менеджер заявок,
+              <br />
+              который не теряет
+              <br />
+              ни одного клиента.
+            </h1>
+
+            <p className="mt-6 max-w-[620px] text-[16px] leading-relaxed text-ink-muted md:text-[18px]">
+              Отвечает за 7 секунд, квалифицирует обращение, собирает контакт и
+              передаёт готовую заявку в Telegram, CRM или таблицу. Работает
+              круглосуточно на инфраструктуре Neeklo.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button asChild variant="brand" size="lg">
+                <Link to="/onboarding/assistant">
+                  Подключить менеджера
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link to="/" hash="product">
+                  Посмотреть, как работает
+                </Link>
+              </Button>
+            </div>
+
+            <dl className="mt-12 grid max-w-[620px] grid-cols-3 gap-6 border-t border-border pt-6">
+              <Stat label="Среднее время ответа" value="7 сек" />
+              <Stat label="Работа без выходных" value="24/7" />
+              <Stat label="Оплата" value="в ₽" />
+            </dl>
+          </div>
+
+          <div className="md:col-span-5">
+            <HeroDemo />
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="text-[11.5px] uppercase tracking-wide text-ink-subtle">{label}</dt>
+      <dd className="mt-1.5 font-display text-[20px] font-semibold tabular text-foreground">
+        {value}
+      </dd>
+    </div>
+  );
+}
+
+function HeroDemo() {
+  return (
+    <div className="relative">
+      <div
+        aria-hidden
+        className="absolute -inset-4 -z-10 rounded-3xl"
+        style={{ background: "var(--surface-muted)" }}
+      />
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
+        <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+          <div className="flex items-center gap-2">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-foreground">
+              <Bot className="h-3.5 w-3.5 text-background" strokeWidth={2} />
+            </div>
+            <div className="text-[12px] font-semibold text-foreground">
+              AI-менеджер
+            </div>
+          </div>
+          <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10.5px] font-medium text-ink-muted">
+            онлайн
+          </span>
+        </div>
+
+        <div className="space-y-3 p-5">
+          <Bubble side="left">Здравствуйте! Подскажите, ремонт квартиры под ключ?</Bubble>
+          <Bubble side="right">
+            Да, делаем под ключ. Уточню несколько деталей. Какой метраж и в каком районе?
+          </Bubble>
+          <Bubble side="left">42 м², Невский район.</Bubble>
+          <Bubble side="right">
+            Понял. Когда планируете начать и удобно ли созвониться сегодня в 17:00?
+          </Bubble>
+          <Bubble side="left">Да, давайте в 17:00. Меня зовут Мария, +7 921 123 45 67.</Bubble>
+
+          <div className="mt-4 rounded-xl border border-border bg-background p-4">
+            <div className="mb-2.5 flex items-center justify-between">
+              <div className="text-[11px] uppercase tracking-wide text-ink-subtle">
+                Заявка готова
+              </div>
+              <span className="text-[10.5px] font-semibold uppercase tracking-wide text-foreground">
+                горячий лид
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-y-1.5 text-[12.5px]">
+              <span className="text-ink-subtle">Имя</span>
+              <span className="text-foreground">Мария</span>
+              <span className="text-ink-subtle">Телефон</span>
+              <span className="font-medium text-foreground">+7 921 123 45 67</span>
+              <span className="text-ink-subtle">Услуга</span>
+              <span className="text-foreground">Ремонт под ключ, 42 м²</span>
+              <span className="text-ink-subtle">Звонок</span>
+              <span className="text-foreground">сегодня в 17:00</span>
+            </div>
+            <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-[11.5px] text-ink-muted">
+              <span className="inline-flex items-center gap-1.5">
+                <Inbox className="h-3 w-3" strokeWidth={2} />
+                Telegram · CRM · Таблица
+              </span>
+              <span className="font-medium text-foreground">отправлено</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Bubble({ side, children }: { side: "left" | "right"; children: React.ReactNode }) {
+  const isLeft = side === "left";
+  return (
+    <div className={"flex " + (isLeft ? "justify-start" : "justify-end")}>
+      <div
+        className={
+          "max-w-[80%] rounded-2xl px-3.5 py-2 text-[13px] leading-snug " +
+          (isLeft
+            ? "rounded-tl-sm border border-border bg-background text-foreground"
+            : "rounded-tr-sm bg-foreground text-background")
+        }
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────── Trust bar ─────────────────── */
+
+function TrustBar() {
+  return (
+    <section className="border-y border-border bg-surface-muted/40">
+      <Container>
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-6 text-[12px] uppercase tracking-wide text-ink-subtle">
+          <span className="inline-flex items-center gap-1.5">
+            <Server className="h-3.5 w-3.5" strokeWidth={1.75} />
+            Своя инфраструктура
+          </span>
+          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
+          <span className="inline-flex items-center gap-1.5">
+            <Shield className="h-3.5 w-3.5" strokeWidth={1.75} />
+            Данные в РФ
+          </span>
+          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
+          <span className="inline-flex items-center gap-1.5">
+            <CreditCard className="h-3.5 w-3.5" strokeWidth={1.75} />
+            Оплата в рублях
+          </span>
+          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
+          <span>Поддержка в Telegram</span>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ─────────────────── Product scene ─────────────────── */
+
+function ProductScene() {
+  const [tab, setTab] = useState<"chat" | "lead" | "handoff">("chat");
+  return (
+    <section id="product" className="py-20 md:py-28">
       <Container>
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
             <div className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
-              Один кабинет, два продукта
+              Продукт
             </div>
             <h2 className="mt-3 font-display text-[32px] font-semibold tracking-[-0.02em] text-foreground md:text-[44px]">
-              Управляйте контентом и сайтом без переключения окон
+              Заявка проходит весь путь, пока вы заняты делом
             </h2>
             <p className="mt-5 text-[15.5px] leading-relaxed text-ink-muted">
-              Запускайте проекты, готовьте публикации, принимайте заявки и
-              следите за балансом в одном месте. Никаких таблиц и чатов.
+              Менеджер ведёт диалог в естественной форме, уточняет нужные поля,
+              собирает контакт и передаёт готовую заявку туда, где вы реально
+              работаете.
             </p>
 
             <ul className="mt-7 space-y-3">
               {[
-                "Все проекты и команда в одном кабинете",
-                "Заявки с сайта приходят сразу в проект",
-                "Баланс и расходы видны по каждому проекту",
-                "Доступ для коллеги или клиента за минуту",
+                "Отвечает за 7 секунд в любом канале",
+                "Сам уточняет имя, контакт и детали заявки",
+                "Размечает лид как горячий или прогрев",
+                "Передаёт в Telegram, CRM и Google Sheets",
               ].map((b) => (
                 <li
                   key={b}
@@ -110,9 +318,9 @@ function InteractiveBlock() {
             <div className="mt-8 flex flex-wrap gap-2">
               {(
                 [
-                  ["panel", "Кабинет"],
-                  ["media", "Медиа"],
-                  ["site", "Сайт"],
+                  ["chat", "Диалог"],
+                  ["lead", "Карточка лида"],
+                  ["handoff", "Передача в CRM"],
                 ] as const
               ).map(([k, l]) => (
                 <button
@@ -134,7 +342,7 @@ function InteractiveBlock() {
           </div>
 
           <div className="md:col-span-7">
-            <InteractiveWidget tab={tab} />
+            <SceneWidget tab={tab} />
           </div>
         </div>
       </Container>
@@ -142,323 +350,231 @@ function InteractiveBlock() {
   );
 }
 
-function InteractiveWidget({ tab }: { tab: "media" | "site" | "panel" }) {
+function SceneWidget({ tab }: { tab: "chat" | "lead" | "handoff" }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
       <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <div className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
-          <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
+        <div className="flex items-center gap-2 text-[12px] font-medium text-foreground">
+          <Bot className="h-3.5 w-3.5" strokeWidth={2} />
+          AI-менеджер заявок
         </div>
-        <div className="text-[11px] font-medium text-ink-subtle">
-          neeklo.ru / кабинет
-        </div>
-        <div className="w-12" />
+        <span className="text-[11px] text-ink-subtle">кабинет Neeklo</span>
       </div>
-
-      {tab === "panel" && <PanelMock />}
-      {tab === "media" && (
-        <div className="p-5">
-          <ProductMock kind="media" />
+      {tab === "chat" && (
+        <div className="space-y-3 p-5">
+          <Bubble side="left">Сколько стоит ремонт двушки?</Bubble>
+          <Bubble side="right">
+            От 8 500 ₽ за м². Уточню для точной сметы. Какой метраж и состояние сейчас?
+          </Bubble>
+          <Bubble side="left">48 м², черновая.</Bubble>
+          <Bubble side="right">
+            Понял. Когда удобно созвониться, чтобы согласовать выезд замерщика?
+          </Bubble>
         </div>
       )}
-      {tab === "site" && (
-        <div className="p-5">
-          <ProductMock kind="site" />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function PanelMock() {
-  return (
-    <div className="grid md:grid-cols-12">
-      <aside className="border-b border-border bg-background p-4 md:col-span-4 md:border-b-0 md:border-r">
-        <div className="mb-3 text-[11px] uppercase tracking-wide text-ink-subtle">
-          Проекты
-        </div>
-        <ul className="space-y-1">
-          {[
-            { t: "Студия ремонта", a: true },
-            { t: "Школа английского", a: false },
-            { t: "Косметология", a: false },
-          ].map((p) => (
-            <li key={p.t}>
-              <div
-                className={
-                  "flex items-center justify-between rounded-lg px-3 py-2 text-[13px] " +
-                  (p.a
-                    ? "bg-foreground text-background"
-                    : "text-foreground hover:bg-surface-muted")
-                }
-              >
-                <span className="truncate">{p.t}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <button
-          type="button"
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border-strong px-3 py-2 text-[12px] font-medium text-ink-muted hover:text-foreground"
-        >
-          + Новый проект
-        </button>
-      </aside>
-      <div className="md:col-span-8">
-        <div className="flex items-center justify-between border-b border-border px-5 py-3">
-          <div>
-            <div className="text-[11px] text-ink-subtle">Проект</div>
-            <div className="font-display text-[15px] font-semibold text-foreground">
-              Студия ремонта
+      {tab === "lead" && (
+        <div className="grid gap-3 p-5 md:grid-cols-2">
+          <Field label="Имя" value="Алексей" />
+          <Field label="Телефон" value="+7 921 555 11 22" />
+          <Field label="Услуга" value="Ремонт под ключ" />
+          <Field label="Метраж" value="48 м²" />
+          <Field label="Бюджет" value="до 800 000 ₽" />
+          <Field label="Готовность" value="в течение недели" />
+          <div className="md:col-span-2 rounded-xl border border-border bg-background p-4">
+            <div className="text-[11px] uppercase tracking-wide text-ink-subtle">
+              Оценка менеджера
+            </div>
+            <div className="mt-1.5 text-[13.5px] text-foreground">
+              Горячий лид. Готов к замеру на этой неделе. Бюджет в рынке.
             </div>
           </div>
-          <Button variant="brand" size="sm">
-            Создать пост
-          </Button>
         </div>
-        <div className="grid gap-3 p-5 md:grid-cols-3">
-          <Tile label="Заявки" value="24" hint="за неделю" />
-          <Tile label="Постов" value="6" hint="готово" />
-          <Tile label="Баланс" value="4 280 ₽" hint="в ₽" />
+      )}
+      {tab === "handoff" && (
+        <div className="space-y-3 p-5">
+          {[
+            { icon: MessageSquare, t: "Telegram", s: "лид-чат менеджеров" },
+            { icon: Database, t: "amoCRM", s: "сделка в воронке «Новые»" },
+            { icon: Table2, t: "Google Sheets", s: "строка добавлена" },
+            { icon: Phone, t: "SMS клиенту", s: "подтверждение звонка в 17:00" },
+          ].map((row) => (
+            <div
+              key={row.t}
+              className="flex items-center justify-between gap-4 rounded-xl border border-border bg-background px-4 py-3"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface">
+                  <row.icon className="h-3.5 w-3.5" strokeWidth={1.75} />
+                </div>
+                <div>
+                  <div className="text-[13.5px] font-semibold text-foreground">
+                    {row.t}
+                  </div>
+                  <div className="text-[12px] text-ink-subtle">{row.s}</div>
+                </div>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-[11.5px] font-medium text-foreground">
+                <Check className="h-3 w-3" strokeWidth={2.5} />
+                отправлено
+              </span>
+            </div>
+          ))}
         </div>
-        <div className="border-t border-border px-5 py-4">
-          <div className="mb-2 text-[11px] uppercase tracking-wide text-ink-subtle">
-            Последнее
-          </div>
-          <ul className="space-y-2 text-[13px]">
-            <li className="flex justify-between text-foreground">
-              <span>5 признаков обновить сайт</span>
-              <span className="text-ink-subtle">сегодня</span>
-            </li>
-            <li className="flex justify-between text-foreground">
-              <span>Кейс: квартира 42 м²</span>
-              <span className="text-ink-subtle">вчера</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
 
-/* ─────────────────── Product cards (clean 2-card grid) ─────────────────── */
+function Field({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-background p-4">
+      <div className="text-[11px] uppercase tracking-wide text-ink-subtle">{label}</div>
+      <div className="mt-1 text-[14px] font-medium text-foreground">{value}</div>
+    </div>
+  );
+}
 
-function ProductCards() {
-  const cards = [
+/* ─────────────────── How it works ─────────────────── */
+
+function HowItWorks() {
+  const steps = [
     {
-      key: "media" as const,
-      tag: "Медиа-помощник",
-      title: "Контент без блока в голове",
-      desc: "Готовит контент-план на неделю, тексты постов, сторис и идеи reels. Держит ваш голос бренда.",
-      bullets: ["Контент-план на 7 дней", "Тексты под формат соцсети", "Идеи reels и сторис"],
-      cta: { to: "/media" as const, label: "Открыть медиа-помощник" },
-      Icon: ImageIcon,
+      n: "01",
+      title: "Описываем бизнес",
+      desc: "Короткий бриф: что вы продаёте, какие вопросы задают, что должен спросить менеджер.",
+      icon: Sparkles,
     },
     {
-      key: "site" as const,
-      tag: "Сайты",
-      title: "Аккуратный сайт за вечер",
-      desc: "Соберите сайт по короткому брифу. Подключите домен и принимайте оплаты в рублях через ЮKassa.",
-      bullets: ["Страницы услуг и тарифов", "Форма заявки в кабинет", "Свой домен и оплата в ₽"],
-      cta: { to: "/site" as const, label: "Открыть конструктор сайтов" },
-      Icon: Layout,
+      n: "02",
+      title: "Обучаем под ваш голос",
+      desc: "Загружаем прайс, FAQ и правила. Менеджер отвечает в вашем стиле, а не шаблонами.",
+      icon: Workflow,
+    },
+    {
+      n: "03",
+      title: "Подключаем каналы",
+      desc: "Telegram, сайт, WhatsApp, Avito. Заявки приходят в CRM, таблицу или Telegram-чат.",
+      icon: Zap,
+    },
+    {
+      n: "04",
+      title: "Считаем результат",
+      desc: "В кабинете видно количество диалогов, заявок, конверсию и стоимость заявки.",
+      icon: Clock,
     },
   ];
   return (
-    <section id="products" className="border-y border-border bg-surface-muted/40 py-20 md:py-28">
+    <section id="how" className="border-t border-border bg-surface-muted/40 py-20 md:py-28">
       <Container>
         <SectionHead
-          eyebrow="Два продукта"
-          title="Сфокусированный набор, без лишнего"
-          desc="Каждый продукт работает отдельно или вместе в одном кабинете."
+          eyebrow="Как это работает"
+          title="От брифа до первой заявки за 3 дня"
+          desc="Внедряем сами, без вашего разработчика. Согласуйте сценарии и подключите каналы."
         />
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {cards.map((c) => (
-            <article
-              key={c.key}
-              className="group flex flex-col rounded-2xl border border-border bg-surface p-7 transition-colors hover:border-border-strong md:p-9"
-            >
-              <div className="flex items-center justify-between">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background">
-                  <c.Icon className="h-4 w-4" strokeWidth={1.75} />
+        <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s) => {
+            const Icon = s.icon;
+            return (
+              <li
+                key={s.n}
+                className="rounded-2xl border border-border bg-surface p-6"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-display text-[13px] font-semibold tabular text-ink-subtle">
+                    {s.n}
+                  </span>
+                  <Icon className="h-4 w-4 text-ink-muted" strokeWidth={1.75} />
                 </div>
-                <span className="text-[11px] font-medium uppercase tracking-wide text-ink-subtle">
-                  {c.tag}
-                </span>
-              </div>
-              <h3 className="mt-6 font-display text-[24px] font-semibold tracking-[-0.02em] text-foreground md:text-[28px]">
-                {c.title}
-              </h3>
-              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-muted">
-                {c.desc}
-              </p>
-              <ul className="mt-5 space-y-2.5">
-                {c.bullets.map((b) => (
-                  <li
-                    key={b}
-                    className="flex items-start gap-2.5 text-[14px] text-foreground"
-                  >
-                    <Check className="mt-0.5 h-3.5 w-3.5 flex-none" strokeWidth={2} />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-7 pt-1">
-                <Link
-                  to={c.cta.to}
-                  className="inline-flex items-center gap-1.5 text-[13.5px] font-medium text-foreground underline-offset-4 hover:underline"
-                >
-                  {c.cta.label}
-                  <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+                <h3 className="mt-6 font-display text-[18px] font-semibold tracking-[-0.01em] text-foreground">
+                  {s.title}
+                </h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">
+                  {s.desc}
+                </p>
+              </li>
+            );
+          })}
+        </ol>
       </Container>
     </section>
   );
 }
 
-/* ─────────────────── Bento (benefits + scenarios + pricing teaser) ─────────────────── */
+/* ─────────────────── Benefits ─────────────────── */
 
-function BentoSection() {
+function Benefits() {
   return (
     <section className="py-20 md:py-28">
       <Container>
         <SectionHead
-          eyebrow="Зачем это вам"
-          title="Меньше рутины, больше заявок"
-          desc="Конкретные выгоды, готовые сценарии под бизнес и понятная цена в рублях."
+          eyebrow="Что вы получаете"
+          title="Больше заявок, меньше упущенных клиентов"
+          desc="Менеджер закрывает первую линию. Вы работаете только с горячими лидами."
         />
 
         <div className="mt-12 grid auto-rows-[minmax(160px,auto)] grid-cols-1 gap-4 md:grid-cols-6">
-          {/* Big benefit */}
           <div className="rounded-2xl border border-border bg-foreground p-7 text-background md:col-span-3 md:row-span-2">
             <div className="text-[11.5px] font-medium uppercase tracking-wide text-background/60">
-              Главная выгода
+              Главный результат
             </div>
             <h3 className="mt-3 font-display text-[26px] font-semibold tracking-[-0.02em] md:text-[32px]">
-              Запуск сервиса за один день, без вёрстки и кода
+              Ни одного потерянного обращения, даже ночью и в выходные
             </h3>
             <p className="mt-4 text-[14.5px] leading-relaxed text-background/75">
-              Короткий бриф, готовые шаблоны и понятный редактор. Помощник пишет
-              контент, сайт принимает заявки уже сегодня.
+              Менеджер на смене 24/7, отвечает за 7 секунд, доводит каждое
+              обращение до заявки.
             </p>
-            <div className="mt-7 flex flex-wrap gap-2">
-              {["Без кода", "Свой домен", "Оплата в ₽", "Поддержка в Telegram"].map(
-                (t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-background/20 px-2.5 py-1 text-[11.5px] font-medium text-background/80"
-                  >
-                    {t}
-                  </span>
-                ),
-              )}
-            </div>
-          </div>
-
-          {/* Two small benefits */}
-          <BentoCell
-            className="md:col-span-3"
-            icon={CreditCard}
-            title="Оплата в рублях"
-            desc="ЮKassa и российские карты, без зарубежных подписок."
-          />
-          <BentoCell
-            className="md:col-span-3"
-            icon={Settings2}
-            title="Один кабинет"
-            desc="Проекты, заявки, баланс и команда в одном месте."
-          />
-
-          {/* Scenarios — wide */}
-          <div className="rounded-2xl border border-border bg-surface p-7 md:col-span-6">
-            <div className="flex flex-wrap items-end justify-between gap-3">
+            <dl className="mt-7 grid grid-cols-2 gap-4 border-t border-background/15 pt-5">
               <div>
-                <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
-                  Готовые сценарии
-                </div>
-                <h3 className="mt-2 font-display text-[22px] font-semibold tracking-[-0.01em] text-foreground md:text-[26px]">
-                  Подобрано под услуги и локальный бизнес
-                </h3>
+                <dt className="text-[11px] uppercase tracking-wide text-background/55">
+                  Время ответа
+                </dt>
+                <dd className="mt-1 font-display text-[24px] font-semibold tabular">
+                  7 сек
+                </dd>
               </div>
-              <Link
-                to="/"
-                hash="products"
-                className="text-[13px] font-medium text-foreground underline-offset-4 hover:underline"
-              >
-                Все сценарии
-              </Link>
-            </div>
-            <div className="mt-6 grid gap-3 md:grid-cols-4">
-              {[
-                { t: "Студия ремонта", s: "сайт + контент-план" },
-                { t: "Школа и курсы", s: "лендинг + посты" },
-                { t: "Косметология", s: "запись + сторис" },
-                { t: "Кафе и доставка", s: "меню + reels" },
-              ].map((s) => (
-                <div
-                  key={s.t}
-                  className="rounded-xl border border-border bg-background p-4"
-                >
-                  <div className="text-[13.5px] font-semibold text-foreground">
-                    {s.t}
-                  </div>
-                  <div className="mt-1 text-[12px] text-ink-subtle">{s.s}</div>
-                </div>
-              ))}
-            </div>
+              <div>
+                <dt className="text-[11px] uppercase tracking-wide text-background/55">
+                  Рост конверсии
+                </dt>
+                <dd className="mt-1 font-display text-[24px] font-semibold tabular">
+                  до +38%
+                </dd>
+              </div>
+            </dl>
           </div>
 
-          {/* Pricing teaser */}
-          <div className="rounded-2xl border border-border bg-surface p-7 md:col-span-4">
-            <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
-              Тарифы
-            </div>
-            <div className="mt-3 flex items-baseline gap-2">
-              <span className="font-display text-[36px] font-semibold tabular text-foreground">
-                от 990 ₽
-              </span>
-              <span className="text-[13px] text-ink-subtle">в месяц</span>
-            </div>
-            <p className="mt-3 max-w-[420px] text-[14px] leading-relaxed text-ink-muted">
-              Три тарифа: «Старт», «Бизнес», «Студия». Платите в рублях,
-              меняйте тариф в любой момент.
-            </p>
-            <div className="mt-5">
-              <Button asChild variant="brand" size="sm">
-                <Link to="/" hash="pricing">
-                  Посмотреть тарифы
-                </Link>
-              </Button>
-            </div>
-          </div>
+          <BentoCell
+            className="md:col-span-3"
+            icon={Inbox}
+            title="Готовая заявка, а не «надо перезвонить»"
+            desc="Менеджер сам собирает имя, контакт и нужные поля. Вы получаете карточку, по которой можно работать."
+          />
+          <BentoCell
+            className="md:col-span-3"
+            icon={Workflow}
+            title="Передача в нужное место"
+            desc="Telegram-чат отдела, amoCRM, Bitrix24, Google Sheets. Без копипаста и потерь."
+          />
 
-          {/* Trial cell */}
-          <div className="rounded-2xl border border-border bg-surface p-7 md:col-span-2">
-            <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
-              Попробовать
-            </div>
-            <div className="mt-3 font-display text-[24px] font-semibold text-foreground">
-              7 дней
-            </div>
-            <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">
-              Бесплатно, без привязки карты.
-            </p>
-            <div className="mt-4">
-              <Link
-                to="/onboarding/assistant"
-                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-foreground underline-offset-4 hover:underline"
-              >
-                Начать
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
-              </Link>
-            </div>
-          </div>
+          <BentoCell
+            className="md:col-span-2"
+            icon={Clock}
+            title="24/7 без выходных"
+            desc="Работает ночью, в праздники, в часы пик. Без выгорания."
+          />
+          <BentoCell
+            className="md:col-span-2"
+            icon={Shield}
+            title="Контроль над данными"
+            desc="Логи диалогов и заявок остаются у вас. Никаких сторонних аккаунтов."
+          />
+          <BentoCell
+            className="md:col-span-2"
+            icon={CreditCard}
+            title="Понятная цена в ₽"
+            desc="Один тариф в месяц. Без зарубежных подписок и пересчётов."
+          />
         </div>
       </Container>
     </section>
@@ -489,539 +605,148 @@ function BentoCell({
   );
 }
 
-/* ─────────────────── Hero ─────────────────── */
+/* ─────────────────── Integrations ─────────────────── */
 
-function Hero() {
-  return (
-    <section className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{ background: "var(--gradient-hero)" }}
-      />
-      <Container>
-        <div className="relative grid items-center gap-12 py-16 md:grid-cols-12 md:gap-16 md:py-28">
-          <div className="md:col-span-7">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[12px] font-medium text-ink-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-foreground" aria-hidden />
-              Интерактивный сервис от Neeklo
-            </div>
-
-            <h1 className="font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.025em] text-foreground md:text-[64px]">
-              Медиа-помощник и сайт
-              <br />
-              в одном кабинете.
-            </h1>
-
-            <p className="mt-6 max-w-[560px] text-[16px] leading-relaxed text-ink-muted md:text-[18px]">
-              Создайте помощника, который пишет посты и общается с клиентами.
-              Запустите аккуратный сайт под услугу. Оплата в рублях, понятная
-              настройка, всё в одном личном кабинете.
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button asChild variant="brand" size="lg">
-                <Link to="/onboarding/assistant">
-                  Создать сервис
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/" hash="interface">
-                  Посмотреть интерфейс
-                </Link>
-              </Button>
-            </div>
-
-            <dl className="mt-12 grid max-w-[560px] grid-cols-3 gap-6 border-t border-border pt-6">
-              <Stat label="Запуск" value="за 1 день" />
-              <Stat label="Оплата" value="в рублях" />
-              <Stat label="Каналы" value="сайт + соцсети" />
-            </dl>
-          </div>
-
-          <div className="md:col-span-5">
-            <HeroPreview />
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <dt className="text-[12px] uppercase tracking-wide text-ink-subtle">{label}</dt>
-      <dd className="mt-1.5 font-display text-[20px] font-semibold tabular text-foreground">
-        {value}
-      </dd>
-    </div>
-  );
-}
-
-/* Interactive hero preview: имитирует превью сервиса. */
-function HeroPreview() {
-  return (
-    <div className="relative">
-      <div
-        aria-hidden
-        className="absolute -inset-4 -z-10 rounded-3xl"
-        style={{ background: "var(--surface-muted)" }}
-      />
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
-        {/* window chrome */}
-        <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-          <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
-          </div>
-          <div className="text-[11px] font-medium text-ink-subtle">
-            neeklo.ru / кабинет
-          </div>
-          <div className="w-12" />
-        </div>
-
-        <div className="grid gap-4 p-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background">
-              <Sparkles className="h-4 w-4 text-foreground" strokeWidth={1.75} />
-            </div>
-            <div className="flex-1">
-              <div className="text-[13px] font-semibold text-foreground">
-                Медиа-помощник
-              </div>
-              <div className="text-[12px] text-ink-subtle">
-                Готовит контент-план на неделю
-              </div>
-            </div>
-            <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10.5px] font-medium text-ink-muted">
-              активен
-            </span>
-          </div>
-
-          <div className="rounded-xl border border-border bg-background p-4">
-            <div className="mb-2 text-[11px] uppercase tracking-wide text-ink-subtle">
-              Сгенерировано сейчас
-            </div>
-            <div className="space-y-2.5">
-              {[
-                "Пост: 5 признаков, что пора обновить сайт услуги",
-                "Reels: показываем кейс клиента до и после",
-                "Сторис: голосование о новом дизайне",
-              ].map((s) => (
-                <div
-                  key={s}
-                  className="flex items-start gap-2.5 text-[13px] text-foreground"
-                >
-                  <Check className="mt-0.5 h-3.5 w-3.5 flex-none text-foreground" strokeWidth={2} />
-                  <span>{s}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-xl border border-border bg-background p-3">
-              <div className="text-[11px] uppercase tracking-wide text-ink-subtle">
-                Сайт
-              </div>
-              <div className="mt-1 text-[15px] font-semibold text-foreground">
-                /studio
-              </div>
-              <div className="mt-0.5 text-[11px] text-ink-subtle">опубликован</div>
-            </div>
-            <div className="rounded-xl border border-border bg-background p-3">
-              <div className="text-[11px] uppercase tracking-wide text-ink-subtle">
-                Баланс
-              </div>
-              <div className="mt-1 font-display text-[15px] font-semibold tabular text-foreground">
-                4 280 ₽
-              </div>
-              <div className="mt-0.5 text-[11px] text-ink-subtle">пополнить</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────── Trust ─────────────────── */
-
-function TrustStrip() {
-  return (
-    <section className="border-y border-border bg-surface-muted/40">
-      <Container>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-6 text-[12px] uppercase tracking-wide text-ink-subtle">
-          <span>Работает в малом бизнесе РФ</span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span>Оплата в рублях через ЮKassa</span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span>Понятный кабинет на русском</span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span>Бренд Neeklo</span>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-/* ─────────────────── Products ─────────────────── */
-
-type ProductKey = "media" | "site";
-
-const products: Record<
-  ProductKey,
-  {
-    label: string;
-    title: string;
-    desc: string;
-    bullets: string[];
-    cta: { to: "/media" | "/site"; label: string };
-    icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-  }
-> = {
-  media: {
-    label: "Медиа-помощник",
-    title: "Контент для соцсетей без блока в голове",
-    desc: "Помощник держит ваш голос бренда, готовит посты, сторис и reels по плану. Вы только согласовываете и публикуете.",
-    bullets: [
-      "Контент-план на неделю за пару минут",
-      "Тексты, описания, заголовки и идеи reels",
-      "Тон голоса под ваш бренд, без шаблонных фраз",
-      "Готовые форматы: пост, сторис, рассылка",
-    ],
-    cta: { to: "/media", label: "Подробнее о медиа-помощнике" },
-    icon: ImageIcon,
-  },
-  site: {
-    label: "Сайты",
-    title: "Аккуратный сайт под услугу за один вечер",
-    desc: "Соберите сайт по короткому брифу: страницы, тарифы, форма заявки. Подключите домен и принимайте оплаты в рублях.",
-    bullets: [
-      "Страницы услуг, цен, контактов и кейсов",
-      "Формы заявок и оплата в рублях",
-      "Понятный редактор без вёрстки",
-      "Свой домен и быстрая загрузка",
-    ],
-    cta: { to: "/site", label: "Подробнее про сайты" },
-    icon: Layout,
-  },
-};
-
-function ProductsTabs() {
-  const [active, setActive] = useState<ProductKey>("media");
-  const p = products[active];
-  const Icon = p.icon;
+function Integrations() {
+  const channels = [
+    { t: "Telegram", s: "бот и чат" },
+    { t: "Сайт", s: "виджет на любой страницы" },
+    { t: "WhatsApp", s: "через провайдера" },
+    { t: "Avito", s: "сообщения и заявки" },
+    { t: "VK", s: "сообщения сообщества" },
+    { t: "Звонки", s: "обработка пропущенных" },
+  ];
+  const handoffs = [
+    { t: "amoCRM", s: "сделка в воронке" },
+    { t: "Bitrix24", s: "лид и задача" },
+    { t: "Google Sheets", s: "строка по заявке" },
+    { t: "Telegram-чат", s: "уведомление команде" },
+    { t: "Email", s: "карточка лида" },
+    { t: "Webhook", s: "ваш сценарий" },
+  ];
 
   return (
-    <section id="products" className="py-20 md:py-28">
+    <section
+      id="integrations"
+      className="border-y border-border bg-surface-muted/40 py-20 md:py-28"
+    >
       <Container>
         <SectionHead
-          eyebrow="Два продукта"
-          title="Сфокусированный набор, без лишнего"
-          desc="Только то, что действительно нужно сервисному бизнесу: контент и сайт. Каждый продукт работает отдельно или вместе в одном кабинете."
+          eyebrow="Интеграции"
+          title="Принимаем там, где пишут. Отдаём туда, где работаете"
+          desc="Один менеджер на все каналы и любые маршруты заявок."
         />
-
-        <div className="mx-auto mt-10 inline-flex rounded-full border border-border bg-surface p-1">
-          {(Object.keys(products) as ProductKey[]).map((k) => (
-            <button
-              key={k}
-              type="button"
-              onClick={() => setActive(k)}
-              className={
-                "rounded-full px-4 py-2 text-[13px] font-medium transition-colors " +
-                (active === k
-                  ? "bg-foreground text-background"
-                  : "text-ink-muted hover:text-foreground")
-              }
-              aria-pressed={active === k}
-            >
-              {products[k].label}
-            </button>
-          ))}
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <IntegrationList title="Каналы" items={channels} />
+          <IntegrationList title="Куда уходит заявка" items={handoffs} />
         </div>
+      </Container>
+    </section>
+  );
+}
 
-        <div className="mt-10 grid items-center gap-10 md:grid-cols-12 md:gap-14">
-          <div className="md:col-span-6">
-            <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-surface">
-              <Icon className="h-4 w-4" strokeWidth={1.75} />
+function IntegrationList({
+  title,
+  items,
+}: {
+  title: string;
+  items: { t: string; s: string }[];
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-surface p-6 md:p-8">
+      <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+        {title}
+      </div>
+      <ul className="mt-5 divide-y divide-border">
+        {items.map((it) => (
+          <li
+            key={it.t}
+            className="flex items-center justify-between gap-4 py-3 first:pt-0 last:pb-0"
+          >
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-[11px] font-semibold text-foreground">
+                {it.t.slice(0, 2)}
+              </span>
+              <div>
+                <div className="text-[14px] font-semibold text-foreground">{it.t}</div>
+                <div className="text-[12px] text-ink-subtle">{it.s}</div>
+              </div>
             </div>
-            <h3 className="font-display text-[28px] font-semibold tracking-[-0.02em] text-foreground md:text-[34px]">
-              {p.title}
-            </h3>
-            <p className="mt-4 text-[15.5px] leading-relaxed text-ink-muted">
-              {p.desc}
+            <Check className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ─────────────────── Why Neeklo ─────────────────── */
+
+function WhyNeeklo() {
+  const items = [
+    {
+      icon: Server,
+      title: "Своя инфраструктура",
+      desc: "Менеджер работает на серверах Neeklo, а не поверх чужих API. Доступность и цена под нашим контролем.",
+    },
+    {
+      icon: Shield,
+      title: "Данные в РФ",
+      desc: "Диалоги, лиды и логи хранятся в российских дата-центрах. Доступ по ролям.",
+    },
+    {
+      icon: CreditCard,
+      title: "Оплата в рублях",
+      desc: "ЮKassa и российские карты. Без зарубежных подписок и блокировок.",
+    },
+    {
+      icon: Bot,
+      title: "Продуктовая компания",
+      desc: "Мы не агентство. Развиваем один продукт и отвечаем за его качество.",
+    },
+  ];
+  return (
+    <section className="py-20 md:py-28">
+      <Container>
+        <div className="grid gap-12 md:grid-cols-12 md:gap-16">
+          <div className="md:col-span-5">
+            <div className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+              Почему Neeklo
+            </div>
+            <h2 className="mt-3 font-display text-[32px] font-semibold tracking-[-0.02em] text-foreground md:text-[44px]">
+              Продукт, который вы контролируете
+            </h2>
+            <p className="mt-5 text-[15.5px] leading-relaxed text-ink-muted">
+              Мы делаем рабочий инструмент для бизнеса, а не очередную обёртку
+              над зарубежными API. Инфраструктура, данные и расчёты в России.
             </p>
-            <ul className="mt-6 space-y-3">
-              {p.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-[14.5px] text-foreground">
-                  <Check className="mt-0.5 h-4 w-4 flex-none" strokeWidth={2} />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
             <div className="mt-7">
-              <Button asChild variant="outline" size="md">
-                <Link to={p.cta.to}>
-                  {p.cta.label}
+              <Button asChild variant="brand" size="md">
+                <Link to="/onboarding/assistant">
+                  Подключить менеджера
                   <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
                 </Link>
               </Button>
             </div>
           </div>
 
-          <div className="md:col-span-6">
-            <ProductMock kind={active} />
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-function ProductMock({ kind }: { kind: ProductKey }) {
-  if (kind === "media") {
-    return (
-      <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-md">
-        <div className="border-b border-border px-5 py-3 text-[12px] font-medium text-ink-muted">
-          Контент-план · эта неделя
-        </div>
-        <div className="space-y-2 p-5">
-          {[
-            { d: "Пн", t: "Пост: подбор материалов для ремонта" },
-            { d: "Вт", t: "Reels: 60 секунд о монтаже" },
-            { d: "Ср", t: "Сторис: отзыв клиента" },
-            { d: "Чт", t: "Пост: типичные ошибки в брифе" },
-            { d: "Пт", t: "Рассылка: цены до конца месяца" },
-          ].map((it) => (
-            <div
-              key={it.d}
-              className="flex items-center gap-4 rounded-xl border border-border bg-background px-4 py-3"
-            >
-              <span className="w-8 text-[12px] font-semibold uppercase tracking-wide text-ink-subtle">
-                {it.d}
-              </span>
-              <span className="flex-1 text-[14px] text-foreground">{it.t}</span>
-              <span className="text-[11px] text-ink-subtle">готово</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-md">
-      <div className="border-b border-border px-5 py-3 text-[12px] font-medium text-ink-muted">
-        Структура сайта · студия ремонта
-      </div>
-      <div className="grid grid-cols-2 gap-3 p-5">
-        {[
-          { t: "Главная", s: "обложка + услуги" },
-          { t: "Тарифы", s: "3 пакета, оплата" },
-          { t: "Кейсы", s: "до и после" },
-          { t: "Контакты", s: "форма заявки" },
-        ].map((b) => (
-          <div key={b.t} className="rounded-xl border border-border bg-background p-4">
-            <div className="text-[13.5px] font-semibold text-foreground">{b.t}</div>
-            <div className="mt-1 text-[12px] text-ink-subtle">{b.s}</div>
-            <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-surface-muted">
+          <div className="grid gap-4 md:col-span-7 md:grid-cols-2">
+            {items.map((it) => (
               <div
-                className="h-full rounded-full bg-foreground"
-                style={{ width: "80%" }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="flex items-center justify-between border-t border-border px-5 py-3 text-[12px] text-ink-muted">
-        <span>Опубликовано · студия.neeklo.ru</span>
-        <span className="font-medium text-foreground">оплата в ₽</span>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────── How it works ─────────────────── */
-
-function HowItWorks() {
-  const steps = [
-    {
-      n: "01",
-      title: "Расскажите о бизнесе",
-      desc: "Короткий бриф: что вы делаете, кому, в каком стиле. Без длинных анкет.",
-      icon: Settings2,
-    },
-    {
-      n: "02",
-      title: "Соберите помощника или сайт",
-      desc: "Пошаговый мастер. Готовые шаблоны для услуг, обучение и образование, локального бизнеса.",
-      icon: Wand2,
-    },
-    {
-      n: "03",
-      title: "Запустите за один день",
-      desc: "Свой домен, форма заявки, оплата в рублях через ЮKassa. Всё работает сразу.",
-      icon: Zap,
-    },
-    {
-      n: "04",
-      title: "Управляйте в одном кабинете",
-      desc: "Проекты, баланс, аналитика и команда в одном месте. Платите только за то, что используете.",
-      icon: TrendingUp,
-    },
-  ];
-  return (
-    <section id="how" className="border-t border-border bg-surface-muted/40 py-20 md:py-28">
-      <Container>
-        <SectionHead
-          eyebrow="Как это работает"
-          title="Четыре шага от идеи до запуска"
-          desc="Сервис ведёт за руку. Никакого кода и долгих внедрений."
-        />
-        <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => {
-            const Icon = s.icon;
-            return (
-              <li
-                key={s.n}
-                className="group rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-border-strong"
+                key={it.title}
+                className="rounded-2xl border border-border bg-surface p-6"
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-[13px] font-semibold tabular text-ink-subtle">
-                    {s.n}
-                  </span>
-                  <Icon className="h-4 w-4 text-ink-muted" strokeWidth={1.75} />
+                <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background">
+                  <it.icon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
-                <h3 className="mt-6 font-display text-[18px] font-semibold tracking-[-0.01em] text-foreground">
-                  {s.title}
+                <h3 className="mt-4 font-display text-[16.5px] font-semibold tracking-[-0.01em] text-foreground">
+                  {it.title}
                 </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">
-                  {s.desc}
+                <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-muted">
+                  {it.desc}
                 </p>
-              </li>
-            );
-          })}
-        </ol>
-      </Container>
-    </section>
-  );
-}
-
-/* ─────────────────── Interface ─────────────────── */
-
-function Interface() {
-  return (
-    <section id="interface" className="py-20 md:py-28">
-      <Container>
-        <SectionHead
-          eyebrow="Реальный интерфейс"
-          title="Один кабинет на все проекты"
-          desc="Создавайте, редактируйте и публикуйте без переключения окон. Видно баланс, заявки и публикации."
-        />
-
-        <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
-          <div className="grid md:grid-cols-12">
-            {/* Sidebar */}
-            <aside className="border-b border-border bg-background p-4 md:col-span-3 md:border-b-0 md:border-r">
-              <div className="mb-4 text-[11px] uppercase tracking-wide text-ink-subtle">
-                Проекты
               </div>
-              <ul className="space-y-1">
-                {[
-                  { t: "Студия ремонта", a: true },
-                  { t: "Школа английского", a: false },
-                  { t: "Косметология", a: false },
-                ].map((p) => (
-                  <li key={p.t}>
-                    <div
-                      className={
-                        "flex items-center justify-between rounded-lg px-3 py-2 text-[13.5px] " +
-                        (p.a
-                          ? "bg-foreground text-background"
-                          : "text-foreground hover:bg-surface-muted")
-                      }
-                    >
-                      <span>{p.t}</span>
-                      {p.a && <span className="text-[10.5px] opacity-80">сейчас</span>}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border-strong px-3 py-2 text-[12.5px] font-medium text-ink-muted hover:text-foreground"
-              >
-                + Новый проект
-              </button>
-            </aside>
-
-            {/* Main */}
-            <div className="md:col-span-9">
-              <div className="flex items-center justify-between border-b border-border px-6 py-4">
-                <div>
-                  <div className="text-[12px] text-ink-subtle">Проект</div>
-                  <div className="font-display text-[16px] font-semibold text-foreground">
-                    Студия ремонта
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] font-medium text-ink-muted">
-                    Сайт опубликован
-                  </span>
-                  <Button variant="brand" size="sm">
-                    Создать пост
-                  </Button>
-                </div>
-              </div>
-
-              <div className="grid gap-4 p-6 md:grid-cols-3">
-                <Tile label="Заявки за неделю" value="24" hint="+8 к прошлой" />
-                <Tile label="Постов готово" value="6" hint="на этой неделе" />
-                <Tile label="Баланс" value="4 280 ₽" hint="хватает на ~22 поста" />
-              </div>
-
-              <div className="grid gap-4 px-6 pb-6 md:grid-cols-2">
-                <div className="rounded-xl border border-border bg-background p-5">
-                  <div className="mb-3 text-[12px] uppercase tracking-wide text-ink-subtle">
-                    Последние публикации
-                  </div>
-                  <ul className="space-y-2.5 text-[13.5px]">
-                    <li className="flex justify-between text-foreground">
-                      <span>5 признаков обновить сайт</span>
-                      <span className="text-ink-subtle">сегодня</span>
-                    </li>
-                    <li className="flex justify-between text-foreground">
-                      <span>Кейс: квартира 42 м²</span>
-                      <span className="text-ink-subtle">вчера</span>
-                    </li>
-                    <li className="flex justify-between text-foreground">
-                      <span>Сторис: голосование</span>
-                      <span className="text-ink-subtle">2 дня</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="rounded-xl border border-border bg-background p-5">
-                  <div className="mb-3 text-[12px] uppercase tracking-wide text-ink-subtle">
-                    Сайт
-                  </div>
-                  <div className="text-[13.5px] text-foreground">студия.neeklo.ru</div>
-                  <div className="mt-1 text-[12px] text-ink-subtle">
-                    4 страницы · форма заявки · оплата в ₽
-                  </div>
-                  <div className="mt-4 flex gap-2">
-                    <Button variant="outline" size="sm">
-                      Редактировать
-                    </Button>
-                    <Button variant="ghostInk" size="sm">
-                      Открыть
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </Container>
@@ -1029,65 +754,59 @@ function Interface() {
   );
 }
 
-function Tile({ label, value, hint }: { label: string; value: string; hint: string }) {
-  return (
-    <div className="rounded-xl border border-border bg-background p-5">
-      <div className="text-[11.5px] uppercase tracking-wide text-ink-subtle">{label}</div>
-      <div className="mt-2 font-display text-[24px] font-semibold tabular text-foreground">
-        {value}
-      </div>
-      <div className="mt-1 text-[12px] text-ink-subtle">{hint}</div>
-    </div>
-  );
-}
+/* ─────────────────── Ecosystem (Скоро) ─────────────────── */
 
-/* ─────────────────── Benefits ─────────────────── */
-
-function Benefits() {
+function Ecosystem() {
   const items = [
     {
-      title: "Меньше рутины",
-      desc: "Сервис готовит контент и держит структуру сайта. Вы тратите часы вместо дней.",
+      icon: ImageIcon,
+      tag: "Медиа-помощник",
+      title: "Контент для соцсетей по плану",
+      desc: "Готовит посты, сторис и идеи reels в вашем стиле. Развиваем как отдельный продукт экосистемы.",
     },
     {
-      title: "Понятная цена в рублях",
-      desc: "Никаких зарубежных карт и подписок. Пополнили баланс, видите расход по делам.",
-    },
-    {
-      title: "Один кабинет",
-      desc: "Помощник, сайт, проекты и команда в одном месте. Без чатов и таблиц.",
-    },
-    {
-      title: "Запуск за день",
-      desc: "Короткий бриф, готовые шаблоны под услуги, обучение, локальный бизнес.",
-    },
-    {
-      title: "Без вёрстки и кода",
-      desc: "Всё редактируется кнопками. Свой домен подключается за пару кликов.",
-    },
-    {
-      title: "Поддержка по-русски",
-      desc: "Отвечаем в Telegram. Помогаем подобрать тариф и подключить оплату.",
+      icon: Layout,
+      tag: "Сайты",
+      title: "Сайт под услугу за один вечер",
+      desc: "Аккуратный сайт с формой заявки и оплатой в рублях. Подключаем к AI-менеджеру в один клик.",
     },
   ];
   return (
     <section className="border-y border-border bg-surface-muted/40 py-20 md:py-28">
       <Container>
         <SectionHead
-          eyebrow="Что вы получаете"
-          title="Конкретный результат, а не «AI-платформа»"
-          desc="Сервис закрывает реальные задачи владельца бизнеса: меньше рутины, больше заявок."
+          eyebrow="Экосистема Neeklo"
+          title="Дальше больше. Менеджер первым, остальное по плану"
+          desc="Сейчас фокус на AI-менеджере заявок. Эти продукты на подходе."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
           {items.map((it) => (
             <div
-              key={it.title}
-              className="rounded-2xl border border-border bg-surface p-6"
+              key={it.tag}
+              className="relative flex flex-col rounded-2xl border border-border bg-surface p-7 md:p-9"
             >
-              <h3 className="font-display text-[17px] font-semibold tracking-[-0.01em] text-foreground">
+              <span className="absolute right-5 top-5 rounded-full border border-foreground/30 bg-background px-2.5 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-foreground">
+                скоро
+              </span>
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background">
+                <it.icon className="h-4 w-4" strokeWidth={1.75} />
+              </div>
+              <div className="mt-5 text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+                {it.tag}
+              </div>
+              <h3 className="mt-2 font-display text-[22px] font-semibold tracking-[-0.01em] text-foreground md:text-[26px]">
                 {it.title}
               </h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">{it.desc}</p>
+              <p className="mt-3 text-[14px] leading-relaxed text-ink-muted">{it.desc}</p>
+              <div className="mt-6">
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-[12.5px] font-medium text-ink-muted"
+                >
+                  В разработке
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -1102,46 +821,45 @@ function Pricing() {
   const plans = [
     {
       name: "Старт",
-      price: "990 ₽",
+      price: "2 490 ₽",
       period: "в месяц",
-      desc: "Чтобы попробовать сервис и собрать первый проект.",
+      desc: "Один канал и до 300 диалогов в месяц. Чтобы попробовать на боевых заявках.",
       features: [
-        "1 проект",
-        "Медиа-помощник: 20 публикаций",
-        "Сайт на поддомене .neeklo.ru",
-        "Поддержка в Telegram",
+        "1 канал на выбор",
+        "До 300 диалогов в месяц",
+        "Передача в Telegram и Sheets",
+        "Поддержка по будням",
       ],
-      cta: "Начать со «Старта»",
+      cta: "Подключить",
       highlighted: false,
     },
     {
       name: "Бизнес",
-      price: "2 490 ₽",
+      price: "6 900 ₽",
       period: "в месяц",
-      desc: "Оптимально для услуги или небольшой студии.",
+      desc: "Оптимально для малого и среднего бизнеса с потоком заявок.",
       features: [
-        "3 проекта",
-        "Медиа-помощник: 120 публикаций",
-        "Сайт на своём домене",
-        "Оплата клиентов в ₽ через ЮKassa",
-        "Аналитика заявок",
+        "Все каналы",
+        "До 2 000 диалогов в месяц",
+        "amoCRM, Bitrix24, Webhooks",
+        "Аналитика и стоимость заявки",
+        "Поддержка 7 дней в неделю",
       ],
       cta: "Выбрать «Бизнес»",
       highlighted: true,
     },
     {
-      name: "Студия",
-      price: "6 900 ₽",
-      period: "в месяц",
-      desc: "Для агентств и команд, которые ведут клиентов.",
+      name: "Команда",
+      price: "по запросу",
+      period: "",
+      desc: "Для агентств, сетей и компаний с несколькими отделами продаж.",
       features: [
-        "10 проектов",
-        "Медиа-помощник без лимита",
-        "Командный доступ",
-        "Приоритетная поддержка",
-        "Перенос проектов клиенту",
+        "Без лимита на диалоги",
+        "Несколько проектов и ролей",
+        "Выделенный менеджер внедрения",
+        "SLA и индивидуальные сценарии",
       ],
-      cta: "Выбрать «Студию»",
+      cta: "Обсудить",
       highlighted: false,
     },
   ];
@@ -1159,7 +877,7 @@ function Pricing() {
             <div
               key={p.name}
               className={
-                "flex flex-col rounded-2xl border p-6 transition-colors " +
+                "flex flex-col rounded-2xl border p-6 " +
                 (p.highlighted
                   ? "border-foreground bg-foreground text-background"
                   : "border-border bg-surface text-foreground")
@@ -1177,14 +895,16 @@ function Pricing() {
                 <span className="font-display text-[32px] font-semibold tabular">
                   {p.price}
                 </span>
-                <span
-                  className={
-                    "text-[13px] " +
-                    (p.highlighted ? "text-background/70" : "text-ink-subtle")
-                  }
-                >
-                  {p.period}
-                </span>
+                {p.period && (
+                  <span
+                    className={
+                      "text-[13px] " +
+                      (p.highlighted ? "text-background/70" : "text-ink-subtle")
+                    }
+                  >
+                    {p.period}
+                  </span>
+                )}
               </div>
               <p
                 className={
@@ -1228,7 +948,7 @@ function Pricing() {
           ))}
         </div>
         <div className="mt-6 flex items-center justify-center gap-2 text-[12.5px] text-ink-subtle">
-          <CreditCard className="h-3.5 w-3.5" strokeWidth={1.75} />
+          <Globe className="h-3.5 w-3.5" strokeWidth={1.75} />
           Оплата картами РФ через ЮKassa. НДС включён.
         </div>
       </Container>
@@ -1240,28 +960,28 @@ function Pricing() {
 
 const faq = [
   {
-    q: "Это для кого?",
-    a: "Для услуг, обучения, локального бизнеса и небольших студий. Тех, кому нужен сайт и регулярный контент без отдельной команды.",
+    q: "На каких заявках это работает?",
+    a: "На любых: ремонт, обучение, услуги, локальный бизнес, b2b. Менеджер обучается под ваши товары и услуги, а не под отрасль.",
   },
   {
-    q: "Что значит «медиа-помощник»?",
-    a: "Это инструмент в кабинете, который готовит контент-план, тексты постов, сторис и идеи reels под ваш бренд. Вы согласовываете и публикуете.",
+    q: "Это собственная разработка или обёртка?",
+    a: "Это наш продукт на инфраструктуре Neeklo. Мы контролируем работу, доступность и обновления.",
   },
   {
-    q: "Сайт работает на своём домене?",
-    a: "Да. На «Бизнес» и «Студии» можно подключить свой домен. На «Старте» используется адрес вида ваш-бренд.neeklo.ru.",
+    q: "Где хранятся диалоги и заявки?",
+    a: "В российских дата-центрах. Доступ по ролям, логи хранятся столько, сколько нужно вам.",
   },
   {
-    q: "Как принимать оплату от клиентов?",
-    a: "Подключаем ЮKassa. Клиенты платят российскими картами в рублях прямо с вашего сайта.",
+    q: "Как подключаются Telegram и сайт?",
+    a: "Telegram через бота за пару минут. Сайт через виджет, который вставляется одной строкой. Avito и VK подключаем под вашу схему.",
   },
   {
-    q: "Можно поменять тариф?",
-    a: "Да, в любой момент из кабинета. При повышении доплачиваете только разницу.",
+    q: "Что значит «передача в CRM»?",
+    a: "Готовая карточка лида автоматически создаётся в amoCRM, Bitrix24, Google Sheets или присылается на Webhook.",
   },
   {
-    q: "Если не подойдёт?",
-    a: "Первые 7 дней бесплатно. Если сервис не подошёл, мы вернём оплату по запросу в поддержку.",
+    q: "А если не подойдёт?",
+    a: "Первые 7 дней бесплатно. Если не подошло, вернём оплату по запросу в поддержку.",
   },
 ];
 
@@ -1274,9 +994,7 @@ function Faq() {
           title="Коротко о главном"
           desc="Не нашли ответа? Напишите в Telegram, отвечаем по-русски и без скриптов."
         />
-        <div
-          className="mx-auto mt-10 max-w-[760px] divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface"
-        >
+        <div className="mx-auto mt-10 max-w-[760px] divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
           {faq.map((item, i) => (
             <FaqRow key={i} q={item.q} a={item.a} />
           ))}
@@ -1321,17 +1039,15 @@ function FinalCta() {
         <div className="relative overflow-hidden rounded-3xl border border-foreground bg-foreground px-8 py-14 text-background md:px-14 md:py-20">
           <div className="mx-auto max-w-[680px] text-center">
             <h2 className="font-display text-[32px] font-semibold tracking-[-0.02em] md:text-[44px]">
-              Запустите сервис сегодня.
-              <br />
-              Оплата в рублях.
+              Подключите AI-менеджера заявок сегодня
             </h2>
             <p className="mx-auto mt-4 max-w-[520px] text-[15px] leading-relaxed text-background/75">
-              Создайте проект за пару минут. Первые 7 дней бесплатно, без привязки карты.
+              Первые 7 дней бесплатно, без привязки карты. Запуск за 3 дня под ключ.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button asChild variant="ink" size="lg">
                 <Link to="/onboarding/assistant">
-                  Создать сервис
+                  Подключить менеджера
                   <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
                 </Link>
               </Button>
@@ -1341,8 +1057,8 @@ function FinalCta() {
                 variant="ghostInk"
                 className="text-background hover:bg-background/10"
               >
-                <Link to="/" hash="interface">
-                  Посмотреть интерфейс
+                <Link to="/" hash="product">
+                  Посмотреть, как работает
                 </Link>
               </Button>
             </div>
@@ -1365,7 +1081,7 @@ function SectionHead({
   desc: string;
 }) {
   return (
-    <div className="mx-auto max-w-[680px] text-center">
+    <div className="mx-auto max-w-[720px] text-center">
       <div className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
         {eyebrow}
       </div>

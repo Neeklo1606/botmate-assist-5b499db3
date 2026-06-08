@@ -1,6 +1,6 @@
 /**
- * NeekloHeader — премиальный sticky-хедер.
- * Логотип слева, центрированное меню, справа theme-toggle + 2 CTA.
+ * NeekloHeader. Премиальный sticky-хедер продуктовой компании.
+ * Главный CTA. Медиа и Сайты помечены как «Скоро».
  */
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -12,12 +12,19 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useCurrentUser } from "@/lib/hooks/use-auth";
 import { cn } from "@/lib/utils";
 
-const nav = [
-  { to: "/media" as const, label: "Медиа-помощник" },
-  { to: "/site" as const, label: "Сайты" },
-  { to: "/" as const, hash: "how", label: "Как работает" },
-  { to: "/" as const, hash: "pricing", label: "Тарифы" },
-  { to: "/" as const, hash: "faq", label: "FAQ" },
+type NavItem = {
+  to: "/" | "/media" | "/site";
+  hash?: string;
+  label: string;
+  soon?: boolean;
+};
+
+const nav: NavItem[] = [
+  { to: "/", hash: "product", label: "Продукт" },
+  { to: "/", hash: "integrations", label: "Интеграции" },
+  { to: "/", hash: "pricing", label: "Тарифы" },
+  { to: "/media", label: "Медиа", soon: true },
+  { to: "/site", label: "Сайты", soon: true },
 ];
 
 export function NeekloHeader() {
@@ -29,12 +36,13 @@ export function NeekloHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-lg">
       <Container>
         <div className="flex h-16 items-center justify-between gap-6">
-          {/* Left: logo */}
-          <Link to="/" className="flex items-center gap-2" aria-label="Neeklo — на главную">
+          <Link to="/" className="flex items-center gap-2" aria-label="Neeklo, на главную">
             <NeekloLogo />
+            <span className="hidden rounded-full border border-border bg-surface px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-wide text-ink-muted sm:inline-flex">
+              Продукт
+            </span>
           </Link>
 
-          {/* Center: nav */}
           <nav aria-label="Главное меню" className="hidden flex-1 justify-center md:flex">
             <ul className="flex items-center gap-1">
               {nav.map((item) => (
@@ -42,17 +50,21 @@ export function NeekloHeader() {
                   <Link
                     to={item.to}
                     hash={item.hash}
-                    className="inline-flex h-9 items-center rounded-md px-3 text-[13.5px] font-medium text-ink-muted transition-colors hover:bg-surface-muted hover:text-foreground"
+                    className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-[13.5px] font-medium text-ink-muted transition-colors hover:bg-surface-muted hover:text-foreground"
                     activeProps={{ className: "text-foreground" }}
                   >
                     {item.label}
+                    {item.soon && (
+                      <span className="rounded-full border border-border bg-surface px-1.5 py-[1px] text-[9.5px] font-semibold uppercase tracking-wide text-ink-subtle">
+                        скоро
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          {/* Right: actions */}
           <div className="hidden items-center gap-2 md:flex">
             <ThemeToggle />
             {isAuthed ? (
@@ -66,7 +78,7 @@ export function NeekloHeader() {
                 </Button>
                 <Button asChild variant="brand" size="sm">
                   <Link to="/onboarding/assistant">
-                    Создать сервис
+                    Подключить
                     <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
                   </Link>
                 </Button>
@@ -74,7 +86,6 @@ export function NeekloHeader() {
             )}
           </div>
 
-          {/* Mobile burger */}
           <div className="flex items-center gap-1 md:hidden">
             <ThemeToggle />
             <button
@@ -104,9 +115,14 @@ export function NeekloHeader() {
                 to={item.to}
                 hash={item.hash}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-[15px] font-medium text-foreground hover:bg-surface-muted"
+                className="flex items-center justify-between rounded-md px-3 py-3 text-[15px] font-medium text-foreground hover:bg-surface-muted"
               >
-                {item.label}
+                <span>{item.label}</span>
+                {item.soon && (
+                  <span className="rounded-full border border-border bg-surface px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ink-subtle">
+                    скоро
+                  </span>
+                )}
               </Link>
             ))}
             <div className="mt-2 flex gap-2 pt-2">
@@ -125,7 +141,7 @@ export function NeekloHeader() {
                   </Button>
                   <Button asChild variant="brand" size="md" className="flex-1">
                     <Link to="/onboarding/assistant" onClick={() => setOpen(false)}>
-                      Создать сервис
+                      Подключить
                     </Link>
                   </Button>
                 </>
