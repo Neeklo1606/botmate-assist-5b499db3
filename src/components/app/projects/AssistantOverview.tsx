@@ -78,15 +78,21 @@ export function AssistantOverview({ project }: { project: Project }) {
 
       {/* Suggestions */}
       <section
-        className="flex items-start gap-3 rounded-xl p-4"
-        style={{ background: "rgba(168,255,87,0.06)", border: "1px solid rgba(168,255,87,0.20)" }}
+        className="flex items-start gap-3 rounded-xl border p-4"
+        style={{
+          background: "color-mix(in oklab, var(--color-accent) 8%, transparent)",
+          borderColor: "color-mix(in oklab, var(--color-accent) 25%, transparent)",
+        }}
       >
-        <Sparkles className="h-4 w-4 flex-none" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
+        <Sparkles className="h-4 w-4 flex-none text-accent" strokeWidth={1.75} />
         <div className="text-sm" style={{ color: "rgba(255,255,255,0.85)" }}>
           Совет: добавьте 5 типовых вопросов клиентов в раздел знаний — это поднимет точность ответов на ~20%.
-          <a className="ml-2 inline-flex items-center gap-1 font-semibold" style={{ color: "#a8ff57" }} href="/knowledge">
+          <Link
+            to="/knowledge"
+            className="ml-2 inline-flex items-center gap-1 font-semibold text-accent hover:underline"
+          >
             Открыть знания <ArrowRight className="h-3 w-3" strokeWidth={2} />
-          </a>
+          </Link>
         </div>
       </section>
     </div>
