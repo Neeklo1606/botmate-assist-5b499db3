@@ -65,13 +65,21 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <div className="mb-3 inline-flex items-center rounded-full border border-border bg-surface px-2.5 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <div
+          className={cn(
+            "mb-4 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted",
+            align === "center" && "justify-center",
+          )}
+        >
+          <span aria-hidden className="h-1 w-1 rounded-full bg-accent" />
           {eyebrow}
         </div>
       ) : null}
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">{title}</h2>
+      <h2 className="font-display text-3xl font-semibold tracking-[-0.025em] md:text-[40px] md:leading-[1.05]">
+        {title}
+      </h2>
       {description ? (
-        <p className="mt-3 text-[15px] md:text-base text-muted-foreground">
+        <p className="mt-4 text-[15px] leading-relaxed text-ink-muted md:text-base">
           {description}
         </p>
       ) : null}
