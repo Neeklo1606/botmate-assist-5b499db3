@@ -100,27 +100,27 @@ export function NeekloHeader() {
           </nav>
 
           {/* Right cluster */}
-          <div className="hidden items-center gap-1.5 md:flex">
+          <div className="hidden items-center gap-2 md:flex">
             <ThemeToggle />
-            <span className="mx-1 h-5 w-px bg-border" aria-hidden />
+            <span className="mx-1.5 h-4 w-px bg-border" aria-hidden />
             {isAuthed ? (
-              <Button asChild variant="brand" size="sm">
+              <Button asChild variant="brand" size="sm" className="rounded-full px-4">
                 <Link to="/app">В кабинет</Link>
               </Button>
             ) : (
               <>
-                <Button asChild variant="ghostInk" size="sm">
+                <Button asChild variant="ghostInk" size="sm" className="rounded-full px-3.5">
                   <Link to="/login">Войти</Link>
                 </Button>
-                <Button asChild variant="brand" size="sm" className="group/cta">
+                <Button asChild variant="brand" size="sm" className="group/cta rounded-full px-4">
                   <Link to="/onboarding/assistant" className="gap-2">
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
                     </span>
                     Подключить
                     <ArrowRight
-                      className="h-3.5 w-3.5 transition-transform group-hover/cta:translate-x-0.5"
+                      className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5"
                       strokeWidth={2}
                     />
                   </Link>
