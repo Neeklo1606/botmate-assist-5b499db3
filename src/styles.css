@@ -184,16 +184,18 @@
   --sidebar-border: oklch(0.89 0.012 92);
   --sidebar-ring: oklch(0.54 0.062 118);
 
-  /* legacy v2 dark palette — для существующих dark-only компонентов */
-  --bg-base: #0c0d0a;
-  --bg-elevated: #131410;
-  --bg-soft: #191a15;
-  --bg-soft-hover: #1f201a;
-  --border-dark: #24251f;
-  --border-dark-strong: #30312a;
-  --ink-dark: #f4f2ea;
-  --ink-dark-muted: #9b9a8e;
-  --ink-dark-subtle: #5d5d54;
+  /* legacy v2 палитра — theme-aware алиасы на основной системе токенов.
+     В светлой теме раскрываются в светлые поверхности + тёмный текст,
+     в тёмной — переопределяются ниже в .dark. */
+  --bg-base: var(--background);
+  --bg-elevated: var(--surface);
+  --bg-soft: var(--surface-muted);
+  --bg-soft-hover: var(--surface-tint);
+  --border-dark: var(--border);
+  --border-dark-strong: var(--border-strong);
+  --ink-dark: var(--foreground);
+  --ink-dark-muted: var(--ink-muted);
+  --ink-dark-subtle: var(--ink-subtle);
 
   --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%,
     oklch(0.54 0.062 118 / 0.07) 0%,
