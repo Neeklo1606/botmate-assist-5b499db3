@@ -120,17 +120,10 @@ function Sidebar() {
       >
         <Link
           to="/app"
-          aria-label="botme — кабинет"
-          className="inline-flex items-baseline font-display text-[20px] font-semibold tracking-tight leading-none text-foreground select-none"
+          aria-label="Neeklo — кабинет"
+          className="transition-opacity hover:opacity-80"
         >
-          <span className="relative">
-            botme
-            <span
-              aria-hidden
-              className="absolute -top-[3px] right-[14px] h-[5px] w-[5px] rounded-full"
-              style={{ background: "var(--color-accent)" }}
-            />
-          </span>
+          <NeekloLogo />
         </Link>
       </div>
 
