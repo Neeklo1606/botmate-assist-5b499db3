@@ -112,7 +112,7 @@ export function NeekloHeader() {
     <header
       data-scrolled={scrolled ? "true" : "false"}
       className={cn(
-        "sticky top-0 z-40 w-full",
+        "sticky top-0 z-[80] w-full",
         // Outer vertical breathing — компрессия отступа сверху при скролле
         "transition-[padding] duration-[320ms]",
         scrolled ? "pt-2 md:pt-3" : "pt-3 md:pt-5",
@@ -132,20 +132,20 @@ export function NeekloHeader() {
       >
         <div
           className={cn(
-            "relative grid items-center gap-3 md:gap-4",
+            "relative grid items-center gap-3 md:gap-4 overflow-hidden",
             "grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
             "rounded-full border backdrop-blur-xl",
             "transition-[height,padding,background-color,border-color,box-shadow,backdrop-filter]",
             "duration-[320ms]",
             scrolled
               ? [
-                  "h-[64px] md:h-[72px]",
+                  "h-[58px] md:h-[62px]",
                   "px-2.5 md:px-3",
                   "border-border/70 bg-background/85",
                   "shadow-[var(--shadow-rim),0_8px_28px_-12px_oklch(0.2_0.01_110/0.18)]",
                 ].join(" ")
               : [
-                  "h-[72px] md:h-[88px]",
+                  "h-[64px] md:h-[72px]",
                   "px-3 md:px-4",
                   "border-border/45 bg-background/60",
                   "shadow-[var(--shadow-rim),0_4px_18px_-12px_oklch(0.2_0.01_110/0.12)]",
@@ -158,7 +158,7 @@ export function NeekloHeader() {
           <div className="flex min-w-0 items-center">
             <Link
               to="/"
-              className="group inline-flex items-center gap-2.5 rounded-full px-1.5 py-1 transition-opacity duration-200 hover:opacity-85"
+              className="group inline-flex h-10 items-center gap-2.5 rounded-full px-1.5 py-1 transition-opacity duration-200 hover:opacity-85 sm:h-11 lg:h-12"
               aria-label="Avreya, на главную"
             >
               <NeekloLogo />
