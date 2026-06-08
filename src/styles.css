@@ -98,13 +98,15 @@
   --color-chart-5: var(--chart-5);
 
   --shadow-xs: 0 1px 1px 0 oklch(0.2 0.01 110 / 0.04);
-  --shadow-sm: 0 1px 2px 0 oklch(0.2 0.01 110 / 0.06);
-  --shadow-md: 0 6px 20px -6px oklch(0.2 0.01 110 / 0.09);
+  --shadow-sm: 0 1px 2px 0 oklch(0.2 0.01 110 / 0.05), 0 1px 1px 0 oklch(0.2 0.01 110 / 0.03);
+  --shadow-md: 0 6px 20px -6px oklch(0.2 0.01 110 / 0.10), 0 2px 4px -2px oklch(0.2 0.01 110 / 0.05);
+  --shadow-lg: 0 18px 40px -18px oklch(0.2 0.01 110 / 0.14), 0 4px 10px -4px oklch(0.2 0.01 110 / 0.06);
   --shadow-lift:
     0 1px 1px 0 oklch(0.2 0.01 110 / 0.04),
     0 2px 6px -1px oklch(0.2 0.01 110 / 0.05),
     0 24px 60px -24px oklch(0.2 0.01 110 / 0.14);
-  --shadow-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.7);
+  --shadow-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.65);
+  --shadow-focus: 0 0 0 4px oklch(0.54 0.062 118 / 0.18);
 }
 
 /*
@@ -359,11 +361,27 @@
   .bg-dot-grid {
     background-image: radial-gradient(
       circle at 1px 1px,
-      color-mix(in oklab, var(--color-border-strong) 70%, transparent) 1px,
+      color-mix(in oklab, var(--color-border-strong) 55%, transparent) 1px,
       transparent 0
     );
-    background-size: 22px 22px;
+    background-size: 24px 24px;
   }
+
+  /* Едва заметная диагональная решётка — для «product surface» панелей */
+  .bg-hairline-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--color-border) 55%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--color-border) 55%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Балансированный заголовок + ограничение длины строки для читабельности */
+  .text-balance { text-wrap: balance; }
+  .measure { max-width: 62ch; }
+  .measure-tight { max-width: 48ch; }
+
+  /* Премиальный «soft-lift» — используется на pricing/featured карточках */
+  .shadow-soft-lift { box-shadow: var(--shadow-lg); }
 
   /* Sticky header: тонкая тень и hairline только при скролле */
   .header-scrolled {
