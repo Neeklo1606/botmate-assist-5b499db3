@@ -854,18 +854,26 @@ function IntegrationList({
   items: { t: string; s: string }[];
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 md:p-8">
-      <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
-        {title}
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 md:p-8">
+      <div className="flex items-baseline justify-between">
+        <div className="inline-flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+            {title}
+          </div>
+        </div>
+        <div className="font-mono text-[10.5px] tabular text-ink-subtle">
+          {String(items.length).padStart(2, "0")}
+        </div>
       </div>
       <ul className="mt-5 divide-y divide-border">
         {items.map((it) => (
           <li
             key={it.t}
-            className="flex items-center justify-between gap-4 py-3 first:pt-0 last:pb-0"
+            className="group flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0"
           >
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-[11px] font-semibold text-foreground">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background text-[11px] font-semibold uppercase tracking-tight text-foreground transition-colors group-hover:border-foreground/25">
                 {it.t.slice(0, 2)}
               </span>
               <div>
@@ -873,7 +881,9 @@ function IntegrationList({
                 <div className="text-[12px] text-ink-subtle">{it.s}</div>
               </div>
             </div>
-            <Check className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2} />
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent/15 text-accent">
+              <Check className="h-3 w-3" strokeWidth={2.5} />
+            </span>
           </li>
         ))}
       </ul>
