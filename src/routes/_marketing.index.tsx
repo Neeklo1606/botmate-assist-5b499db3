@@ -401,7 +401,7 @@ function TrustBar() {
 
   return (
     <section className="border-b border-border bg-surface-sunken/50">
-      <div className="py-3 md:py-3.5">
+      <div className="py-2 md:py-2.5">
         <div
           className="marquee-mask pause-on-hover group/marquee relative overflow-hidden"
           style={{ ["--marquee-duration" as string]: "90s" }}
