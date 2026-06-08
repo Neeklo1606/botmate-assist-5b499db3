@@ -134,7 +134,7 @@ function Hero() {
               </span>
             </div>
 
-            <h1 className="font-display text-[48px] font-bold leading-[0.95] tracking-[-0.035em] text-foreground md:text-[68px] lg:text-[80px]">
+            <h1 className="hero-h1 font-display text-[48px] font-bold leading-[0.95] tracking-[-0.035em] text-foreground md:text-[68px] lg:text-[80px]">
               Ни одной
               <br />
               упущенной
