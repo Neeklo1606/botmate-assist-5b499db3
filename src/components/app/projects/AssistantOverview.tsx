@@ -103,7 +103,9 @@ function KpiCard({ label, value, accent }: { label: string; value: string; accen
   return (
     <div className="rounded-xl p-4" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
       <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</div>
-      <div className="mt-1 font-display text-2xl font-semibold tabular-nums" style={{ color: accent ? "#a8ff57" : "#ffffff" }}>
+      <div
+        className={"mt-1 font-display text-2xl font-semibold tabular-nums " + (accent ? "text-accent" : "text-white")}
+      >
         {value}
       </div>
     </div>
@@ -111,8 +113,16 @@ function KpiCard({ label, value, accent }: { label: string; value: string; accen
 }
 
 function StatusPill({ status }: { status: Conversation["status"] }) {
+  if (status === "lead") {
+    return (
+      <span
+        className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent"
+      >
+        Лид
+      </span>
+    );
+  }
   const map = {
-    lead:   { label: "Лид",     bg: "rgba(168,255,87,0.12)", fg: "#a8ff57" },
     active: { label: "Активный", bg: "rgba(125,211,252,0.10)", fg: "#7dd3fc" },
     closed: { label: "Закрыт",  bg: "rgba(255,255,255,0.05)", fg: "rgba(255,255,255,0.55)" },
   } as const;
