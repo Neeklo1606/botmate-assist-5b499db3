@@ -141,13 +141,13 @@ export function NeekloHeader() {
               ? [
                   "h-[58px] md:h-[62px]",
                   "px-2.5 md:px-3",
-                  "border-border/75 bg-background/98",
+                  "border-border/75 bg-background",
                   "shadow-[var(--shadow-rim),0_8px_28px_-12px_oklch(0.2_0.01_110/0.18)]",
                 ].join(" ")
               : [
                   "h-[64px] md:h-[72px]",
                   "px-3 md:px-4",
-                  "border-border/55 bg-background/94",
+                  "border-border/55 bg-background",
                   "shadow-[var(--shadow-rim),0_4px_18px_-12px_oklch(0.2_0.01_110/0.12)]",
                 ].join(" "),
           )}
