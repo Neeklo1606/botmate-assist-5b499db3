@@ -303,18 +303,8 @@ function Topbar() {
     >
       <div className="flex min-w-0 items-center gap-3">
         <div className="md:hidden">
-          <Link
-            to="/app"
-            className="inline-flex items-baseline font-display text-[18px] font-semibold tracking-tight text-foreground"
-          >
-            <span className="relative">
-              botme
-              <span
-                aria-hidden
-                className="absolute -top-[3px] right-[12px] h-[5px] w-[5px] rounded-full"
-                style={{ background: "var(--color-accent)" }}
-              />
-            </span>
+          <Link to="/app" aria-label="Neeklo" className="transition-opacity hover:opacity-80">
+            <NeekloLogo />
           </Link>
         </div>
         <div className="hidden text-sm md:block" style={{ color: "var(--color-ink-subtle)" }}>
