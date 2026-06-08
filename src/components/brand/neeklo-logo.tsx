@@ -1,8 +1,9 @@
 /**
- * NeekloLogo — шрифтовой логотип бренда Avreya.
- * Тонкая засечка на акценте, без декора. Адаптируется под тему.
+ * AvreyaLogo — логотип бренда Avreya (картинка + wordmark).
+ * Имя компонента и файл сохранены как NeekloLogo / neeklo-logo для совместимости импортов.
  */
 import { cn } from "@/lib/utils";
+import logo from "@/assets/avreya-logo.png.asset.json";
 
 interface Props {
   className?: string;
@@ -11,19 +12,16 @@ interface Props {
 export function NeekloLogo({ className }: Props) {
   return (
     <span
-      className={cn(
-        "inline-flex items-baseline font-display text-[20px] font-semibold tracking-[-0.02em] leading-none select-none text-foreground",
-        className,
-      )}
-      aria-label="Avreya"
+      className={cn("inline-flex items-center select-none", className)}
+      aria-label="avreya.ru"
     >
-      <span className="relative">
-        Avreya
-        <span
-          aria-hidden
-          className="absolute -bottom-[2px] left-0 right-0 h-[2px] rounded-full bg-foreground/15"
-        />
-      </span>
+      <img
+        src={logo.url}
+        alt="avreya.ru"
+        className="h-7 w-auto"
+        loading="eager"
+        decoding="async"
+      />
     </span>
   );
 }
