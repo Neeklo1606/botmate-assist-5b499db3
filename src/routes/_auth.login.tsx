@@ -50,7 +50,7 @@ function LoginPage() {
   return (
     <div className="rounded-2xl border border-border bg-surface p-7 shadow-[var(--shadow-md),var(--shadow-rim)] md:p-8">
       <h1 className="text-center font-display text-[22px] font-semibold tracking-[-0.02em] text-foreground">
-        Войти в Neeklo
+        Войти в Avreya
       </h1>
       <p className="mt-1.5 text-center text-[13px] text-ink-muted">
         Используйте email и пароль аккаунта

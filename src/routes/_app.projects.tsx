@@ -12,7 +12,7 @@ import type { ProjectKind } from "@/lib/projects/types";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_app/projects")({
-  head: () => ({ meta: [{ title: "Проекты — botme" }] }),
+  head: () => ({ meta: [{ title: "Проекты — avreya" }] }),
   component: ProjectsListPage,
 });
 

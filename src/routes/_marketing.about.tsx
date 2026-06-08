@@ -1,5 +1,5 @@
 /**
- * /about — о команде botme.
+ * /about — о команде avreya.
  * Hero + миссия + команда + CTA.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -14,7 +14,7 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/about")({
   head: () => ({
     meta: buildPageMeta({
-      title: "О команде botme — продукт студии neeklo",
+      title: "О команде avreya — продукт студии avreya",
       description:
         "Команда из 4 человек делает AI-ассистенты для бизнеса с 2025 года. Никаких выдуманных метрик — только то, что работает у клиентов.",
       path: "/about",
@@ -57,7 +57,7 @@ function AboutPage() {
               Делаем AI-ассистенты, которые приносят выручку
             </h1>
             <p className="mt-5 text-base text-ink-muted md:text-lg">
-              botme: продукт студии neeklo.studio. Мы строим инструменты, которые экономят бизнесу
+              avreya: продукт студии avreya.studio. Мы строим инструменты, которые экономят бизнесу
               часы и деньги. Без волшебства, на проверенных технологиях.
             </p>
           </div>

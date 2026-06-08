@@ -34,7 +34,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export const Route = createFileRoute("/_app/onboarding")({
   head: () => ({
-    meta: [{ title: "Онбординг — botme" }],
+    meta: [{ title: "Онбординг — avreya" }],
   }),
   component: OnboardingWizard,
 });
@@ -511,7 +511,7 @@ function ChipIcon({ kind }: { kind: KnowledgeChip["kind"] }) {
 
 /* ───────────── Step 3 — Widget ───────────── */
 
-const WIDGET_SNIPPET = `<script src="https://cdn.botme.io/w.js" data-key="demo-key-12345" async></script>`;
+const WIDGET_SNIPPET = `<script src="https://cdn.avreya.io/w.js" data-key="demo-key-12345" async></script>`;
 
 const PLATFORM_HINTS: Record<string, string> = {
   WordPress:

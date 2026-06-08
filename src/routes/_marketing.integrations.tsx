@@ -18,7 +18,7 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/integrations")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Интеграции и каналы botme — Telegram, Avito, amoCRM",
+      title: "Интеграции и каналы avreya — Telegram, Avito, amoCRM",
       description:
         "Telegram, сайт, Avito, ВКонтакте, WhatsApp, Instagram. Связки с amoCRM, Битрикс24, YClients, Notion, Google Sheets и Webhook.",
       path: "/integrations",

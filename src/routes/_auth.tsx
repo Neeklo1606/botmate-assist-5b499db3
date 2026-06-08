@@ -20,7 +20,7 @@ function AuthLayout() {
     <div className="flex min-h-screen flex-col bg-background">
       <header className="border-b border-border/70 bg-background/85 backdrop-blur-md">
         <div className="container-px mx-auto flex h-14 max-w-[1200px] items-center justify-between">
-          <Link to="/" aria-label="Neeklo — на главную" className="transition-opacity hover:opacity-80">
+          <Link to="/" aria-label="Avreya — на главную" className="transition-opacity hover:opacity-80">
             <NeekloLogo />
           </Link>
           <Link

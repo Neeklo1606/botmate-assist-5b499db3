@@ -9,9 +9,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/legal/privacy")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Политика конфиденциальности — botme",
+      title: "Политика конфиденциальности — avreya",
       description:
-        "Как botme обрабатывает персональные данные. Соответствие 152-ФЗ. Хранение данных в РФ. Права субъекта ПД.",
+        "Как avreya обрабатывает персональные данные. Соответствие 152-ФЗ. Хранение данных в РФ. Права субъекта ПД.",
       path: "/legal/privacy",
     }),
     links: [canonicalLink("/legal/privacy")],

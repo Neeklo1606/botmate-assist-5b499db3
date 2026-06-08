@@ -35,10 +35,10 @@ export const Route = createFileRoute("/_marketing/scenarios/$niche")({
   head: ({ loaderData, params }) => {
     const sc = loaderData?.scenario;
     const title = sc
-      ? `${sc.title} — AI-ассистент botme для ${sc.industry}`
-      : `Сценарий botme — ${params.niche}`;
+      ? `${sc.title} — AI-ассистент avreya для ${sc.industry}`
+      : `Сценарий avreya — ${params.niche}`;
     const description = sc
-      ? `${sc.pain} Готовый сценарий ассистента botme: задачи, диалог, интеграции и кейс клиента.`
+      ? `${sc.pain} Готовый сценарий ассистента avreya: задачи, диалог, интеграции и кейс клиента.`
       : "Готовый AI-ассистент под нишу: задачи, диалог, интеграции и кейс клиента.";
     return {
       meta: buildPageMeta({
@@ -134,7 +134,7 @@ function ScenarioPage() {
             <div className="md:col-span-6">
               {scenario.dialog.length > 0 ? (
                 <MockChat
-                  title={`botme · ${scenario.industry}`}
+                  title={`avreya · ${scenario.industry}`}
                   subtitle="отвечает за 7 секунд"
                   messages={scenario.dialog}
                 />

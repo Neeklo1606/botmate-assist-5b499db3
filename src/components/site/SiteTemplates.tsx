@@ -300,7 +300,7 @@ export function SiteTemplates() {
           className="mt-8 text-center text-[13px]"
           style={{ color: "var(--ink-dark-muted)" }}
         >
-          Каждый шаблон адаптируется под твой бизнес. Botme не штампует
+          Каждый шаблон адаптируется под твой бизнес. Avreya не штампует
           одинаковые сайты.
         </p>
       </Container>

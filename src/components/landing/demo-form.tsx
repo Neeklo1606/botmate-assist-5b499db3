@@ -141,9 +141,9 @@ export function DemoForm({
             {t("form.successDescA")}{" "}
             <a
               className="font-medium underline-offset-2 hover:underline"
-              href="https://t.me/botme_support"
+              href="https://t.me/avreya_support"
             >
-              @botme_support
+              @avreya_support
             </a>
             .
           </p>

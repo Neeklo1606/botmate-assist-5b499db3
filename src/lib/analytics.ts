@@ -13,7 +13,7 @@
  */
 
 /** Домен для data-domain. Замените на свой при публикации. */
-export const PLAUSIBLE_DOMAIN = "botme.ru";
+export const PLAUSIBLE_DOMAIN = "avreya.ru";
 
 /** Имя skript URL — self-hosted в будущем легко подменить. */
 export const PLAUSIBLE_SRC = "https://plausible.io/js/script.js";

@@ -22,9 +22,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/first-100")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Первые 100 клиентов botme — настройка под ключ за 150 000 ₽",
+      title: "Первые 100 клиентов avreya — настройка под ключ за 150 000 ₽",
       description:
-        "Команда neeklo собирает ассистента руками. Pro-подписка со скидкой 40% навсегда. Только для первых 100 клиентов botme.",
+        "Команда avreya собирает ассистента руками. Pro-подписка со скидкой 40% навсегда. Только для первых 100 клиентов avreya.",
       path: "/first-100",
     }),
     links: [canonicalLink("/first-100")],
@@ -103,7 +103,7 @@ function First100Hero() {
               раз.
             </h1>
             <p className="mt-5 max-w-[560px] text-[15px] text-ink-muted md:text-[17px]">
-              Команда neeklo настраивает ассистента под ваш бизнес лично. Pro-подписка навсегда со
+              Команда avreya настраивает ассистента под ваш бизнес лично. Pro-подписка навсегда со
               скидкой 40%. Только для первых 100 клиентов.
             </p>
 

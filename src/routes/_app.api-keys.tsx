@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/api-keys")({
   head: () => ({
-    meta: [{ title: "API Ключи — botme" }],
+    meta: [{ title: "API Ключи — avreya" }],
   }),
   component: ApiKeysPage,
 });

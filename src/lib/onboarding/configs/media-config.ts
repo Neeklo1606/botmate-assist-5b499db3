@@ -67,7 +67,7 @@ export const mediaConfig: OnboardingConfig = {
           type: "pill-multi",
           name: "topics",
           label: "О чём публикуете?",
-          helperText: "Выберите 2–4 темы — botme сгенерирует контент-план",
+          helperText: "Выберите 2–4 темы — avreya сгенерирует контент-план",
           required: true,
           min: 2,
           max: 4,
@@ -121,7 +121,7 @@ export const mediaConfig: OnboardingConfig = {
     {
       id: "rhythm",
       title: "Как часто публикуете?",
-      description: "Выберите ритм — botme подготовит план под ваш темп.",
+      description: "Выберите ритм — avreya подготовит план под ваш темп.",
       fields: [
         {
           type: "card-single",

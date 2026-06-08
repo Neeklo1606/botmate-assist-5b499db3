@@ -23,7 +23,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({
-    meta: [{ title: "Настройки — botme" }],
+    meta: [{ title: "Настройки — avreya" }],
   }),
   component: SettingsPage,
 });

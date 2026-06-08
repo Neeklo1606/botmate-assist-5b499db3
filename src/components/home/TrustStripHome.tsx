@@ -4,7 +4,7 @@
  * Pause-on-hover, soft fade по краям, без агрессивных эффектов.
  */
 const items = [
-  "Уже 47 компаний доверяют Neeklo",
+  "Уже 47 компаний доверяют Avreya",
   "Запуск AI-менеджера за 3 дня",
   "Telegram · WhatsApp · Instagram · Сайт",
   "Интеграция с amoCRM и Bitrix24",

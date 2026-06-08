@@ -157,7 +157,7 @@ export function NeekloHeader() {
             <Link
               to="/"
               className="group inline-flex items-center gap-2.5 rounded-full px-1.5 py-1 transition-opacity duration-200 hover:opacity-85"
-              aria-label="Neeklo, на главную"
+              aria-label="Avreya, на главную"
             >
               <NeekloLogo />
             </Link>

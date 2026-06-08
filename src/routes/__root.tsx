@@ -115,9 +115,9 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       // Defaults — каждый маркетинг-роут переопределяет своим buildPageMeta(...)
-      { name: "author", content: "botme" },
+      { name: "author", content: "avreya" },
       { name: "theme-color", content: "#0F1115" },
-      { property: "og:site_name", content: "botme" },
+      { property: "og:site_name", content: "avreya" },
       { property: "og:locale", content: "ru_RU" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },

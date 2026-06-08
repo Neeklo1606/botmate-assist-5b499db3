@@ -1,5 +1,5 @@
 /**
- * Расширенный Button. Brand-варианты botme (Graphite Ink + Electric Lime).
+ * Расширенный Button. Brand-варианты avreya (Graphite Ink + Electric Lime).
  * - brand   — primary CTA: графит фон + lime-подчёркивание на hover
  * - signal  — редкий ударный CTA на lime-фоне (текст всегда графит)
  * - ink     — инверсия для тёмных секций: светлый фон + графит текст

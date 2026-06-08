@@ -155,10 +155,10 @@ export function LegalLayout({ doc, isLoading }: LegalLayoutProps) {
                 <div className="text-sm text-ink-muted">
                   Вопросы по документу — пишите на{" "}
                   <a
-                    href="mailto:legal@botme.ru"
+                    href="mailto:legal@avreya.ru"
                     className="font-medium text-foreground underline-offset-4 hover:underline"
                   >
-                    legal@botme.ru
+                    legal@avreya.ru
                   </a>
                   .
                 </div>

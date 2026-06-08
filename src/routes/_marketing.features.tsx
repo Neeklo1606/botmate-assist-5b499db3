@@ -25,7 +25,7 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/features")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Возможности botme — что умеет AI-ассистент",
+      title: "Возможности avreya — что умеет AI-ассистент",
       description:
         "4 ключевые роли в одном ассистенте: ответы за 7 секунд, квалификация лидов, продажи и запись в CRM. Без выгорания, ночью и в выходные.",
       path: "/features",
@@ -64,7 +64,7 @@ function FeaturesPage() {
               Один ассистент закрывает работу команды поддержки и продаж
             </h1>
             <p className="mt-5 text-base text-ink-muted md:text-lg">
-              botme отвечает клиентам мгновенно, квалифицирует, продаёт и складывает сделки в CRM.
+              avreya отвечает клиентам мгновенно, квалифицирует, продаёт и складывает сделки в CRM.
               Без выходных и обеда.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

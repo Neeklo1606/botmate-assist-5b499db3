@@ -52,7 +52,7 @@ export function LeadWidget() {
     {
       id: "m0",
       role: "ai",
-      text: "Здравствуйте. Я AI-менеджер Neeklo. Покажу за минуту, как мы соберём и квалифицируем заявку для вашего бизнеса.",
+      text: "Здравствуйте. Я AI-менеджер Avreya. Покажу за минуту, как мы соберём и квалифицируем заявку для вашего бизнеса.",
     },
   ]);
   const [typing, setTyping] = useState(false);
@@ -162,7 +162,7 @@ export function LeadWidget() {
     if (!lead.name.trim() || !lead.contact.trim()) return;
     pushUser(`${lead.name} · ${lead.contact}`);
     setStep("done");
-    pushAi("Готово. Заявка передана команде Neeklo и продублирована в Telegram.");
+    pushAi("Готово. Заявка передана команде Avreya и продублирована в Telegram.");
   }
 
   function reset() {
@@ -215,7 +215,7 @@ export function LeadWidget() {
         </span>
         <span className="flex flex-col items-start leading-tight">
           <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-background/60">
-            {open ? "" : "Neeklo"}
+            {open ? "" : "Avreya"}
           </span>
           <span className="text-[13px] font-semibold">
             {open ? "Свернуть" : "AI-менеджер"}
@@ -236,7 +236,7 @@ export function LeadWidget() {
       {/* Panel */}
       <div
         role="dialog"
-        aria-label="AI-менеджер Neeklo"
+        aria-label="AI-менеджер Avreya"
         aria-hidden={!open}
         className={
           "fixed z-[54] flex flex-col overflow-hidden border border-border bg-surface text-foreground shadow-lift transition-all duration-300 " +
@@ -258,7 +258,7 @@ export function LeadWidget() {
             </div>
             <div className="leading-tight">
               <div className="text-[13.5px] font-semibold text-foreground">
-                AI-менеджер · Neeklo
+                AI-менеджер · Avreya
               </div>
               <div className="inline-flex items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.12em] text-ink-subtle">
                 <span className="h-1 w-1 rounded-full bg-accent" />
@@ -415,7 +415,7 @@ export function LeadWidget() {
             <div className="flex items-center justify-between text-[11px] text-ink-subtle">
               <span className="inline-flex items-center gap-1.5">
                 <Sparkles className="h-3 w-3" strokeWidth={2} />
-                AI-менеджер Neeklo
+                AI-менеджер Avreya
               </span>
               <span>оператор подключится при необходимости</span>
             </div>

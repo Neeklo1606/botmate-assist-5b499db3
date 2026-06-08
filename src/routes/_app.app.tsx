@@ -35,7 +35,7 @@ import { useCurrentUser } from "@/lib/hooks/use-auth";
 
 export const Route = createFileRoute("/_app/app")({
   head: () => ({
-    meta: [{ title: "Дашборд — botme" }],
+    meta: [{ title: "Дашборд — avreya" }],
   }),
   component: DashboardPage,
 });
@@ -190,7 +190,7 @@ function ProjectsSection({
             className="mt-0.5 text-sm"
             style={{ color: "rgba(255,255,255,0.6)" }}
           >
-            Каждый проект — это отдельный продукт botme: ассистент, медиа или сайт.
+            Каждый проект — это отдельный продукт avreya: ассистент, медиа или сайт.
           </p>
         </div>
         <Link

@@ -1,5 +1,5 @@
 /**
- * Единый источник доменных типов botme.
+ * Единый источник доменных типов avreya.
  * Используется во всех features, hooks, schemas и mock-repository.
  */
 

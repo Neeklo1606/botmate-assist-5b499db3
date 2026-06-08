@@ -1,5 +1,5 @@
 /**
- * /assistant — продуктовая страница «Ассистент botme».
+ * /assistant — продуктовая страница «Ассистент avreya».
  * Полный лендинг (раньше был на /). Светлая палитра, hash-навигация по секциям.
  */
 import { lazy, Suspense } from "react";
@@ -47,7 +47,7 @@ function SectionSkeleton({ tone = "default", minH = 560 }: { tone?: "default" | 
 export const Route = createFileRoute("/_marketing/assistant")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Ассистент botme — AI, который не теряет клиентов",
+      title: "Ассистент avreya — AI, который не теряет клиентов",
       description:
         "AI-ассистент для Telegram, сайта, Avito и CRM. Запуск за 3 дня. Отвечает за 7 секунд, квалифицирует лида.",
       path: "/assistant",

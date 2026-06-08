@@ -1,5 +1,5 @@
 /**
- * /media — лендинг продукта «Медиа-студия» botme. Тёмная палитра v2.
+ * /media — лендинг продукта «Медиа-студия» avreya. Тёмная палитра v2.
  */
 import { createFileRoute } from "@tanstack/react-router";
 import { MediaHero } from "@/components/media/MediaHero";
@@ -15,9 +15,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Product",
-  name: "Медиа-студия botme",
+  name: "Медиа-студия avreya",
   description: "AI-генерация контента для соцсетей",
-  brand: "botme",
+  brand: "avreya",
   offers: [
     { "@type": "Offer", name: "Старт", price: "4900", priceCurrency: "RUB" },
     { "@type": "Offer", name: "Рост", price: "12900", priceCurrency: "RUB" },
@@ -28,7 +28,7 @@ const JSON_LD = {
 export const Route = createFileRoute("/_marketing/media")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Медиа-студия botme — контент для соцсетей без дизайнера",
+      title: "Медиа-студия avreya — контент для соцсетей без дизайнера",
       description:
         "Посты, карусели, обложки сторис, баннеры. GPT генерирует тексты и визуалы под твой бренд. От 4 900 ₽/мес.",
       path: "/media",

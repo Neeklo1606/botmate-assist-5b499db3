@@ -5,7 +5,7 @@ import { getOnboardingConfig } from "@/lib/onboarding/configs";
 export const Route = createFileRoute("/onboarding/assistant")({
   head: () => ({
     meta: [
-      { title: "Бриф · Ассистент botme" },
+      { title: "Бриф · Ассистент avreya" },
       { name: "robots", content: "noindex" },
     ],
   }),
