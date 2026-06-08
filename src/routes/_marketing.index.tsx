@@ -600,26 +600,59 @@ function HowItWorks() {
           title="От брифа до первой заявки за 3 дня"
           desc="Внедряем сами. Вам не нужен разработчик, маркетолог или интегратор."
         />
-        <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => {
+        <ol className="relative mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {/* connector rail (desktop) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-0 right-0 top-8 hidden h-px lg:block"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, var(--color-border) 50%, transparent 50%)",
+              backgroundSize: "8px 1px",
+            }}
+          />
+          {steps.map((s, i) => {
             const Icon = s.icon;
+            const featured = i === 0;
             return (
               <li
                 key={s.n}
-                className="rounded-2xl border border-border bg-surface p-6"
+                className={
+                  "group relative flex flex-col rounded-2xl border bg-surface p-6 transition-shadow duration-300 ease-quart hover:shadow-sm " +
+                  (featured ? "border-foreground/30 bg-background" : "border-border")
+                }
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-[13px] font-semibold tabular text-ink-subtle">
-                    {s.n}
-                  </span>
-                  <Icon className="h-4 w-4 text-ink-muted" strokeWidth={1.75} />
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={
+                        "relative flex h-12 w-12 items-center justify-center rounded-xl bg-background ring-1 " +
+                        (featured ? "ring-foreground/20" : "ring-border")
+                      }
+                    >
+                      <span className="font-display text-[15px] font-bold tabular text-foreground">
+                        {s.n}
+                      </span>
+                      {featured && (
+                        <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-surface" />
+                      )}
+                    </span>
+                  </div>
+                  <Icon
+                    className={"h-4 w-4 " + (featured ? "text-accent" : "text-ink-subtle")}
+                    strokeWidth={1.6}
+                  />
                 </div>
-                <h3 className="mt-6 font-display text-[18px] font-semibold tracking-[-0.01em] text-foreground">
+                <h3 className="mt-7 font-display text-[18px] font-semibold leading-snug tracking-[-0.015em] text-foreground">
                   {s.title}
                 </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">
+                <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">
                   {s.desc}
                 </p>
+                <div className="mt-5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-subtle">
+                  <span className={"h-1 w-1 rounded-full " + (featured ? "bg-accent" : "bg-border-strong")} />
+                  шаг {i + 1} из {steps.length}
+                </div>
               </li>
             );
           })}
