@@ -87,85 +87,83 @@ function HomePage() {
   );
 }
 
-/* ─────────────────── Hero ─────────────────── */
+/* ─────────────────── Hero — Editorial stack ─────────────────── */
 
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      {/* subtle backdrop */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{ background: "var(--gradient-hero)" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse at 70% 40%, black 0%, transparent 75%)",
-        }}
-      />
-
       <Container>
-        <div className="relative grid items-center gap-14 py-20 md:grid-cols-12 md:gap-10 md:py-28 lg:py-32">
-          {/* LEFT */}
-          <div className="md:col-span-6 lg:col-span-6">
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3 py-1 text-[12px] font-medium text-ink-muted backdrop-blur">
+        <div className="relative grid items-center gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24 lg:py-28">
+          {/* LEFT — strategic hierarchy */}
+          <div className="z-10 flex flex-col items-start md:col-span-6">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-surface/60 px-3 py-1 backdrop-blur">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-              Neeklo. AI-менеджер заявок
+              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-ink-muted">
+                Neeklo · AI-менеджер заявок
+              </span>
             </div>
 
-            <h1 className="font-display text-[44px] font-semibold leading-[0.98] tracking-[-0.03em] text-foreground md:text-[68px] lg:text-[76px]">
+            <h1 className="font-display text-[48px] font-bold leading-[0.95] tracking-[-0.035em] text-foreground md:text-[68px] lg:text-[80px]">
               Ни одной
               <br />
               упущенной
               <br />
-              заявки.{" "}
-              <span className="text-ink-subtle">Никогда.</span>
+              заявки. <span className="text-foreground/30">Никогда.</span>
             </h1>
 
-            <p className="mt-7 max-w-[540px] text-[16.5px] leading-relaxed text-ink-muted md:text-[18px]">
-              AI-сотрудник для входящих обращений. Принимает заявку с сайта, Telegram и форм,
-              задаёт нужные вопросы, собирает контакт и сразу передаёт готовый лид в CRM
-              или владельцу. 24/7, на инфраструктуре Neeklo, оплата в рублях.
+            <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[20px]">
+              AI-сотрудник для входящих обращений. Принимает заявку с сайта,
+              Telegram и форм, задаёт нужные вопросы и передаёт готовый лид в CRM.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button asChild variant="brand" size="lg">
-                <Link to="/onboarding/assistant">
-                  Запустить менеджера
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-                </Link>
-              </Button>
-              <Button asChild variant="ghost" size="lg" className="gap-2">
-                <Link to="/" hash="product">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-40" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-foreground" />
-                  </span>
-                  Смотреть демо
-                </Link>
-              </Button>
+            <div className="mt-10 flex flex-wrap items-center gap-5">
+              <Link
+                to="/onboarding/assistant"
+                className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-[14px] font-semibold text-background shadow-lift transition-transform hover:scale-[1.02]"
+              >
+                Запустить менеджера
+                <ArrowRight
+                  className="h-[18px] w-[18px] transition-transform group-hover:translate-x-0.5"
+                  strokeWidth={1.75}
+                />
+              </Link>
+              <Link
+                to="/"
+                hash="product"
+                className="group inline-flex h-14 items-center gap-3 px-2 text-[14px] font-semibold text-foreground"
+              >
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 transition-colors group-hover:border-foreground/30">
+                  <span className="ml-[2px] h-0 w-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-foreground" />
+                </span>
+                Смотреть демо
+              </Link>
             </div>
 
-            <dl className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-5">
+            {/* Metrics anchor */}
+            <dl className="mt-14 grid w-full max-w-[520px] grid-cols-3 gap-8 border-t border-foreground/10 pt-8">
               <Stat label="Ответ" value="7 сек" />
-              <span className="hidden h-8 w-px bg-border sm:block" />
               <Stat label="Работа" value="24/7" />
-              <span className="hidden h-8 w-px bg-border sm:block" />
-              <Stat label="Каналы" value="Сайт · TG · Формы" />
+              <Stat label="Интеграции" value="TG + CRM" />
             </dl>
           </div>
 
-          {/* RIGHT — layered product scene */}
-          <div className="md:col-span-6 lg:col-span-6">
+          {/* RIGHT — unified system canvas */}
+          <div className="relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[620px]">
+            {/* subtle grid foundation */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(var(--color-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
+                maskImage:
+                  "radial-gradient(ellipse at center, black 0%, transparent 75%)",
+              }}
+            />
             <HeroScene />
           </div>
         </div>
@@ -177,10 +175,10 @@ function Hero() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-[11px] uppercase tracking-[0.12em] text-ink-subtle">
+      <dt className="mb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-foreground/40">
         {label}
       </dt>
-      <dd className="mt-1 font-display text-[18px] font-semibold tabular text-foreground">
+      <dd className="font-display text-[22px] font-semibold tabular text-foreground md:text-[24px]">
         {value}
       </dd>
     </div>
@@ -189,133 +187,98 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function HeroScene() {
   return (
-    <div className="relative mx-auto aspect-[5/6] w-full max-w-[560px] md:aspect-[4/5]">
-      {/* soft halo */}
-      <div
-        aria-hidden
-        className="absolute -inset-6 -z-10 rounded-[36px] opacity-70"
-        style={{ background: "var(--surface-muted)" }}
-      />
-
-      {/* MAIN: AI chat widget — back-left, slightly rotated */}
-      <div className="absolute left-0 top-6 w-[78%] -rotate-[1.5deg] overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
-        <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-          <div className="flex items-center gap-2">
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-foreground">
-              <Bot className="h-3.5 w-3.5 text-background" strokeWidth={2} />
+    <div className="relative w-full max-w-md">
+      {/* Main Lead Processing Card */}
+      <div className="relative z-30 translate-x-4 rounded-2xl border border-foreground/5 bg-background p-6 shadow-lift">
+        <div className="mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted">
+              <User className="h-5 w-5 text-foreground" strokeWidth={1.75} />
             </div>
-            <div className="text-[12px] font-semibold text-foreground">
-              Neeklo · AI-менеджер
-            </div>
-          </div>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-2 py-0.5 text-[10.5px] font-medium text-ink-muted">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            онлайн
-          </span>
-        </div>
-        <div className="space-y-2.5 p-4">
-          <Bubble side="left">Здравствуйте! Делаете ремонт под ключ?</Bubble>
-          <Bubble side="right">
-            Да. Подскажите метраж и район — соберу для вас точную смету.
-          </Bubble>
-          <Bubble side="left">42 м², Невский. Когда сможете приехать?</Bubble>
-          <Bubble side="right">
-            Завтра в 17:00 удобно? Запишу замерщика и пришлю подтверждение.
-          </Bubble>
-          <div className="flex items-center gap-1.5 pl-1 pt-1 text-[11px] text-ink-subtle">
-            <span className="inline-flex h-1.5 w-1.5 animate-pulse rounded-full bg-foreground/60" />
-            печатает ответ
-          </div>
-        </div>
-      </div>
-
-      {/* FRONT: Lead card — front-right */}
-      <div className="absolute -right-2 top-[38%] w-[62%] rotate-[2deg] overflow-hidden rounded-2xl border border-border bg-background shadow-lift md:-right-4">
-        <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-          <div className="text-[11px] uppercase tracking-[0.12em] text-ink-subtle">
-            Новая заявка
-          </div>
-          <span className="rounded-full bg-foreground px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-background">
-            горячий
-          </span>
-        </div>
-        <div className="space-y-2 p-4 text-[12.5px]">
-          <Row k="Имя" v="Мария" />
-          <Row k="Телефон" v="+7 921 123 45 67" mono />
-          <Row k="Услуга" v="Ремонт под ключ" />
-          <Row k="Метраж" v="42 м²" />
-          <Row k="Звонок" v="сегодня, 17:00" />
-        </div>
-        <div className="flex items-center justify-between border-t border-border bg-surface-muted/50 px-4 py-2.5 text-[11px]">
-          <span className="inline-flex items-center gap-1.5 text-ink-muted">
-            <Sparkles className="h-3 w-3" strokeWidth={2} />
-            квалифицировано AI
-          </span>
-          <span className="font-medium text-foreground">12с назад</span>
-        </div>
-      </div>
-
-      {/* FLOAT: Telegram notification — top right */}
-      <div className="absolute -top-2 right-2 w-[58%] -rotate-[3deg] rounded-xl border border-border bg-surface px-3.5 py-2.5 shadow-lift md:right-6">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-foreground">
-            <MessageSquare className="h-3.5 w-3.5 text-background" strokeWidth={2} />
-          </div>
-          <div className="min-w-0">
-            <div className="flex items-baseline justify-between gap-2">
-              <div className="truncate text-[12px] font-semibold text-foreground">
-                Лиды · Telegram
+            <div className="leading-tight">
+              <div className="text-[11px] font-bold uppercase tracking-tight text-foreground/40">
+                Новая заявка
               </div>
-              <span className="text-[10px] text-ink-subtle">сейчас</span>
-            </div>
-            <div className="truncate text-[11.5px] text-ink-muted">
-              Мария, ремонт, 42 м² — звонок в 17:00
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* FLOAT: CRM synced — bottom left */}
-      <div className="absolute bottom-2 left-2 w-[54%] rotate-[1.5deg] rounded-xl border border-border bg-surface px-3.5 py-2.5 shadow-lift md:left-0">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 flex-none items-center justify-center rounded-lg border border-border bg-background">
-            <Database className="h-3.5 w-3.5 text-foreground" strokeWidth={1.75} />
-          </div>
-          <div className="min-w-0">
-            <div className="text-[12px] font-semibold text-foreground">
-              amoCRM
-            </div>
-            <div className="text-[11.5px] text-ink-muted">
-              Сделка #4821 создана
+              <div className="text-[14px] font-bold text-foreground">
+                Мария Волкова
+              </div>
             </div>
           </div>
-          <span className="ml-auto inline-flex items-center gap-1 rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-semibold text-foreground">
-            <Check className="h-2.5 w-2.5" strokeWidth={3} />
-            sync
+          <span className="rounded bg-foreground px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-background">
+            Горячий
           </span>
         </div>
+
+        <div className="mb-6 space-y-3">
+          <SceneRow k="Услуга" v="Ремонт под ключ" />
+          <SceneRow k="Объект" v="42 м², Невский р-н" />
+          <div className="flex justify-between text-[12px]">
+            <span className="text-foreground/40">Статус</span>
+            <span className="flex items-center gap-1.5 font-semibold text-foreground">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              </span>
+              Квалифицирован AI
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-foreground/5 pt-4">
+          <div className="flex items-center gap-2">
+            <div className="flex h-6 w-6 items-center justify-center rounded bg-surface-muted text-[10px] font-bold text-foreground">
+              C
+            </div>
+            <span className="text-[11px] font-medium text-ink-muted">
+              amoCRM. Сделка создана
+            </span>
+          </div>
+          <span className="text-[10px] text-foreground/30">12с назад</span>
+        </div>
       </div>
 
-      {/* FLOAT: Live counter — bottom right */}
-      <div className="absolute -bottom-1 right-0 w-[44%] -rotate-[2deg] rounded-xl border border-border bg-foreground px-3.5 py-2.5 text-background shadow-lift">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="text-[10px] uppercase tracking-[0.14em] text-background/60">
-              Сегодня
-            </div>
-            <div className="font-display text-[20px] font-semibold leading-none tabular">
-              23 лида
+      {/* Chat Context Underlay */}
+      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-foreground/5 bg-surface-muted/80 p-6 opacity-90 backdrop-blur-md">
+        <div className="mb-4 flex gap-3">
+          <div className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-foreground text-[10px] font-semibold text-background">
+            AI
+          </div>
+          <div className="flex-1">
+            <div className="rounded-xl rounded-tl-none bg-background p-3 text-[12px] leading-snug text-foreground shadow-sm">
+              Здравствуйте! Делаете ремонт под ключ?
             </div>
           </div>
-          <div className="flex flex-col items-end gap-0.5">
-            <span className="inline-flex items-center gap-1 text-[10.5px] font-medium text-emerald-300">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-              онлайн
-            </span>
-            <span className="text-[10px] text-background/60">avg 7с</span>
+        </div>
+        <div className="flex justify-end gap-3">
+          <div className="max-w-[82%]">
+            <div className="rounded-xl rounded-tr-none bg-foreground p-3 text-[12px] leading-snug text-background shadow-sm">
+              Да. Подскажите метраж и район, соберу для вас точную смету.
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom graphite live counter */}
+      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-4 rounded-xl bg-foreground p-4 text-background shadow-lift md:-left-20">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-foreground bg-emerald-500 text-[10px] font-bold text-foreground">
+          23
+        </div>
+        <div className="leading-tight">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-background/50">
+            Сегодня
+          </div>
+          <div className="text-[12px] font-semibold">Лида обработано</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SceneRow({ k, v }: { k: string; v: string }) {
+  return (
+    <div className="flex justify-between text-[12px]">
+      <span className="text-foreground/40">{k}</span>
+      <span className="font-semibold text-foreground">{v}</span>
     </div>
   );
 }
