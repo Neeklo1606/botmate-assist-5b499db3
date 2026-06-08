@@ -82,7 +82,7 @@ export function SiteLivePreview({ data }: Props) {
         <span className="h-2 w-2 rounded-full bg-border-dark-strong" />
         <span className="h-2 w-2 rounded-full bg-border-dark-strong" />
         <span className="ml-2 truncate font-mono text-[10px] text-ink-dark-subtle">
-          {name ? `${name.toLowerCase().replace(/\s+/g, "-")}.botme.site` : "yourbrand.botme.site"}
+          {name ? `${name.toLowerCase().replace(/\s+/g, "-")}.avreya.site` : "yourbrand.avreya.site"}
         </span>
       </div>
 
@@ -226,7 +226,7 @@ export function SiteLivePreview({ data }: Props) {
 
       {/* Footer */}
       <div className="border-t border-border-dark bg-bg-base px-3 py-2 text-center font-mono text-[8px] text-ink-dark-subtle">
-        {name || "your brand"} · сделано в botme
+        {name || "your brand"} · сделано в avreya
       </div>
     </div>
   );

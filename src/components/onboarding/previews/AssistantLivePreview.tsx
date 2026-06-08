@@ -65,7 +65,7 @@ export function AssistantLivePreview({ data }: Props) {
       {/* Top */}
       <div className="flex h-9 items-center justify-between border-b border-border-dark bg-bg-soft px-3.5">
         <span className="font-mono text-[10px] text-ink-dark-subtle">
-          botme.app/inbox
+          avreya.app/inbox
         </span>
         <span className="flex items-center gap-1.5 font-mono text-[10px] text-ink-dark-subtle">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />

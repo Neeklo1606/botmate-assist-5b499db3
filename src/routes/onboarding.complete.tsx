@@ -4,7 +4,7 @@ import { Check, ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/onboarding/complete")({
   head: () => ({
     meta: [
-      { title: "Бриф сохранён · Neeklo" },
+      { title: "Бриф сохранён · Avreya" },
       { name: "robots", content: "noindex" },
     ],
   }),

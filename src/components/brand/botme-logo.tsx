@@ -21,10 +21,10 @@ export function BotmeLogo({ variant, inverse = false, className }: BotmeLogoProp
         className,
       )}
       style={{ color: v === "dark" ? "var(--ink-dark)" : "var(--foreground)" }}
-      aria-label="botme"
+      aria-label="avreya"
     >
       <span className="relative">
-        botme
+        avreya
         <span
           aria-hidden
           className="absolute -top-[3px] right-[14px] h-[5px] w-[5px] rounded-full bg-accent"

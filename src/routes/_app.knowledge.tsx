@@ -60,7 +60,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/knowledge")({
   head: () => ({
-    meta: [{ title: "База знаний — botme" }],
+    meta: [{ title: "База знаний — avreya" }],
   }),
   component: KnowledgePage,
 });

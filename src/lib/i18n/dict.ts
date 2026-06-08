@@ -18,7 +18,7 @@ export const dict = {
     "nav.demo": "Демо",
     "nav.menuOpen": "Открыть меню",
     "nav.menuClose": "Закрыть меню",
-    "nav.toLanding": "botme — на главную",
+    "nav.toLanding": "avreya — на главную",
     "nav.langSwitch": "Сменить язык",
     "nav.langRu": "RU",
     "nav.langEn": "EN",
@@ -90,7 +90,7 @@ export const dict = {
     "launch.eyebrow": "Запуск",
     "launch.title": "3 дня от старта до первого диалога",
     "launch.desc":
-      "Никаких «согласований 2 недели». Команда neeklo собирает ассистента руками, вы только утверждаете.",
+      "Никаких «согласований 2 недели». Команда avreya собирает ассистента руками, вы только утверждаете.",
     "launch.day1": "День 1",
     "launch.day1Title": "Загружаем базу знаний",
     "launch.day1Desc": "Берём ваши тексты, прайс, FAQ. Структурируем под ассистента.",
@@ -156,7 +156,7 @@ export const dict = {
     "form.toastSuccessDesc": "Свяжемся в течение 30 минут в рабочее время.",
     "form.toastErrorTitle": "Не удалось отправить",
     "form.toastErrorDesc":
-      "Попробуйте ещё раз или напишите в Telegram @botme_support.",
+      "Попробуйте ещё раз или напишите в Telegram @avreya_support.",
 
     // Footer
     "footer.tagline":
@@ -175,7 +175,7 @@ export const dict = {
     "footer.linkContacts": "Контакты",
     "footer.linkPrivacy": "Политика конфиденциальности",
     "footer.linkOffer": "Договор-оферта",
-    "footer.copyright": "продукт neeklo.studio",
+    "footer.copyright": "продукт avreya.studio",
     "footer.legalEntity": "ИП Клочко Никита Николаевич · ИНН 7806123456",
 
     // Niche
@@ -203,7 +203,7 @@ export const dict = {
     "nav.demo": "Demo",
     "nav.menuOpen": "Open menu",
     "nav.menuClose": "Close menu",
-    "nav.toLanding": "botme — to homepage",
+    "nav.toLanding": "avreya — to homepage",
     "nav.langSwitch": "Switch language",
     "nav.langRu": "RU",
     "nav.langEn": "EN",
@@ -276,7 +276,7 @@ export const dict = {
     "launch.eyebrow": "Launch",
     "launch.title": "3 days from kickoff to the first conversation",
     "launch.desc":
-      "No two-week “sign-off cycles”. The neeklo team builds the assistant by hand; you only approve.",
+      "No two-week “sign-off cycles”. The avreya team builds the assistant by hand; you only approve.",
     "launch.day1": "Day 1",
     "launch.day1Title": "We load the knowledge base",
     "launch.day1Desc":
@@ -346,7 +346,7 @@ export const dict = {
     "form.toastSuccessDesc": "We’ll be in touch within 30 minutes during business hours.",
     "form.toastErrorTitle": "Couldn’t send it",
     "form.toastErrorDesc":
-      "Try again or message us on Telegram @botme_support.",
+      "Try again or message us on Telegram @avreya_support.",
 
     // Footer
     "footer.tagline":
@@ -365,7 +365,7 @@ export const dict = {
     "footer.linkContacts": "Contacts",
     "footer.linkPrivacy": "Privacy policy",
     "footer.linkOffer": "Terms of service",
-    "footer.copyright": "a neeklo.studio product",
+    "footer.copyright": "a avreya.studio product",
     "footer.legalEntity": "Sole proprietor Nikita Klochko · TIN 7806123456",
 
     // Niche

@@ -28,7 +28,7 @@ const FEATS: Feat[] = [
   {
     Icon: Globe,
     title: "Собственный домен",
-    body: "Свой .ru или поддомен .botme.app. SSL автоматически.",
+    body: "Свой .ru или поддомен .avreya.app. SSL автоматически.",
   },
   {
     Icon: ClipboardList,
@@ -169,7 +169,7 @@ export function SiteFeatures() {
                 className="font-mono text-[10px]"
                 style={{ color: "var(--ink-dark-muted)" }}
               >
-                anna-fitness.botme.app/edit
+                anna-fitness.avreya.app/edit
               </span>
               <span
                 className="rounded px-2 py-0.5 text-[10px] font-medium"

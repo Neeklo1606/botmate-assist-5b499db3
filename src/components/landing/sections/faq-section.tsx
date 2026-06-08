@@ -61,9 +61,9 @@ export function FaqSection() {
               <div className="mt-4 space-y-2 text-sm">
                 <a
                   className="block font-medium text-foreground underline-offset-4 hover:underline"
-                  href="https://t.me/botme_support"
+                  href="https://t.me/avreya_support"
                 >
-                  @botme_support →
+                  @avreya_support →
                 </a>
                 <Link
                   to="/assistant"

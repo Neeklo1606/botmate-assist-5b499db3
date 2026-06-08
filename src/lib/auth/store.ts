@@ -6,8 +6,8 @@
  */
 import type { Session, SessionUser } from "./types";
 
-const SESSION_KEY = "botme:auth:session";
-const USERS_KEY = "botme:auth:users";
+const SESSION_KEY = "avreya:auth:session";
+const USERS_KEY = "avreya:auth:users";
 
 function safe(): Storage | null {
   try {

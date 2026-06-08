@@ -1,5 +1,5 @@
 /**
- * / Neeklo. Главная страница продукта.
+ * / Avreya. Главная страница продукта.
  * Главный продукт: AI-менеджер заявок.
  * Вторичные (Скоро): Медиа-помощник, Сайты.
  * Без длинных тире в копирайте.
@@ -35,9 +35,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Neeklo. AI-менеджер заявок для бизнеса",
+      title: "Avreya. AI-менеджер заявок для бизнеса",
       description:
-        "AI-менеджер заявок отвечает 24/7, собирает лиды, квалифицирует обращения и передаёт их в Telegram, CRM и таблицы. На инфраструктуре Neeklo, оплата в рублях.",
+        "AI-менеджер заявок отвечает 24/7, собирает лиды, квалифицирует обращения и передаёт их в Telegram, CRM и таблицы. На инфраструктуре Avreya, оплата в рублях.",
       path: "/",
     }),
     links: [canonicalLink("/")],
@@ -49,12 +49,12 @@ export const Route = createFileRoute("/_marketing/")({
           "@graph": [
             {
               "@type": "Organization",
-              name: "Neeklo",
-              url: "https://botme.neeklo.ru",
+              name: "Avreya",
+              url: "https://avreya.avreya.ru",
               description:
-                "Neeklo. AI-менеджер заявок для бизнеса. Self-hosted инфраструктура, оплата в рублях.",
+                "Avreya. AI-менеджер заявок для бизнеса. Self-hosted инфраструктура, оплата в рублях.",
             },
-            { "@type": "WebSite", name: "Neeklo", url: "https://botme.neeklo.ru" },
+            { "@type": "WebSite", name: "Avreya", url: "https://avreya.avreya.ru" },
             {
               "@type": "SoftwareApplication",
               name: "AI-менеджер заявок",
@@ -79,7 +79,7 @@ function HomePage() {
       <HowItWorks />
       <Benefits />
       <Integrations />
-      <WhyNeeklo />
+      <WhyAvreya />
       <Ecosystem />
       <Pricing />
       <Faq />
@@ -234,7 +234,7 @@ function HeroScene() {
             <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
           </div>
           <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-subtle">
-            neeklo / leads / live
+            avreya / leads / live
           </div>
           <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-accent">
             <span className="h-1 w-1 rounded-full bg-accent" />
@@ -389,7 +389,7 @@ function Bubble({ side, children }: { side: "left" | "right"; children: React.Re
 
 function TrustBar() {
   const items = [
-    { icon: Server, t: "Своя инфраструктура", s: "серверы Neeklo" },
+    { icon: Server, t: "Своя инфраструктура", s: "серверы Avreya" },
     { icon: Shield, t: "Данные в РФ", s: "ДЦ в России" },
     { icon: CreditCard, t: "Оплата в рублях", s: "ЮKassa, акты" },
     { icon: MessageSquare, t: "Поддержка", s: "Telegram, 24/7" },
@@ -408,7 +408,7 @@ function TrustBar() {
         >
           <ul
             className="animate-marquee flex w-max items-center gap-8 md:gap-10"
-            aria-label="Преимущества Neeklo"
+            aria-label="Преимущества Avreya"
           >
             {track.map((it, i) => (
               <li
@@ -520,7 +520,7 @@ function SceneWidget({ tab }: { tab: "chat" | "lead" | "handoff" }) {
           </span>
         </div>
         <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
-          neeklo · {tabLabel}
+          avreya · {tabLabel}
         </span>
       </div>
       {tab === "chat" && (
@@ -925,14 +925,14 @@ function IntegrationList({
   );
 }
 
-/* ─────────────────── Why Neeklo ─────────────────── */
+/* ─────────────────── Why Avreya ─────────────────── */
 
-function WhyNeeklo() {
+function WhyAvreya() {
   const items = [
     {
       icon: Server,
       title: "Своя инфраструктура",
-      desc: "Менеджер работает на серверах Neeklo. Доступность, обновления и цена под нашим контролем.",
+      desc: "Менеджер работает на серверах Avreya. Доступность, обновления и цена под нашим контролем.",
     },
     {
       icon: Shield,
@@ -962,7 +962,7 @@ function WhyNeeklo() {
               Продукт, который вы контролируете
             </h2>
             <p className="mt-5 text-[15.5px] leading-relaxed text-ink-muted">
-              Neeklo это продуктовая компания, а не агентство и не обёртка над
+              Avreya это продуктовая компания, а не агентство и не обёртка над
               зарубежным API. Инфраструктура, данные и расчёты в России.
             </p>
             <div className="mt-7">
@@ -1007,7 +1007,7 @@ function Ecosystem() {
       icon: ImageIcon,
       tag: "Медиа-помощник",
       title: "Контент для соцсетей по плану",
-      desc: "Готовит посты, сторис и идеи reels в вашем стиле. Появится в том же кабинете Neeklo.",
+      desc: "Готовит посты, сторис и идеи reels в вашем стиле. Появится в том же кабинете Avreya.",
     },
     {
       icon: Layout,
@@ -1020,7 +1020,7 @@ function Ecosystem() {
     <section className="border-y border-border bg-surface-muted/40 py-20 md:py-28">
       <Container>
         <SectionHead
-          eyebrow="Экосистема Neeklo · Скоро"
+          eyebrow="Экосистема Avreya · Скоро"
           title="Сегодня AI-менеджер. Дальше больше"
           desc="Сейчас фокус на одном продукте. В том же аккаунте позже появятся ещё два."
         />
@@ -1277,7 +1277,7 @@ const faq = [
   },
   {
     q: "Где хранятся данные?",
-    a: "В российских дата-центрах на инфраструктуре Neeklo. Доступ по ролям, полные логи диалогов и решений менеджера, выгрузка по запросу.",
+    a: "В российских дата-центрах на инфраструктуре Avreya. Доступ по ролям, полные логи диалогов и решений менеджера, выгрузка по запросу.",
   },
   {
     q: "Можно ли подключить CRM?",
@@ -1297,7 +1297,7 @@ const faq = [
   },
   {
     q: "Когда появятся Медиа-помощник и Сайты?",
-    a: "Эти продукты в разработке и выйдут в том же кабинете Neeklo. Сейчас фокус на AI-менеджере заявок. Подписка на ранний доступ через Telegram.",
+    a: "Эти продукты в разработке и выйдут в том же кабинете Avreya. Сейчас фокус на AI-менеджере заявок. Подписка на ранний доступ через Telegram.",
   },
 ];
 
@@ -1319,7 +1319,7 @@ function Faq() {
               </span>
             </div>
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
-              support · neeklo
+              support · avreya
             </span>
           </div>
           <div className="divide-y divide-border">

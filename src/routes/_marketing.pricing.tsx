@@ -26,7 +26,7 @@ import { track } from "@/lib/analytics";
 export const Route = createFileRoute("/_marketing/pricing")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Тарифы botme — от 4 900 ₽ в месяц, без сюрпризов",
+      title: "Тарифы avreya — от 4 900 ₽ в месяц, без сюрпризов",
       description:
         "Старт, Рост и Масштаб. Прозрачные тарифы без скрытых платежей. Возврат 100% в первые 14 дней. Скидка 15% при оплате за год.",
       path: "/pricing",

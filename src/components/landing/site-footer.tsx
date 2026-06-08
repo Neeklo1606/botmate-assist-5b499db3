@@ -58,9 +58,9 @@ export function SiteFooter({ variant = "light" }: SiteFooterProps = {}) {
                 <a
                   className="underline-offset-4 hover:underline"
                   style={{ color: isDark ? "var(--ink-dark)" : undefined }}
-                  href="https://t.me/botme_support"
+                  href="https://t.me/avreya_support"
                 >
-                  @botme_support
+                  @avreya_support
                 </a>
               </div>
               <div style={{ color: isDark ? "var(--ink-dark-muted)" : undefined }}>
@@ -68,9 +68,9 @@ export function SiteFooter({ variant = "light" }: SiteFooterProps = {}) {
                 <a
                   className="underline-offset-4 hover:underline"
                   style={{ color: isDark ? "var(--ink-dark)" : undefined }}
-                  href="mailto:hello@botme.ru"
+                  href="mailto:hello@avreya.ru"
                 >
-                  hello@botme.ru
+                  hello@avreya.ru
                 </a>
               </div>
             </div>
@@ -89,7 +89,7 @@ export function SiteFooter({ variant = "light" }: SiteFooterProps = {}) {
           }}
         >
           <div>
-            © {new Date().getFullYear()} Neeklo · {t("footer.copyright")}
+            © {new Date().getFullYear()} Avreya · {t("footer.copyright")}
           </div>
           <div>{t("footer.legalEntity")}</div>
         </div>

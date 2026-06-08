@@ -51,7 +51,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/leads")({
   head: () => ({
-    meta: [{ title: "Лиды — botme" }],
+    meta: [{ title: "Лиды — avreya" }],
   }),
   component: LeadsPage,
 });

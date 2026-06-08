@@ -24,7 +24,7 @@ export function SiteOverview({ project }: { project: Project }) {
   const data = project.briefData;
   const offer = (data.offer as string) || project.name;
   const audience = (data.audience as string) || "ваша аудитория";
-  const previewUrl = `https://${slug(project.name)}.botme.site`;
+  const previewUrl = `https://${slug(project.name)}.avreya.site`;
 
   return (
     <div className="space-y-5">

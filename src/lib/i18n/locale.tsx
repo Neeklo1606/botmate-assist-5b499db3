@@ -13,7 +13,7 @@ import { dict, type Dict } from "./dict";
 
 export type Locale = "ru" | "en";
 
-const STORAGE_KEY = "botme.locale";
+const STORAGE_KEY = "avreya.locale";
 const DEFAULT_LOCALE: Locale = "ru";
 
 interface LocaleContextValue {

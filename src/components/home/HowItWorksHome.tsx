@@ -1,5 +1,5 @@
 /**
- * HowItWorksHome — три универсальных шага использования botme.
+ * HowItWorksHome — три универсальных шага использования avreya.
  */
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/container";

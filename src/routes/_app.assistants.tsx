@@ -13,7 +13,7 @@ import type { Assistant } from "@/types/entities";
 
 export const Route = createFileRoute("/_app/assistants")({
   head: () => ({
-    meta: [{ title: "Ассистенты — botme" }],
+    meta: [{ title: "Ассистенты — avreya" }],
   }),
   component: AssistantsPage,
 });

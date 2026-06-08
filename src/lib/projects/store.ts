@@ -1,10 +1,10 @@
 /**
- * Projects sessionStorage wrapper. Ключ: botme:projects:${userId}.
+ * Projects sessionStorage wrapper. Ключ: avreya:projects:${userId}.
  * SSR-safe.
  */
 import type { Project } from "./types";
 
-const key = (userId: string) => `botme:projects:${userId}`;
+const key = (userId: string) => `avreya:projects:${userId}`;
 
 function safe(): Storage | null {
   try {

@@ -36,9 +36,9 @@ export const Route = createFileRoute("/_marketing/faq")({
   },
   head: ({ loaderData }) => ({
     meta: buildPageMeta({
-      title: "FAQ botme — частые вопросы о AI-ассистенте",
+      title: "FAQ avreya — частые вопросы о AI-ассистенте",
       description:
-        "Ответы на вопросы о запуске, ценах, технологиях, интеграциях и безопасности данных. Что нужно знать до старта работы с AI-ассистентом botme.",
+        "Ответы на вопросы о запуске, ценах, технологиях, интеграциях и безопасности данных. Что нужно знать до старта работы с AI-ассистентом avreya.",
       path: "/faq",
     }),
     links: [canonicalLink("/faq")],

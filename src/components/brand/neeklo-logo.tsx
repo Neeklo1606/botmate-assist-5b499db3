@@ -1,5 +1,5 @@
 /**
- * NeekloLogo — шрифтовой логотип бренда Neeklo.
+ * NeekloLogo — шрифтовой логотип бренда Avreya.
  * Тонкая засечка на акценте, без декора. Адаптируется под тему.
  */
 import { cn } from "@/lib/utils";
@@ -15,10 +15,10 @@ export function NeekloLogo({ className }: Props) {
         "inline-flex items-baseline font-display text-[20px] font-semibold tracking-[-0.02em] leading-none select-none text-foreground",
         className,
       )}
-      aria-label="Neeklo"
+      aria-label="Avreya"
     >
       <span className="relative">
-        Neeklo
+        Avreya
         <span
           aria-hidden
           className="absolute -bottom-[2px] left-0 right-0 h-[2px] rounded-full bg-foreground/15"

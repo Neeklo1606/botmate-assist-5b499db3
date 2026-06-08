@@ -19,9 +19,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/contacts")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Контакты botme — Telegram, email и форма обратной связи",
+      title: "Контакты avreya — Telegram, email и форма обратной связи",
       description:
-        "Свяжитесь с командой botme. Telegram-поддержка @botme_support, email hello@botme.ru, форма заявки. Отвечаем в течение 30 минут в рабочее время.",
+        "Свяжитесь с командой avreya. Telegram-поддержка @avreya_support, email hello@avreya.ru, форма заявки. Отвечаем в течение 30 минут в рабочее время.",
       path: "/contacts",
     }),
     links: [canonicalLink("/contacts")],
@@ -58,7 +58,7 @@ function ContactsPage() {
               Контакты
             </div>
             <h1 className="font-display text-4xl font-semibold tracking-[-0.02em] md:text-5xl md:leading-[1.05]">
-              Свяжитесь с командой botme
+              Свяжитесь с командой avreya
             </h1>
             <p className="mt-5 text-base text-ink-muted">
               Отвечаем в течение часа в рабочее время. Telegram самый быстрый канал.
@@ -66,7 +66,7 @@ function ContactsPage() {
 
             <div className="mt-8 space-y-4">
               <a
-                href="https://t.me/botme_support"
+                href="https://t.me/avreya_support"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="flex items-start gap-3 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-border-strong"
@@ -78,12 +78,12 @@ function ContactsPage() {
                   <div className="font-display text-base font-semibold text-foreground">
                     Telegram
                   </div>
-                  <div className="text-sm text-ink-muted">@botme_support</div>
+                  <div className="text-sm text-ink-muted">@avreya_support</div>
                 </div>
               </a>
 
               <a
-                href="mailto:hello@botme.ru"
+                href="mailto:hello@avreya.ru"
                 className="flex items-start gap-3 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-border-strong"
               >
                 <div className="flex h-10 w-10 flex-none items-center justify-center rounded-md bg-foreground text-background">
@@ -91,7 +91,7 @@ function ContactsPage() {
                 </div>
                 <div>
                   <div className="font-display text-base font-semibold text-foreground">Email</div>
-                  <div className="text-sm text-ink-muted">hello@botme.ru</div>
+                  <div className="text-sm text-ink-muted">hello@avreya.ru</div>
                 </div>
               </a>
 

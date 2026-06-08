@@ -180,7 +180,7 @@ export function MediaShowcase() {
           className="mt-8 text-center font-mono text-[12px]"
           style={{ color: "var(--ink-dark-subtle)" }}
         >
-          Это всё сделано в Медиа-студии botme · сгенерировано за 12 минут
+          Это всё сделано в Медиа-студии avreya · сгенерировано за 12 минут
         </p>
       </Container>
 

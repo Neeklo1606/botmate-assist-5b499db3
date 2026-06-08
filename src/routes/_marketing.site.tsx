@@ -1,5 +1,5 @@
 /**
- * /site — лендинг продукта «Конструктор сайтов» botme. Тёмная палитра v2.
+ * /site — лендинг продукта «Конструктор сайтов» avreya. Тёмная палитра v2.
  */
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHero } from "@/components/site/SiteHero";
@@ -15,9 +15,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Product",
-  name: "Конструктор сайтов botme",
+  name: "Конструктор сайтов avreya",
   description: "AI-генератор лендингов по брифу",
-  brand: "botme",
+  brand: "avreya",
   offers: [
     { "@type": "Offer", name: "Лайт", price: "4900", priceCurrency: "RUB" },
     { "@type": "Offer", name: "Бизнес", price: "9900", priceCurrency: "RUB" },
@@ -28,7 +28,7 @@ const JSON_LD = {
 export const Route = createFileRoute("/_marketing/site")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Конструктор сайтов botme — лендинг за 10 минут",
+      title: "Конструктор сайтов avreya — лендинг за 10 минут",
       description:
         "AI собирает лендинг по короткому брифу. Свой домен, SSL, аналитика, форма в CRM. От 4 900 ₽/мес.",
       path: "/site",

@@ -12,7 +12,7 @@ import type { TeamMember } from "@/types/entities";
 
 export const Route = createFileRoute("/_app/team")({
   head: () => ({
-    meta: [{ title: "Команда — botme" }],
+    meta: [{ title: "Команда — avreya" }],
   }),
   component: TeamPage,
 });

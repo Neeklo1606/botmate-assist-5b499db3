@@ -64,7 +64,7 @@ export function ShowcaseTabs({ activeTab, onChange, isPaused, autoplayMs, cycleK
     <div
       ref={containerRef}
       role="tablist"
-      aria-label="Продукты botme"
+      aria-label="Продукты avreya"
       onKeyDown={onKey}
       className="relative flex w-full border-b"
       style={{ borderColor: "var(--border-dark)" }}

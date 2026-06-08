@@ -6,9 +6,9 @@ import { Lock, Search, Bell, User } from "lucide-react";
 import type { ShowcaseTab } from "./ShowcaseTabs";
 
 const URLS: Record<ShowcaseTab, string> = {
-  assistant: "botme.app/assistant/inbox",
-  media: "botme.app/media/studio",
-  site: "botme.app/site/builder",
+  assistant: "avreya.app/assistant/inbox",
+  media: "avreya.app/media/studio",
+  site: "avreya.app/site/builder",
 };
 
 export function ShowcaseFrame({ activeTab, children }: { activeTab: ShowcaseTab; children: ReactNode }) {

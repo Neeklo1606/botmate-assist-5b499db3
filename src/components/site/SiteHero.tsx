@@ -120,7 +120,7 @@ export function SiteHero() {
               className="mt-6 max-w-[540px] text-[16px] lg:text-[19px]"
               style={{ color: "var(--ink-dark-muted)", lineHeight: 1.55 }}
             >
-              Отвечаешь на 7 вопросов про свой бизнес. Botme собирает готовый
+              Отвечаешь на 7 вопросов про свой бизнес. Avreya собирает готовый
               лендинг с твоим доменом, SSL, формой и аналитикой. Без шаблонов
               на коленке.
             </motion.p>
@@ -274,7 +274,7 @@ export function SiteHero() {
                       color: "var(--ink-dark-muted)",
                     }}
                   >
-                    anna-fitness.botme.app
+                    anna-fitness.avreya.app
                   </span>
                 </div>
                 {inView && <GeneratedPagePreview reduced={reduced} />}

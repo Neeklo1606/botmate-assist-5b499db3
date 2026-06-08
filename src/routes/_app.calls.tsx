@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_app/calls")({
   head: () => ({
-    meta: [{ title: "Звонки — botme" }],
+    meta: [{ title: "Звонки — avreya" }],
   }),
   component: CallsPage,
 });

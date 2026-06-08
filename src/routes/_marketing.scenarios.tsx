@@ -13,7 +13,7 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/scenarios")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Сценарии botme под нишу — 6 готовых индустриальных решений",
+      title: "Сценарии avreya под нишу — 6 готовых индустриальных решений",
       description:
         "AI-ассистент для недвижимости, авто, клиник, онлайн-школ, услуг и агентств. Готовые сценарии, диалоги и интеграции под каждую нишу.",
       path: "/scenarios",
@@ -100,7 +100,7 @@ function ScenariosPage() {
               Не нашли свою нишу?
             </h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-ink-muted">
-              Команда neeklo соберёт ассистента под любой бизнес: от логистики до b2b SaaS. Запуск
+              Команда avreya соберёт ассистента под любой бизнес: от логистики до b2b SaaS. Запуск
               5–7 дней.
             </p>
             <Button asChild variant="brand" size="md" className="mt-4">

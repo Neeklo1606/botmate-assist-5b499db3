@@ -12,7 +12,7 @@
  *
  *    head: () => ({
  *      meta: buildPageMeta({
- *        title: "Тарифы botme — от 4 900 ₽",
+ *        title: "Тарифы avreya — от 4 900 ₽",
  *        description: "...",
  *        path: "/pricing",
  *      }),
@@ -20,11 +20,11 @@
  *    });
  */
 
-const FALLBACK_ORIGIN = "https://botme.neeklo.ru";
+const FALLBACK_ORIGIN = "https://avreya.avreya.ru";
 
 /** Resolve site origin. Predicтable on SSR (env), corrected on client (location). */
 export function getSiteOrigin(): string {
-  // Env-инжект через Vite. Для production выставить VITE_SITE_URL=https://botme.ru.
+  // Env-инжект через Vite. Для production выставить VITE_SITE_URL=https://avreya.ru.
   const envOrigin =
     typeof import.meta !== "undefined"
       ? (import.meta as ImportMeta & { env?: Record<string, string> }).env?.VITE_SITE_URL
@@ -97,7 +97,7 @@ export function buildPageMeta(input: PageMetaInput): MetaTag[] {
     { property: "og:image:width", content: "1216" },
     { property: "og:image:height", content: "640" },
     { property: "og:locale", content: "ru_RU" },
-    { property: "og:site_name", content: "botme" },
+    { property: "og:site_name", content: "avreya" },
 
     // Twitter
     { name: "twitter:card", content: "summary_large_image" },

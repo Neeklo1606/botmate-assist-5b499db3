@@ -16,7 +16,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 47, display: "47", label: "КОМПАНИИ С BOTME" },
+  { value: 47, display: "47", label: "КОМПАНИИ С AVREYA" },
   { value: 3, display: "3", suffix: "дня", label: "СРЕДНИЙ ЗАПУСК ПРОЕКТА" },
   { value: 4, display: "4", suffix: "ч/день", label: "ЭКОНОМИЯ НА МЕНЕДЖЕРЕ" },
   { value: 38, display: "38", prefix: "+", suffix: "%", label: "КОНВЕРСИЯ В ЛИДА" },
@@ -45,7 +45,7 @@ export function StatsHome() {
           className="mt-8 text-center text-[12px] font-mono"
           style={{ color: "var(--ink-dark-subtle)" }}
         >
-          Средние данные по клиентам botme · обновлено в марте 2026
+          Средние данные по клиентам avreya · обновлено в марте 2026
         </div>
       </Container>
     </section>

@@ -4,7 +4,7 @@
  */
 import type { OnboardingDraft, OnboardingProduct } from "./types";
 
-const key = (p: OnboardingProduct) => `botme:onboarding:${p}`;
+const key = (p: OnboardingProduct) => `avreya:onboarding:${p}`;
 
 function safeStorage(): Storage | null {
   try {

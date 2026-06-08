@@ -13,9 +13,9 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/cases")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Кейсы клиентов botme — реальные цифры по 6 нишам",
+      title: "Кейсы клиентов avreya — реальные цифры по 6 нишам",
       description:
-        "Как клиенты botme экономят на ФОТ, увеличивают конверсию и закрывают ночные заявки. Недвижимость, авто, клиники, услуги, школы, агентства.",
+        "Как клиенты avreya экономят на ФОТ, увеличивают конверсию и закрывают ночные заявки. Недвижимость, авто, клиники, услуги, школы, агентства.",
       path: "/cases",
     }),
     links: [canonicalLink("/cases")],

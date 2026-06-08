@@ -1,7 +1,7 @@
 /**
  * _app — protected layout кабинета.
  *
- * Дизайн (Neeklo, Milk & Olive):
+ * Дизайн (Avreya, Milk & Olive):
  * - Левый сайдбар 240px на --color-sidebar, тонкая hairline-граница.
  * - Активный пункт: foreground + олив-аккент слева (--color-accent).
  * - Профиль и Settings — внизу сайдбара.
@@ -121,7 +121,7 @@ function Sidebar() {
       >
         <Link
           to="/app"
-          aria-label="Neeklo — кабинет"
+          aria-label="Avreya — кабинет"
           className="transition-opacity hover:opacity-80"
         >
           <NeekloLogo />
@@ -303,7 +303,7 @@ function Topbar() {
     >
       <div className="flex min-w-0 items-center gap-3">
         <div className="md:hidden">
-          <Link to="/app" aria-label="Neeklo" className="transition-opacity hover:opacity-80">
+          <Link to="/app" aria-label="Avreya" className="transition-opacity hover:opacity-80">
             <NeekloLogo />
           </Link>
         </div>

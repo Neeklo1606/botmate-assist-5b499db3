@@ -153,7 +153,7 @@ export function MediaPricing() {
         </div>
 
         <p className="mt-6 text-center font-mono text-[12px]" style={{ color: "var(--ink-dark-subtle)" }}>
-          Можно подключить только Медиа или весь botme · Ассистент + Медиа + Сайт
+          Можно подключить только Медиа или весь avreya · Ассистент + Медиа + Сайт
         </p>
       </Container>
 

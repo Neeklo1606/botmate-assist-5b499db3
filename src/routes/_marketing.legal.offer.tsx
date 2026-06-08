@@ -9,7 +9,7 @@ import { buildPageMeta, canonicalLink } from "@/lib/seo";
 export const Route = createFileRoute("/_marketing/legal/offer")({
   head: () => ({
     meta: buildPageMeta({
-      title: "Договор-оферта botme — условия использования сервиса",
+      title: "Договор-оферта avreya — условия использования сервиса",
       description:
         "Стоимость, порядок оплаты, возврат средств в первые 14 дней, обязательства сторон. Реквизиты ИП Клочко Никита Николаевич.",
       path: "/legal/offer",

@@ -1,5 +1,5 @@
 /**
- * WhyHome — 4 причины выбрать botme. Grid 2x2 desktop / 1col mobile.
+ * WhyHome — 4 причины выбрать avreya. Grid 2x2 desktop / 1col mobile.
  */
 import { motion } from "framer-motion";
 import { Layers, Lock, Users, Zap, type LucideIcon } from "lucide-react";
@@ -27,7 +27,7 @@ const reasons: Reason[] = [
   {
     icon: Users,
     title: "Команда настраивает за тебя",
-    body: "Не «AI-конструктор», а живые люди. neeklo studio собирает ассистента вручную под твой бизнес.",
+    body: "Не «AI-конструктор», а живые люди. avreya studio собирает ассистента вручную под твой бизнес.",
   },
   {
     icon: Lock,
@@ -58,7 +58,7 @@ export function WhyHome() {
               color: "var(--ink-dark-muted)",
             }}
           >
-            Почему botme
+            Почему avreya
           </span>
           <h2
             className="mt-5 font-display font-semibold text-[32px] lg:text-[48px]"

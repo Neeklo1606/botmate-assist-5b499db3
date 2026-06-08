@@ -1,5 +1,5 @@
 /**
- * SiteSpeedComparison — обычный путь vs botme.
+ * SiteSpeedComparison — обычный путь vs avreya.
  */
 import { motion } from "framer-motion";
 import { X, Check } from "lucide-react";
@@ -18,7 +18,7 @@ const SLOW = [
 
 const FAST = [
   "5 минут - отвечаешь на вопросы брифа",
-  "2 минуты - botme генерирует лендинг",
+  "2 минуты - avreya генерирует лендинг",
   "15 минут - правишь под себя",
   "5 минут - выбираешь домен и публикуешь",
   "Работает сразу с SSL и Метрикой",
@@ -61,7 +61,7 @@ export function SiteSpeedComparison() {
             className="mt-5 text-[16px] lg:text-[18px]"
             style={{ color: "var(--ink-dark-muted)", lineHeight: 1.55 }}
           >
-            А сколько — в botme.
+            А сколько — в avreya.
           </p>
         </motion.div>
 
@@ -172,7 +172,7 @@ export function SiteSpeedComparison() {
                 letterSpacing: "0.05em",
               }}
             >
-              В botme
+              В avreya
             </span>
             <div
               className="relative mt-6 font-display tabular-nums"

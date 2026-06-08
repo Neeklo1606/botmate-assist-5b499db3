@@ -53,7 +53,7 @@ import { SiteOverview } from "@/components/app/projects/SiteOverview";
 import { BriefView } from "@/components/app/projects/BriefView";
 
 export const Route = createFileRoute("/_app/projects/$projectId")({
-  head: () => ({ meta: [{ title: "Проект — botme" }] }),
+  head: () => ({ meta: [{ title: "Проект — avreya" }] }),
   component: ProjectDetailPage,
   notFoundComponent: () => (
     <div className="text-foreground">

@@ -5,7 +5,7 @@ import { getOnboardingConfig } from "@/lib/onboarding/configs";
 export const Route = createFileRoute("/onboarding/media")({
   head: () => ({
     meta: [
-      { title: "Бриф · Медиа botme" },
+      { title: "Бриф · Медиа avreya" },
       { name: "robots", content: "noindex" },
     ],
   }),

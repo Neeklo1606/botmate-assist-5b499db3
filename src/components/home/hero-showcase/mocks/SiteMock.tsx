@@ -134,7 +134,7 @@ export function SiteMock() {
               padding: "2px 8px",
             }}
           >
-            anna-nutritio.botme.app
+            anna-nutritio.avreya.app
           </span>
           <div className="ml-auto flex items-center gap-1.5">
             <Monitor className="h-3 w-3" style={{ color: "var(--ink-dark)" }} />

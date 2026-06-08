@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import type { MockChatProps } from "./mock-chat-types";
 
 export default function MockChatImpl({
-  title = "Ассистент botme",
+  title = "Ассистент avreya",
   subtitle = "онлайн",
   messages,
   variant = "light",

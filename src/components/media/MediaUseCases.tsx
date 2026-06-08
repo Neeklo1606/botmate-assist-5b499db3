@@ -53,7 +53,7 @@ export function MediaUseCases() {
           </div>
           <h2 className="mt-4 font-display font-semibold text-[36px] lg:text-[52px]"
             style={{ color: "var(--ink-dark)", letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-            Кто уже делает контент в botme.
+            Кто уже делает контент в avreya.
           </h2>
           <p className="mt-5 text-[16px] lg:text-[18px]" style={{ color: "var(--ink-dark-muted)", lineHeight: 1.55 }}>
             Эксперты, малый бизнес, агентства. У каждого свой ритм публикаций.

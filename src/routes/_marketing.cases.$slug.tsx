@@ -24,11 +24,11 @@ export const Route = createFileRoute("/_marketing/cases/$slug")({
   head: ({ loaderData, params }) => {
     const study = loaderData?.study;
     const title = study
-      ? `${study.company} — кейс botme в нише ${study.industry}`
-      : `Кейс — botme`;
+      ? `${study.company} — кейс avreya в нише ${study.industry}`
+      : `Кейс — avreya`;
     const description = study
-      ? `${study.summary} Реальные метрики за 30 дней работы AI-ассистента botme.`
-      : "Подробный кейс клиента botme: задача, решение, метрики и результат.";
+      ? `${study.summary} Реальные метрики за 30 дней работы AI-ассистента avreya.`
+      : "Подробный кейс клиента avreya: задача, решение, метрики и результат.";
     return {
       meta: buildPageMeta({
         title,
@@ -46,8 +46,8 @@ export const Route = createFileRoute("/_marketing/cases/$slug")({
                 "@type": "Article",
                 headline: title,
                 description,
-                author: { "@type": "Organization", name: "botme" },
-                publisher: { "@type": "Organization", name: "botme" },
+                author: { "@type": "Organization", name: "avreya" },
+                publisher: { "@type": "Organization", name: "avreya" },
                 about: study.industry,
               }),
             },

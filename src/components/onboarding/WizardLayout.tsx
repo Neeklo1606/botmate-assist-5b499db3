@@ -107,7 +107,7 @@ export function WizardLayout({ config }: Props) {
       {/* Mini-header */}
       <header className="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-border/70 bg-background/88 px-4 backdrop-blur-xl md:px-6">
         <div className="flex items-center gap-3">
-          <Link to="/" aria-label="Neeklo — на главную" className="transition-opacity hover:opacity-80">
+          <Link to="/" aria-label="Avreya — на главную" className="transition-opacity hover:opacity-80">
             <NeekloLogo />
           </Link>
           <span className="hidden font-mono text-[12px] text-ink-subtle md:inline">
