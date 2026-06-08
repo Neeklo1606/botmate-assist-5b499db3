@@ -675,35 +675,69 @@ function Benefits() {
         />
 
         <div className="mt-12 grid auto-rows-[minmax(160px,auto)] grid-cols-1 gap-4 md:grid-cols-6">
-          <div className="rounded-2xl border border-border bg-foreground p-7 text-background md:col-span-3 md:row-span-2">
-            <div className="text-[11.5px] font-medium uppercase tracking-wide text-background/60">
-              Главный результат
+          <div className="relative overflow-hidden rounded-2xl border border-foreground/30 bg-foreground p-7 text-background shadow-lift md:col-span-3 md:row-span-2 md:p-9">
+            {/* soft accent halo */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
+              style={{ background: "radial-gradient(closest-side, var(--color-accent), transparent 70%)" }}
+            />
+            <div className="relative">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-background/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-background/75 backdrop-blur">
+                <span className="h-1 w-1 rounded-full bg-accent" />
+                Главный результат
+              </div>
+              <h3 className="mt-5 font-display text-[26px] font-semibold leading-[1.1] tracking-[-0.025em] md:text-[34px]">
+                Ни одного потерянного обращения, даже ночью и в выходные
+              </h3>
+              <p className="mt-4 max-w-md text-[14.5px] leading-relaxed text-background/75">
+                Менеджер на смене 24/7, отвечает за 7 секунд, доводит каждое
+                обращение до заявки.
+              </p>
+              <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-background/15">
+                <div className="bg-foreground p-4">
+                  <dt className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-background/55">
+                    <span className="h-1 w-1 rounded-full bg-accent" />
+                    Время ответа
+                  </dt>
+                  <dd className="mt-2 font-display text-[28px] font-semibold tabular tracking-[-0.02em]">
+                    7 <span className="text-[16px] font-medium text-background/55">сек</span>
+                  </dd>
+                </div>
+                <div className="bg-foreground p-4">
+                  <dt className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-background/55">
+                    <span className="h-1 w-1 rounded-full bg-accent" />
+                    Рост конверсии
+                  </dt>
+                  <dd className="mt-2 font-display text-[28px] font-semibold tabular tracking-[-0.02em]">
+                    +38<span className="text-[16px] font-medium text-background/55">%</span>
+                  </dd>
+                </div>
+              </dl>
+              {/* tiny sparkline */}
+              <svg
+                viewBox="0 0 200 36"
+                className="mt-5 h-8 w-full opacity-80"
+                aria-hidden
+              >
+                <defs>
+                  <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.45" />
+                    <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 28 L20 24 L40 26 L60 20 L80 22 L100 14 L120 16 L140 10 L160 12 L180 6 L200 8 L200 36 L0 36 Z"
+                  fill="url(#spark)"
+                />
+                <path
+                  d="M0 28 L20 24 L40 26 L60 20 L80 22 L100 14 L120 16 L140 10 L160 12 L180 6 L200 8"
+                  fill="none"
+                  stroke="var(--color-accent)"
+                  strokeWidth="1.5"
+                />
+              </svg>
             </div>
-            <h3 className="mt-3 font-display text-[26px] font-semibold tracking-[-0.02em] md:text-[32px]">
-              Ни одного потерянного обращения, даже ночью и в выходные
-            </h3>
-            <p className="mt-4 text-[14.5px] leading-relaxed text-background/75">
-              Менеджер на смене 24/7, отвечает за 7 секунд, доводит каждое
-              обращение до заявки.
-            </p>
-            <dl className="mt-7 grid grid-cols-2 gap-4 border-t border-background/15 pt-5">
-              <div>
-                <dt className="text-[11px] uppercase tracking-wide text-background/55">
-                  Время ответа
-                </dt>
-                <dd className="mt-1 font-display text-[24px] font-semibold tabular">
-                  7 сек
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[11px] uppercase tracking-wide text-background/55">
-                  Рост конверсии
-                </dt>
-                <dd className="mt-1 font-display text-[24px] font-semibold tabular">
-                  до +38%
-                </dd>
-              </div>
-            </dl>
           </div>
 
           <BentoCell
@@ -755,14 +789,19 @@ function BentoCell({
   className?: string;
 }) {
   return (
-    <div className={"rounded-2xl border border-border bg-surface p-6 " + className}>
-      <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background">
-        <Icon className="h-4 w-4" strokeWidth={1.75} />
+    <div
+      className={
+        "group relative flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all duration-300 ease-quart hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-sm " +
+        className
+      }
+    >
+      <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background text-foreground transition-colors group-hover:border-accent/40 group-hover:text-accent">
+        <Icon className="h-4 w-4" strokeWidth={1.6} />
       </div>
-      <h3 className="mt-4 font-display text-[17px] font-semibold tracking-[-0.01em] text-foreground">
+      <h3 className="mt-5 font-display text-[16.5px] font-semibold leading-snug tracking-[-0.015em] text-foreground">
         {title}
       </h3>
-      <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-muted">{desc}</p>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">{desc}</p>
     </div>
   );
 }
