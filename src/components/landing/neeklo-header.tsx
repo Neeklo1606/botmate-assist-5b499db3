@@ -132,7 +132,7 @@ export function NeekloHeader() {
       >
         <div
           className={cn(
-            "relative grid items-center gap-3 md:gap-4 overflow-hidden",
+            "relative isolate grid items-center gap-3 overflow-hidden md:gap-4",
             "grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
             "rounded-full border backdrop-blur-xl",
             "transition-[height,padding,background-color,border-color,box-shadow,backdrop-filter]",
@@ -141,13 +141,13 @@ export function NeekloHeader() {
               ? [
                   "h-[58px] md:h-[62px]",
                   "px-2.5 md:px-3",
-                  "border-border/70 bg-background/85",
+                  "border-border/75 bg-background/98",
                   "shadow-[var(--shadow-rim),0_8px_28px_-12px_oklch(0.2_0.01_110/0.18)]",
                 ].join(" ")
               : [
                   "h-[64px] md:h-[72px]",
                   "px-3 md:px-4",
-                  "border-border/45 bg-background/60",
+                  "border-border/55 bg-background/94",
                   "shadow-[var(--shadow-rim),0_4px_18px_-12px_oklch(0.2_0.01_110/0.12)]",
                 ].join(" "),
           )}
