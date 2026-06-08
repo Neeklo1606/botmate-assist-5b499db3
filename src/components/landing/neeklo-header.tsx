@@ -308,7 +308,7 @@ export function NeekloHeader() {
       <div
         id="mobile-nav-overlay"
         className={cn(
-          "fixed inset-x-0 bottom-0 top-[72px] z-30 md:hidden",
+          "fixed inset-x-0 bottom-0 top-[76px] z-[70] lg:hidden",
           "transition-[opacity,transform] duration-[360ms]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
