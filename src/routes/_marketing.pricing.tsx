@@ -356,7 +356,7 @@ function EnterpriseLi({ children }: { children: React.ReactNode }) {
 
 function PricingFaq() {
   return (
-    <Section tone="muted" size="md">
+    <Section tone="tint" size="md">
       <Container>
         <SectionHeading eyebrow="FAQ по тарифам" title="Биллинг, лимиты и возвраты" />
 

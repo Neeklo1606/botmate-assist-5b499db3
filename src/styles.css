@@ -46,6 +46,8 @@
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
+  --color-surface-tint: var(--surface-tint);
+  --color-surface-sunken: var(--surface-sunken);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -116,10 +118,12 @@
 :root {
   --radius: 14px;
 
-  --background: oklch(0.975 0.012 92);          /* #faf8f3 milk */
+  --background: oklch(0.975 0.012 92);          /* #faf8f3 milk — основной фон */
   --foreground: oklch(0.235 0.008 110);         /* #1f2017 graphite */
   --surface: oklch(0.992 0.006 92);             /* почти белая карточка с тёплым ядром */
-  --surface-muted: oklch(0.935 0.018 90);       /* #ece8dc stone */
+  --surface-muted: oklch(0.945 0.014 92);       /* мягкая молочная пыль, чуть светлее stone */
+  --surface-tint:  oklch(0.955 0.018 110);      /* тёплый олив-нейтрал — для ритма секций */
+  --surface-sunken: oklch(0.92 0.014 92);       /* «утопленная» полоса для глубины (footer/ink-edge) */
 
   --card: oklch(0.992 0.006 92);
   --card-foreground: oklch(0.235 0.008 110);
@@ -202,7 +206,9 @@
   --background: oklch(0.165 0.006 110);
   --foreground: oklch(0.955 0.01 92);
   --surface: oklch(0.21 0.006 110);
-  --surface-muted: oklch(0.25 0.006 110);
+  --surface-muted: oklch(0.235 0.006 110);
+  --surface-tint:  oklch(0.225 0.012 118);
+  --surface-sunken: oklch(0.14 0.006 110);
   --card: oklch(0.21 0.006 110);
   --card-foreground: oklch(0.955 0.01 92);
   --popover: oklch(0.21 0.006 110);
