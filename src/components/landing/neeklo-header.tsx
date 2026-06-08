@@ -19,7 +19,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
-import { ThemeToggle } from "@/components/theme-toggle";
+
 import { useCurrentUser } from "@/lib/hooks/use-auth";
 import { cn } from "@/lib/utils";
 
@@ -217,15 +217,7 @@ export function NeekloHeader() {
 
           {/* RIGHT — actions cluster */}
           <div className="desktop-header-only items-center justify-end gap-1">
-            <ThemeToggle />
-            <span
-              aria-hidden
-              className="mx-1.5 h-5 w-px"
-              style={{
-                background:
-                  "linear-gradient(to bottom, transparent, var(--color-border), transparent)",
-              }}
-            />
+
             {isAuthed ? (
               <Button
                 asChild
@@ -270,9 +262,9 @@ export function NeekloHeader() {
             )}
           </div>
 
-          {/* MOBILE — right column compresses to: theme + burger */}
+          {/* MOBILE — right column compresses to: burger */}
           <div className="mobile-header-only col-start-3 items-center justify-end gap-1">
-            <ThemeToggle />
+
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
