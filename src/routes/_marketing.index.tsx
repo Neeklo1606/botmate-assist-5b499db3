@@ -24,6 +24,7 @@ import {
   Shield,
   Sparkles,
   Table2,
+  User,
   Workflow,
   Zap,
 } from "lucide-react";
