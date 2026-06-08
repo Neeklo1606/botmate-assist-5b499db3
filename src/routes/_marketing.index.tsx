@@ -92,18 +92,31 @@ function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border">
+    <section className="relative overflow-hidden border-b border-border bg-background">
+      {/* Soft ambient olive wash, top-right */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 -top-40 h-[520px] w-[520px] rounded-full opacity-60 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, var(--color-accent-glow), transparent 70%)" }}
+      />
       <Container>
         <div className="relative grid items-center gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24 lg:py-28">
           {/* LEFT — strategic hierarchy */}
           <div className="z-10 flex flex-col items-start md:col-span-6">
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-surface/60 px-3 py-1 backdrop-blur">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface/70 py-1 pl-1.5 pr-3 backdrop-blur shadow-xs">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-accent-ink">
+                N
               </span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-ink-muted">
-                Neeklo · AI-менеджер заявок
+              <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                AI-менеджер заявок
+              </span>
+              <span className="h-3 w-px bg-border" />
+              <span className="inline-flex items-center gap-1.5 text-[10.5px] font-medium text-ink-muted">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                online
               </span>
             </div>
 
@@ -115,7 +128,7 @@ function Hero() {
               заявки. <span className="text-foreground/30">Никогда.</span>
             </h1>
 
-            <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[20px]">
+            <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
               AI-сотрудник для входящих обращений. Принимает заявку с сайта,
               Telegram и форм, задаёт нужные вопросы и передаёт готовый лид в CRM.
             </p>
@@ -123,11 +136,11 @@ function Hero() {
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <Link
                 to="/onboarding/assistant"
-                className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-[14px] font-semibold text-background shadow-lift transition-transform hover:scale-[1.02]"
+                className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-[14px] font-semibold text-background shadow-lift transition-[transform,box-shadow] duration-300 ease-quart hover:-translate-y-0.5"
               >
                 Запустить менеджера
                 <ArrowRight
-                  className="h-[18px] w-[18px] transition-transform group-hover:translate-x-0.5"
+                  className="h-[18px] w-[18px] transition-transform duration-200 ease-out group-hover:translate-x-0.5"
                   strokeWidth={1.75}
                 />
               </Link>
@@ -136,7 +149,7 @@ function Hero() {
                 hash="product"
                 className="group inline-flex h-14 items-center gap-3 px-2 text-[14px] font-semibold text-foreground"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 transition-colors group-hover:border-foreground/30">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/60 transition-colors group-hover:border-foreground/40 group-hover:bg-surface">
                   <span className="ml-[2px] h-0 w-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-foreground" />
                 </span>
                 Смотреть демо
@@ -144,15 +157,15 @@ function Hero() {
             </div>
 
             {/* Metrics anchor */}
-            <dl className="mt-14 grid w-full max-w-[520px] grid-cols-3 gap-8 border-t border-foreground/10 pt-8">
+            <dl className="mt-14 grid w-full max-w-[540px] grid-cols-3 divide-x divide-border border-t border-border pt-7">
               <Stat label="Ответ" value="7 сек" />
-              <Stat label="Работа" value="24/7" />
-              <Stat label="Интеграции" value="TG + CRM" />
+              <Stat label="Работа" value="24/7" pad />
+              <Stat label="Интеграции" value="TG · CRM" pad />
             </dl>
           </div>
 
           {/* RIGHT — unified system canvas */}
-          <div className="relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[620px]">
+          <div className="relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[640px]">
             {/* subtle grid foundation */}
             <div
               aria-hidden
@@ -173,13 +186,14 @@ function Hero() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, pad }: { label: string; value: string; pad?: boolean }) {
   return (
-    <div>
-      <dt className="mb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-foreground/40">
+    <div className={pad ? "pl-5" : ""}>
+      <dt className="mb-1.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+        <span className="h-1 w-1 rounded-full bg-accent" />
         {label}
       </dt>
-      <dd className="font-display text-[22px] font-semibold tabular text-foreground md:text-[24px]">
+      <dd className="font-display text-[22px] font-semibold tabular tracking-[-0.01em] text-foreground md:text-[24px]">
         {value}
       </dd>
     </div>
@@ -189,86 +203,116 @@ function Stat({ label, value }: { label: string; value: string }) {
 function HeroScene() {
   return (
     <div className="relative w-full max-w-md">
-      {/* Main Lead Processing Card */}
-      <div className="relative z-30 translate-x-4 rounded-2xl border border-foreground/5 bg-background p-6 shadow-lift">
-        <div className="mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted">
-              <User className="h-5 w-5 text-foreground" strokeWidth={1.75} />
-            </div>
-            <div className="leading-tight">
-              <div className="text-[11px] font-bold uppercase tracking-tight text-foreground/40">
-                Новая заявка
-              </div>
-              <div className="text-[14px] font-bold text-foreground">
-                Мария Волкова
-              </div>
-            </div>
+      {/* Main Lead Processing Card — product window */}
+      <div className="relative z-30 translate-x-4 overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
+        {/* window chrome */}
+        <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-4 py-2.5">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
           </div>
-          <span className="rounded bg-foreground px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-background">
-            Горячий
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-subtle">
+            neeklo / leads / live
+          </div>
+          <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-accent">
+            <span className="h-1 w-1 rounded-full bg-accent" />
+            live
           </span>
         </div>
 
-        <div className="mb-6 space-y-3">
-          <SceneRow k="Услуга" v="Ремонт под ключ" />
-          <SceneRow k="Объект" v="42 м², Невский р-н" />
-          <div className="flex justify-between text-[12px]">
-            <span className="text-foreground/40">Статус</span>
-            <span className="flex items-center gap-1.5 font-semibold text-foreground">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
-              Квалифицирован AI
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between border-t border-foreground/5 pt-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-6 w-6 items-center justify-center rounded bg-surface-muted text-[10px] font-bold text-foreground">
-              C
+        <div className="p-6">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted ring-1 ring-border">
+                <User className="h-5 w-5 text-foreground" strokeWidth={1.75} />
+                <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-background" />
+              </div>
+              <div className="leading-tight">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-subtle">
+                  Новая заявка · #L-2849
+                </div>
+                <div className="text-[14px] font-semibold text-foreground">
+                  Мария Волкова
+                </div>
+              </div>
             </div>
-            <span className="text-[11px] font-medium text-ink-muted">
-              amoCRM. Сделка создана
+            <span className="rounded-md bg-foreground px-2 py-1 text-[9.5px] font-bold uppercase tracking-[0.12em] text-background">
+              Горячий
             </span>
           </div>
-          <span className="text-[10px] text-foreground/30">12с назад</span>
+
+          <div className="mb-5 space-y-3">
+            <SceneRow k="Услуга" v="Ремонт под ключ" />
+            <SceneRow k="Объект" v="42 м², Невский р-н" />
+            <SceneRow k="Бюджет" v="до 800 000 ₽" />
+            <div className="flex justify-between text-[12px]">
+              <span className="text-ink-subtle">Статус</span>
+              <span className="flex items-center gap-1.5 font-semibold text-foreground">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                Квалифицирован AI
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-border pt-4">
+            <div className="flex items-center gap-2">
+              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-accent/15 text-[10px] font-bold text-accent">
+                C
+              </div>
+              <span className="text-[11.5px] font-medium text-ink-muted">
+                amoCRM · сделка создана
+              </span>
+            </div>
+            <span className="font-mono text-[10px] tabular text-ink-subtle">00:12</span>
+          </div>
         </div>
       </div>
 
       {/* Chat Context Underlay */}
-      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-foreground/5 bg-surface-muted/80 p-6 opacity-90 backdrop-blur-md">
-        <div className="mb-4 flex gap-3">
-          <div className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-foreground text-[10px] font-semibold text-background">
+      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-border bg-surface-muted/85 p-5 opacity-95 backdrop-blur-md shadow-sm">
+        <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            Telegram · вход
+          </span>
+          <span className="font-mono">14:02</span>
+        </div>
+        <div className="mb-3 flex gap-3">
+          <div className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-foreground text-[9.5px] font-bold text-background">
             AI
           </div>
           <div className="flex-1">
-            <div className="rounded-xl rounded-tl-none bg-background p-3 text-[12px] leading-snug text-foreground shadow-sm">
+            <div className="rounded-xl rounded-tl-none bg-background p-3 text-[12px] leading-snug text-foreground shadow-xs">
               Здравствуйте! Делаете ремонт под ключ?
             </div>
           </div>
         </div>
-        <div className="flex justify-end gap-3">
+        <div className="flex justify-end">
           <div className="max-w-[82%]">
-            <div className="rounded-xl rounded-tr-none bg-foreground p-3 text-[12px] leading-snug text-background shadow-sm">
-              Да. Подскажите метраж и район, соберу для вас точную смету.
+            <div className="rounded-xl rounded-tr-none bg-foreground p-3 text-[12px] leading-snug text-background shadow-xs">
+              Да. Подскажите метраж и район, соберу точную смету.
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom graphite live counter */}
-      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-4 rounded-xl bg-foreground p-4 text-background shadow-lift md:-left-20">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-foreground bg-emerald-500 text-[10px] font-bold text-foreground">
+      {/* Bottom live counter — refined */}
+      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-lift md:-left-20">
+        <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-[12px] font-bold tabular text-accent-ink">
           23
+          <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-background ring-2 ring-foreground">
+            <span className="absolute inset-0 animate-ping rounded-full bg-accent opacity-60" />
+          </span>
         </div>
         <div className="leading-tight">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-background/50">
+          <div className="text-[9.5px] font-semibold uppercase tracking-[0.14em] text-background/55">
             Сегодня
           </div>
-          <div className="text-[12px] font-semibold">Лида обработано</div>
+          <div className="text-[12.5px] font-semibold">Лидов обработано</div>
         </div>
       </div>
     </div>
@@ -278,8 +322,8 @@ function HeroScene() {
 function SceneRow({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex justify-between text-[12px]">
-      <span className="text-foreground/40">{k}</span>
-      <span className="font-semibold text-foreground">{v}</span>
+      <span className="text-ink-subtle">{k}</span>
+      <span className="font-medium text-foreground">{v}</span>
     </div>
   );
 }
@@ -320,26 +364,32 @@ function Bubble({ side, children }: { side: "left" | "right"; children: React.Re
 /* ─────────────────── Trust bar ─────────────────── */
 
 function TrustBar() {
+  const items = [
+    { icon: Server, t: "Своя инфраструктура", s: "серверы Neeklo" },
+    { icon: Shield, t: "Данные в РФ", s: "ДЦ в России" },
+    { icon: CreditCard, t: "Оплата в рублях", s: "ЮKassa, акты" },
+    { icon: MessageSquare, t: "Поддержка", s: "Telegram, 24/7" },
+  ];
   return (
-    <section className="border-y border-border bg-surface-muted/40">
+    <section className="border-b border-border bg-surface-sunken/55">
       <Container>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-6 text-[12px] uppercase tracking-wide text-ink-subtle">
-          <span className="inline-flex items-center gap-1.5">
-            <Server className="h-3.5 w-3.5" strokeWidth={1.75} />
-            Своя инфраструктура
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span className="inline-flex items-center gap-1.5">
-            <Shield className="h-3.5 w-3.5" strokeWidth={1.75} />
-            Данные в РФ
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span className="inline-flex items-center gap-1.5">
-            <CreditCard className="h-3.5 w-3.5" strokeWidth={1.75} />
-            Оплата в рублях
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span>Поддержка в Telegram</span>
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border my-6 md:my-8 md:grid-cols-4">
+          {items.map((it) => (
+            <div
+              key={it.t}
+              className="flex items-center gap-3 bg-background px-4 py-3.5"
+            >
+              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-border bg-surface-muted text-foreground">
+                <it.icon className="h-4 w-4" strokeWidth={1.6} />
+              </span>
+              <div className="leading-tight">
+                <div className="text-[12.5px] font-semibold text-foreground">{it.t}</div>
+                <div className="text-[10.5px] font-medium uppercase tracking-[0.1em] text-ink-subtle">
+                  {it.s}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </Container>
     </section>
@@ -420,14 +470,24 @@ function ProductScene() {
 }
 
 function SceneWidget({ tab }: { tab: "chat" | "lead" | "handoff" }) {
+  const tabLabel = tab === "chat" ? "диалог" : tab === "lead" ? "карточка лида" : "передача в CRM";
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
-      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <div className="flex items-center gap-2 text-[12px] font-medium text-foreground">
-          <Bot className="h-3.5 w-3.5" strokeWidth={2} />
-          AI-менеджер заявок
+      <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-4 py-2.5">
+        <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-border-strong/60" />
+            <span className="h-2 w-2 rounded-full bg-border-strong/60" />
+            <span className="h-2 w-2 rounded-full bg-border-strong/60" />
+          </div>
+          <span className="ml-1 inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-foreground">
+            <Bot className="h-3.5 w-3.5 text-accent" strokeWidth={2} />
+            AI-менеджер заявок
+          </span>
         </div>
-        <span className="text-[11px] text-ink-subtle">кабинет Neeklo</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
+          neeklo · {tabLabel}
+        </span>
       </div>
       {tab === "chat" && (
         <div className="space-y-3 p-5">
@@ -540,26 +600,59 @@ function HowItWorks() {
           title="От брифа до первой заявки за 3 дня"
           desc="Внедряем сами. Вам не нужен разработчик, маркетолог или интегратор."
         />
-        <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => {
+        <ol className="relative mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {/* connector rail (desktop) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-0 right-0 top-8 hidden h-px lg:block"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, var(--color-border) 50%, transparent 50%)",
+              backgroundSize: "8px 1px",
+            }}
+          />
+          {steps.map((s, i) => {
             const Icon = s.icon;
+            const featured = i === 0;
             return (
               <li
                 key={s.n}
-                className="rounded-2xl border border-border bg-surface p-6"
+                className={
+                  "group relative flex flex-col rounded-2xl border bg-surface p-6 transition-shadow duration-300 ease-quart hover:shadow-sm " +
+                  (featured ? "border-foreground/30 bg-background" : "border-border")
+                }
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-[13px] font-semibold tabular text-ink-subtle">
-                    {s.n}
-                  </span>
-                  <Icon className="h-4 w-4 text-ink-muted" strokeWidth={1.75} />
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={
+                        "relative flex h-12 w-12 items-center justify-center rounded-xl bg-background ring-1 " +
+                        (featured ? "ring-foreground/20" : "ring-border")
+                      }
+                    >
+                      <span className="font-display text-[15px] font-bold tabular text-foreground">
+                        {s.n}
+                      </span>
+                      {featured && (
+                        <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-surface" />
+                      )}
+                    </span>
+                  </div>
+                  <Icon
+                    className={"h-4 w-4 " + (featured ? "text-accent" : "text-ink-subtle")}
+                    strokeWidth={1.6}
+                  />
                 </div>
-                <h3 className="mt-6 font-display text-[18px] font-semibold tracking-[-0.01em] text-foreground">
+                <h3 className="mt-7 font-display text-[18px] font-semibold leading-snug tracking-[-0.015em] text-foreground">
                   {s.title}
                 </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">
+                <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">
                   {s.desc}
                 </p>
+                <div className="mt-5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-subtle">
+                  <span className={"h-1 w-1 rounded-full " + (featured ? "bg-accent" : "bg-border-strong")} />
+                  шаг {i + 1} из {steps.length}
+                </div>
               </li>
             );
           })}
@@ -582,35 +675,69 @@ function Benefits() {
         />
 
         <div className="mt-12 grid auto-rows-[minmax(160px,auto)] grid-cols-1 gap-4 md:grid-cols-6">
-          <div className="rounded-2xl border border-border bg-foreground p-7 text-background md:col-span-3 md:row-span-2">
-            <div className="text-[11.5px] font-medium uppercase tracking-wide text-background/60">
-              Главный результат
+          <div className="relative overflow-hidden rounded-2xl border border-foreground/30 bg-foreground p-7 text-background shadow-lift md:col-span-3 md:row-span-2 md:p-9">
+            {/* soft accent halo */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
+              style={{ background: "radial-gradient(closest-side, var(--color-accent), transparent 70%)" }}
+            />
+            <div className="relative">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-background/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-background/75 backdrop-blur">
+                <span className="h-1 w-1 rounded-full bg-accent" />
+                Главный результат
+              </div>
+              <h3 className="mt-5 font-display text-[26px] font-semibold leading-[1.1] tracking-[-0.025em] md:text-[34px]">
+                Ни одного потерянного обращения, даже ночью и в выходные
+              </h3>
+              <p className="mt-4 max-w-md text-[14.5px] leading-relaxed text-background/75">
+                Менеджер на смене 24/7, отвечает за 7 секунд, доводит каждое
+                обращение до заявки.
+              </p>
+              <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-background/15">
+                <div className="bg-foreground p-4">
+                  <dt className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-background/55">
+                    <span className="h-1 w-1 rounded-full bg-accent" />
+                    Время ответа
+                  </dt>
+                  <dd className="mt-2 font-display text-[28px] font-semibold tabular tracking-[-0.02em]">
+                    7 <span className="text-[16px] font-medium text-background/55">сек</span>
+                  </dd>
+                </div>
+                <div className="bg-foreground p-4">
+                  <dt className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-background/55">
+                    <span className="h-1 w-1 rounded-full bg-accent" />
+                    Рост конверсии
+                  </dt>
+                  <dd className="mt-2 font-display text-[28px] font-semibold tabular tracking-[-0.02em]">
+                    +38<span className="text-[16px] font-medium text-background/55">%</span>
+                  </dd>
+                </div>
+              </dl>
+              {/* tiny sparkline */}
+              <svg
+                viewBox="0 0 200 36"
+                className="mt-5 h-8 w-full opacity-80"
+                aria-hidden
+              >
+                <defs>
+                  <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.45" />
+                    <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 28 L20 24 L40 26 L60 20 L80 22 L100 14 L120 16 L140 10 L160 12 L180 6 L200 8 L200 36 L0 36 Z"
+                  fill="url(#spark)"
+                />
+                <path
+                  d="M0 28 L20 24 L40 26 L60 20 L80 22 L100 14 L120 16 L140 10 L160 12 L180 6 L200 8"
+                  fill="none"
+                  stroke="var(--color-accent)"
+                  strokeWidth="1.5"
+                />
+              </svg>
             </div>
-            <h3 className="mt-3 font-display text-[26px] font-semibold tracking-[-0.02em] md:text-[32px]">
-              Ни одного потерянного обращения, даже ночью и в выходные
-            </h3>
-            <p className="mt-4 text-[14.5px] leading-relaxed text-background/75">
-              Менеджер на смене 24/7, отвечает за 7 секунд, доводит каждое
-              обращение до заявки.
-            </p>
-            <dl className="mt-7 grid grid-cols-2 gap-4 border-t border-background/15 pt-5">
-              <div>
-                <dt className="text-[11px] uppercase tracking-wide text-background/55">
-                  Время ответа
-                </dt>
-                <dd className="mt-1 font-display text-[24px] font-semibold tabular">
-                  7 сек
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[11px] uppercase tracking-wide text-background/55">
-                  Рост конверсии
-                </dt>
-                <dd className="mt-1 font-display text-[24px] font-semibold tabular">
-                  до +38%
-                </dd>
-              </div>
-            </dl>
           </div>
 
           <BentoCell
@@ -662,14 +789,19 @@ function BentoCell({
   className?: string;
 }) {
   return (
-    <div className={"rounded-2xl border border-border bg-surface p-6 " + className}>
-      <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background">
-        <Icon className="h-4 w-4" strokeWidth={1.75} />
+    <div
+      className={
+        "group relative flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all duration-300 ease-quart hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-sm " +
+        className
+      }
+    >
+      <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background text-foreground transition-colors group-hover:border-accent/40 group-hover:text-accent">
+        <Icon className="h-4 w-4" strokeWidth={1.6} />
       </div>
-      <h3 className="mt-4 font-display text-[17px] font-semibold tracking-[-0.01em] text-foreground">
+      <h3 className="mt-5 font-display text-[16.5px] font-semibold leading-snug tracking-[-0.015em] text-foreground">
         {title}
       </h3>
-      <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-muted">{desc}</p>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">{desc}</p>
     </div>
   );
 }
@@ -722,18 +854,26 @@ function IntegrationList({
   items: { t: string; s: string }[];
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 md:p-8">
-      <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
-        {title}
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 md:p-8">
+      <div className="flex items-baseline justify-between">
+        <div className="inline-flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+            {title}
+          </div>
+        </div>
+        <div className="font-mono text-[10.5px] tabular text-ink-subtle">
+          {String(items.length).padStart(2, "0")}
+        </div>
       </div>
       <ul className="mt-5 divide-y divide-border">
         {items.map((it) => (
           <li
             key={it.t}
-            className="flex items-center justify-between gap-4 py-3 first:pt-0 last:pb-0"
+            className="group flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0"
           >
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-[11px] font-semibold text-foreground">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background text-[11px] font-semibold uppercase tracking-tight text-foreground transition-colors group-hover:border-foreground/25">
                 {it.t.slice(0, 2)}
               </span>
               <div>
@@ -741,7 +881,9 @@ function IntegrationList({
                 <div className="text-[12px] text-ink-subtle">{it.s}</div>
               </div>
             </div>
-            <Check className="h-3.5 w-3.5 text-ink-muted" strokeWidth={2} />
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent/15 text-accent">
+              <Check className="h-3 w-3" strokeWidth={2.5} />
+            </span>
           </li>
         ))}
       </ul>
@@ -849,29 +991,59 @@ function Ecosystem() {
           desc="Сейчас фокус на одном продукте. В том же аккаунте позже появятся ещё два."
         />
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {items.map((it) => (
+          {items.map((it, i) => (
             <div
               key={it.tag}
-              className="relative flex flex-col rounded-2xl border border-border bg-surface p-7 md:p-9"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface p-7 md:p-9"
             >
-              <span className="absolute right-5 top-5 rounded-full border border-foreground/30 bg-background px-2.5 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-foreground">
-                скоро
-              </span>
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background">
-                <it.icon className="h-4 w-4" strokeWidth={1.75} />
+              {/* faint diagonal hatch to read as "in progress" */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.035]"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(135deg, var(--color-foreground) 0 1px, transparent 1px 10px)",
+                }}
+              />
+              {/* progress rail */}
+              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-border">
+                <div
+                  className="h-full bg-accent/70"
+                  style={{ width: i === 0 ? "65%" : "32%" }}
+                />
               </div>
-              <div className="mt-5 text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+
+              <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted backdrop-blur">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                Скоро
+              </span>
+
+              <div className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background text-foreground">
+                <it.icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+              </div>
+
+              <div className="relative mt-6 inline-flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+                <span className="h-1 w-1 rounded-full bg-accent" />
                 {it.tag}
               </div>
-              <h3 className="mt-2 font-display text-[22px] font-semibold tracking-[-0.01em] text-foreground md:text-[26px]">
+              <h3 className="relative mt-2 font-display text-[22px] font-semibold leading-snug tracking-[-0.02em] text-foreground md:text-[26px]">
                 {it.title}
               </h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-ink-muted">{it.desc}</p>
-              <div className="mt-6">
+              <p className="relative mt-3 max-w-md text-[14px] leading-relaxed text-ink-muted">
+                {it.desc}
+              </p>
+
+              <div className="relative mt-6 flex items-center justify-between border-t border-border pt-5">
+                <span className="font-mono text-[10.5px] tabular text-ink-subtle">
+                  ETA · {i === 0 ? "Q3 / 2026" : "Q4 / 2026"}
+                </span>
                 <button
                   type="button"
                   disabled
-                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-[12.5px] font-medium text-ink-muted"
+                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-[12px] font-medium text-ink-muted"
                 >
                   В разработке
                 </button>
@@ -941,80 +1113,109 @@ function Pricing() {
           title="Понятная цена, без скрытых платежей"
           desc="Оплата российскими картами через ЮKassa. Меняйте тариф в любой момент."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {plans.map((p) => (
-            <div
-              key={p.name}
-              className={
-                "flex flex-col rounded-2xl border p-6 " +
-                (p.highlighted
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border bg-surface text-foreground")
-              }
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-display text-[18px] font-semibold">{p.name}</h3>
-                {p.highlighted && (
-                  <span className="rounded-full bg-background px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-foreground">
-                    выгодно
-                  </span>
-                )}
-              </div>
-              <div className="mt-4 flex items-baseline gap-1.5">
-                <span className="font-display text-[32px] font-semibold tabular">
-                  {p.price}
-                </span>
-                {p.period && (
-                  <span
-                    className={
-                      "text-[13px] " +
-                      (p.highlighted ? "text-background/70" : "text-ink-subtle")
-                    }
-                  >
-                    {p.period}
-                  </span>
-                )}
-              </div>
-              <p
+        <div className="relative mt-14 grid gap-4 md:grid-cols-3">
+          {plans.map((p) => {
+            const onPriceColor = p.highlighted ? "text-background/65" : "text-ink-subtle";
+            const onBodyColor = p.highlighted ? "text-background/80" : "text-ink-muted";
+            return (
+              <div
+                key={p.name}
                 className={
-                  "mt-2 text-[13.5px] leading-relaxed " +
-                  (p.highlighted ? "text-background/80" : "text-ink-muted")
+                  "group relative flex flex-col rounded-2xl border p-7 transition-all duration-300 ease-quart " +
+                  (p.highlighted
+                    ? "border-foreground bg-foreground text-background shadow-lift md:-translate-y-2"
+                    : "border-border bg-surface text-foreground hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-sm")
                 }
               >
-                {p.desc}
-              </p>
-              <ul className="mt-6 flex-1 space-y-2.5">
-                {p.features.map((f) => (
-                  <li
-                    key={f}
-                    className={
-                      "flex items-start gap-2.5 text-[13.5px] " +
-                      (p.highlighted ? "text-background" : "text-foreground")
-                    }
-                  >
-                    <Check
+                {p.highlighted && (
+                  <>
+                    {/* accent halo */}
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute -inset-px -z-10 rounded-2xl opacity-60 blur-2xl"
+                      style={{ background: "radial-gradient(60% 80% at 50% 0%, var(--color-accent-glow), transparent 70%)" }}
+                    />
+                    <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
+                  </>
+                )}
+
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center gap-2">
+                    <span
                       className={
-                        "mt-0.5 h-3.5 w-3.5 flex-none " +
+                        "h-1.5 w-1.5 rounded-full " +
+                        (p.highlighted ? "bg-accent" : "bg-border-strong")
+                      }
+                    />
+                    <h3 className="font-display text-[15px] font-semibold uppercase tracking-[0.12em]">
+                      {p.name}
+                    </h3>
+                  </div>
+                  {p.highlighted && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-accent-ink">
+                      рекомендуем
+                    </span>
+                  )}
+                </div>
+
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className="font-display text-[40px] font-semibold tabular leading-none tracking-[-0.025em]">
+                    {p.price}
+                  </span>
+                  {p.period && (
+                    <span className={"text-[12.5px] font-medium " + onPriceColor}>
+                      / {p.period.replace("в ", "")}
+                    </span>
+                  )}
+                </div>
+                <p className={"mt-3 text-[13.5px] leading-relaxed " + onBodyColor}>
+                  {p.desc}
+                </p>
+
+                <div
+                  className={
+                    "mt-6 h-px " +
+                    (p.highlighted ? "bg-background/15" : "bg-border")
+                  }
+                />
+
+                <ul className="mt-5 flex-1 space-y-3">
+                  {p.features.map((f) => (
+                    <li
+                      key={f}
+                      className={
+                        "flex items-start gap-2.5 text-[13.5px] " +
                         (p.highlighted ? "text-background" : "text-foreground")
                       }
-                      strokeWidth={2}
-                    />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6">
-                <Button
-                  asChild
-                  variant={p.highlighted ? "ink" : "outline"}
-                  size="md"
-                  className="w-full"
-                >
-                  <Link to="/onboarding/assistant">{p.cta}</Link>
-                </Button>
+                    >
+                      <span
+                        className={
+                          "mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full " +
+                          (p.highlighted
+                            ? "bg-accent text-accent-ink"
+                            : "bg-accent/15 text-accent")
+                        }
+                      >
+                        <Check className="h-2.5 w-2.5" strokeWidth={3} />
+                      </span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-7">
+                  <Button
+                    asChild
+                    variant={p.highlighted ? "ink" : "outline"}
+                    size="md"
+                    className="w-full"
+                  >
+                    <Link to="/onboarding/assistant">{p.cta}</Link>
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="mt-6 flex items-center justify-center gap-2 text-[12.5px] text-ink-subtle">
           <Globe className="h-3.5 w-3.5" strokeWidth={1.75} />
@@ -1075,38 +1276,81 @@ function Faq() {
           title="Коротко о главном"
           desc="Не нашли ответа? Напишите в Telegram, отвечаем по-русски и без скриптов."
         />
-        <div className="mx-auto mt-10 max-w-[760px] divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
-          {faq.map((item, i) => (
-            <FaqRow key={i} q={item.q} a={item.a} />
-          ))}
+        <div className="mx-auto mt-12 max-w-[780px] overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+          <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-5 py-3">
+            <div className="inline-flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+                {String(faq.length).padStart(2, "0")} вопросов · ответы команды
+              </span>
+            </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
+              support · neeklo
+            </span>
+          </div>
+          <div className="divide-y divide-border">
+            {faq.map((item, i) => (
+              <FaqRow key={i} q={item.q} a={item.a} n={i + 1} />
+            ))}
+          </div>
         </div>
       </Container>
     </section>
   );
 }
 
-function FaqRow({ q, a }: { q: string; a: string }) {
+function FaqRow({ q, a, n }: { q: string; a: string; n: number }) {
   const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div className={open ? "bg-background/60" : ""}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+        className="group flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-background/40"
         aria-expanded={open}
       >
-        <span className="text-[15px] font-medium text-foreground">{q}</span>
-        <ChevronDown
+        <span
           className={
-            "h-4 w-4 flex-none text-ink-muted transition-transform " +
-            (open ? "rotate-180" : "")
+            "font-mono text-[11px] tabular w-7 flex-none " +
+            (open ? "text-accent" : "text-ink-subtle")
           }
-          strokeWidth={1.75}
-        />
+        >
+          {String(n).padStart(2, "0")}
+        </span>
+        <span
+          className={
+            "flex-1 text-[15px] font-medium leading-snug transition-colors " +
+            (open ? "text-foreground" : "text-foreground/90 group-hover:text-foreground")
+          }
+        >
+          {q}
+        </span>
+        <span
+          className={
+            "inline-flex h-7 w-7 flex-none items-center justify-center rounded-full border transition-all duration-300 ease-quart " +
+            (open
+              ? "border-accent bg-accent text-accent-ink"
+              : "border-border bg-background text-ink-muted group-hover:border-foreground/30")
+          }
+        >
+          <ChevronDown
+            className={"h-3.5 w-3.5 transition-transform duration-300 " + (open ? "rotate-180" : "")}
+            strokeWidth={2}
+          />
+        </span>
       </button>
-      {open && (
-        <div className="px-5 pb-5 text-[14px] leading-relaxed text-ink-muted">{a}</div>
-      )}
+      <div
+        className={
+          "grid overflow-hidden transition-[grid-template-rows] duration-300 ease-quart " +
+          (open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")
+        }
+      >
+        <div className="overflow-hidden">
+          <div className="pb-5 pl-[60px] pr-5 text-[14px] leading-relaxed text-ink-muted">
+            {a}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1163,13 +1407,14 @@ function SectionHead({
 }) {
   return (
     <div className="mx-auto max-w-[720px] text-center">
-      <div className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+      <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle shadow-xs backdrop-blur">
+        <span className="h-1 w-1 rounded-full bg-accent" />
         {eyebrow}
       </div>
-      <h2 className="mt-3 font-display text-[30px] font-semibold tracking-[-0.02em] text-foreground md:text-[42px]">
+      <h2 className="mt-5 font-display text-[30px] font-semibold leading-[1.05] tracking-[-0.025em] text-foreground md:text-[44px]">
         {title}
       </h2>
-      <p className="mt-4 text-[15.5px] leading-relaxed text-ink-muted">{desc}</p>
+      <p className="mx-auto mt-4 max-w-[600px] text-[15.5px] leading-relaxed text-ink-muted">{desc}</p>
     </div>
   );
 }
