@@ -1,12 +1,13 @@
 /*
  * Neeklo — design system
- * Paper & Ink: warm off-white paper + rich ink.
+ * Milk & Olive: тёплое молочное полотно + графитовая краска + сдержанная олива.
  * Light default, full dark theme available via .dark on <html>.
  *
  * Принципы:
  *  - Premium редакторская типографика (Sora display + Manrope body).
- *  - Один акцент на роль, без неона, без градиентов-«фоев».
- *  - Воздух и иерархия важнее декора.
+ *  - Графит вместо чистого чёрного — мягче для глаз, дороже на ощущение.
+ *  - Один сдержанный акцент (muted olive) на роль, без неона.
+ *  - Воздух, ритм и иерархия важнее декора.
  */
 
 @import "tailwindcss" source(none);
