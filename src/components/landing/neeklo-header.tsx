@@ -19,7 +19,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
-import { ThemeToggle } from "@/components/theme-toggle";
+
 import { useCurrentUser } from "@/lib/hooks/use-auth";
 import { cn } from "@/lib/utils";
 
