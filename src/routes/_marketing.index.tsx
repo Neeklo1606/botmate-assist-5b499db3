@@ -157,14 +157,19 @@ function Hero() {
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <Link
                 to="/onboarding/assistant"
-                className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-[14px] font-semibold text-background shadow-lift transition-[transform,box-shadow] duration-300 ease-quart hover:-translate-y-0.5"
+                className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-foreground pl-7 pr-8 text-[14px] font-semibold text-background shadow-lift ring-1 ring-foreground/0 transition-[transform,box-shadow,padding] duration-300 ease-quart hover:-translate-y-0.5 hover:shadow-soft-lift"
               >
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
                 Запустить менеджера
                 <ArrowRight
                   className="h-[18px] w-[18px] transition-transform duration-200 ease-out group-hover:translate-x-0.5"
                   strokeWidth={1.75}
                 />
               </Link>
+
               <Link
                 to="/"
                 hash="product"
