@@ -220,7 +220,7 @@ function Stat({ label, value, pad }: { label: string; value: string; pad?: boole
   return (
     <div className={pad ? "pl-5" : ""}>
       <dt className="mb-1.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
-        <span className="h-1 w-1 rounded-full bg-accent" />
+        <span className="h-1 w-1 rounded-full bg-foreground/30" />
         {label}
       </dt>
       <dd className="font-display text-[22px] font-semibold tabular tracking-[-0.01em] text-foreground md:text-[24px]">
