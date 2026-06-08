@@ -1,16 +1,23 @@
 /**
- * NeekloHeader — премиальный sticky-хедер.
- * Паттерн: прозрачный поверх hero, при скролле сжимается по высоте, получает
- * сильнее блюр + soft shadow. Центрированная pill-навигация. Полноэкранный
- * mobile overlay с крупной типографикой и сильным CTA.
+ * NeekloHeader — премиальный floating sticky-хедер.
  *
- * Применяется во всех маркетинговых маршрутах через _marketing layout.
+ * Поведение:
+ * - Хедер закреплён к верху вьюпорта и представлен в виде центрированной
+ *   «капсулы» (floating island): не полноразмерный бар, а островок с
+ *   max-width, лежащий в центре экрана.
+ * - При скролле капсула сжимается: уменьшается max-width, высота, паддинги;
+ *   усиливаются blur / shadow / border. Переходы плавные (≈320ms).
+ * - 3-частная композиция: слева — логотип, в центре — pill-навигация,
+ *   справа — theme toggle + Войти + Подключить. Левая и правая колонки
+ *   равны по ширине (flex-1 basis-0), благодаря чему центр оптически
+ *   совпадает с центром капсулы.
+ *
+ * Используется во всех маркетинговых маршрутах через _marketing layout.
  */
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/layout/container";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useCurrentUser } from "@/lib/hooks/use-auth";
@@ -31,21 +38,21 @@ const nav: NavItem[] = [
   { to: "/site", label: "Сайты", soon: true },
 ];
 
+const EASE = "cubic-bezier(0.22, 0.61, 0.36, 1)";
+
 export function NeekloHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { data: user } = useCurrentUser();
   const isAuthed = !!user;
 
-  // Scroll-aware sticky state
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu open
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -55,7 +62,6 @@ export function NeekloHeader() {
     };
   }, [open]);
 
-  // Close mobile on Esc
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -69,42 +75,69 @@ export function NeekloHeader() {
     <header
       data-scrolled={scrolled ? "true" : "false"}
       className={cn(
-        "sticky top-0 z-40",
-        "transition-[background-color,border-color,box-shadow,backdrop-filter] duration-[420ms]",
-        "ease-[cubic-bezier(0.2,0.8,0.2,1)]",
-        scrolled
-          ? "border-b border-border/70 bg-background/88 backdrop-blur-xl header-scrolled"
-          : "border-b border-transparent bg-background/55 backdrop-blur-md",
+        "sticky top-0 z-40 w-full",
+        // Outer vertical breathing — компрессия отступа сверху при скролле
+        "transition-[padding] duration-[320ms]",
+        scrolled ? "pt-2 md:pt-3" : "pt-3 md:pt-5",
       )}
+      style={{ transitionTimingFunction: EASE }}
     >
-      <Container>
+      {/* Floating capsule — центрированный остров, шириной по max-w */}
+      <div
+        className={cn(
+          "mx-auto px-3 sm:px-4 md:px-6",
+          "transition-[max-width,padding] duration-[320ms]",
+          scrolled
+            ? "max-w-[1040px]"
+            : "max-w-[1200px]",
+        )}
+        style={{ transitionTimingFunction: EASE }}
+      >
         <div
           className={cn(
-            "flex items-center justify-between gap-6",
-            "transition-[height] duration-[420ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
-            scrolled ? "h-[52px] md:h-[58px]" : "h-14 md:h-[68px]",
+            "relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-4",
+            "rounded-full border backdrop-blur-xl",
+            "transition-[height,padding,background-color,border-color,box-shadow,backdrop-filter]",
+            "duration-[320ms]",
+            scrolled
+              ? [
+                  "h-[52px] md:h-[56px]",
+                  "px-2.5 md:px-3",
+                  "border-border/70 bg-background/85",
+                  "shadow-[var(--shadow-rim),0_8px_28px_-12px_oklch(0.2_0.01_110/0.18)]",
+                ].join(" ")
+              : [
+                  "h-[58px] md:h-[68px]",
+                  "px-3 md:px-4",
+                  "border-border/45 bg-background/60",
+                  "shadow-[var(--shadow-rim),0_4px_18px_-12px_oklch(0.2_0.01_110/0.12)]",
+                ].join(" "),
           )}
+          style={{ transitionTimingFunction: EASE }}
         >
-          {/* Logo */}
-          <Link
-            to="/"
-            className="group flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80"
-            aria-label="Neeklo, на главную"
-          >
-            <NeekloLogo />
-          </Link>
+          {/* LEFT — logo */}
+          <div className="flex min-w-0 items-center">
+            <Link
+              to="/"
+              className="group inline-flex items-center gap-2.5 rounded-full px-1.5 py-1 transition-opacity duration-200 hover:opacity-85"
+              aria-label="Neeklo, на главную"
+            >
+              <NeekloLogo />
+            </Link>
+          </div>
 
-          {/* Centered pill nav */}
+          {/* CENTER — pill nav */}
           <nav
             aria-label="Главное меню"
-            className="hidden flex-1 justify-center md:flex"
+            className="hidden md:flex"
           >
             <ul
               className={cn(
-                "flex items-center gap-0.5 rounded-full border border-border/60 bg-background/70 px-1.5 py-1",
-                "shadow-[var(--shadow-rim),0_1px_2px_0_oklch(0.2_0.01_110/0.04)] backdrop-blur-md",
-                "transition-shadow duration-[420ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+                "flex items-center gap-0.5 rounded-full",
+                "transition-[gap,padding] duration-[320ms]",
+                scrolled ? "px-0.5 py-0.5" : "px-1 py-0.5",
               )}
+              style={{ transitionTimingFunction: EASE }}
             >
               {nav.map((item) => (
                 <li key={item.label}>
@@ -114,7 +147,7 @@ export function NeekloHeader() {
                     className={cn(
                       "inline-flex h-[30px] items-center gap-1.5 rounded-full px-3.5",
                       "text-[12.5px] font-medium tracking-[-0.005em] text-ink-muted",
-                      "transition-colors duration-200 hover:text-foreground",
+                      "transition-colors duration-200 hover:text-foreground hover:bg-surface-muted/70",
                     )}
                     activeProps={{
                       className: "bg-surface-muted text-foreground",
@@ -137,12 +170,12 @@ export function NeekloHeader() {
             </ul>
           </nav>
 
-          {/* Right cluster */}
-          <div className="hidden items-center gap-1.5 md:flex">
+          {/* RIGHT — actions cluster */}
+          <div className="hidden items-center justify-end gap-1 md:flex">
             <ThemeToggle />
             <span
               aria-hidden
-              className="mx-2 h-5 w-px"
+              className="mx-1.5 h-5 w-px"
               style={{
                 background:
                   "linear-gradient(to bottom, transparent, var(--color-border), transparent)",
@@ -173,7 +206,7 @@ export function NeekloHeader() {
                   size="sm"
                   className={cn(
                     "group/cta h-9 rounded-full pl-3.5 pr-4 text-[13px]",
-                    "shadow-xs ring-1 ring-foreground/0 transition-shadow hover:shadow-sm",
+                    "shadow-xs transition-shadow duration-200 hover:shadow-sm",
                   )}
                 >
                   <Link to="/onboarding/assistant" className="gap-2">
@@ -192,14 +225,14 @@ export function NeekloHeader() {
             )}
           </div>
 
-          {/* Mobile trigger */}
-          <div className="flex items-center gap-1 md:hidden">
+          {/* MOBILE — right column compresses to: theme + burger */}
+          <div className="col-start-3 flex items-center justify-end gap-1 md:hidden">
             <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               className={cn(
-                "relative inline-flex h-10 w-10 items-center justify-center rounded-full",
+                "relative inline-flex h-9 w-9 items-center justify-center rounded-full",
                 "border border-border/70 bg-background/70 text-foreground backdrop-blur",
                 "transition-colors duration-200 hover:bg-surface-muted",
               )}
@@ -209,37 +242,36 @@ export function NeekloHeader() {
             >
               <Menu
                 className={cn(
-                  "absolute h-[18px] w-[18px] transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+                  "absolute h-[18px] w-[18px] transition-all duration-300",
                   open ? "rotate-90 scale-75 opacity-0" : "rotate-0 scale-100 opacity-100",
                 )}
+                style={{ transitionTimingFunction: EASE }}
               />
               <X
                 className={cn(
-                  "absolute h-[18px] w-[18px] transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+                  "absolute h-[18px] w-[18px] transition-all duration-300",
                   open ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-75 opacity-0",
                 )}
+                style={{ transitionTimingFunction: EASE }}
               />
             </button>
           </div>
         </div>
-      </Container>
+      </div>
 
-      {/* Mobile overlay — near-fullscreen, premium */}
+      {/* Mobile overlay */}
       <div
         id="mobile-nav-overlay"
         className={cn(
-          "fixed inset-x-0 bottom-0 top-14 z-30 md:hidden",
-          "transition-[opacity,transform] duration-[360ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+          "fixed inset-x-0 bottom-0 top-[72px] z-30 md:hidden",
+          "transition-[opacity,transform] duration-[360ms]",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-1.5 opacity-0",
         )}
+        style={{ transitionTimingFunction: EASE }}
       >
-        {/* Layered surface — soft warm panel, not a flat sheet */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-background/96 backdrop-blur-2xl"
-        />
+        <div aria-hidden className="absolute inset-0 bg-background/96 backdrop-blur-2xl" />
         <div
           aria-hidden
           className="pointer-events-none absolute -top-24 right-[-15%] h-[420px] w-[420px] rounded-full opacity-60 blur-3xl"
@@ -248,21 +280,10 @@ export function NeekloHeader() {
               "radial-gradient(closest-side, var(--color-accent-glow), transparent 70%)",
           }}
         />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px"
-          style={{
-            background:
-              "linear-gradient(to right, transparent, color-mix(in oklab, var(--color-border) 90%, transparent), transparent)",
-          }}
-        />
 
         <div className="relative flex h-full flex-col">
-          <Container>
-            <nav
-              aria-label="Меню"
-              className="flex flex-col gap-1 pt-6"
-            >
+          <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
+            <nav aria-label="Меню" className="flex flex-col gap-1 pt-6">
               {nav.map((item, i) => (
                 <Link
                   key={item.label}
@@ -272,11 +293,19 @@ export function NeekloHeader() {
                   className={cn(
                     "group flex items-center justify-between rounded-2xl px-4 py-4",
                     "font-display text-[22px] font-medium tracking-[-0.02em] text-foreground",
-                    "transition-[background-color,transform] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+                    "transition-[background-color,transform] duration-300",
                     "hover:bg-surface-muted",
                     open && "animate-fade-in",
                   )}
-                  style={open ? { animationDelay: `${60 + i * 40}ms`, animationFillMode: "backwards" } : undefined}
+                  style={
+                    open
+                      ? {
+                          animationDelay: `${60 + i * 40}ms`,
+                          animationFillMode: "backwards",
+                          transitionTimingFunction: EASE,
+                        }
+                      : { transitionTimingFunction: EASE }
+                  }
                 >
                   <span className="inline-flex items-center gap-3">
                     <span
@@ -298,11 +327,10 @@ export function NeekloHeader() {
                 </Link>
               ))}
             </nav>
-          </Container>
+          </div>
 
-          {/* Bottom CTA cluster — pinned to safe-area */}
           <div className="mt-auto px-4 pb-[max(24px,env(safe-area-inset-bottom))] pt-6">
-            <Container>
+            <div className="mx-auto w-full max-w-[1200px]">
               <div className="rounded-3xl border border-border/70 bg-surface/80 p-3 shadow-[var(--shadow-rim),var(--shadow-md)] backdrop-blur">
                 {isAuthed ? (
                   <Button asChild variant="brand" size="lg" className="w-full rounded-2xl">
@@ -347,7 +375,7 @@ export function NeekloHeader() {
                   Один помощник. Весь твой бизнес.
                 </p>
               </div>
-            </Container>
+            </div>
           </div>
         </div>
       </div>
