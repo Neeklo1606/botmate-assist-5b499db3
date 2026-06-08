@@ -15,13 +15,41 @@
  * Используется во всех маркетинговых маршрутах через _marketing layout.
  */
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useCurrentUser } from "@/lib/hooks/use-auth";
 import { cn } from "@/lib/utils";
+
+/**
+ * Scroll-spy: следит за in-page #section якорями и возвращает текущий
+ * видимый. Нужен, чтобы hash-пункты подсвечивались по реально видимой
+ * секции, а не сразу все три (когда они все указывают на "/").
+ */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const targets = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!targets.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] },
+    );
+    targets.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, [ids.join("|")]);
+  return active;
+}
 
 type NavItem = {
   to: "/" | "/media" | "/site";
