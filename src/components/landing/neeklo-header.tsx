@@ -217,15 +217,7 @@ export function NeekloHeader() {
 
           {/* RIGHT — actions cluster */}
           <div className="desktop-header-only items-center justify-end gap-1">
-            <ThemeToggle />
-            <span
-              aria-hidden
-              className="mx-1.5 h-5 w-px"
-              style={{
-                background:
-                  "linear-gradient(to bottom, transparent, var(--color-border), transparent)",
-              }}
-            />
+
             {isAuthed ? (
               <Button
                 asChild
