@@ -412,29 +412,43 @@ function TrustBar() {
     { icon: Shield, t: "Данные в РФ", s: "ДЦ в России" },
     { icon: CreditCard, t: "Оплата в рублях", s: "ЮKassa, акты" },
     { icon: MessageSquare, t: "Поддержка", s: "Telegram, 24/7" },
+    { icon: Zap, t: "Отклик 7 сек", s: "среднее по AI" },
+    { icon: Database, t: "Свои данные", s: "никаких утечек" },
   ];
+  // Дубль массива — нужен для бесшовной анимации translate(-50%).
+  const track = [...items, ...items];
+
   return (
     <section className="border-b border-border bg-surface-sunken/55">
-      <Container>
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border my-6 md:my-8 md:grid-cols-4">
-          {items.map((it) => (
-            <div
-              key={it.t}
-              className="flex items-center gap-3 bg-background px-4 py-3.5"
-            >
-              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-border bg-surface-muted text-foreground">
-                <it.icon className="h-4 w-4" strokeWidth={1.6} />
-              </span>
-              <div className="leading-tight">
-                <div className="text-[12.5px] font-semibold text-foreground">{it.t}</div>
-                <div className="text-[10.5px] font-medium uppercase tracking-[0.1em] text-ink-subtle">
-                  {it.s}
+      <div className="py-7 md:py-9">
+        <div
+          className="marquee-mask pause-on-hover group/marquee relative overflow-hidden"
+          style={{ ["--marquee-duration" as string]: "60s" }}
+        >
+          <ul
+            className="animate-marquee flex w-max items-center gap-3"
+            aria-label="Преимущества Neeklo"
+          >
+            {track.map((it, i) => (
+              <li
+                key={`${it.t}-${i}`}
+                className="flex flex-none items-center gap-3 rounded-full border border-border/70 bg-background/80 px-5 py-3 backdrop-blur-sm shadow-xs"
+                aria-hidden={i >= items.length ? "true" : undefined}
+              >
+                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-border bg-surface-muted text-foreground">
+                  <it.icon className="h-4 w-4" strokeWidth={1.6} />
+                </span>
+                <div className="leading-tight">
+                  <div className="text-[12.5px] font-semibold text-foreground">{it.t}</div>
+                  <div className="text-[10.5px] font-medium uppercase tracking-[0.1em] text-ink-subtle">
+                    {it.s}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </li>
+            ))}
+          </ul>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
