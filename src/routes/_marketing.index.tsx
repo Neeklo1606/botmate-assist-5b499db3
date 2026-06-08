@@ -1407,13 +1407,14 @@ function SectionHead({
 }) {
   return (
     <div className="mx-auto max-w-[720px] text-center">
-      <div className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+      <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle shadow-xs backdrop-blur">
+        <span className="h-1 w-1 rounded-full bg-accent" />
         {eyebrow}
       </div>
-      <h2 className="mt-3 font-display text-[30px] font-semibold tracking-[-0.02em] text-foreground md:text-[42px]">
+      <h2 className="mt-5 font-display text-[30px] font-semibold leading-[1.05] tracking-[-0.025em] text-foreground md:text-[44px]">
         {title}
       </h2>
-      <p className="mt-4 text-[15.5px] leading-relaxed text-ink-muted">{desc}</p>
+      <p className="mx-auto mt-4 max-w-[600px] text-[15.5px] leading-relaxed text-ink-muted">{desc}</p>
     </div>
   );
 }
