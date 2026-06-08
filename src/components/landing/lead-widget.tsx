@@ -198,20 +198,28 @@ export function LeadWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Закрыть AI-менеджера" : "Открыть AI-менеджера"}
         aria-expanded={open}
-        className="fixed bottom-[88px] right-4 z-[55] inline-flex h-14 items-center gap-2.5 rounded-full bg-foreground pl-3 pr-4 text-background shadow-lift transition-transform hover:-translate-y-0.5 active:translate-y-0 md:bottom-6 md:right-6"
+        className="group fixed bottom-[88px] right-4 z-[55] inline-flex h-14 items-center gap-2.5 rounded-full border border-foreground/15 bg-foreground pl-2 pr-5 text-background shadow-lift transition-[transform,box-shadow] duration-300 ease-quart hover:-translate-y-0.5 active:translate-y-0 md:bottom-6 md:right-6"
       >
-        <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-background/10">
+        <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-background/10 ring-1 ring-background/15">
           {open ? (
             <X className="h-4 w-4" strokeWidth={2} />
           ) : (
             <Bot className="h-4 w-4" strokeWidth={2} />
           )}
           {!open && (
-            <span className="absolute right-0 top-0 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-foreground" />
+            <>
+              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-foreground" />
+              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 animate-ping rounded-full bg-accent opacity-50" />
+            </>
           )}
         </span>
-        <span className="text-[13px] font-medium">
-          {open ? "Свернуть" : "AI-менеджер"}
+        <span className="flex flex-col items-start leading-tight">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-background/60">
+            {open ? "" : "Neeklo"}
+          </span>
+          <span className="text-[13px] font-semibold">
+            {open ? "Свернуть" : "AI-менеджер"}
+          </span>
         </span>
       </button>
 
