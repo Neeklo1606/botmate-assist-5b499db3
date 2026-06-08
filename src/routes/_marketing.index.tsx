@@ -190,7 +190,7 @@ function Hero() {
           </div>
 
           {/* RIGHT — unified system canvas */}
-          <div className="relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[640px]">
+          <div className="hero-right relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[640px]">
             {/* subtle grid foundation */}
             <div
               aria-hidden
