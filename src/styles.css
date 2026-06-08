@@ -277,15 +277,23 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.55;
     font-weight: 400;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.15;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.035em;
+    line-height: 0.98;
   }
 
   /* Числа — табличные везде по умолчанию */
