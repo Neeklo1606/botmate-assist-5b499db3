@@ -18,10 +18,11 @@ export function NeekloLogo({ className }: Props) {
       <img
         src={logo.url}
         alt="avreya.ru"
-        className="h-7 w-auto"
+        className="h-12 w-auto md:h-14"
         loading="eager"
         decoding="async"
       />
+
     </span>
   );
 }
