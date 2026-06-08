@@ -315,7 +315,7 @@
   }
 
   ::selection {
-    background-color: oklch(0.91 0.2 124 / 0.4);
+    background-color: oklch(0.54 0.062 118 / 0.28);
     color: var(--color-foreground);
   }
 
