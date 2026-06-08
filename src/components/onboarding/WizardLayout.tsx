@@ -116,7 +116,7 @@ export function WizardLayout({ config }: Props) {
         </div>
         <Link
           to="/"
-          className="inline-flex items-center gap-1.5 text-[13px] text-ink-dark-muted transition-colors hover:text-ink-dark"
+          className="inline-flex items-center gap-1.5 text-[13px] text-ink-muted transition-colors hover:text-foreground"
           aria-label="Сохранить и выйти"
         >
           <span className="hidden md:inline">Сохранить и выйти</span>
