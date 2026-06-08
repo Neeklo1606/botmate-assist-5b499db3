@@ -153,12 +153,12 @@ function Hero() {
             </h1>
 
 
-            <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
+            <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
               AI-сотрудник для входящих обращений. Принимает заявку с сайта,
               Telegram и форм, задаёт нужные вопросы и передаёт готовый лид в CRM.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-5">
+            <div className="mt-7 flex flex-wrap items-center gap-5">
               <Link
                 to="/onboarding/assistant"
                 className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-foreground pl-7 pr-8 text-[14px] font-semibold text-background shadow-lift ring-1 ring-foreground/0 transition-[transform,box-shadow,padding] duration-300 ease-quart hover:-translate-y-0.5 hover:shadow-soft-lift"
