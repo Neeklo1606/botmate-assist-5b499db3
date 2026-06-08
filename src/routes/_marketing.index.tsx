@@ -400,31 +400,27 @@ function TrustBar() {
   const track = [...items, ...items];
 
   return (
-    <section className="border-b border-border bg-surface-sunken/55">
-      <div className="py-7 md:py-9">
+    <section className="border-b border-border bg-surface-sunken/50">
+      <div className="py-3 md:py-3.5">
         <div
           className="marquee-mask pause-on-hover group/marquee relative overflow-hidden"
-          style={{ ["--marquee-duration" as string]: "60s" }}
+          style={{ ["--marquee-duration" as string]: "90s" }}
         >
           <ul
-            className="animate-marquee flex w-max items-center gap-3"
+            className="animate-marquee flex w-max items-center gap-8 md:gap-10"
             aria-label="Преимущества Neeklo"
           >
             {track.map((it, i) => (
               <li
                 key={`${it.t}-${i}`}
-                className="flex flex-none items-center gap-3 rounded-full border border-border/70 bg-background/80 px-5 py-3 backdrop-blur-sm shadow-xs"
+                className="flex flex-none items-center gap-2 text-foreground/75"
                 aria-hidden={i >= items.length ? "true" : undefined}
               >
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-border bg-surface-muted text-foreground">
-                  <it.icon className="h-4 w-4" strokeWidth={1.6} />
+                <it.icon className="h-3.5 w-3.5 text-ink-subtle" strokeWidth={1.75} />
+                <span className="text-[11.5px] font-medium uppercase tracking-[0.14em]">
+                  {it.t}
                 </span>
-                <div className="leading-tight">
-                  <div className="text-[12.5px] font-semibold text-foreground">{it.t}</div>
-                  <div className="text-[10.5px] font-medium uppercase tracking-[0.1em] text-ink-subtle">
-                    {it.s}
-                  </div>
-                </div>
+                <span aria-hidden className="ml-2 h-1 w-1 rounded-full bg-foreground/20" />
               </li>
             ))}
           </ul>
