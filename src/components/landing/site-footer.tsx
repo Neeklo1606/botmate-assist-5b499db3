@@ -92,7 +92,10 @@ export function SiteFooter({ variant = "light" }: SiteFooterProps = {}) {
           <div>
             © {new Date().getFullYear()} Avreya · {t("footer.copyright")}
           </div>
-          <div>{t("footer.legalEntity")}</div>
+          <div className="flex items-center gap-4 md:gap-6">
+            <span>{t("footer.legalEntity")}</span>
+            <ThemeToggle />
+          </div>
         </div>
       </Container>
     </footer>
