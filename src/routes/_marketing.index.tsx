@@ -92,18 +92,31 @@ function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border">
+    <section className="relative overflow-hidden border-b border-border bg-background">
+      {/* Soft ambient olive wash, top-right */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 -top-40 h-[520px] w-[520px] rounded-full opacity-60 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, var(--color-accent-glow), transparent 70%)" }}
+      />
       <Container>
         <div className="relative grid items-center gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24 lg:py-28">
           {/* LEFT — strategic hierarchy */}
           <div className="z-10 flex flex-col items-start md:col-span-6">
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-surface/60 px-3 py-1 backdrop-blur">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface/70 py-1 pl-1.5 pr-3 backdrop-blur shadow-xs">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-accent-ink">
+                N
               </span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-ink-muted">
-                Neeklo · AI-менеджер заявок
+              <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                AI-менеджер заявок
+              </span>
+              <span className="h-3 w-px bg-border" />
+              <span className="inline-flex items-center gap-1.5 text-[10.5px] font-medium text-ink-muted">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                online
               </span>
             </div>
 
@@ -115,7 +128,7 @@ function Hero() {
               заявки. <span className="text-foreground/30">Никогда.</span>
             </h1>
 
-            <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[20px]">
+            <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
               AI-сотрудник для входящих обращений. Принимает заявку с сайта,
               Telegram и форм, задаёт нужные вопросы и передаёт готовый лид в CRM.
             </p>
@@ -123,11 +136,11 @@ function Hero() {
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <Link
                 to="/onboarding/assistant"
-                className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-[14px] font-semibold text-background shadow-lift transition-transform hover:scale-[1.02]"
+                className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-[14px] font-semibold text-background shadow-lift transition-[transform,box-shadow] duration-300 ease-quart hover:-translate-y-0.5"
               >
                 Запустить менеджера
                 <ArrowRight
-                  className="h-[18px] w-[18px] transition-transform group-hover:translate-x-0.5"
+                  className="h-[18px] w-[18px] transition-transform duration-200 ease-out group-hover:translate-x-0.5"
                   strokeWidth={1.75}
                 />
               </Link>
@@ -136,7 +149,7 @@ function Hero() {
                 hash="product"
                 className="group inline-flex h-14 items-center gap-3 px-2 text-[14px] font-semibold text-foreground"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 transition-colors group-hover:border-foreground/30">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/60 transition-colors group-hover:border-foreground/40 group-hover:bg-surface">
                   <span className="ml-[2px] h-0 w-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-foreground" />
                 </span>
                 Смотреть демо
@@ -144,15 +157,15 @@ function Hero() {
             </div>
 
             {/* Metrics anchor */}
-            <dl className="mt-14 grid w-full max-w-[520px] grid-cols-3 gap-8 border-t border-foreground/10 pt-8">
+            <dl className="mt-14 grid w-full max-w-[540px] grid-cols-3 divide-x divide-border border-t border-border pt-7">
               <Stat label="Ответ" value="7 сек" />
-              <Stat label="Работа" value="24/7" />
-              <Stat label="Интеграции" value="TG + CRM" />
+              <Stat label="Работа" value="24/7" pad />
+              <Stat label="Интеграции" value="TG · CRM" pad />
             </dl>
           </div>
 
           {/* RIGHT — unified system canvas */}
-          <div className="relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[620px]">
+          <div className="relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[640px]">
             {/* subtle grid foundation */}
             <div
               aria-hidden
@@ -173,13 +186,14 @@ function Hero() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, pad }: { label: string; value: string; pad?: boolean }) {
   return (
-    <div>
-      <dt className="mb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-foreground/40">
+    <div className={pad ? "pl-5" : ""}>
+      <dt className="mb-1.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+        <span className="h-1 w-1 rounded-full bg-accent" />
         {label}
       </dt>
-      <dd className="font-display text-[22px] font-semibold tabular text-foreground md:text-[24px]">
+      <dd className="font-display text-[22px] font-semibold tabular tracking-[-0.01em] text-foreground md:text-[24px]">
         {value}
       </dd>
     </div>
@@ -189,86 +203,116 @@ function Stat({ label, value }: { label: string; value: string }) {
 function HeroScene() {
   return (
     <div className="relative w-full max-w-md">
-      {/* Main Lead Processing Card */}
-      <div className="relative z-30 translate-x-4 rounded-2xl border border-foreground/5 bg-background p-6 shadow-lift">
-        <div className="mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted">
-              <User className="h-5 w-5 text-foreground" strokeWidth={1.75} />
-            </div>
-            <div className="leading-tight">
-              <div className="text-[11px] font-bold uppercase tracking-tight text-foreground/40">
-                Новая заявка
-              </div>
-              <div className="text-[14px] font-bold text-foreground">
-                Мария Волкова
-              </div>
-            </div>
+      {/* Main Lead Processing Card — product window */}
+      <div className="relative z-30 translate-x-4 overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
+        {/* window chrome */}
+        <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-4 py-2.5">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
           </div>
-          <span className="rounded bg-foreground px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-background">
-            Горячий
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-subtle">
+            neeklo / leads / live
+          </div>
+          <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-accent">
+            <span className="h-1 w-1 rounded-full bg-accent" />
+            live
           </span>
         </div>
 
-        <div className="mb-6 space-y-3">
-          <SceneRow k="Услуга" v="Ремонт под ключ" />
-          <SceneRow k="Объект" v="42 м², Невский р-н" />
-          <div className="flex justify-between text-[12px]">
-            <span className="text-foreground/40">Статус</span>
-            <span className="flex items-center gap-1.5 font-semibold text-foreground">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
-              Квалифицирован AI
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between border-t border-foreground/5 pt-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-6 w-6 items-center justify-center rounded bg-surface-muted text-[10px] font-bold text-foreground">
-              C
+        <div className="p-6">
+          <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted ring-1 ring-border">
+                <User className="h-5 w-5 text-foreground" strokeWidth={1.75} />
+                <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-background" />
+              </div>
+              <div className="leading-tight">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-subtle">
+                  Новая заявка · #L-2849
+                </div>
+                <div className="text-[14px] font-semibold text-foreground">
+                  Мария Волкова
+                </div>
+              </div>
             </div>
-            <span className="text-[11px] font-medium text-ink-muted">
-              amoCRM. Сделка создана
+            <span className="rounded-md bg-foreground px-2 py-1 text-[9.5px] font-bold uppercase tracking-[0.12em] text-background">
+              Горячий
             </span>
           </div>
-          <span className="text-[10px] text-foreground/30">12с назад</span>
+
+          <div className="mb-5 space-y-3">
+            <SceneRow k="Услуга" v="Ремонт под ключ" />
+            <SceneRow k="Объект" v="42 м², Невский р-н" />
+            <SceneRow k="Бюджет" v="до 800 000 ₽" />
+            <div className="flex justify-between text-[12px]">
+              <span className="text-ink-subtle">Статус</span>
+              <span className="flex items-center gap-1.5 font-semibold text-foreground">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                Квалифицирован AI
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-border pt-4">
+            <div className="flex items-center gap-2">
+              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-accent/15 text-[10px] font-bold text-accent">
+                C
+              </div>
+              <span className="text-[11.5px] font-medium text-ink-muted">
+                amoCRM · сделка создана
+              </span>
+            </div>
+            <span className="font-mono text-[10px] tabular text-ink-subtle">00:12</span>
+          </div>
         </div>
       </div>
 
       {/* Chat Context Underlay */}
-      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-foreground/5 bg-surface-muted/80 p-6 opacity-90 backdrop-blur-md">
-        <div className="mb-4 flex gap-3">
-          <div className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-foreground text-[10px] font-semibold text-background">
+      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-border bg-surface-muted/85 p-5 opacity-95 backdrop-blur-md shadow-sm">
+        <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            Telegram · вход
+          </span>
+          <span className="font-mono">14:02</span>
+        </div>
+        <div className="mb-3 flex gap-3">
+          <div className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-foreground text-[9.5px] font-bold text-background">
             AI
           </div>
           <div className="flex-1">
-            <div className="rounded-xl rounded-tl-none bg-background p-3 text-[12px] leading-snug text-foreground shadow-sm">
+            <div className="rounded-xl rounded-tl-none bg-background p-3 text-[12px] leading-snug text-foreground shadow-xs">
               Здравствуйте! Делаете ремонт под ключ?
             </div>
           </div>
         </div>
-        <div className="flex justify-end gap-3">
+        <div className="flex justify-end">
           <div className="max-w-[82%]">
-            <div className="rounded-xl rounded-tr-none bg-foreground p-3 text-[12px] leading-snug text-background shadow-sm">
-              Да. Подскажите метраж и район, соберу для вас точную смету.
+            <div className="rounded-xl rounded-tr-none bg-foreground p-3 text-[12px] leading-snug text-background shadow-xs">
+              Да. Подскажите метраж и район, соберу точную смету.
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom graphite live counter */}
-      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-4 rounded-xl bg-foreground p-4 text-background shadow-lift md:-left-20">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-foreground bg-emerald-500 text-[10px] font-bold text-foreground">
+      {/* Bottom live counter — refined */}
+      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-lift md:-left-20">
+        <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-[12px] font-bold tabular text-accent-ink">
           23
+          <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-background ring-2 ring-foreground">
+            <span className="absolute inset-0 animate-ping rounded-full bg-accent opacity-60" />
+          </span>
         </div>
         <div className="leading-tight">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-background/50">
+          <div className="text-[9.5px] font-semibold uppercase tracking-[0.14em] text-background/55">
             Сегодня
           </div>
-          <div className="text-[12px] font-semibold">Лида обработано</div>
+          <div className="text-[12.5px] font-semibold">Лидов обработано</div>
         </div>
       </div>
     </div>
@@ -278,8 +322,8 @@ function HeroScene() {
 function SceneRow({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex justify-between text-[12px]">
-      <span className="text-foreground/40">{k}</span>
-      <span className="font-semibold text-foreground">{v}</span>
+      <span className="text-ink-subtle">{k}</span>
+      <span className="font-medium text-foreground">{v}</span>
     </div>
   );
 }
