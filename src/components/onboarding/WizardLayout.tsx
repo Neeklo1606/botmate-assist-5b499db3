@@ -10,7 +10,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { toast } from "sonner";
-import { BotmeLogo } from "@/components/brand/botme-logo";
+import { NeekloLogo } from "@/components/brand/neeklo-logo";
 import { WizardProgress } from "./WizardProgress";
 import { WizardFooter } from "./WizardFooter";
 import { WizardStep } from "./WizardStep";
