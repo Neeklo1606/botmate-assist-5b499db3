@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
 import { LocaleProvider } from "@/lib/i18n/locale";
+import { ThemeProvider } from "@/lib/theme";
 import { repository } from "@/lib/mock/repository";
 import { qk } from "@/lib/query-keys";
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_SRC } from "@/lib/analytics";
@@ -97,11 +98,13 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <LocaleProvider>
-        <AuthSync />
-        <Outlet />
-        <Toaster richColors position="top-center" />
-      </LocaleProvider>
+      <ThemeProvider>
+        <LocaleProvider>
+          <AuthSync />
+          <Outlet />
+          <Toaster richColors position="top-center" />
+        </LocaleProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
@@ -120,9 +123,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       { property: "og:type", content: "website" },
     ],
     links: [
-      // Preconnect к Google Fonts — экономит ~100–300ms на TTF.
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap",
+      },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico" },
     ],
