@@ -20,7 +20,7 @@ export function FeaturesSection() {
   const { t } = useLocale();
 
   return (
-    <Section tone="muted" size="md">
+    <Section tone="tint" size="md">
       <Container>
         <SectionHeading
           eyebrow={t("features.eyebrow")}
