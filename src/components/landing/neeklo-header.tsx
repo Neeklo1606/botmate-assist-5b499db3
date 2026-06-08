@@ -216,7 +216,7 @@ export function NeekloHeader() {
 
 
           {/* RIGHT — actions cluster */}
-          <div className="hidden items-center justify-end gap-1 md:flex">
+          <div className="hidden items-center justify-end gap-1 lg:flex">
             <ThemeToggle />
             <span
               aria-hidden
