@@ -359,21 +359,6 @@
     }
   }
 
-  .desktop-header-only {
-    display: none;
-  }
-  .mobile-header-only {
-    display: flex;
-  }
-  @media (min-width: 1280px) {
-    .desktop-header-only {
-      display: flex;
-    }
-    .mobile-header-only {
-      display: none;
-    }
-  }
-
   /* Тонкая hairline-сетка для премиальных фонов hero / секций */
   .bg-dot-grid {
     background-image: radial-gradient(
