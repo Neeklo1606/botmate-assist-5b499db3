@@ -470,14 +470,24 @@ function ProductScene() {
 }
 
 function SceneWidget({ tab }: { tab: "chat" | "lead" | "handoff" }) {
+  const tabLabel = tab === "chat" ? "диалог" : tab === "lead" ? "карточка лида" : "передача в CRM";
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
-      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <div className="flex items-center gap-2 text-[12px] font-medium text-foreground">
-          <Bot className="h-3.5 w-3.5" strokeWidth={2} />
-          AI-менеджер заявок
+      <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-4 py-2.5">
+        <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-border-strong/60" />
+            <span className="h-2 w-2 rounded-full bg-border-strong/60" />
+            <span className="h-2 w-2 rounded-full bg-border-strong/60" />
+          </div>
+          <span className="ml-1 inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-foreground">
+            <Bot className="h-3.5 w-3.5 text-accent" strokeWidth={2} />
+            AI-менеджер заявок
+          </span>
         </div>
-        <span className="text-[11px] text-ink-subtle">кабинет Neeklo</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
+          neeklo · {tabLabel}
+        </span>
       </div>
       {tab === "chat" && (
         <div className="space-y-3 p-5">
