@@ -73,6 +73,15 @@ export function NeekloHeader() {
   const [scrolled, setScrolled] = useState(false);
   const { data: user } = useCurrentUser();
   const isAuthed = !!user;
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const activeSection = useActiveSection(
+    nav.filter((n) => n.hash).map((n) => n.hash as string),
+  );
+
+  const isItemActive = (item: NavItem) => {
+    if (item.hash) return pathname === "/" && activeSection === item.hash;
+    return pathname === item.to || pathname.startsWith(item.to + "/");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
