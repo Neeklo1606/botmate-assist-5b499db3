@@ -13,7 +13,7 @@ interface BotmeLogoProps {
 export function BotmeLogo({ className }: BotmeLogoProps) {
   return (
     <span className={cn("inline-flex items-center select-none", className)} aria-label="avreya.ru">
-      <img src={logo.url} alt="avreya.ru" className="h-7 w-auto" loading="eager" decoding="async" />
+      <img src={logo.url} alt="avreya.ru" className="h-11 w-auto md:h-12" loading="eager" decoding="async" />
     </span>
   );
 }
