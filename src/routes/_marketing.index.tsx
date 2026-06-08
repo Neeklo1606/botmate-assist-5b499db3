@@ -364,26 +364,32 @@ function Bubble({ side, children }: { side: "left" | "right"; children: React.Re
 /* ─────────────────── Trust bar ─────────────────── */
 
 function TrustBar() {
+  const items = [
+    { icon: Server, t: "Своя инфраструктура", s: "серверы Neeklo" },
+    { icon: Shield, t: "Данные в РФ", s: "ДЦ в России" },
+    { icon: CreditCard, t: "Оплата в рублях", s: "ЮKassa, акты" },
+    { icon: MessageSquare, t: "Поддержка", s: "Telegram, 24/7" },
+  ];
   return (
-    <section className="border-y border-border bg-surface-muted/40">
+    <section className="border-b border-border bg-surface-sunken/55">
       <Container>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-6 text-[12px] uppercase tracking-wide text-ink-subtle">
-          <span className="inline-flex items-center gap-1.5">
-            <Server className="h-3.5 w-3.5" strokeWidth={1.75} />
-            Своя инфраструктура
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span className="inline-flex items-center gap-1.5">
-            <Shield className="h-3.5 w-3.5" strokeWidth={1.75} />
-            Данные в РФ
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span className="inline-flex items-center gap-1.5">
-            <CreditCard className="h-3.5 w-3.5" strokeWidth={1.75} />
-            Оплата в рублях
-          </span>
-          <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />
-          <span>Поддержка в Telegram</span>
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border my-6 md:my-8 md:grid-cols-4">
+          {items.map((it) => (
+            <div
+              key={it.t}
+              className="flex items-center gap-3 bg-background px-4 py-3.5"
+            >
+              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-border bg-surface-muted text-foreground">
+                <it.icon className="h-4 w-4" strokeWidth={1.6} />
+              </span>
+              <div className="leading-tight">
+                <div className="text-[12.5px] font-semibold text-foreground">{it.t}</div>
+                <div className="text-[10.5px] font-medium uppercase tracking-[0.1em] text-ink-subtle">
+                  {it.s}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </Container>
     </section>
