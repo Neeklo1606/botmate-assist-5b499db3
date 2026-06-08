@@ -372,6 +372,47 @@
       0 1px 0 0 color-mix(in oklab, var(--color-border) 60%, transparent),
       0 6px 24px -16px oklch(0 0 0 / 0.25);
   }
+
+  /* Marquee — медленная атмосферная лента. Поддерживает pause-on-hover. */
+  @keyframes marquee-x {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  .animate-marquee {
+    animation: marquee-x var(--marquee-duration, 80s) linear infinite;
+    will-change: transform;
+  }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+            mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+  .pause-on-hover:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+
+  /* Тонкий «лифт» при ховере для карточек — премиально, без скачка */
+  .lift-on-hover {
+    transition:
+      transform 320ms var(--ease-out-quart),
+      box-shadow 320ms var(--ease-out-quart),
+      border-color 320ms var(--ease-out-quart);
+  }
+  .lift-on-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

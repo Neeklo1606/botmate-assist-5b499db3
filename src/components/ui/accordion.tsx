@@ -22,7 +22,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between rounded-md py-4 text-left text-sm font-medium transition-all hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background [&[data-state=open]>svg]:rotate-180",
+        "group flex flex-1 items-center justify-between gap-4 rounded-md py-5 text-left font-display text-[15px] font-semibold tracking-tight text-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}
       {...props}
@@ -30,7 +30,7 @@ const AccordionTrigger = React.forwardRef<
       {children}
       <ChevronDown
         aria-hidden
-        className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+        className="h-4 w-4 shrink-0 text-ink-subtle transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent"
       />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
