@@ -54,18 +54,18 @@ export function NeekloHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 transition-[background-color,border-color,box-shadow] duration-300",
+        "sticky top-0 z-40 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
         scrolled
-          ? "border-b border-border bg-background/80 backdrop-blur-xl header-scrolled"
-          : "border-b border-transparent bg-background/60 backdrop-blur-md",
+          ? "border-b border-border/80 bg-background/85 backdrop-blur-xl header-scrolled"
+          : "border-b border-transparent bg-background/50 backdrop-blur-md",
       )}
     >
       <Container>
-        <div className="flex h-[60px] items-center justify-between gap-6 md:h-[68px]">
+        <div className="flex h-14 items-center justify-between gap-6 md:h-16">
           {/* Logo */}
           <Link
             to="/"
-            className="group flex items-center gap-2.5"
+            className="group flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80"
             aria-label="Neeklo, на главную"
           >
             <NeekloLogo />
@@ -76,20 +76,20 @@ export function NeekloHeader() {
             aria-label="Главное меню"
             className="hidden flex-1 justify-center md:flex"
           >
-            <ul className="flex items-center gap-0.5 rounded-full border border-border/60 bg-surface/60 px-1 py-1 backdrop-blur-sm">
+            <ul className="flex items-center gap-0.5 rounded-full border border-border/70 bg-background/70 px-1 py-1 shadow-xs backdrop-blur-md">
               {nav.map((item) => (
                 <li key={item.label}>
                   <Link
                     to={item.to}
                     hash={item.hash}
-                    className="inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[13px] font-medium text-ink-muted transition-colors hover:bg-background hover:text-foreground"
+                    className="inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 text-[13px] font-medium text-ink-muted transition-colors duration-200 hover:text-foreground"
                     activeProps={{
-                      className: "bg-background text-foreground shadow-xs",
+                      className: "bg-surface-muted text-foreground",
                     }}
                   >
                     {item.label}
                     {item.soon && (
-                      <span className="rounded-full bg-foreground/10 px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-[0.08em] text-ink-subtle">
+                      <span className="rounded-full bg-foreground/[0.06] px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-subtle">
                         скоро
                       </span>
                     )}
@@ -100,27 +100,27 @@ export function NeekloHeader() {
           </nav>
 
           {/* Right cluster */}
-          <div className="hidden items-center gap-1.5 md:flex">
+          <div className="hidden items-center gap-2 md:flex">
             <ThemeToggle />
-            <span className="mx-1 h-5 w-px bg-border" aria-hidden />
+            <span className="mx-1.5 h-4 w-px bg-border" aria-hidden />
             {isAuthed ? (
-              <Button asChild variant="brand" size="sm">
+              <Button asChild variant="brand" size="sm" className="rounded-full px-4">
                 <Link to="/app">В кабинет</Link>
               </Button>
             ) : (
               <>
-                <Button asChild variant="ghostInk" size="sm">
+                <Button asChild variant="ghostInk" size="sm" className="rounded-full px-3.5">
                   <Link to="/login">Войти</Link>
                 </Button>
-                <Button asChild variant="brand" size="sm" className="group/cta">
+                <Button asChild variant="brand" size="sm" className="group/cta rounded-full px-4">
                   <Link to="/onboarding/assistant" className="gap-2">
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
                     </span>
                     Подключить
                     <ArrowRight
-                      className="h-3.5 w-3.5 transition-transform group-hover/cta:translate-x-0.5"
+                      className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5"
                       strokeWidth={2}
                     />
                   </Link>
@@ -148,7 +148,7 @@ export function NeekloHeader() {
       {/* Mobile overlay */}
       <div
         className={cn(
-          "fixed inset-x-0 top-[60px] z-30 origin-top border-t border-border bg-background/95 backdrop-blur-xl transition-all duration-300 md:hidden",
+          "fixed inset-x-0 top-14 z-30 origin-top border-t border-border bg-background/95 backdrop-blur-xl transition-all duration-300 md:hidden",
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0",
