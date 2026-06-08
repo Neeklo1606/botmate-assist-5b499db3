@@ -4,6 +4,7 @@
 import { Link } from "@tanstack/react-router";
 import { Container } from "@/components/layout/container";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useLocale } from "@/lib/i18n/locale";
 
 interface SiteFooterProps {
