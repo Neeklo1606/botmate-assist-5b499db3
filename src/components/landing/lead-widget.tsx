@@ -334,7 +334,7 @@ export function LeadWidget() {
           {/* Done state */}
           {step === "done" && (
             <div className="rounded-2xl border border-border bg-surface p-4">
-              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2 py-0.5 text-[11px] font-semibold text-accent">
                 <Check className="h-3 w-3" strokeWidth={3} />
                 Заявка отправлена
               </div>
