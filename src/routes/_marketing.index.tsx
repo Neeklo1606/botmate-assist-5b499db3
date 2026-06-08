@@ -301,7 +301,7 @@ function HeroScene() {
 
           <div className="flex items-center justify-between border-t border-border pt-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-accent/15 text-[10px] font-bold text-accent">
+              <div className="flex h-6 w-6 items-center justify-center rounded-md border border-border bg-surface-muted text-[10px] font-bold text-foreground">
                 C
               </div>
               <span className="text-[11.5px] font-medium text-ink-muted">
