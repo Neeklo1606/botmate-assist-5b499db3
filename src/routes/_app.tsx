@@ -35,6 +35,7 @@ import {
   FolderKanban,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NeekloLogo } from "@/components/brand/neeklo-logo";
 import { useCurrentUser, useLogout } from "@/lib/hooks/use-auth";
 import {
   useNotifications,
