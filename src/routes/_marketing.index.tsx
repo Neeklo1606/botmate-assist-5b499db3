@@ -339,7 +339,8 @@ function HeroScene() {
       </div>
 
       {/* Bottom live counter — refined */}
-      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-lift md:-left-20">
+      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-[var(--shadow-lg)] ring-1 ring-foreground/10 md:-left-20">
+
         <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-[12px] font-bold tabular text-accent-ink">
           23
           <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-background ring-2 ring-foreground">
