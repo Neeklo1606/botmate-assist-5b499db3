@@ -9,13 +9,20 @@ import { cn } from "@/lib/utils";
 import { fadeUp, inViewProps } from "@/lib/motion";
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
-  tone?: "default" | "muted" | "ink";
+  tone?: "default" | "subtle" | "muted" | "tint" | "sunken" | "ink";
   size?: "sm" | "md" | "lg";
+  /** Включить тонкий верхний/нижний hairline для усиления слоистости. */
+  bordered?: boolean;
 }
 
+// Тона выстроены по светлоте: default → subtle → tint → muted → sunken → ink.
+// Это даёт ритм при чередовании, без ярких контрастов.
 const toneClass = {
   default: "bg-background text-foreground",
+  subtle: "bg-surface text-foreground",
   muted: "bg-surface-muted text-foreground",
+  tint: "bg-surface-tint text-foreground",
+  sunken: "bg-surface-sunken text-foreground",
   ink: "bg-foreground text-background",
 } as const;
 
@@ -25,15 +32,31 @@ const sizeClass = {
   lg: "py-20 md:py-32",
 } as const;
 
+// Лёгкая верхняя «кромка» — даёт слоистость соседним светлым секциям.
+const rimClass: Record<SectionProps["tone"] & string, string> = {
+  default: "",
+  subtle: "shadow-[inset_0_1px_0_0_color-mix(in_oklab,var(--color-border)_55%,transparent)]",
+  muted: "shadow-[inset_0_1px_0_0_color-mix(in_oklab,var(--color-border)_70%,transparent)]",
+  tint: "shadow-[inset_0_1px_0_0_color-mix(in_oklab,var(--color-border)_60%,transparent)]",
+  sunken: "shadow-[inset_0_1px_0_0_color-mix(in_oklab,var(--color-border-strong)_55%,transparent),inset_0_-1px_0_0_color-mix(in_oklab,var(--color-border)_45%,transparent)]",
+  ink: "",
+};
+
 export function Section({
   className,
   tone = "default",
   size = "md",
+  bordered = true,
   ...props
 }: SectionProps) {
   return (
     <section
-      className={cn(toneClass[tone], sizeClass[size], className)}
+      className={cn(
+        toneClass[tone],
+        sizeClass[size],
+        bordered && rimClass[tone],
+        className,
+      )}
       {...props}
     />
   );
