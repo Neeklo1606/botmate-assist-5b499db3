@@ -206,7 +206,9 @@
   --background: oklch(0.165 0.006 110);
   --foreground: oklch(0.955 0.01 92);
   --surface: oklch(0.21 0.006 110);
-  --surface-muted: oklch(0.25 0.006 110);
+  --surface-muted: oklch(0.235 0.006 110);
+  --surface-tint:  oklch(0.225 0.012 118);
+  --surface-sunken: oklch(0.14 0.006 110);
   --card: oklch(0.21 0.006 110);
   --card-foreground: oklch(0.955 0.01 92);
   --popover: oklch(0.21 0.006 110);
