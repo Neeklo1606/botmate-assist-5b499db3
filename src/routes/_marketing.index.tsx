@@ -1276,38 +1276,81 @@ function Faq() {
           title="Коротко о главном"
           desc="Не нашли ответа? Напишите в Telegram, отвечаем по-русски и без скриптов."
         />
-        <div className="mx-auto mt-10 max-w-[760px] divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
-          {faq.map((item, i) => (
-            <FaqRow key={i} q={item.q} a={item.a} />
-          ))}
+        <div className="mx-auto mt-12 max-w-[780px] overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+          <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-5 py-3">
+            <div className="inline-flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+                {String(faq.length).padStart(2, "0")} вопросов · ответы команды
+              </span>
+            </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
+              support · neeklo
+            </span>
+          </div>
+          <div className="divide-y divide-border">
+            {faq.map((item, i) => (
+              <FaqRow key={i} q={item.q} a={item.a} n={i + 1} />
+            ))}
+          </div>
         </div>
       </Container>
     </section>
   );
 }
 
-function FaqRow({ q, a }: { q: string; a: string }) {
+function FaqRow({ q, a, n }: { q: string; a: string; n: number }) {
   const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div className={open ? "bg-background/60" : ""}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+        className="group flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-background/40"
         aria-expanded={open}
       >
-        <span className="text-[15px] font-medium text-foreground">{q}</span>
-        <ChevronDown
+        <span
           className={
-            "h-4 w-4 flex-none text-ink-muted transition-transform " +
-            (open ? "rotate-180" : "")
+            "font-mono text-[11px] tabular w-7 flex-none " +
+            (open ? "text-accent" : "text-ink-subtle")
           }
-          strokeWidth={1.75}
-        />
+        >
+          {String(n).padStart(2, "0")}
+        </span>
+        <span
+          className={
+            "flex-1 text-[15px] font-medium leading-snug transition-colors " +
+            (open ? "text-foreground" : "text-foreground/90 group-hover:text-foreground")
+          }
+        >
+          {q}
+        </span>
+        <span
+          className={
+            "inline-flex h-7 w-7 flex-none items-center justify-center rounded-full border transition-all duration-300 ease-quart " +
+            (open
+              ? "border-accent bg-accent text-accent-ink"
+              : "border-border bg-background text-ink-muted group-hover:border-foreground/30")
+          }
+        >
+          <ChevronDown
+            className={"h-3.5 w-3.5 transition-transform duration-300 " + (open ? "rotate-180" : "")}
+            strokeWidth={2}
+          />
+        </span>
       </button>
-      {open && (
-        <div className="px-5 pb-5 text-[14px] leading-relaxed text-ink-muted">{a}</div>
-      )}
+      <div
+        className={
+          "grid overflow-hidden transition-[grid-template-rows] duration-300 ease-quart " +
+          (open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")
+        }
+      >
+        <div className="overflow-hidden">
+          <div className="pb-5 pl-[60px] pr-5 text-[14px] leading-relaxed text-ink-muted">
+            {a}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
