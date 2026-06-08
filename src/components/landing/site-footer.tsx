@@ -3,7 +3,7 @@
  */
 import { Link } from "@tanstack/react-router";
 import { Container } from "@/components/layout/container";
-import { BotmeLogo } from "@/components/brand/botme-logo";
+import { NeekloLogo } from "@/components/brand/neeklo-logo";
 import { useLocale } from "@/lib/i18n/locale";
 
 interface SiteFooterProps {
@@ -45,12 +45,12 @@ export function SiteFooter({ variant = "light" }: SiteFooterProps = {}) {
       <Container>
         <div className="grid gap-10 py-12 md:grid-cols-12 md:py-16">
           <div className="md:col-span-4">
-            <BotmeLogo variant={isDark ? "dark" : "light"} />
+            <NeekloLogo />
             <p
               className="mt-3 max-w-[280px] text-sm"
               style={{ color: isDark ? "var(--ink-dark-muted)" : undefined }}
             >
-              {t("footer.tagline")}
+              Сервис для запуска медиа-помощника и сайта. Оплата в рублях.
             </p>
             <div className="mt-6 space-y-1.5 text-sm">
               <div style={{ color: isDark ? "var(--ink-dark-muted)" : undefined }}>
@@ -89,7 +89,7 @@ export function SiteFooter({ variant = "light" }: SiteFooterProps = {}) {
           }}
         >
           <div>
-            © {new Date().getFullYear()} botme · {t("footer.copyright")}
+            © {new Date().getFullYear()} Neeklo · {t("footer.copyright")}
           </div>
           <div>{t("footer.legalEntity")}</div>
         </div>
