@@ -262,9 +262,9 @@ export function NeekloHeader() {
             )}
           </div>
 
-          {/* MOBILE — right column compresses to: theme + burger */}
+          {/* MOBILE — right column compresses to: burger */}
           <div className="mobile-header-only col-start-3 items-center justify-end gap-1">
-            <ThemeToggle />
+
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
