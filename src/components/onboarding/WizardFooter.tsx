@@ -38,7 +38,7 @@ export function WizardFooter({
           <button
             type="button"
             onClick={onBack}
-            className="inline-flex h-11 items-center gap-1.5 rounded-[10px] border border-border-dark-strong bg-transparent px-5 text-[14px] text-ink-dark transition-colors hover:bg-bg-soft"
+            className="inline-flex h-11 items-center gap-1.5 rounded-full border border-border-dark-strong bg-transparent px-5 text-[13px] font-medium text-ink-dark transition-colors hover:bg-bg-soft"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Назад
@@ -47,7 +47,7 @@ export function WizardFooter({
           <span />
         )}
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         {isOptionalStep && onSkip && (
           <button
             type="button"
@@ -62,12 +62,12 @@ export function WizardFooter({
           onClick={onNext}
           disabled={isLoading}
           className={cn(
-            "inline-flex items-center gap-2 rounded-[10px] bg-accent font-medium text-bg-base outline-none transition-all duration-200",
-            "hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-accent",
-            "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100",
+            "inline-flex items-center gap-2 rounded-full bg-accent font-medium text-accent-ink outline-none transition-all duration-200",
+            "hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
+            "disabled:cursor-not-allowed disabled:opacity-50",
             isAuthStep && isFinish
-              ? "h-14 px-7 text-[16px] shadow-[0_0_32px_-8px_var(--accent)]"
-              : "h-11 px-6 text-[14px]",
+              ? "h-14 px-8 text-[15px] shadow-[0_18px_40px_-18px_var(--accent)]"
+              : "h-11 px-6 text-[13px]",
           )}
         >
           {isLoading ? (
