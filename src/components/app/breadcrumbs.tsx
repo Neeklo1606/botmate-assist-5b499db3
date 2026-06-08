@@ -37,7 +37,7 @@ export function Breadcrumbs() {
     >
       <Link
         to="/app"
-        className="inline-flex items-center gap-1 transition-colors hover:text-white"
+        className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
       >
         <Home className="h-3 w-3" strokeWidth={1.75} />
         <span>Приложение</span>

@@ -144,12 +144,12 @@ function Sidebar() {
                     "relative flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                   )}
                   style={{
-                    color: isActive ? "#ffffff" : "var(--color-ink-muted)",
+                    color: isActive ? "var(--color-foreground)" : "var(--color-ink-muted)",
                     background: isActive ? "color-mix(in oklab, var(--color-accent) 10%, transparent)" : "transparent",
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
-                      (e.currentTarget as HTMLElement).style.color = "#ffffff";
+                      (e.currentTarget as HTMLElement).style.color = "var(--color-foreground)";
                       (e.currentTarget as HTMLElement).style.background =
                         "var(--color-surface-muted)";
                     }
@@ -201,7 +201,7 @@ function SidebarSettingsLink({ active }: { active: boolean }) {
       to="/settings"
       className="relative flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors"
       style={{
-        color: active ? "#ffffff" : "var(--color-ink-muted)",
+        color: active ? "var(--color-foreground)" : "var(--color-ink-muted)",
         background: active ? "color-mix(in oklab, var(--color-accent) 10%, transparent)" : "transparent",
       }}
     >

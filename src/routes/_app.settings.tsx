@@ -30,17 +30,17 @@ export const Route = createFileRoute("/_app/settings")({
 
 function SettingsPage() {
   return (
-    <div className="min-h-full bg-[#141414] text-white">
-      <div className="px-6 py-5 border-b border-[#2a2a2a]">
+    <div className="min-h-full bg-bg-elevated text-foreground">
+      <div className="px-6 py-5 border-b border-border">
         <h1 className="text-2xl font-semibold">Настройки</h1>
       </div>
 
       <Tabs defaultValue="profile" className="px-6 py-6">
-        <TabsList className="bg-[#1a1a1a] border border-[#2a2a2a] mb-6">
-          <TabsTrigger value="profile"  className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Профиль</TabsTrigger>
-          <TabsTrigger value="billing"  className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Тариф</TabsTrigger>
-          <TabsTrigger value="team"     className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Команда</TabsTrigger>
-          <TabsTrigger value="widget"   className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Виджет</TabsTrigger>
+        <TabsList className="bg-bg-elevated border border-border mb-6">
+          <TabsTrigger value="profile"  className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Профиль</TabsTrigger>
+          <TabsTrigger value="billing"  className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Тариф</TabsTrigger>
+          <TabsTrigger value="team"     className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Команда</TabsTrigger>
+          <TabsTrigger value="widget"   className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Виджет</TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile"><ProfileTab /></TabsContent>
@@ -76,23 +76,23 @@ function ProfileTab() {
       <div className="flex items-center gap-5 mb-6">
         <button
           onClick={() => fileRef.current?.click()}
-          className="relative h-20 w-20 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] overflow-hidden flex items-center justify-center text-white/40 hover:text-white"
+          className="relative h-20 w-20 rounded-full bg-bg-elevated border border-border overflow-hidden flex items-center justify-center text-foreground/40 hover:text-foreground"
         >
           {avatar ? (
             <img src={avatar} alt="avatar" className="h-full w-full object-cover" />
           ) : (
-            <span className="text-2xl font-semibold text-black bg-[#a8ff57] h-full w-full flex items-center justify-center">
+            <span className="text-2xl font-semibold text-background bg-accent h-full w-full flex items-center justify-center">
               {name.slice(0, 1)}
             </span>
           )}
-          <span className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
-            <Camera className="h-5 w-5 text-white" />
+          <span className="absolute inset-0 bg-foreground/40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
+            <Camera className="h-5 w-5 text-foreground" />
           </span>
         </button>
         <input ref={fileRef} type="file" accept="image/*" hidden onChange={(e) => onPickAvatar(e.target.files?.[0] ?? null)} />
         <div>
           <div className="text-base font-medium">Фото профиля</div>
-          <div className="text-xs text-white/50">JPG или PNG, до 5 MB</div>
+          <div className="text-xs text-foreground/50">JPG или PNG, до 5 MB</div>
         </div>
       </div>
 
@@ -131,7 +131,7 @@ function ProfileTab() {
       </div>
 
       <div className="flex justify-end">
-        <Button onClick={() => toast.success("Профиль сохранён")} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+        <Button onClick={() => toast.success("Профиль сохранён")} className="bg-accent text-background hover:bg-accent-hover">
           Сохранить
         </Button>
       </div>
@@ -162,13 +162,13 @@ function BillingTab() {
       <Card>
         <div className="flex items-center justify-between mb-5">
           <div>
-            <div className="text-xs uppercase tracking-wider text-white/40">Текущий тариф</div>
+            <div className="text-xs uppercase tracking-wider text-foreground/40">Текущий тариф</div>
             <div className="text-2xl font-semibold mt-1">
-              Business · <span className="text-[#a8ff57]">2 490 ₽</span>
-              <span className="text-base text-white/50">/мес</span>
+              Business · <span className="text-accent">2 490 ₽</span>
+              <span className="text-base text-foreground/50">/мес</span>
             </div>
           </div>
-          <Button onClick={() => toast.success("Откроется страница оплаты (mock)")} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+          <Button onClick={() => toast.success("Откроется страница оплаты (mock)")} className="bg-accent text-background hover:bg-accent-hover">
             Повысить тариф
           </Button>
         </div>
@@ -178,14 +178,14 @@ function BillingTab() {
             const pct = Math.min(100, (u.value / u.max) * 100);
             const danger = pct > 80;
             return (
-              <div key={u.label} className="rounded-md border border-[#2a2a2a] bg-[#141414] p-4">
+              <div key={u.label} className="rounded-md border border-border bg-bg-elevated p-4">
                 <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-white/70">{u.label}</span>
-                  <span className="text-white">{u.value}{u.unit} / {u.max}{u.unit}</span>
+                  <span className="text-foreground/70">{u.label}</span>
+                  <span className="text-foreground">{u.value}{u.unit} / {u.max}{u.unit}</span>
                 </div>
-                <div className="h-2 rounded bg-[#2a2a2a] overflow-hidden">
+                <div className="h-2 rounded bg-bg-soft overflow-hidden">
                   <div
-                    className={cn("h-full transition-all", danger ? "bg-[#facc15]" : "bg-[#a8ff57]")}
+                    className={cn("h-full transition-all", danger ? "bg-warning" : "bg-accent")}
                     style={{ width: `${pct}%` }}
                   />
                 </div>
@@ -200,7 +200,7 @@ function BillingTab() {
         <SectionTitle>Сравнение тарифов</SectionTitle>
         <div className="overflow-x-auto -mx-2">
           <table className="w-full text-sm">
-            <thead className="text-white/50">
+            <thead className="text-foreground/50">
               <tr>
                 <th className="text-left p-3 font-medium">Тариф</th>
                 <th className="text-left p-3 font-medium">Диалоги</th>
@@ -217,30 +217,30 @@ function BillingTab() {
                 const isCurrent = p.id === current;
                 return (
                   <tr key={p.id} className={cn(
-                    "border-t border-[#2a2a2a]",
-                    isCurrent && "bg-[#a8ff57]/5"
+                    "border-t border-border",
+                    isCurrent && "bg-accent/5"
                   )}>
                     <td className="p-3 font-medium">
                       {p.name}
                       {isCurrent && (
-                        <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-[#a8ff57]/20 text-[#a8ff57] border border-[#a8ff57]/30">
+                        <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-accent/20 text-accent border border-accent/30">
                           текущий
                         </span>
                       )}
                     </td>
-                    <td className="p-3 text-white/80">{p.dialogs}</td>
-                    <td className="p-3 text-white/80">{p.video || "—"}</td>
-                    <td className="p-3">{p.tracking ? <Check className="h-4 w-4 text-[#a8ff57]" /> : <X className="h-4 w-4 text-white/30" />}</td>
-                    <td className="p-3">{p.crm ? <Check className="h-4 w-4 text-[#a8ff57]" /> : <X className="h-4 w-4 text-white/30" />}</td>
-                    <td className="p-3">{p.api ? <Check className="h-4 w-4 text-[#a8ff57]" /> : <X className="h-4 w-4 text-white/30" />}</td>
-                    <td className="p-3 text-white">{p.price} ₽</td>
+                    <td className="p-3 text-foreground/80">{p.dialogs}</td>
+                    <td className="p-3 text-foreground/80">{p.video || "—"}</td>
+                    <td className="p-3">{p.tracking ? <Check className="h-4 w-4 text-accent" /> : <X className="h-4 w-4 text-foreground/30" />}</td>
+                    <td className="p-3">{p.crm ? <Check className="h-4 w-4 text-accent" /> : <X className="h-4 w-4 text-foreground/30" />}</td>
+                    <td className="p-3">{p.api ? <Check className="h-4 w-4 text-accent" /> : <X className="h-4 w-4 text-foreground/30" />}</td>
+                    <td className="p-3 text-foreground">{p.price} ₽</td>
                     <td className="p-3 text-right">
                       {!isCurrent && (
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => toast.success(`Переход на ${p.name} (mock)`)}
-                          className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]"
+                          className="border-border bg-transparent text-foreground hover:bg-bg-soft"
                         >
                           Выбрать
                         </Button>
@@ -296,20 +296,20 @@ function TeamTab() {
     <Card>
       <div className="flex items-center justify-between mb-5">
         <SectionTitle className="mb-0">Участники</SectionTitle>
-        <Button onClick={() => setOpen(true)} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+        <Button onClick={() => setOpen(true)} className="bg-accent text-background hover:bg-accent-hover">
           <Plus className="h-4 w-4 mr-1.5" /> Пригласить участника
         </Button>
       </div>
 
       <div className="space-y-2">
         {members.map((m) => (
-          <div key={m.id} className="flex items-center gap-3 rounded-md border border-[#2a2a2a] bg-[#141414] p-3">
-            <div className="h-10 w-10 rounded-full bg-[#a8ff57] text-black font-semibold flex items-center justify-center">
+          <div key={m.id} className="flex items-center gap-3 rounded-md border border-border bg-bg-elevated p-3">
+            <div className="h-10 w-10 rounded-full bg-accent text-background font-semibold flex items-center justify-center">
               {m.avatar}
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium truncate">{m.name}</div>
-              <div className="text-xs text-white/50 truncate">{m.email}</div>
+              <div className="text-xs text-foreground/50 truncate">{m.email}</div>
             </div>
             <span
               className="text-xs px-2 py-0.5 rounded-full border"
@@ -320,7 +320,7 @@ function TeamTab() {
             {m.role !== "owner" && (
               <button
                 onClick={() => { setMembers((arr) => arr.filter((x) => x.id !== m.id)); toast("Участник удалён"); }}
-                className="p-2 rounded hover:bg-red-500/10 text-white/60 hover:text-red-400"
+                className="p-2 rounded hover:bg-destructive/10 text-foreground/60 hover:text-destructive"
               >
                 <Trash2 className="h-4 w-4" />
               </button>
@@ -330,7 +330,7 @@ function TeamTab() {
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="bg-[#0f0f0f] border-[#2a2a2a] text-white">
+        <DialogContent className="bg-bg-base border-border text-foreground">
           <DialogHeader><DialogTitle>Пригласить участника</DialogTitle></DialogHeader>
           <div className="space-y-3 py-2">
             <Field label="Email">
@@ -353,8 +353,8 @@ function TeamTab() {
             </Field>
           </div>
           <div className="flex justify-end gap-2">
-            <Button variant="ghost" onClick={() => setOpen(false)} className="text-white/70 hover:bg-[#2a2a2a]">Отмена</Button>
-            <Button onClick={sendInvite} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">Отправить</Button>
+            <Button variant="ghost" onClick={() => setOpen(false)} className="text-foreground/70 hover:bg-bg-soft">Отмена</Button>
+            <Button onClick={sendInvite} className="bg-accent text-background hover:bg-accent-hover">Отправить</Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -398,7 +398,7 @@ function WidgetTab() {
               type="color"
               value={color}
               onChange={(e) => setColor(e.target.value)}
-              className="h-10 w-14 rounded border border-[#2a2a2a] bg-transparent cursor-pointer"
+              className="h-10 w-14 rounded border border-border bg-transparent cursor-pointer"
             />
             <DarkInput value={color} onChange={(e) => setColor(e.target.value)} className="flex-1" />
           </div>
@@ -413,8 +413,8 @@ function WidgetTab() {
                 className={cn(
                   "rounded-md border px-3 py-2 text-xs",
                   position === p.id
-                    ? "border-[#a8ff57] bg-[#a8ff57]/10 text-white"
-                    : "border-[#2a2a2a] bg-[#1a1a1a] text-white/70 hover:border-[#3a3a3a]"
+                    ? "border-accent bg-accent/10 text-foreground"
+                    : "border-border bg-bg-elevated text-foreground/70 hover:border-border-strong"
                 )}
               >
                 {p.label}
@@ -429,7 +429,7 @@ function WidgetTab() {
             value={greeting}
             onChange={(e) => setGreeting(e.target.value)}
             rows={2}
-            className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 resize-none"
+            className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 resize-none"
           />
         </Field>
 
@@ -437,11 +437,11 @@ function WidgetTab() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => fileRef.current?.click()}
-              className="h-12 w-12 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] overflow-hidden flex items-center justify-center"
+              className="h-12 w-12 rounded-full bg-bg-elevated border border-border overflow-hidden flex items-center justify-center"
             >
               {avatar
                 ? <img src={avatar} alt="" className="h-full w-full object-cover" />
-                : <Camera className="h-4 w-4 text-white/40" />}
+                : <Camera className="h-4 w-4 text-foreground/40" />}
             </button>
             <input
               ref={fileRef}
@@ -459,7 +459,7 @@ function WidgetTab() {
             <Button
               variant="outline"
               onClick={() => fileRef.current?.click()}
-              className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]"
+              className="border-border bg-transparent text-foreground hover:bg-bg-soft"
             >
               Загрузить
             </Button>
@@ -467,18 +467,18 @@ function WidgetTab() {
         </Field>
 
         <SectionTitle className="mt-6">Код установки</SectionTitle>
-        <div className="relative rounded-md border border-[#2a2a2a] bg-[#0f0f0f] p-3">
-          <pre className="text-xs text-[#a8ff57] font-mono overflow-x-auto whitespace-pre">{snippet}</pre>
+        <div className="relative rounded-md border border-border bg-bg-base p-3">
+          <pre className="text-xs text-accent font-mono overflow-x-auto whitespace-pre">{snippet}</pre>
           <button
             onClick={() => { navigator.clipboard.writeText(snippet); toast.success("Скопировано"); }}
-            className="absolute top-2 right-2 p-1.5 rounded hover:bg-[#2a2a2a] text-white/60"
+            className="absolute top-2 right-2 p-1.5 rounded hover:bg-bg-soft text-foreground/60"
           >
             <Copy className="h-3.5 w-3.5" />
           </button>
         </div>
 
         <div className="flex justify-end mt-5">
-          <Button onClick={() => toast.success("Виджет сохранён")} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+          <Button onClick={() => toast.success("Виджет сохранён")} className="bg-accent text-background hover:bg-accent-hover">
             Сохранить
           </Button>
         </div>
@@ -487,25 +487,25 @@ function WidgetTab() {
       {/* Live preview */}
       <Card>
         <SectionTitle>Превью</SectionTitle>
-        <div className="relative rounded-lg border border-[#2a2a2a] bg-gradient-to-br from-[#1f1f1f] to-[#141414] h-[460px] overflow-hidden">
+        <div className="relative rounded-lg border border-border bg-gradient-to-br from-surface to-background h-[460px] overflow-hidden">
           {/* Mock browser chrome */}
-          <div className="h-7 border-b border-[#2a2a2a] bg-[#0f0f0f] flex items-center gap-1.5 px-3">
-            <span className="h-2 w-2 rounded-full bg-[#ff5f56]" />
-            <span className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
-            <span className="h-2 w-2 rounded-full bg-[#27c93f]" />
-            <div className="ml-3 flex-1 h-4 rounded bg-[#1a1a1a] text-[10px] text-white/40 px-2 leading-4 truncate">
+          <div className="h-7 border-b border-border bg-bg-base flex items-center gap-1.5 px-3">
+            <span className="h-2 w-2 rounded-full bg-destructive" />
+            <span className="h-2 w-2 rounded-full bg-warning" />
+            <span className="h-2 w-2 rounded-full bg-success" />
+            <div className="ml-3 flex-1 h-4 rounded bg-bg-elevated text-[10px] text-foreground/40 px-2 leading-4 truncate">
               https://example.com
             </div>
           </div>
 
           {/* Mock page content */}
           <div className="p-6 space-y-3">
-            <div className="h-6 w-1/3 rounded bg-[#2a2a2a]" />
-            <div className="h-3 w-3/4 rounded bg-[#1f1f1f]" />
-            <div className="h-3 w-2/3 rounded bg-[#1f1f1f]" />
-            <div className="h-3 w-1/2 rounded bg-[#1f1f1f]" />
+            <div className="h-6 w-1/3 rounded bg-bg-soft" />
+            <div className="h-3 w-3/4 rounded bg-bg-soft" />
+            <div className="h-3 w-2/3 rounded bg-bg-soft" />
+            <div className="h-3 w-1/2 rounded bg-bg-soft" />
             <div className="grid grid-cols-3 gap-3 pt-4">
-              {[1,2,3].map((i) => <div key={i} className="h-20 rounded bg-[#1a1a1a]" />)}
+              {[1,2,3].map((i) => <div key={i} className="h-20 rounded bg-bg-elevated" />)}
             </div>
           </div>
 
@@ -517,11 +517,11 @@ function WidgetTab() {
             >
               {avatar
                 ? <img src={avatar} alt="" className="h-10 w-10 rounded-full object-cover" />
-                : <MessageCircle className="h-6 w-6 text-black" />}
+                : <MessageCircle className="h-6 w-6 text-background" />}
             </button>
           </div>
         </div>
-        <div className="mt-3 text-xs text-white/40">
+        <div className="mt-3 text-xs text-foreground/40">
           Виджет «{title}» появится в позиции {pos.label} с приветствием: «{greeting}»
         </div>
       </Card>
@@ -532,27 +532,27 @@ function WidgetTab() {
 // ===== UI helpers ===========================================================
 
 function Card({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] p-5">{children}</div>;
+  return <div className="rounded-lg border border-border bg-bg-elevated p-5">{children}</div>;
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="mb-4">
-      <div className="text-xs uppercase tracking-wider text-white/40 mb-1.5">{label}</div>
+      <div className="text-xs uppercase tracking-wider text-foreground/40 mb-1.5">{label}</div>
       {children}
     </div>
   );
 }
 
 function SectionTitle({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("text-sm font-medium text-white/80 mb-3", className)}>{children}</div>;
+  return <div className={cn("text-sm font-medium text-foreground/80 mb-3", className)}>{children}</div>;
 }
 
 function DarkInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <Input
       {...props}
-      className={cn("bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-10", props.className)}
+      className={cn("bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-10", props.className)}
     />
   );
 }
@@ -566,10 +566,10 @@ function DarkSelect({
 }) {
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="bg-[#1a1a1a] border-[#2a2a2a] text-white h-10">
+      <SelectTrigger className="bg-bg-elevated border-border text-foreground h-10">
         <SelectValue />
       </SelectTrigger>
-      <SelectContent className="bg-[#1a1a1a] border-[#2a2a2a] text-white">
+      <SelectContent className="bg-bg-elevated border-border text-foreground">
         {options.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
       </SelectContent>
     </Select>

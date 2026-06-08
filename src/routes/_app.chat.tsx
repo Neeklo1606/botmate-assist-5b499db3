@@ -70,9 +70,9 @@ interface Session {
 const AVATAR_COLORS = ["#a8ff57", "#57c7ff", "#ff9f57", "#d57aff", "#ff6b9d", "#5eead4"];
 
 const STATUS_META: Record<SessionStatus, { label: string; dot: string; bar: string }> = {
-  ai:       { label: "AI",        dot: "bg-[#a8ff57]", bar: "bg-[#a8ff57]" },
-  operator: { label: "Оператор",  dot: "bg-[#57c7ff]", bar: "bg-[#57c7ff]" },
-  closed:   { label: "Завершён",  dot: "bg-[#666]",    bar: "bg-[#666]" },
+  ai:       { label: "AI",        dot: "bg-accent", bar: "bg-accent" },
+  operator: { label: "Оператор",  dot: "bg-accent", bar: "bg-accent" },
+  closed:   { label: "Завершён",  dot: "bg-muted",    bar: "bg-muted" },
 };
 
 // TODO: replace with real API
@@ -242,7 +242,7 @@ function ChatPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-0px)] bg-[#141414] text-white overflow-hidden">
+    <div className="flex h-[calc(100vh-0px)] bg-bg-elevated text-foreground overflow-hidden">
       <SessionsPanel
         sessions={filtered}
         counts={counts}
@@ -286,20 +286,20 @@ function SessionsPanel({
   ];
 
   return (
-    <aside className="w-[280px] shrink-0 border-r border-[#2a2a2a] bg-[#0f0f0f] flex flex-col">
-      <div className="p-3 border-b border-[#2a2a2a]">
+    <aside className="w-[280px] shrink-0 border-r border-border bg-bg-base flex flex-col">
+      <div className="p-3 border-b border-border">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
           <Input
             value={search}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Поиск…"
-            className="pl-9 bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+            className="pl-9 bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
           />
         </div>
       </div>
 
-      <div className="px-2 py-2 flex gap-1 border-b border-[#2a2a2a] overflow-x-auto">
+      <div className="px-2 py-2 flex gap-1 border-b border-border overflow-x-auto">
         {tabs.map(([k, label]) => (
           <button
             key={k}
@@ -307,19 +307,19 @@ function SessionsPanel({
             className={cn(
               "shrink-0 text-xs px-2.5 py-1.5 rounded-md inline-flex items-center gap-1.5",
               filter === k
-                ? "bg-[#1a1a1a] text-white"
-                : "text-white/60 hover:bg-[#1a1a1a] hover:text-white"
+                ? "bg-bg-elevated text-foreground"
+                : "text-foreground/60 hover:bg-bg-elevated hover:text-foreground"
             )}
           >
             {label}
-            <span className="text-[10px] text-white/50">({counts[k]})</span>
+            <span className="text-[10px] text-foreground/50">({counts[k]})</span>
           </button>
         ))}
       </div>
 
       <div className="flex-1 overflow-y-auto">
         {sessions.length === 0 && (
-          <div className="p-6 text-center text-sm text-white/40">Нет сессий</div>
+          <div className="p-6 text-center text-sm text-foreground/40">Нет сессий</div>
         )}
         {sessions.map((s) => {
           const color = AVATAR_COLORS[(s.number - 1) % AVATAR_COLORS.length];
@@ -331,18 +331,18 @@ function SessionsPanel({
               key={s.id}
               onClick={() => onSelect(s.id)}
               className={cn(
-                "w-full text-left flex items-start gap-3 px-3 py-3 border-b border-[#1a1a1a] transition-colors",
-                active ? "bg-[#1a1a1a]" : "hover:bg-[#161616]"
+                "w-full text-left flex items-start gap-3 px-3 py-3 border-b border-border transition-colors",
+                active ? "bg-bg-elevated" : "hover:bg-bg-elevated"
               )}
             >
               <div className="relative shrink-0">
                 <div
-                  className="h-10 w-10 rounded-full flex items-center justify-center font-semibold text-black text-sm"
+                  className="h-10 w-10 rounded-full flex items-center justify-center font-semibold text-background text-sm"
                   style={{ background: color }}
                 >
                   {s.number}
                 </div>
-                <span className={cn("absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full ring-2 ring-[#0f0f0f]", meta.dot)} />
+                <span className={cn("absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full ring-2 ring-background", meta.dot)} />
               </div>
 
               <div className="flex-1 min-w-0">
@@ -350,23 +350,23 @@ function SessionsPanel({
                   <span className="text-sm font-medium truncate">
                     {s.visitorName ?? `Посетитель #${s.number}`}
                   </span>
-                  <span className="text-[10px] text-white/40 shrink-0">{s.sessionStartedAt}</span>
+                  <span className="text-[10px] text-foreground/40 shrink-0">{s.sessionStartedAt}</span>
                 </div>
-                <div className="text-xs text-white/50 truncate mt-0.5">
+                <div className="text-xs text-foreground/50 truncate mt-0.5">
                   {last?.text ?? "—"}
                 </div>
                 <div className="flex items-center justify-between gap-2 mt-1.5">
                   <span className={cn(
                     "text-[10px] px-1.5 py-0.5 rounded inline-flex items-center gap-1",
-                    s.status === "ai" && "bg-[#a8ff57]/10 text-[#a8ff57]",
-                    s.status === "operator" && "bg-[#57c7ff]/10 text-[#57c7ff]",
-                    s.status === "closed" && "bg-[#2a2a2a] text-white/50",
+                    s.status === "ai" && "bg-accent/10 text-accent",
+                    s.status === "operator" && "bg-accent/10 text-accent",
+                    s.status === "closed" && "bg-bg-soft text-foreground/50",
                   )}>
                     <span className={cn("h-1.5 w-1.5 rounded-full", meta.dot)} />
                     {meta.label}
                   </span>
                   {s.unread > 0 && (
-                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-red-500 text-white">
+                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-destructive text-foreground">
                       {s.unread}
                     </span>
                   )}
@@ -422,11 +422,11 @@ function ChatPanel({
   const isClosed = session.status === "closed";
 
   return (
-    <section className="flex-1 min-w-0 flex flex-col bg-[#141414]">
+    <section className="flex-1 min-w-0 flex flex-col bg-bg-elevated">
       {/* Header */}
-      <header className="px-5 py-3.5 border-b border-[#2a2a2a] flex items-center gap-3">
+      <header className="px-5 py-3.5 border-b border-border flex items-center gap-3">
         <div
-          className="h-10 w-10 rounded-full flex items-center justify-center font-semibold text-black text-sm shrink-0"
+          className="h-10 w-10 rounded-full flex items-center justify-center font-semibold text-background text-sm shrink-0"
           style={{ background: color }}
         >
           {session.number}
@@ -437,9 +437,9 @@ function ChatPanel({
           </div>
           <div className={cn(
             "text-xs flex items-center gap-1.5 mt-0.5",
-            session.status === "ai" && "text-[#a8ff57]",
-            session.status === "operator" && "text-[#57c7ff]",
-            session.status === "closed" && "text-white/50",
+            session.status === "ai" && "text-accent",
+            session.status === "operator" && "text-accent",
+            session.status === "closed" && "text-foreground/50",
           )}>
             <span className={cn("h-1.5 w-1.5 rounded-full", STATUS_META[session.status].dot)} />
             {session.status === "ai" && "AI ведёт диалог"}
@@ -451,7 +451,7 @@ function ChatPanel({
           <Button
             size="sm" variant="outline"
             onClick={() => toast.success("Звоним…")}
-            className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]"
+            className="border-border bg-transparent text-foreground hover:bg-bg-soft"
             disabled={isClosed}
           >
             <Video className="h-4 w-4 mr-1.5" /> Позвонить
@@ -459,7 +459,7 @@ function ChatPanel({
           <Button
             size="sm" variant="outline"
             onClick={session.status === "operator" ? onHandBack : onTakeover}
-            className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]"
+            className="border-border bg-transparent text-foreground hover:bg-bg-soft"
             disabled={isClosed}
           >
             <ArrowRightLeft className="h-4 w-4 mr-1.5" />
@@ -468,7 +468,7 @@ function ChatPanel({
           <Button
             size="sm" variant="ghost"
             onClick={onClose}
-            className="text-white/70 hover:bg-[#2a2a2a] hover:text-red-400"
+            className="text-foreground/70 hover:bg-bg-soft hover:text-destructive"
             disabled={isClosed}
           >
             <XCircle className="h-4 w-4 mr-1.5" /> Завершить
@@ -482,13 +482,13 @@ function ChatPanel({
         {streaming !== null && (
           <div className="flex justify-start">
             <div className="max-w-[70%]">
-              <div className="text-[10px] uppercase tracking-wider text-[#a8ff57] mb-1 inline-flex items-center gap-1">
+              <div className="text-[10px] uppercase tracking-wider text-accent mb-1 inline-flex items-center gap-1">
                 <Sparkles className="h-3 w-3" /> AI
               </div>
-              <div className="rounded-2xl rounded-tl-sm bg-[#1a1a1a] border border-[#2a2a2a] px-4 py-2.5 text-sm text-white/90">
+              <div className="rounded-2xl rounded-tl-sm bg-bg-elevated border border-border px-4 py-2.5 text-sm text-foreground/90">
                 {streaming}
                 {streaming.length > 0 ? (
-                  <span className="inline-block w-1.5 h-4 bg-[#a8ff57] ml-0.5 align-middle animate-pulse" />
+                  <span className="inline-block w-1.5 h-4 bg-accent ml-0.5 align-middle animate-pulse" />
                 ) : (
                   <TypingDots />
                 )}
@@ -503,11 +503,11 @@ function ChatPanel({
         <div className={cn(
           "px-5 py-2.5 border-t flex items-center justify-between gap-3 text-sm",
           session.status === "ai"
-            ? "border-[#facc15]/30 bg-[#facc15]/10 text-[#facc15]"
-            : "border-[#a8ff57]/30 bg-[#a8ff57]/10 text-[#a8ff57]",
+            ? "border-warning/30 bg-warning/10 text-warning"
+            : "border-accent/30 bg-accent/10 text-accent",
         )}>
           <span className="flex items-center gap-2">
-            <span className={cn("h-1.5 w-1.5 rounded-full", session.status === "ai" ? "bg-[#facc15]" : "bg-[#a8ff57]")} />
+            <span className={cn("h-1.5 w-1.5 rounded-full", session.status === "ai" ? "bg-warning" : "bg-accent")} />
             {session.status === "ai" ? "AI ведёт диалог" : "Вы общаетесь с клиентом"}
           </span>
           <Button
@@ -516,8 +516,8 @@ function ChatPanel({
             className={cn(
               "h-7 text-xs",
               session.status === "ai"
-                ? "bg-[#facc15] text-black hover:bg-[#facc15]/90"
-                : "bg-[#1a1a1a] text-white hover:bg-[#2a2a2a] border border-[#a8ff57]/30",
+                ? "bg-warning text-background hover:bg-warning"
+                : "bg-bg-elevated text-foreground hover:bg-bg-soft border border-accent/30",
             )}
           >
             {session.status === "ai" ? "Подключиться" : "Передать AI"}
@@ -526,10 +526,10 @@ function ChatPanel({
       )}
 
       {/* Input */}
-      <div className="border-t border-[#2a2a2a] p-3 bg-[#0f0f0f]">
-        <div className="flex items-end gap-2 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-2 py-1.5">
+      <div className="border-t border-border p-3 bg-bg-base">
+        <div className="flex items-end gap-2 rounded-lg border border-border bg-bg-elevated px-2 py-1.5">
           <button
-            className="p-2 rounded hover:bg-[#2a2a2a] text-white/60"
+            className="p-2 rounded hover:bg-bg-soft text-foreground/60"
             onClick={() => toast("Прикрепить файл")}
             disabled={isClosed}
           >
@@ -548,10 +548,10 @@ function ChatPanel({
             placeholder={isClosed ? "Сессия завершена" : "Напишите сообщение… (Enter — отправить, Shift+Enter — перенос)"}
             disabled={isClosed}
             rows={1}
-            className="flex-1 resize-none border-0 bg-transparent px-1 py-2 text-sm text-white placeholder:text-white/40 focus-visible:ring-0 min-h-[36px]"
+            className="flex-1 resize-none border-0 bg-transparent px-1 py-2 text-sm text-foreground placeholder:text-foreground/40 focus-visible:ring-0 min-h-[36px]"
           />
           <button
-            className="p-2 rounded hover:bg-[#2a2a2a] text-white/60"
+            className="p-2 rounded hover:bg-bg-soft text-foreground/60"
             onClick={() => toast("Эмодзи")}
             disabled={isClosed}
           >
@@ -561,7 +561,7 @@ function ChatPanel({
             size="icon"
             onClick={handleSend}
             disabled={isClosed || !draft.trim()}
-            className="h-9 w-9 bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90 disabled:opacity-40"
+            className="h-9 w-9 bg-accent text-background hover:bg-accent-hover disabled:opacity-40"
           >
             <Send className="h-4 w-4" />
           </Button>
@@ -575,7 +575,7 @@ function MessageBubble({ m }: { m: Message }) {
   if (m.who === "system") {
     return (
       <div className="flex justify-center">
-        <span className="text-[11px] text-white/40 px-3 py-1 rounded-full bg-[#1a1a1a] border border-[#2a2a2a]">
+        <span className="text-[11px] text-foreground/40 px-3 py-1 rounded-full bg-bg-elevated border border-border">
           {m.text}
         </span>
       </div>
@@ -590,7 +590,7 @@ function MessageBubble({ m }: { m: Message }) {
         {!right && (
           <div className={cn(
             "text-[10px] uppercase tracking-wider mb-1 inline-flex items-center gap-1",
-            m.who === "ai" ? "text-[#a8ff57]" : "text-[#57c7ff]",
+            m.who === "ai" ? "text-accent" : "text-accent",
           )}>
             {m.who === "ai" ? <><Sparkles className="h-3 w-3" /> AI</> : <>👤 {m.authorName ?? "Оператор"}</>}
           </div>
@@ -598,14 +598,14 @@ function MessageBubble({ m }: { m: Message }) {
         <div className={cn(
           "px-4 py-2.5 text-sm whitespace-pre-wrap",
           right
-            ? "rounded-2xl rounded-tr-sm bg-[#2a2a2a] text-white"
+            ? "rounded-2xl rounded-tr-sm bg-bg-soft text-foreground"
             : m.who === "ai"
-              ? "rounded-2xl rounded-tl-sm bg-[#1a1a1a] border border-[#2a2a2a] text-white/90"
-              : "rounded-2xl rounded-tl-sm bg-[#57c7ff]/10 border border-[#57c7ff]/30 text-white/90",
+              ? "rounded-2xl rounded-tl-sm bg-bg-elevated border border-border text-foreground/90"
+              : "rounded-2xl rounded-tl-sm bg-accent/10 border border-accent/30 text-foreground/90",
         )}>
           {m.text}
         </div>
-        <div className={cn("text-[10px] text-white/40 mt-1", right ? "text-right" : "text-left")}>
+        <div className={cn("text-[10px] text-foreground/40 mt-1", right ? "text-right" : "text-left")}>
           {m.at}
         </div>
       </div>
@@ -616,9 +616,9 @@ function MessageBubble({ m }: { m: Message }) {
 function TypingDots() {
   return (
     <span className="inline-flex items-center gap-1">
-      <span className="h-1.5 w-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "0ms" }} />
-      <span className="h-1.5 w-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "150ms" }} />
-      <span className="h-1.5 w-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "300ms" }} />
+      <span className="h-1.5 w-1.5 rounded-full bg-surface/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+      <span className="h-1.5 w-1.5 rounded-full bg-surface/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+      <span className="h-1.5 w-1.5 rounded-full bg-surface/60 animate-bounce" style={{ animationDelay: "300ms" }} />
     </span>
   );
 }
@@ -630,10 +630,10 @@ function ContextPanel({ session }: { session: Session }) {
   const [lead, setLead] = useState({ name: session.visitorName ?? "", phone: "", email: "", notes: "" });
 
   return (
-    <aside className="w-[280px] shrink-0 border-l border-[#2a2a2a] bg-[#0f0f0f] flex flex-col overflow-y-auto">
+    <aside className="w-[280px] shrink-0 border-l border-border bg-bg-base flex flex-col overflow-y-auto">
       {/* Visitor info */}
-      <div className="p-4 border-b border-[#2a2a2a]">
-        <div className="text-xs uppercase tracking-wider text-white/40 mb-3">Посетитель</div>
+      <div className="p-4 border-b border-border">
+        <div className="text-xs uppercase tracking-wider text-foreground/40 mb-3">Посетитель</div>
         <div className="space-y-2 text-sm">
           <Row label="ID" value={`#${session.number}`} mono />
           <Row label="Девайс" value={session.device.label} icon={<DeviceIcon type={session.device.type} />} />
@@ -645,8 +645,8 @@ function ContextPanel({ session }: { session: Session }) {
       </div>
 
       {/* Page path */}
-      <div className="p-4 border-b border-[#2a2a2a]">
-        <div className="text-xs uppercase tracking-wider text-white/40 mb-3">Путь по сайту</div>
+      <div className="p-4 border-b border-border">
+        <div className="text-xs uppercase tracking-wider text-foreground/40 mb-3">Путь по сайту</div>
         <div className="space-y-1.5">
           {session.path.map((p, i) => {
             const isCurrent = i === session.path.length - 1;
@@ -654,13 +654,13 @@ function ContextPanel({ session }: { session: Session }) {
               <div key={i} className={cn(
                 "flex items-center justify-between rounded-md px-2.5 py-1.5 text-xs border",
                 isCurrent
-                  ? "bg-[#a8ff57]/10 border-[#a8ff57]/30 text-white"
-                  : "bg-[#1a1a1a] border-[#2a2a2a] text-white/70",
+                  ? "bg-accent/10 border-accent/30 text-foreground"
+                  : "bg-bg-elevated border-border text-foreground/70",
               )}>
                 <span className="truncate">
-                  {p.title} {isCurrent && <span className="text-[#a8ff57] ml-1">← сейчас</span>}
+                  {p.title} {isCurrent && <span className="text-accent ml-1">← сейчас</span>}
                 </span>
-                <span className="text-white/50">{fmtDur(p.seconds)}</span>
+                <span className="text-foreground/50">{fmtDur(p.seconds)}</span>
               </div>
             );
           })}
@@ -668,17 +668,17 @@ function ContextPanel({ session }: { session: Session }) {
       </div>
 
       {/* Quick actions */}
-      <div className="p-4 border-b border-[#2a2a2a] space-y-2">
+      <div className="p-4 border-b border-border space-y-2">
         <Button
           onClick={() => { setLeadOpen(true); toast.success("Откройте форму ниже"); }}
-          className="w-full bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90 justify-start"
+          className="w-full bg-accent text-background hover:bg-accent-hover justify-start"
         >
           📋 Добавить в лиды
         </Button>
         <Button
           onClick={() => toast.success("Приглашение отправлено")}
           variant="outline"
-          className="w-full border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a] justify-start"
+          className="w-full border-border bg-transparent text-foreground hover:bg-bg-soft justify-start"
         >
           <Video className="h-4 w-4 mr-2" /> Пригласить на звонок
         </Button>
@@ -688,7 +688,7 @@ function ContextPanel({ session }: { session: Session }) {
       <div className="p-4">
         <button
           onClick={() => setLeadOpen((v) => !v)}
-          className="w-full flex items-center justify-between text-xs uppercase tracking-wider text-white/40 hover:text-white/70"
+          className="w-full flex items-center justify-between text-xs uppercase tracking-wider text-foreground/40 hover:text-foreground/70"
         >
           <span>Форма лида</span>
           {leadOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -699,30 +699,30 @@ function ContextPanel({ session }: { session: Session }) {
               value={lead.name}
               onChange={(e) => setLead({ ...lead, name: e.target.value })}
               placeholder="Имя"
-              className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+              className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
             />
             <Input
               value={lead.phone}
               onChange={(e) => setLead({ ...lead, phone: e.target.value })}
               placeholder="Телефон"
-              className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+              className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
             />
             <Input
               value={lead.email}
               onChange={(e) => setLead({ ...lead, email: e.target.value })}
               placeholder="Email"
-              className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+              className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
             />
             <Textarea
               value={lead.notes}
               onChange={(e) => setLead({ ...lead, notes: e.target.value })}
               placeholder="Заметки"
               rows={3}
-              className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 resize-none"
+              className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 resize-none"
             />
             <Button
               onClick={() => toast.success("Лид сохранён")}
-              className="w-full bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90"
+              className="w-full bg-accent text-background hover:bg-accent-hover"
             >
               Сохранить лид
             </Button>
@@ -736,8 +736,8 @@ function ContextPanel({ session }: { session: Session }) {
 function Row({ label, value, icon, mono }: { label: string; value: string; icon?: React.ReactNode; mono?: boolean }) {
   return (
     <div className="flex items-center justify-between gap-2">
-      <span className="text-xs text-white/40">{label}</span>
-      <span className={cn("text-white/90 inline-flex items-center gap-1.5 truncate", mono && "font-mono text-xs")}>
+      <span className="text-xs text-foreground/40">{label}</span>
+      <span className={cn("text-foreground/90 inline-flex items-center gap-1.5 truncate", mono && "font-mono text-xs")}>
         {icon}{value}
       </span>
     </div>

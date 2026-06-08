@@ -134,7 +134,7 @@ function avatarColor(n: number) {
   const colors = [
     "bg-rose-500",
     "bg-amber-500",
-    "bg-emerald-500",
+    "bg-success",
     "bg-sky-500",
     "bg-violet-500",
     "bg-pink-500",
@@ -323,8 +323,8 @@ function TabButton({
       {badge !== undefined && (
         <span
           className={cn(
-            "inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-semibold text-white",
-            badgeVariant === "red" ? "bg-red-500" : "bg-emerald-500"
+            "inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-semibold text-foreground",
+            badgeVariant === "red" ? "bg-destructive" : "bg-success"
           )}
         >
           {badge}
@@ -352,7 +352,7 @@ function IncomingCallCard({
   onDecline: () => void;
 }) {
   return (
-    <div className="rounded-xl border-2 border-red-500 p-4 bg-red-500/5 animate-pulse-border">
+    <div className="rounded-xl border-2 border-destructive p-4 bg-destructive/5 animate-pulse-border">
       <style>{`
         @keyframes pulseBorder {
           0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
@@ -364,7 +364,7 @@ function IncomingCallCard({
       <div className="flex items-center gap-3 mb-3">
         <div
           className={cn(
-            "w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm",
+            "w-10 h-10 rounded-full flex items-center justify-center text-foreground font-semibold text-sm",
             avatarColor(call.visitorNumber)
           )}
         >
@@ -374,7 +374,7 @@ function IncomingCallCard({
           <div className="font-medium text-sm">
             {call.visitorName ?? `Посетитель #${call.visitorNumber}`}
           </div>
-          <div className="text-xs text-red-600 dark:text-red-400 flex items-center gap-1 font-medium">
+          <div className="text-xs text-destructive dark:text-destructive flex items-center gap-1 font-medium">
             <PhoneIncoming className="w-3 h-3" />
             Входящий звонок · {formatDuration(elapsed)}
           </div>
@@ -396,7 +396,7 @@ function IncomingCallCard({
         <Button
           onClick={onAccept}
           size="sm"
-          className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white"
+          className="flex-1 bg-success hover:bg-success text-foreground"
         >
           <Check className="w-4 h-4 mr-1" /> Принять
         </Button>
@@ -423,11 +423,11 @@ function ActiveCallCard({
   onEnd: () => void;
 }) {
   return (
-    <div className="rounded-xl border-2 border-emerald-500 p-4 bg-emerald-500/5">
+    <div className="rounded-xl border-2 border-success p-4 bg-success/5">
       <div className="flex items-center gap-3 mb-3">
         <div
           className={cn(
-            "w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm",
+            "w-10 h-10 rounded-full flex items-center justify-center text-foreground font-semibold text-sm",
             avatarColor(call.visitorNumber)
           )}
         >
@@ -437,7 +437,7 @@ function ActiveCallCard({
           <div className="font-medium text-sm">
             {call.visitorName ?? `Посетитель #${call.visitorNumber}`}
           </div>
-          <div className="text-xs text-emerald-600 dark:text-emerald-400 font-mono font-medium">
+          <div className="text-xs text-success dark:text-success font-mono font-medium">
             {formatDuration(elapsed)}
           </div>
         </div>
@@ -457,7 +457,7 @@ function HistoryRow({ call }: { call: CallRecord }) {
       <div className="flex items-center gap-3">
         <div
           className={cn(
-            "w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs flex-shrink-0",
+            "w-9 h-9 rounded-full flex items-center justify-center text-foreground font-semibold text-xs flex-shrink-0",
             avatarColor(call.visitorNumber)
           )}
         >
@@ -478,8 +478,8 @@ function HistoryRow({ call }: { call: CallRecord }) {
               className={cn(
                 "text-[10px] h-5 px-1.5",
                 isMissed
-                  ? "text-red-600 border-red-500/40 bg-red-500/10"
-                  : "text-emerald-600 border-emerald-500/40 bg-emerald-500/10"
+                  ? "text-destructive border-destructive/40 bg-destructive/10"
+                  : "text-success border-success/40 bg-success/10"
               )}
             >
               {isMissed ? "Пропущен" : "Принят"}
@@ -557,7 +557,7 @@ function ActiveCallView({
         <div className="flex items-center gap-3 text-sm">
           <div
             className={cn(
-              "w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold text-xs",
+              "w-8 h-8 rounded-full flex items-center justify-center text-foreground font-semibold text-xs",
               avatarColor(call.visitorNumber)
             )}
           >
@@ -570,35 +570,35 @@ function ActiveCallView({
           <span className="text-muted-foreground">{timeOnSite}</span>
         </div>
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
           <span className="font-mono font-medium">{formatDuration(elapsed)}</span>
         </div>
       </div>
 
       <div className="flex-1 flex overflow-hidden">
         {/* Video area */}
-        <div className="flex-1 bg-neutral-900 relative flex items-center justify-center">
+        <div className="flex-1 bg-bg-elevated relative flex items-center justify-center">
           {/* Main video placeholder */}
           <div className="flex flex-col items-center gap-3">
             <div
               className={cn(
-                "w-32 h-32 rounded-full flex items-center justify-center text-white font-bold text-2xl",
+                "w-32 h-32 rounded-full flex items-center justify-center text-foreground font-bold text-2xl",
                 avatarColor(call.visitorNumber)
               )}
             >
               #{call.visitorNumber}
             </div>
-            <div className="text-neutral-400 text-sm flex items-center gap-2">
+            <div className="text-ink-muted text-sm flex items-center gap-2">
               <VideoOff className="w-4 h-4" /> Камера выключена
             </div>
           </div>
 
           {/* Self preview PiP */}
-          <div className="absolute bottom-4 right-4 w-44 h-32 rounded-lg bg-neutral-800 border border-neutral-700 flex items-center justify-center overflow-hidden shadow-xl">
+          <div className="absolute bottom-4 right-4 w-44 h-32 rounded-lg bg-bg-soft border border-border-strong flex items-center justify-center overflow-hidden shadow-xl">
             {camOn ? (
-              <div className="text-neutral-500 text-xs">[ваше видео]</div>
+              <div className="text-ink-subtle text-xs">[ваше видео]</div>
             ) : (
-              <div className="flex flex-col items-center gap-1.5 text-neutral-500">
+              <div className="flex flex-col items-center gap-1.5 text-ink-subtle">
                 <VideoOff className="w-5 h-5" />
                 <span className="text-[10px]">Вы</span>
               </div>
@@ -606,7 +606,7 @@ function ActiveCallView({
           </div>
 
           {/* Bottom control bar */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-neutral-800/90 backdrop-blur rounded-full px-3 py-2 shadow-2xl border border-neutral-700">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-bg-soft/90 backdrop-blur rounded-full px-3 py-2 shadow-2xl border border-border-strong">
             <ControlButton
               active={micOn}
               onClick={() => setMicOn((v) => !v)}
@@ -633,7 +633,7 @@ function ActiveCallView({
             />
             <button
               onClick={onEnd}
-              className="ml-1 inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-600 hover:bg-red-700 text-white transition-colors"
+              className="ml-1 inline-flex items-center justify-center w-10 h-10 rounded-full bg-destructive hover:bg-destructive text-foreground transition-colors"
               title="Завершить"
             >
               <PhoneOff className="w-4 h-4" />
@@ -666,7 +666,7 @@ function ActiveCallView({
                       ? "bg-muted"
                       : m.role === "ai"
                         ? "bg-primary/10"
-                        : "bg-emerald-500/10"
+                        : "bg-success/10"
                   )}
                 >
                   <div className="text-[10px] font-semibold uppercase text-muted-foreground mb-0.5">
@@ -748,8 +748,8 @@ function ControlButton({
       className={cn(
         "inline-flex items-center justify-center w-10 h-10 rounded-full transition-colors",
         active
-          ? "bg-neutral-700 text-white hover:bg-neutral-600"
-          : "bg-neutral-900 text-neutral-400 hover:bg-neutral-800"
+          ? "bg-muted text-foreground hover:bg-muted"
+          : "bg-bg-elevated text-ink-muted hover:bg-bg-soft"
       )}
     >
       {icon}

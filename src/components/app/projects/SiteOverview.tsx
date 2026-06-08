@@ -41,7 +41,7 @@ export function SiteOverview({ project }: { project: Project }) {
         <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "#2a2a2a" }}>
           <div className="flex items-center gap-2">
             <Globe className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
-            <h3 className="font-display text-sm font-semibold text-white">Превью лендинга</h3>
+            <h3 className="font-display text-sm font-semibold text-foreground">Превью лендинга</h3>
           </div>
           <a
             href={previewUrl}
@@ -64,7 +64,7 @@ export function SiteOverview({ project }: { project: Project }) {
               <span className="ml-3 truncate font-mono text-[11px]" style={{ color: "rgba(255,255,255,0.45)" }}>{previewUrl}</span>
             </div>
             <div className="px-6 py-10 text-center">
-              <h4 className="font-display text-2xl font-semibold tracking-tight text-white md:text-3xl">
+              <h4 className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 {offer}
               </h4>
               <p className="mx-auto mt-3 max-w-md text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
@@ -88,7 +88,7 @@ export function SiteOverview({ project }: { project: Project }) {
         <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "#2a2a2a" }}>
           <div className="flex items-center gap-2">
             <Inbox className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
-            <h3 className="font-display text-sm font-semibold text-white">Заявки с лендинга</h3>
+            <h3 className="font-display text-sm font-semibold text-foreground">Заявки с лендинга</h3>
           </div>
           <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>mock</span>
         </header>
@@ -96,7 +96,7 @@ export function SiteOverview({ project }: { project: Project }) {
           {LEADS.map((l) => (
             <li key={l.id} className="grid grid-cols-1 gap-1 px-5 py-3 sm:grid-cols-[1fr_1fr_auto] sm:items-center sm:gap-4">
               <div>
-                <div className="text-sm font-semibold text-white">{l.name}</div>
+                <div className="text-sm font-semibold text-foreground">{l.name}</div>
                 <div className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>{l.contact}</div>
               </div>
               <div className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>{l.source}</div>

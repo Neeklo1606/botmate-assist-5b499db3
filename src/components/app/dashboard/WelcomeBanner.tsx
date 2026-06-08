@@ -53,7 +53,7 @@ export function WelcomeBanner({ userName }: Props) {
           ✨
         </span>
         <div className="min-w-0">
-          <h1 className="font-display text-xl font-semibold tracking-tight text-white md:text-2xl">
+          <h1 className="font-display text-xl font-semibold tracking-tight text-foreground md:text-2xl">
             {userName ? `Привет, ${userName}!` : "Привет!"} С чего начнём?
           </h1>
           <p
@@ -106,7 +106,7 @@ export function WelcomeBanner({ userName }: Props) {
                   {p.minutes}
                 </span>
               </div>
-              <div className="mt-3 font-display text-base font-semibold text-white">
+              <div className="mt-3 font-display text-base font-semibold text-foreground">
                 {p.title}
               </div>
               <div
