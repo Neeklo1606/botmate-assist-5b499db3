@@ -59,13 +59,432 @@ function HomePage() {
     <div className="bg-background">
       <Hero />
       <TrustStrip />
-      <ProductsTabs />
-      <HowItWorks />
-      <Interface />
-      <Benefits />
+      <InteractiveBlock />
+      <ProductCards />
+      <BentoSection />
       <Pricing />
+      <HowItWorks />
       <Faq />
       <FinalCta />
+    </div>
+  );
+}
+
+/* ─────────────────── Interactive 2-col block ─────────────────── */
+
+function InteractiveBlock() {
+  const [tab, setTab] = useState<"media" | "site" | "panel">("panel");
+  return (
+    <section id="interface" className="py-20 md:py-28">
+      <Container>
+        <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
+          <div className="md:col-span-5">
+            <div className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+              Один кабинет, два продукта
+            </div>
+            <h2 className="mt-3 font-display text-[32px] font-semibold tracking-[-0.02em] text-foreground md:text-[44px]">
+              Управляйте контентом и сайтом без переключения окон
+            </h2>
+            <p className="mt-5 text-[15.5px] leading-relaxed text-ink-muted">
+              Запускайте проекты, готовьте публикации, принимайте заявки и
+              следите за балансом в одном месте. Никаких таблиц и чатов.
+            </p>
+
+            <ul className="mt-7 space-y-3">
+              {[
+                "Все проекты и команда в одном кабинете",
+                "Заявки с сайта приходят сразу в проект",
+                "Баланс и расходы видны по каждому проекту",
+                "Доступ для коллеги или клиента за минуту",
+              ].map((b) => (
+                <li
+                  key={b}
+                  className="flex items-start gap-3 text-[14.5px] text-foreground"
+                >
+                  <Check className="mt-0.5 h-4 w-4 flex-none" strokeWidth={2} />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 flex flex-wrap gap-2">
+              {(
+                [
+                  ["panel", "Кабинет"],
+                  ["media", "Медиа"],
+                  ["site", "Сайт"],
+                ] as const
+              ).map(([k, l]) => (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => setTab(k)}
+                  aria-pressed={tab === k}
+                  className={
+                    "rounded-full border px-3.5 py-1.5 text-[12.5px] font-medium transition-colors " +
+                    (tab === k
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border bg-surface text-ink-muted hover:text-foreground")
+                  }
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="md:col-span-7">
+            <InteractiveWidget tab={tab} />
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function InteractiveWidget({ tab }: { tab: "media" | "site" | "panel" }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-lift">
+      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+        <div className="flex gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
+          <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
+          <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
+        </div>
+        <div className="text-[11px] font-medium text-ink-subtle">
+          neeklo.ru / кабинет
+        </div>
+        <div className="w-12" />
+      </div>
+
+      {tab === "panel" && <PanelMock />}
+      {tab === "media" && (
+        <div className="p-5">
+          <ProductMock kind="media" />
+        </div>
+      )}
+      {tab === "site" && (
+        <div className="p-5">
+          <ProductMock kind="site" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PanelMock() {
+  return (
+    <div className="grid md:grid-cols-12">
+      <aside className="border-b border-border bg-background p-4 md:col-span-4 md:border-b-0 md:border-r">
+        <div className="mb-3 text-[11px] uppercase tracking-wide text-ink-subtle">
+          Проекты
+        </div>
+        <ul className="space-y-1">
+          {[
+            { t: "Студия ремонта", a: true },
+            { t: "Школа английского", a: false },
+            { t: "Косметология", a: false },
+          ].map((p) => (
+            <li key={p.t}>
+              <div
+                className={
+                  "flex items-center justify-between rounded-lg px-3 py-2 text-[13px] " +
+                  (p.a
+                    ? "bg-foreground text-background"
+                    : "text-foreground hover:bg-surface-muted")
+                }
+              >
+                <span className="truncate">{p.t}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border-strong px-3 py-2 text-[12px] font-medium text-ink-muted hover:text-foreground"
+        >
+          + Новый проект
+        </button>
+      </aside>
+      <div className="md:col-span-8">
+        <div className="flex items-center justify-between border-b border-border px-5 py-3">
+          <div>
+            <div className="text-[11px] text-ink-subtle">Проект</div>
+            <div className="font-display text-[15px] font-semibold text-foreground">
+              Студия ремонта
+            </div>
+          </div>
+          <Button variant="brand" size="sm">
+            Создать пост
+          </Button>
+        </div>
+        <div className="grid gap-3 p-5 md:grid-cols-3">
+          <Tile label="Заявки" value="24" hint="за неделю" />
+          <Tile label="Постов" value="6" hint="готово" />
+          <Tile label="Баланс" value="4 280 ₽" hint="в ₽" />
+        </div>
+        <div className="border-t border-border px-5 py-4">
+          <div className="mb-2 text-[11px] uppercase tracking-wide text-ink-subtle">
+            Последнее
+          </div>
+          <ul className="space-y-2 text-[13px]">
+            <li className="flex justify-between text-foreground">
+              <span>5 признаков обновить сайт</span>
+              <span className="text-ink-subtle">сегодня</span>
+            </li>
+            <li className="flex justify-between text-foreground">
+              <span>Кейс: квартира 42 м²</span>
+              <span className="text-ink-subtle">вчера</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────── Product cards (clean 2-card grid) ─────────────────── */
+
+function ProductCards() {
+  const cards = [
+    {
+      key: "media" as const,
+      tag: "Медиа-помощник",
+      title: "Контент без блока в голове",
+      desc: "Готовит контент-план на неделю, тексты постов, сторис и идеи reels. Держит ваш голос бренда.",
+      bullets: ["Контент-план на 7 дней", "Тексты под формат соцсети", "Идеи reels и сторис"],
+      cta: { to: "/media" as const, label: "Открыть медиа-помощник" },
+      Icon: ImageIcon,
+    },
+    {
+      key: "site" as const,
+      tag: "Сайты",
+      title: "Аккуратный сайт за вечер",
+      desc: "Соберите сайт по короткому брифу. Подключите домен и принимайте оплаты в рублях через ЮKassa.",
+      bullets: ["Страницы услуг и тарифов", "Форма заявки в кабинет", "Свой домен и оплата в ₽"],
+      cta: { to: "/site" as const, label: "Открыть конструктор сайтов" },
+      Icon: Layout,
+    },
+  ];
+  return (
+    <section id="products" className="border-y border-border bg-surface-muted/40 py-20 md:py-28">
+      <Container>
+        <SectionHead
+          eyebrow="Два продукта"
+          title="Сфокусированный набор, без лишнего"
+          desc="Каждый продукт работает отдельно или вместе в одном кабинете."
+        />
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {cards.map((c) => (
+            <article
+              key={c.key}
+              className="group flex flex-col rounded-2xl border border-border bg-surface p-7 transition-colors hover:border-border-strong md:p-9"
+            >
+              <div className="flex items-center justify-between">
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background">
+                  <c.Icon className="h-4 w-4" strokeWidth={1.75} />
+                </div>
+                <span className="text-[11px] font-medium uppercase tracking-wide text-ink-subtle">
+                  {c.tag}
+                </span>
+              </div>
+              <h3 className="mt-6 font-display text-[24px] font-semibold tracking-[-0.02em] text-foreground md:text-[28px]">
+                {c.title}
+              </h3>
+              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-muted">
+                {c.desc}
+              </p>
+              <ul className="mt-5 space-y-2.5">
+                {c.bullets.map((b) => (
+                  <li
+                    key={b}
+                    className="flex items-start gap-2.5 text-[14px] text-foreground"
+                  >
+                    <Check className="mt-0.5 h-3.5 w-3.5 flex-none" strokeWidth={2} />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-7 pt-1">
+                <Link
+                  to={c.cta.to}
+                  className="inline-flex items-center gap-1.5 text-[13.5px] font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  {c.cta.label}
+                  <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ─────────────────── Bento (benefits + scenarios + pricing teaser) ─────────────────── */
+
+function BentoSection() {
+  return (
+    <section className="py-20 md:py-28">
+      <Container>
+        <SectionHead
+          eyebrow="Зачем это вам"
+          title="Меньше рутины, больше заявок"
+          desc="Конкретные выгоды, готовые сценарии под бизнес и понятная цена в рублях."
+        />
+
+        <div className="mt-12 grid auto-rows-[minmax(160px,auto)] grid-cols-1 gap-4 md:grid-cols-6">
+          {/* Big benefit */}
+          <div className="rounded-2xl border border-border bg-foreground p-7 text-background md:col-span-3 md:row-span-2">
+            <div className="text-[11.5px] font-medium uppercase tracking-wide text-background/60">
+              Главная выгода
+            </div>
+            <h3 className="mt-3 font-display text-[26px] font-semibold tracking-[-0.02em] md:text-[32px]">
+              Запуск сервиса за один день, без вёрстки и кода
+            </h3>
+            <p className="mt-4 text-[14.5px] leading-relaxed text-background/75">
+              Короткий бриф, готовые шаблоны и понятный редактор. Помощник пишет
+              контент, сайт принимает заявки уже сегодня.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2">
+              {["Без кода", "Свой домен", "Оплата в ₽", "Поддержка в Telegram"].map(
+                (t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-background/20 px-2.5 py-1 text-[11.5px] font-medium text-background/80"
+                  >
+                    {t}
+                  </span>
+                ),
+              )}
+            </div>
+          </div>
+
+          {/* Two small benefits */}
+          <BentoCell
+            className="md:col-span-3"
+            icon={CreditCard}
+            title="Оплата в рублях"
+            desc="ЮKassa и российские карты, без зарубежных подписок."
+          />
+          <BentoCell
+            className="md:col-span-3"
+            icon={Settings2}
+            title="Один кабинет"
+            desc="Проекты, заявки, баланс и команда в одном месте."
+          />
+
+          {/* Scenarios — wide */}
+          <div className="rounded-2xl border border-border bg-surface p-7 md:col-span-6">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+                  Готовые сценарии
+                </div>
+                <h3 className="mt-2 font-display text-[22px] font-semibold tracking-[-0.01em] text-foreground md:text-[26px]">
+                  Подобрано под услуги и локальный бизнес
+                </h3>
+              </div>
+              <Link
+                to="/"
+                hash="products"
+                className="text-[13px] font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Все сценарии
+              </Link>
+            </div>
+            <div className="mt-6 grid gap-3 md:grid-cols-4">
+              {[
+                { t: "Студия ремонта", s: "сайт + контент-план" },
+                { t: "Школа и курсы", s: "лендинг + посты" },
+                { t: "Косметология", s: "запись + сторис" },
+                { t: "Кафе и доставка", s: "меню + reels" },
+              ].map((s) => (
+                <div
+                  key={s.t}
+                  className="rounded-xl border border-border bg-background p-4"
+                >
+                  <div className="text-[13.5px] font-semibold text-foreground">
+                    {s.t}
+                  </div>
+                  <div className="mt-1 text-[12px] text-ink-subtle">{s.s}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pricing teaser */}
+          <div className="rounded-2xl border border-border bg-surface p-7 md:col-span-4">
+            <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+              Тарифы
+            </div>
+            <div className="mt-3 flex items-baseline gap-2">
+              <span className="font-display text-[36px] font-semibold tabular text-foreground">
+                от 990 ₽
+              </span>
+              <span className="text-[13px] text-ink-subtle">в месяц</span>
+            </div>
+            <p className="mt-3 max-w-[420px] text-[14px] leading-relaxed text-ink-muted">
+              Три тарифа: «Старт», «Бизнес», «Студия». Платите в рублях,
+              меняйте тариф в любой момент.
+            </p>
+            <div className="mt-5">
+              <Button asChild variant="brand" size="sm">
+                <Link to="/" hash="pricing">
+                  Посмотреть тарифы
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Trial cell */}
+          <div className="rounded-2xl border border-border bg-surface p-7 md:col-span-2">
+            <div className="text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+              Попробовать
+            </div>
+            <div className="mt-3 font-display text-[24px] font-semibold text-foreground">
+              7 дней
+            </div>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">
+              Бесплатно, без привязки карты.
+            </p>
+            <div className="mt-4">
+              <Link
+                to="/onboarding/assistant"
+                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-foreground underline-offset-4 hover:underline"
+              >
+                Начать
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function BentoCell({
+  icon: Icon,
+  title,
+  desc,
+  className = "",
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  title: string;
+  desc: string;
+  className?: string;
+}) {
+  return (
+    <div className={"rounded-2xl border border-border bg-surface p-6 " + className}>
+      <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background">
+        <Icon className="h-4 w-4" strokeWidth={1.75} />
+      </div>
+      <h3 className="mt-4 font-display text-[17px] font-semibold tracking-[-0.01em] text-foreground">
+        {title}
+      </h3>
+      <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-muted">{desc}</p>
     </div>
   );
 }
