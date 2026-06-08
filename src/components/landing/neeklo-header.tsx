@@ -176,34 +176,39 @@ export function NeekloHeader() {
               )}
               style={{ transitionTimingFunction: EASE }}
             >
-              {nav.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    to={item.to}
-                    hash={item.hash}
-                    className={cn(
-                      "inline-flex h-[30px] items-center gap-1.5 rounded-full px-3.5",
-                      "text-[12.5px] font-medium tracking-[-0.005em] text-ink-muted",
-                      "transition-colors duration-200 hover:text-foreground hover:bg-surface-muted/70",
-                    )}
-                    activeProps={{
-                      className: "bg-surface-muted text-foreground",
-                    }}
-                  >
-                    {item.label}
-                    {item.soon && (
-                      <span
-                        className={cn(
-                          "rounded-full bg-foreground/[0.05] px-1.5 py-[1px]",
-                          "text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-subtle",
-                        )}
-                      >
-                        скоро
-                      </span>
-                    )}
-                  </Link>
-                </li>
-              ))}
+              {nav.map((item) => {
+                const active = isItemActive(item);
+                return (
+                  <li key={item.label}>
+                    <Link
+                      to={item.to}
+                      hash={item.hash}
+                      data-active={active ? "true" : undefined}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "group/nav relative inline-flex h-[30px] items-center gap-1.5 rounded-full px-3.5",
+                        "text-[12.5px] font-medium tracking-[-0.005em]",
+                        "transition-colors duration-200",
+                        active
+                          ? "bg-surface-muted text-foreground"
+                          : "text-ink-muted hover:bg-surface-muted/60 hover:text-foreground",
+                      )}
+                    >
+                      {item.label}
+                      {item.soon && (
+                        <span
+                          className={cn(
+                            "rounded-full bg-foreground/[0.05] px-1.5 py-[1px]",
+                            "text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-subtle",
+                          )}
+                        >
+                          скоро
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
