@@ -210,10 +210,6 @@ function Hero() {
   );
 }
 
-function Stat(_: { label: string; value: string; pad?: boolean }) {
-  return null;
-}
-}
 
 function HeroScene() {
   return (
