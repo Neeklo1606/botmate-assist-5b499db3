@@ -3,6 +3,7 @@
  * Mock: live inbox-style список диалогов + KPI.
  */
 import { Bot, MessageSquare, Sparkles, ArrowRight, User } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { Project } from "@/lib/projects/types";
 
 interface Conversation {
