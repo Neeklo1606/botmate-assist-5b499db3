@@ -250,18 +250,19 @@ export function LeadWidget() {
         }
       >
         {/* Header */}
-        <div className="flex items-center justify-between gap-3 border-b border-border bg-background px-4 py-3">
+        <div className="flex items-center justify-between gap-3 border-b border-border bg-surface-muted/60 px-4 py-3">
           <div className="flex items-center gap-2.5">
             <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-foreground">
               <Bot className="h-4 w-4 text-background" strokeWidth={2} />
-              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-background" />
+              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-surface" />
             </div>
             <div className="leading-tight">
               <div className="text-[13.5px] font-semibold text-foreground">
                 AI-менеджер · Neeklo
               </div>
-              <div className="text-[11px] text-ink-subtle">
-                онлайн · отвечает за 7 сек
+              <div className="inline-flex items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.12em] text-ink-subtle">
+                <span className="h-1 w-1 rounded-full bg-accent" />
+                онлайн · ответ за 7 сек
               </div>
             </div>
           </div>
