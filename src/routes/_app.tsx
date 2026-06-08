@@ -1,11 +1,11 @@
 /**
  * _app — protected layout кабинета.
  *
- * Дизайн (по спеке Botmate):
- * - Левый сайдбар 240px, фон #0f0f0f, основной текст светлый.
- * - Активный пункт: белый текст + узкий лаймовый бордер слева (#a8ff57).
- * - Профиль (avatar) и Settings — внизу сайдбара.
- * - Основная область: фон #141414, на всю высоту экрана.
+ * Дизайн (Neeklo, Milk & Olive):
+ * - Левый сайдбар 240px на --color-sidebar, тонкая hairline-граница.
+ * - Активный пункт: foreground + олив-аккент слева (--color-accent).
+ * - Профиль и Settings — внизу сайдбара.
+ * - Основная область: --color-background, одна типографическая система.
  *
  * Если не авторизован → /login?redirect=<current>.
  */
@@ -35,6 +35,7 @@ import {
   FolderKanban,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NeekloLogo } from "@/components/brand/neeklo-logo";
 import { useCurrentUser, useLogout } from "@/lib/hooks/use-auth";
 import {
   useNotifications,
@@ -88,7 +89,7 @@ const MOBILE_NAV: NavItem[] = [
 
 function AppLayout() {
   return (
-    <div className="flex min-h-screen" style={{ background: "#141414" }}>
+    <div className="flex min-h-screen" style={{ background: "var(--color-background)" }}>
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar />
@@ -111,26 +112,19 @@ function Sidebar() {
   return (
     <aside
       className="sticky top-0 hidden h-screen w-[240px] flex-none flex-col md:flex"
-      style={{ background: "#0f0f0f", borderRight: "1px solid rgba(255,255,255,0.06)" }}
+      style={{ background: "var(--color-sidebar)", borderRight: "1px solid var(--color-border)" }}
     >
       {/* Logo */}
       <div
         className="flex h-14 items-center px-5"
-        style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+        style={{ borderBottom: "1px solid var(--color-border)" }}
       >
         <Link
           to="/app"
-          aria-label="botme — кабинет"
-          className="inline-flex items-baseline font-display text-[20px] font-semibold tracking-tight leading-none text-white select-none"
+          aria-label="Neeklo — кабинет"
+          className="transition-opacity hover:opacity-80"
         >
-          <span className="relative">
-            botme
-            <span
-              aria-hidden
-              className="absolute -top-[3px] right-[14px] h-[5px] w-[5px] rounded-full"
-              style={{ background: "#a8ff57" }}
-            />
-          </span>
+          <NeekloLogo />
         </Link>
       </div>
 
@@ -150,19 +144,19 @@ function Sidebar() {
                     "relative flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                   )}
                   style={{
-                    color: isActive ? "#ffffff" : "rgba(255,255,255,0.62)",
-                    background: isActive ? "rgba(168,255,87,0.06)" : "transparent",
+                    color: isActive ? "#ffffff" : "var(--color-ink-muted)",
+                    background: isActive ? "color-mix(in oklab, var(--color-accent) 10%, transparent)" : "transparent",
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
                       (e.currentTarget as HTMLElement).style.color = "#ffffff";
                       (e.currentTarget as HTMLElement).style.background =
-                        "rgba(255,255,255,0.04)";
+                        "var(--color-surface-muted)";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isActive) {
-                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.62)";
+                      (e.currentTarget as HTMLElement).style.color = "var(--color-ink-muted)";
                       (e.currentTarget as HTMLElement).style.background = "transparent";
                     }
                   }}
@@ -175,7 +169,7 @@ function Sidebar() {
                       style={{
                         width: 3,
                         height: 22,
-                        background: "#a8ff57",
+                        background: "var(--color-accent)",
                         borderRadius: 2,
                       }}
                     />
@@ -192,7 +186,7 @@ function Sidebar() {
       {/* Bottom: profile + settings */}
       <div
         className="px-2 pb-3 pt-2"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+        style={{ borderTop: "1px solid var(--color-border)" }}
       >
         <SidebarSettingsLink active={location.pathname.startsWith("/settings")} />
         <SidebarProfile />
@@ -207,15 +201,15 @@ function SidebarSettingsLink({ active }: { active: boolean }) {
       to="/settings"
       className="relative flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors"
       style={{
-        color: active ? "#ffffff" : "rgba(255,255,255,0.62)",
-        background: active ? "rgba(168,255,87,0.06)" : "transparent",
+        color: active ? "#ffffff" : "var(--color-ink-muted)",
+        background: active ? "color-mix(in oklab, var(--color-accent) 10%, transparent)" : "transparent",
       }}
     >
       {active && (
         <span
           aria-hidden
           className="absolute left-0 top-1/2 -translate-y-1/2"
-          style={{ width: 3, height: 22, background: "#a8ff57", borderRadius: 2 }}
+          style={{ width: 3, height: 22, background: "var(--color-accent)", borderRadius: 2 }}
         />
       )}
       <Settings className="h-4 w-4" strokeWidth={1.75} />
@@ -235,9 +229,9 @@ function SidebarProfile() {
         <button
           type="button"
           className="mt-1 flex w-full items-center gap-2.5 rounded-md px-2 py-2 text-left text-sm font-medium transition-colors"
-          style={{ color: "rgba(255,255,255,0.85)" }}
+          style={{ color: "var(--color-foreground)" }}
           onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)")
+            ((e.currentTarget as HTMLElement).style.background = "var(--color-surface-muted)")
           }
           onMouseLeave={(e) =>
             ((e.currentTarget as HTMLElement).style.background = "transparent")
@@ -245,7 +239,7 @@ function SidebarProfile() {
         >
           <span
             className="flex h-7 w-7 flex-none items-center justify-center rounded-full text-xs font-semibold"
-            style={{ background: "#a8ff57", color: "#0f0f0f" }}
+            style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
           >
             {user.avatarInitials}
           </span>
@@ -302,28 +296,18 @@ function Topbar() {
     <header
       className="sticky top-0 z-30 flex h-14 items-center justify-between gap-3 px-4 md:px-6"
       style={{
-        background: "#141414",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-        color: "rgba(255,255,255,0.9)",
+        background: "var(--color-background)",
+        borderBottom: "1px solid var(--color-border)",
+        color: "var(--color-foreground)",
       }}
     >
       <div className="flex min-w-0 items-center gap-3">
         <div className="md:hidden">
-          <Link
-            to="/app"
-            className="inline-flex items-baseline font-display text-[18px] font-semibold tracking-tight text-white"
-          >
-            <span className="relative">
-              botme
-              <span
-                aria-hidden
-                className="absolute -top-[3px] right-[12px] h-[5px] w-[5px] rounded-full"
-                style={{ background: "#a8ff57" }}
-              />
-            </span>
+          <Link to="/app" aria-label="Neeklo" className="transition-opacity hover:opacity-80">
+            <NeekloLogo />
           </Link>
         </div>
-        <div className="hidden text-sm md:block" style={{ color: "rgba(255,255,255,0.55)" }}>
+        <div className="hidden text-sm md:block" style={{ color: "var(--color-ink-subtle)" }}>
           {user?.workspaceName ?? "Workspace"}
         </div>
       </div>
@@ -333,9 +317,9 @@ function Topbar() {
         <div
           className="hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium sm:inline-flex"
           style={{
-            background: "rgba(168,255,87,0.10)",
-            color: "#a8ff57",
-            border: "1px solid rgba(168,255,87,0.25)",
+            background: "var(--color-accent-glow)",
+            color: "var(--color-accent)",
+            border: "1px solid color-mix(in oklab, var(--color-accent) 30%, transparent)",
           }}
           title="Посетители на сайте сейчас"
         >
@@ -343,11 +327,11 @@ function Topbar() {
             <span
               aria-hidden
               className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
-              style={{ background: "#a8ff57" }}
+              style={{ background: "var(--color-accent)" }}
             />
             <span
               className="relative inline-flex h-2 w-2 rounded-full"
-              style={{ background: "#a8ff57" }}
+              style={{ background: "var(--color-accent)" }}
             />
           </span>
           Онлайн: <span className="tabular-nums">{onlineNow}</span>
@@ -360,13 +344,13 @@ function Topbar() {
               variant="ghost"
               size="icon"
               aria-label={`Уведомления${unread ? `, непрочитанных: ${unread}` : ""}`}
-              className="relative text-white hover:bg-white/5 hover:text-white"
+              className="relative text-foreground hover:bg-surface-muted hover:text-foreground"
             >
               <Bell className="h-4 w-4" strokeWidth={1.75} />
               {unread > 0 && (
                 <span
-                  className="absolute right-1 top-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full px-1 text-[10px] font-semibold leading-none text-[#0f0f0f] tabular-nums"
-                  style={{ background: "#a8ff57" }}
+                  className="absolute right-1 top-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full px-1 text-[10px] font-semibold leading-none text-accent-ink tabular-nums"
+                  style={{ background: "var(--color-accent)" }}
                 >
                   {unread > 9 ? "9+" : unread}
                 </span>
@@ -409,7 +393,7 @@ function Topbar() {
                       <span
                         aria-hidden
                         className="mt-1.5 inline-flex h-2 w-2 flex-none rounded-full"
-                        style={{ background: "#a8ff57" }}
+                        style={{ background: "var(--color-accent)" }}
                       />
                     )}
                     <div className={cn("min-w-0 flex-1", n.read && "pl-4")}>
@@ -437,7 +421,7 @@ function Topbar() {
                 type="button"
                 aria-label="Профиль"
                 className="hidden h-8 w-8 items-center justify-center rounded-full text-xs font-semibold transition-opacity hover:opacity-90 md:inline-flex"
-                style={{ background: "#a8ff57", color: "#0f0f0f" }}
+                style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
               >
                 {user.avatarInitials}
               </button>
@@ -486,8 +470,8 @@ function MobileBottomNav() {
       aria-label="Мобильная навигация"
       className="fixed inset-x-0 bottom-0 z-30 grid h-[64px] grid-cols-4 md:hidden"
       style={{
-        background: "#0f0f0f",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--color-sidebar)",
+        borderTop: "1px solid var(--color-border)",
       }}
     >
       {MOBILE_NAV.map((item) => {
@@ -500,7 +484,7 @@ function MobileBottomNav() {
             key={item.to}
             to={item.to}
             className="flex flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors"
-            style={{ color: isActive ? "#ffffff" : "rgba(255,255,255,0.55)" }}
+            style={{ color: isActive ? "var(--color-foreground)" : "var(--color-ink-subtle)" }}
           >
             <item.icon className="h-5 w-5" strokeWidth={1.75} />
             {item.label}
