@@ -12,6 +12,7 @@ import { Outlet, createFileRoute, useLocation, useRouter } from "@tanstack/react
 import { NeekloHeader } from "@/components/landing/neeklo-header";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { StickyMobileCTA } from "@/components/landing/sticky-mobile-cta";
+import { LeadWidget } from "@/components/landing/lead-widget";
 
 export const Route = createFileRoute("/_marketing")({
   component: MarketingLayout,
