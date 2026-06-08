@@ -113,7 +113,7 @@ function Hero() {
       />
       <Container>
 
-        <div className="relative grid items-center gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24 lg:py-28">
+        <div className="relative grid items-center gap-12 pt-8 pb-14 md:grid-cols-12 md:gap-10 md:pt-12 md:pb-20 lg:pt-14 lg:pb-24">
           {/* LEFT — strategic hierarchy */}
           <div className="z-10 flex flex-col items-start md:col-span-6">
             <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface/70 py-1 pl-1.5 pr-3 backdrop-blur shadow-xs">
