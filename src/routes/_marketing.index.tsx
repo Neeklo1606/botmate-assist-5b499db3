@@ -139,11 +139,15 @@ function Hero() {
               упущенной
               <br />
               заявки.{" "}
-              <span className="relative inline-block italic font-medium text-foreground/55">
+              <span className="relative inline-block font-display italic font-semibold tracking-[-0.04em] text-foreground/85">
                 Никогда.
                 <span
                   aria-hidden
-                  className="absolute -bottom-1 left-1 right-2 h-[2px] rounded-full bg-accent/60"
+                  className="absolute -bottom-1.5 left-0.5 right-1.5 h-[3px] rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(to right, transparent, var(--color-accent) 22%, var(--color-accent) 78%, transparent)",
+                  }}
                 />
               </span>
             </h1>
@@ -216,7 +220,7 @@ function Stat({ label, value, pad }: { label: string; value: string; pad?: boole
   return (
     <div className={pad ? "pl-5" : ""}>
       <dt className="mb-1.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
-        <span className="h-1 w-1 rounded-full bg-accent" />
+        <span className="h-1 w-1 rounded-full bg-foreground/30" />
         {label}
       </dt>
       <dd className="font-display text-[22px] font-semibold tabular tracking-[-0.01em] text-foreground md:text-[24px]">
@@ -297,7 +301,7 @@ function HeroScene() {
 
           <div className="flex items-center justify-between border-t border-border pt-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-accent/15 text-[10px] font-bold text-accent">
+              <div className="flex h-6 w-6 items-center justify-center rounded-md border border-border bg-surface-muted text-[10px] font-bold text-foreground">
                 C
               </div>
               <span className="text-[11.5px] font-medium text-ink-muted">
@@ -314,7 +318,7 @@ function HeroScene() {
 
         <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="h-1.5 w-1.5 rounded-full bg-foreground/35" />
             Telegram · вход
           </span>
           <span className="font-mono">14:02</span>

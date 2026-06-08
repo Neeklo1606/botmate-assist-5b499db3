@@ -120,12 +120,12 @@
 :root {
   --radius: 14px;
 
-  --background: oklch(0.975 0.012 92);          /* #faf8f3 milk — основной фон */
-  --foreground: oklch(0.235 0.008 110);         /* #1f2017 graphite */
-  --surface: oklch(0.992 0.006 92);             /* почти белая карточка с тёплым ядром */
-  --surface-muted: oklch(0.945 0.014 92);       /* мягкая молочная пыль, чуть светлее stone */
-  --surface-tint:  oklch(0.955 0.018 110);      /* тёплый олив-нейтрал — для ритма секций */
-  --surface-sunken: oklch(0.92 0.014 92);       /* «утопленная» полоса для глубины (footer/ink-edge) */
+  --background: oklch(0.965 0.012 92);          /* milk — чуть глубже, чтобы карточки и floating header читались как поднятые поверхности */
+  --foreground: oklch(0.225 0.008 110);         /* graphite, чуть плотнее для контраста */
+  --surface: oklch(0.995 0.005 92);             /* почти белая карточка — заметно светлее фона */
+  --surface-muted: oklch(0.94 0.014 92);        /* мягкая молочная пыль */
+  --surface-tint:  oklch(0.95 0.018 110);       /* тёплый олив-нейтрал — для ритма секций */
+  --surface-sunken: oklch(0.91 0.014 92);       /* «утопленная» полоса для глубины (footer/ink-edge) */
 
   --card: oklch(0.992 0.006 92);
   --card-foreground: oklch(0.235 0.008 110);
