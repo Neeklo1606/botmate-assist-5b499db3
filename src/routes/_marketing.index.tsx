@@ -214,7 +214,7 @@ function Hero() {
 
 function HeroScene() {
   return (
-    <div className="relative w-full max-w-md">
+      <div className="relative w-full max-w-md overflow-visible">
       {/* Soft accent halo behind main card — depth without color noise */}
       <div
         aria-hidden
@@ -325,7 +325,7 @@ function HeroScene() {
       </div>
 
       {/* Bottom live counter — refined */}
-      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-[var(--shadow-lg)] ring-1 ring-foreground/10 md:-left-20">
+      <div className="absolute -bottom-8 -left-12 z-[35] flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-[var(--shadow-lg)] ring-1 ring-foreground/10 md:-left-20">
 
         <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-[12px] font-bold tabular text-accent-ink">
           23
