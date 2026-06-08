@@ -93,6 +93,7 @@ function MarketingLayout() {
       </main>
       <SiteFooter variant={footerVariant} />
       <StickyMobileCTA />
+      <LeadWidget />
     </div>
   );
 }
