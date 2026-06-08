@@ -446,3 +446,36 @@
   }
 }
 
+
+/* Compact hero rhythm on shorter laptop screens (≈ MacBook 13"). */
+@media (max-height: 860px) and (min-width: 768px) {
+  .hero-grid {
+    padding-top: 0.5rem !important;
+    padding-bottom: 1rem !important;
+    gap: 1.5rem !important;
+  }
+  .hero-h1 {
+    font-size: 56px !important;
+    line-height: 0.95 !important;
+  }
+  .hero-right {
+    height: 480px !important;
+  }
+  .trust-marquee > div {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 768px) {
+  .hero-grid {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+  .hero-h1 {
+    font-size: 48px !important;
+  }
+  .hero-right {
+    height: 420px !important;
+  }
+}
