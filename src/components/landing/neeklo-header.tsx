@@ -54,18 +54,18 @@ export function NeekloHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 transition-[background-color,border-color,box-shadow] duration-300",
+        "sticky top-0 z-40 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-[400ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
         scrolled
-          ? "border-b border-border bg-background/80 backdrop-blur-xl header-scrolled"
-          : "border-b border-transparent bg-background/60 backdrop-blur-md",
+          ? "border-b border-border/80 bg-background/85 backdrop-blur-xl header-scrolled"
+          : "border-b border-transparent bg-background/50 backdrop-blur-md",
       )}
     >
       <Container>
-        <div className="flex h-[60px] items-center justify-between gap-6 md:h-[68px]">
+        <div className="flex h-14 items-center justify-between gap-6 md:h-16">
           {/* Logo */}
           <Link
             to="/"
-            className="group flex items-center gap-2.5"
+            className="group flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80"
             aria-label="Neeklo, на главную"
           >
             <NeekloLogo />
@@ -76,20 +76,20 @@ export function NeekloHeader() {
             aria-label="Главное меню"
             className="hidden flex-1 justify-center md:flex"
           >
-            <ul className="flex items-center gap-0.5 rounded-full border border-border/60 bg-surface/60 px-1 py-1 backdrop-blur-sm">
+            <ul className="flex items-center gap-0.5 rounded-full border border-border/70 bg-background/70 px-1 py-1 shadow-xs backdrop-blur-md">
               {nav.map((item) => (
                 <li key={item.label}>
                   <Link
                     to={item.to}
                     hash={item.hash}
-                    className="inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[13px] font-medium text-ink-muted transition-colors hover:bg-background hover:text-foreground"
+                    className="inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 text-[13px] font-medium text-ink-muted transition-colors duration-200 hover:text-foreground"
                     activeProps={{
-                      className: "bg-background text-foreground shadow-xs",
+                      className: "bg-surface-muted text-foreground",
                     }}
                   >
                     {item.label}
                     {item.soon && (
-                      <span className="rounded-full bg-foreground/10 px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-[0.08em] text-ink-subtle">
+                      <span className="rounded-full bg-foreground/[0.06] px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-[0.1em] text-ink-subtle">
                         скоро
                       </span>
                     )}
