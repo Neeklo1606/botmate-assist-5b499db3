@@ -271,7 +271,7 @@ export function NeekloHeader() {
           </div>
 
           {/* MOBILE — right column compresses to: theme + burger */}
-          <div className="col-start-3 flex items-center justify-end gap-1 md:hidden">
+          <div className="col-start-3 flex items-center justify-end gap-1 lg:hidden">
             <ThemeToggle />
             <button
               type="button"
