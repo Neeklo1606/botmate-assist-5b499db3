@@ -346,6 +346,24 @@
       padding-inline: 48px;
     }
   }
+
+  /* Тонкая hairline-сетка для премиальных фонов hero / секций */
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in oklab, var(--color-border-strong) 70%, transparent) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Sticky header: тонкая тень и hairline только при скролле */
+  .header-scrolled {
+    border-bottom-color: color-mix(in oklab, var(--color-border) 100%, transparent);
+    box-shadow:
+      0 1px 0 0 color-mix(in oklab, var(--color-border) 60%, transparent),
+      0 6px 24px -16px oklch(0 0 0 / 0.25);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
