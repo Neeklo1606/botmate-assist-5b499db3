@@ -118,10 +118,12 @@
 :root {
   --radius: 14px;
 
-  --background: oklch(0.975 0.012 92);          /* #faf8f3 milk */
+  --background: oklch(0.975 0.012 92);          /* #faf8f3 milk — основной фон */
   --foreground: oklch(0.235 0.008 110);         /* #1f2017 graphite */
   --surface: oklch(0.992 0.006 92);             /* почти белая карточка с тёплым ядром */
-  --surface-muted: oklch(0.935 0.018 90);       /* #ece8dc stone */
+  --surface-muted: oklch(0.945 0.014 92);       /* мягкая молочная пыль, чуть светлее stone */
+  --surface-tint:  oklch(0.955 0.018 110);      /* тёплый олив-нейтрал — для ритма секций */
+  --surface-sunken: oklch(0.92 0.014 92);       /* «утопленная» полоса для глубины (footer/ink-edge) */
 
   --card: oklch(0.992 0.006 92);
   --card-foreground: oklch(0.235 0.008 110);
