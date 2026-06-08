@@ -96,10 +96,23 @@ function Hero() {
       {/* Soft ambient olive wash, top-right */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-40 h-[520px] w-[520px] rounded-full opacity-60 blur-3xl"
+        className="pointer-events-none absolute -right-32 -top-40 h-[560px] w-[560px] rounded-full opacity-70 blur-3xl"
         style={{ background: "radial-gradient(closest-side, var(--color-accent-glow), transparent 70%)" }}
       />
+      {/* Cool secondary wash, bottom-left — adds layered depth without color noise */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-40 -left-32 h-[460px] w-[460px] rounded-full opacity-50 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, color-mix(in oklab, var(--color-foreground) 6%, transparent), transparent 70%)" }}
+      />
+      {/* Hairline bottom rule — anchors hero to next section */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
+        style={{ background: "linear-gradient(to right, transparent, color-mix(in oklab, var(--color-border-strong) 80%, transparent), transparent)" }}
+      />
       <Container>
+
         <div className="relative grid items-center gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24 lg:py-28">
           {/* LEFT — strategic hierarchy */}
           <div className="z-10 flex flex-col items-start md:col-span-6">
