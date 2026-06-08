@@ -151,7 +151,7 @@ function Sidebar() {
                   )}
                   style={{
                     color: isActive ? "#ffffff" : "var(--color-ink-muted)",
-                    background: isActive ? "rgba(168,255,87,0.06)" : "transparent",
+                    background: isActive ? "color-mix(in oklab, var(--color-accent) 10%, transparent)" : "transparent",
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
@@ -208,7 +208,7 @@ function SidebarSettingsLink({ active }: { active: boolean }) {
       className="relative flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors"
       style={{
         color: active ? "#ffffff" : "var(--color-ink-muted)",
-        background: active ? "rgba(168,255,87,0.06)" : "transparent",
+        background: active ? "color-mix(in oklab, var(--color-accent) 10%, transparent)" : "transparent",
       }}
     >
       {active && (
@@ -500,7 +500,7 @@ function MobileBottomNav() {
             key={item.to}
             to={item.to}
             className="flex flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors"
-            style={{ color: isActive ? "#ffffff" : "rgba(255,255,255,0.55)" }}
+            style={{ color: isActive ? "var(--color-foreground)" : "var(--color-ink-subtle)" }}
           >
             <item.icon className="h-5 w-5" strokeWidth={1.75} />
             {item.label}
