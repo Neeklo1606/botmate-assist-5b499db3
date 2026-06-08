@@ -96,10 +96,23 @@ function Hero() {
       {/* Soft ambient olive wash, top-right */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-40 h-[520px] w-[520px] rounded-full opacity-60 blur-3xl"
+        className="pointer-events-none absolute -right-32 -top-40 h-[560px] w-[560px] rounded-full opacity-70 blur-3xl"
         style={{ background: "radial-gradient(closest-side, var(--color-accent-glow), transparent 70%)" }}
       />
+      {/* Cool secondary wash, bottom-left — adds layered depth without color noise */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-40 -left-32 h-[460px] w-[460px] rounded-full opacity-50 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, color-mix(in oklab, var(--color-foreground) 6%, transparent), transparent 70%)" }}
+      />
+      {/* Hairline bottom rule — anchors hero to next section */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
+        style={{ background: "linear-gradient(to right, transparent, color-mix(in oklab, var(--color-border-strong) 80%, transparent), transparent)" }}
+      />
       <Container>
+
         <div className="relative grid items-center gap-14 py-16 md:grid-cols-12 md:gap-10 md:py-24 lg:py-28">
           {/* LEFT — strategic hierarchy */}
           <div className="z-10 flex flex-col items-start md:col-span-6">
@@ -125,8 +138,16 @@ function Hero() {
               <br />
               упущенной
               <br />
-              заявки. <span className="text-foreground/30">Никогда.</span>
+              заявки.{" "}
+              <span className="relative inline-block italic font-medium text-foreground/55">
+                Никогда.
+                <span
+                  aria-hidden
+                  className="absolute -bottom-1 left-1 right-2 h-[2px] rounded-full bg-accent/60"
+                />
+              </span>
             </h1>
+
 
             <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
               AI-сотрудник для входящих обращений. Принимает заявку с сайта,
@@ -136,14 +157,19 @@ function Hero() {
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <Link
                 to="/onboarding/assistant"
-                className="group inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-[14px] font-semibold text-background shadow-lift transition-[transform,box-shadow] duration-300 ease-quart hover:-translate-y-0.5"
+                className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-foreground pl-7 pr-8 text-[14px] font-semibold text-background shadow-lift ring-1 ring-foreground/0 transition-[transform,box-shadow,padding] duration-300 ease-quart hover:-translate-y-0.5 hover:shadow-soft-lift"
               >
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
                 Запустить менеджера
                 <ArrowRight
                   className="h-[18px] w-[18px] transition-transform duration-200 ease-out group-hover:translate-x-0.5"
                   strokeWidth={1.75}
                 />
               </Link>
+
               <Link
                 to="/"
                 hash="product"
@@ -203,14 +229,24 @@ function Stat({ label, value, pad }: { label: string; value: string; pad?: boole
 function HeroScene() {
   return (
     <div className="relative w-full max-w-md">
+      {/* Soft accent halo behind main card — depth without color noise */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-6 -z-10 rounded-[32px] opacity-70 blur-2xl"
+        style={{
+          background:
+            "radial-gradient(60% 60% at 70% 30%, var(--color-accent-glow), transparent 70%)",
+        }}
+      />
+
       {/* Main Lead Processing Card — product window */}
-      <div className="relative z-30 translate-x-4 overflow-hidden rounded-2xl border border-border bg-background shadow-lift">
+      <div className="relative z-30 translate-x-4 overflow-hidden rounded-2xl border border-border/80 bg-background shadow-[var(--shadow-lg),var(--shadow-rim)] ring-1 ring-foreground/[0.02]">
         {/* window chrome */}
-        <div className="flex items-center justify-between border-b border-border bg-surface-muted/60 px-4 py-2.5">
+        <div className="flex items-center justify-between border-b border-border/80 bg-surface-muted/70 px-4 py-2.5">
           <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
+            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
           </div>
           <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-subtle">
             neeklo / leads / live
@@ -220,6 +256,7 @@ function HeroScene() {
             live
           </span>
         </div>
+
 
         <div className="p-6">
           <div className="mb-6 flex items-center justify-between">
@@ -273,7 +310,8 @@ function HeroScene() {
       </div>
 
       {/* Chat Context Underlay */}
-      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-border bg-surface-muted/85 p-5 opacity-95 backdrop-blur-md shadow-sm">
+      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-border/70 bg-surface-muted/90 p-5 opacity-95 backdrop-blur-md shadow-[var(--shadow-md),var(--shadow-rim)]">
+
         <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
           <span className="inline-flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -301,7 +339,8 @@ function HeroScene() {
       </div>
 
       {/* Bottom live counter — refined */}
-      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-lift md:-left-20">
+      <div className="absolute -bottom-8 -left-12 z-40 flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-[var(--shadow-lg)] ring-1 ring-foreground/10 md:-left-20">
+
         <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-[12px] font-bold tabular text-accent-ink">
           23
           <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-background ring-2 ring-foreground">

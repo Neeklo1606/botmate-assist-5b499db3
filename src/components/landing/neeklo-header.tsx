@@ -100,19 +100,33 @@ export function NeekloHeader() {
           </nav>
 
           {/* Right cluster */}
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-1.5 md:flex">
             <ThemeToggle />
-            <span className="mx-1.5 h-4 w-px bg-border" aria-hidden />
+            <span
+              aria-hidden
+              className="mx-2 h-5 w-px"
+              style={{ background: "linear-gradient(to bottom, transparent, var(--color-border), transparent)" }}
+            />
             {isAuthed ? (
-              <Button asChild variant="brand" size="sm" className="rounded-full px-4">
+              <Button asChild variant="brand" size="sm" className="h-9 rounded-full px-4 text-[13px]">
                 <Link to="/app">В кабинет</Link>
               </Button>
             ) : (
               <>
-                <Button asChild variant="ghostInk" size="sm" className="rounded-full px-3.5">
+                <Button
+                  asChild
+                  variant="ghostInk"
+                  size="sm"
+                  className="h-9 rounded-full px-3.5 text-[13px] text-ink-muted hover:text-foreground"
+                >
                   <Link to="/login">Войти</Link>
                 </Button>
-                <Button asChild variant="brand" size="sm" className="group/cta rounded-full px-4">
+                <Button
+                  asChild
+                  variant="brand"
+                  size="sm"
+                  className="group/cta h-9 rounded-full pl-3.5 pr-4 text-[13px] shadow-xs ring-1 ring-foreground/0 transition-shadow hover:shadow-sm"
+                >
                   <Link to="/onboarding/assistant" className="gap-2">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
@@ -128,6 +142,7 @@ export function NeekloHeader() {
               </>
             )}
           </div>
+
 
           {/* Mobile */}
           <div className="flex items-center gap-1 md:hidden">
