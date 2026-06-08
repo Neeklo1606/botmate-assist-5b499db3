@@ -77,23 +77,23 @@ function ApiKeysPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#141414] text-white">
-      <div className="px-6 py-5 border-b border-[#2a2a2a] flex items-center justify-between gap-3">
+    <div className="min-h-full bg-bg-elevated text-foreground">
+      <div className="px-6 py-5 border-b border-border flex items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold inline-flex items-center gap-2">
-            <KeyRound className="h-5 w-5 text-[#a8ff57]" /> API Ключи
+            <KeyRound className="h-5 w-5 text-accent" /> API Ключи
           </h1>
-          <p className="text-sm text-white/50 mt-1">Доступ к Botmate API из ваших приложений</p>
+          <p className="text-sm text-foreground/50 mt-1">Доступ к Botmate API из ваших приложений</p>
         </div>
-        <Button onClick={() => setCreateOpen(true)} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+        <Button onClick={() => setCreateOpen(true)} className="bg-accent text-background hover:bg-accent-hover">
           <Plus className="h-4 w-4 mr-1.5" /> Создать ключ
         </Button>
       </div>
 
       <div className="p-6">
-        <div className="rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] overflow-hidden">
+        <div className="rounded-lg border border-border bg-bg-elevated overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-[#141414] text-white/60">
+            <thead className="bg-bg-elevated text-foreground/60">
               <tr>
                 <th className="text-left p-3 font-medium">Название</th>
                 <th className="text-left p-3 font-medium">Ключ</th>
@@ -104,23 +104,23 @@ function ApiKeysPage() {
             </thead>
             <tbody>
               {keys.map((k) => (
-                <tr key={k.id} className="border-t border-[#2a2a2a] hover:bg-[#222]">
+                <tr key={k.id} className="border-t border-border hover:bg-bg-soft">
                   <td className="p-3 font-medium">{k.name}</td>
-                  <td className="p-3 font-mono text-xs text-white/70">{k.masked}</td>
-                  <td className="p-3 text-white/60">{k.created}</td>
-                  <td className="p-3 text-white/60">{k.lastUsed}</td>
+                  <td className="p-3 font-mono text-xs text-foreground/70">{k.masked}</td>
+                  <td className="p-3 text-foreground/60">{k.created}</td>
+                  <td className="p-3 text-foreground/60">{k.lastUsed}</td>
                   <td className="p-3">
                     <div className="flex justify-end gap-1">
                       <button
                         onClick={() => copy(k.masked, "Маска скопирована")}
-                        className="p-1.5 rounded hover:bg-[#2a2a2a] text-white/70"
+                        className="p-1.5 rounded hover:bg-bg-soft text-foreground/70"
                         title="Скопировать"
                       >
                         <Copy className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => setRevokeTarget(k)}
-                        className="p-1.5 rounded hover:bg-red-500/10 text-red-400"
+                        className="p-1.5 rounded hover:bg-destructive/10 text-destructive"
                         title="Отозвать"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -130,7 +130,7 @@ function ApiKeysPage() {
                 </tr>
               ))}
               {keys.length === 0 && (
-                <tr><td colSpan={5} className="p-10 text-center text-white/40">Нет ключей. Создайте первый.</td></tr>
+                <tr><td colSpan={5} className="p-10 text-center text-foreground/40">Нет ключей. Создайте первый.</td></tr>
               )}
             </tbody>
           </table>
@@ -139,10 +139,10 @@ function ApiKeysPage() {
 
       {/* Create modal */}
       <Dialog open={createOpen} onOpenChange={setCreateOpen}>
-        <DialogContent className="bg-[#0f0f0f] border-[#2a2a2a] text-white max-w-md">
+        <DialogContent className="bg-bg-base border-border text-foreground max-w-md">
           <DialogHeader>
             <DialogTitle>Создать API ключ</DialogTitle>
-            <DialogDescription className="text-white/50">
+            <DialogDescription className="text-foreground/50">
               Дайте ключу осмысленное название, чтобы потом легко его узнать.
             </DialogDescription>
           </DialogHeader>
@@ -153,12 +153,12 @@ function ApiKeysPage() {
               onChange={(e) => setNewName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && create()}
               placeholder="Например: Production"
-              className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40"
+              className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40"
             />
           </div>
           <div className="flex justify-end gap-2">
-            <Button variant="ghost" onClick={() => setCreateOpen(false)} className="text-white/70 hover:bg-[#2a2a2a]">Отмена</Button>
-            <Button onClick={create} disabled={!newName.trim()} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90 disabled:opacity-40">
+            <Button variant="ghost" onClick={() => setCreateOpen(false)} className="text-foreground/70 hover:bg-bg-soft">Отмена</Button>
+            <Button onClick={create} disabled={!newName.trim()} className="bg-accent text-background hover:bg-accent-hover disabled:opacity-40">
               Создать
             </Button>
           </div>
@@ -167,24 +167,24 @@ function ApiKeysPage() {
 
       {/* Reveal modal — shown once after creation */}
       <Dialog open={!!reveal} onOpenChange={(o) => !o && setReveal(null)}>
-        <DialogContent className="bg-[#0f0f0f] border-[#2a2a2a] text-white max-w-md">
+        <DialogContent className="bg-bg-base border-border text-foreground max-w-md">
           <DialogHeader>
             <DialogTitle className="inline-flex items-center gap-2">
-              <Check className="h-5 w-5 text-[#a8ff57]" /> Ключ создан
+              <Check className="h-5 w-5 text-accent" /> Ключ создан
             </DialogTitle>
           </DialogHeader>
 
-          <div className="rounded-md border border-[#facc15]/30 bg-[#facc15]/10 p-3 text-sm text-[#facc15] flex items-start gap-2">
+          <div className="rounded-md border border-warning/30 bg-warning/10 p-3 text-sm text-warning flex items-start gap-2">
             <AlertTriangle className="h-4 w-4 mt-0.5 shrink-0" />
             <span>Сохраните ключ — он больше не будет показан.</span>
           </div>
 
           {reveal && (
-            <div className="mt-2 rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-3 flex items-center gap-2">
-              <code className="flex-1 font-mono text-xs text-[#a8ff57] break-all">{reveal.key}</code>
+            <div className="mt-2 rounded-md border border-border bg-bg-elevated p-3 flex items-center gap-2">
+              <code className="flex-1 font-mono text-xs text-accent break-all">{reveal.key}</code>
               <button
                 onClick={() => copy(reveal.key)}
-                className="p-2 rounded hover:bg-[#2a2a2a] text-white/70 shrink-0"
+                className="p-2 rounded hover:bg-bg-soft text-foreground/70 shrink-0"
               >
                 <Copy className="h-4 w-4" />
               </button>
@@ -192,7 +192,7 @@ function ApiKeysPage() {
           )}
 
           <div className="flex justify-end pt-2">
-            <Button onClick={() => setReveal(null)} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+            <Button onClick={() => setReveal(null)} className="bg-accent text-background hover:bg-accent-hover">
               Я сохранил ключ
             </Button>
           </div>
@@ -201,21 +201,21 @@ function ApiKeysPage() {
 
       {/* Revoke confirmation */}
       <Dialog open={!!revokeTarget} onOpenChange={(o) => !o && setRevokeTarget(null)}>
-        <DialogContent className="bg-[#0f0f0f] border-[#2a2a2a] text-white max-w-md">
+        <DialogContent className="bg-bg-base border-border text-foreground max-w-md">
           <DialogHeader>
-            <DialogTitle className="inline-flex items-center gap-2 text-red-400">
+            <DialogTitle className="inline-flex items-center gap-2 text-destructive">
               <AlertTriangle className="h-5 w-5" /> Отозвать ключ?
             </DialogTitle>
-            <DialogDescription className="text-white/60">
-              Ключ <span className="text-white font-medium">«{revokeTarget?.name}»</span> перестанет работать немедленно.
+            <DialogDescription className="text-foreground/60">
+              Ключ <span className="text-foreground font-medium">«{revokeTarget?.name}»</span> перестанет работать немедленно.
               Все запросы с этим ключом будут возвращать 401. Действие необратимо.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" onClick={() => setRevokeTarget(null)} className="text-white/70 hover:bg-[#2a2a2a]">Отмена</Button>
+            <Button variant="ghost" onClick={() => setRevokeTarget(null)} className="text-foreground/70 hover:bg-bg-soft">Отмена</Button>
             <Button
               onClick={() => revokeTarget && revoke(revokeTarget)}
-              className="bg-red-500 text-white hover:bg-red-600"
+              className="bg-destructive text-foreground hover:bg-destructive"
             >
               Отозвать
             </Button>

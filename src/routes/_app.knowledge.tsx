@@ -156,17 +156,17 @@ function KnowledgePage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-0px)] bg-[#141414] text-white">
+    <div className="flex h-[calc(100vh-0px)] bg-bg-elevated text-foreground">
       {/* LEFT PANEL */}
-      <aside className="w-[300px] border-r border-[#2a2a2a] bg-[#0f0f0f] flex flex-col">
-        <div className="p-4 border-b border-[#2a2a2a]">
+      <aside className="w-[300px] border-r border-border bg-bg-base flex flex-col">
+        <div className="p-4 border-b border-border">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Поиск документов…"
-              className="pl-9 bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40"
+              className="pl-9 bg-bg-elevated border-border text-foreground placeholder:text-foreground/40"
             />
           </div>
         </div>
@@ -176,14 +176,14 @@ function KnowledgePage() {
             onClick={() => setActiveCategory("all")}
             className={cn(
               "w-full flex items-center justify-between px-3 py-2 rounded-md text-sm",
-              activeCategory === "all" ? "bg-[#1a1a1a] text-white" : "text-white/70 hover:bg-[#1a1a1a]"
+              activeCategory === "all" ? "bg-bg-elevated text-foreground" : "text-foreground/70 hover:bg-bg-elevated"
             )}
           >
             <span className="flex items-center gap-2"><FileText className="h-4 w-4" /> Все документы</span>
-            <Badge variant="secondary" className="bg-[#2a2a2a] text-white/80 hover:bg-[#2a2a2a]">{docs.length}</Badge>
+            <Badge variant="secondary" className="bg-bg-soft text-foreground/80 hover:bg-bg-soft">{docs.length}</Badge>
           </button>
 
-          <div className="pt-3 pb-1 px-3 text-xs uppercase tracking-wider text-white/40">Категории</div>
+          <div className="pt-3 pb-1 px-3 text-xs uppercase tracking-wider text-foreground/40">Категории</div>
 
           {(Object.keys(CATEGORY_META) as Category[]).map((cat) => {
             const meta = CATEGORY_META[cat];
@@ -194,19 +194,19 @@ function KnowledgePage() {
                 onClick={() => setActiveCategory(cat)}
                 className={cn(
                   "w-full flex items-center justify-between px-3 py-2 rounded-md text-sm",
-                  active ? "bg-[#1a1a1a] text-white" : "text-white/70 hover:bg-[#1a1a1a]"
+                  active ? "bg-bg-elevated text-foreground" : "text-foreground/70 hover:bg-bg-elevated"
                 )}
               >
                 <span className="flex items-center gap-2">
                   <span style={{ color: meta.color }}>{meta.emoji}</span>
                   {meta.label}
                 </span>
-                <Badge variant="secondary" className="bg-[#2a2a2a] text-white/80 hover:bg-[#2a2a2a]">{counts[cat]}</Badge>
+                <Badge variant="secondary" className="bg-bg-soft text-foreground/80 hover:bg-bg-soft">{counts[cat]}</Badge>
               </button>
             );
           })}
 
-          <div className="pt-4 pb-2 px-3 text-xs uppercase tracking-wider text-white/40">Теги</div>
+          <div className="pt-4 pb-2 px-3 text-xs uppercase tracking-wider text-foreground/40">Теги</div>
           <div className="px-2 flex flex-wrap gap-1.5">
             {ALL_TAGS.map((tag) => (
               <button
@@ -215,8 +215,8 @@ function KnowledgePage() {
                 className={cn(
                   "text-xs px-2 py-1 rounded-full border transition-colors",
                   activeTag === tag
-                    ? "bg-[#a8ff57] text-black border-[#a8ff57]"
-                    : "bg-[#1a1a1a] text-white/70 border-[#2a2a2a] hover:border-[#a8ff57]/40"
+                    ? "bg-accent text-background border-accent"
+                    : "bg-bg-elevated text-foreground/70 border-border hover:border-accent/40"
                 )}
               >
                 #{tag}
@@ -225,10 +225,10 @@ function KnowledgePage() {
           </div>
         </div>
 
-        <div className="p-3 border-t border-[#2a2a2a]">
+        <div className="p-3 border-t border-border">
           <Button
             onClick={() => setUploadOpen(true)}
-            className="w-full bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90"
+            className="w-full bg-accent text-background hover:bg-accent-hover"
           >
             <Plus className="h-4 w-4 mr-2" /> Добавить
           </Button>
@@ -237,12 +237,12 @@ function KnowledgePage() {
 
       {/* MAIN */}
       <main className="flex-1 relative overflow-hidden">
-        <div className="absolute top-4 right-4 z-20 inline-flex rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-1">
+        <div className="absolute top-4 right-4 z-20 inline-flex rounded-md border border-border bg-bg-elevated p-1">
           <button
             onClick={() => setView("graph")}
             className={cn(
               "flex items-center gap-1.5 px-3 py-1.5 text-sm rounded",
-              view === "graph" ? "bg-[#2a2a2a] text-white" : "text-white/60 hover:text-white"
+              view === "graph" ? "bg-bg-soft text-foreground" : "text-foreground/60 hover:text-foreground"
             )}
           >
             <Network className="h-4 w-4" /> Graph
@@ -251,7 +251,7 @@ function KnowledgePage() {
             onClick={() => setView("list")}
             className={cn(
               "flex items-center gap-1.5 px-3 py-1.5 text-sm rounded",
-              view === "list" ? "bg-[#2a2a2a] text-white" : "text-white/60 hover:text-white"
+              view === "list" ? "bg-bg-soft text-foreground" : "text-foreground/60 hover:text-foreground"
             )}
           >
             <ListIcon className="h-4 w-4" /> List
@@ -380,44 +380,44 @@ function GraphView({
   }, [overlaySearch, docs]);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 bg-[#141414]">
+    <div ref={containerRef} className="absolute inset-0 bg-bg-elevated">
       {/* Subtitle */}
-      <div className="absolute top-4 left-4 z-10 max-w-md text-sm text-white/50">
+      <div className="absolute top-4 left-4 z-10 max-w-md text-sm text-foreground/50">
         Это ваша база знаний. Каждый документ влияет на ответы ассистента.
       </div>
 
       {/* Search overlay */}
       <div className="absolute top-16 left-4 z-10 w-64">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
           <Input
             value={overlaySearch}
             onChange={(e) => setOverlaySearch(e.target.value)}
             placeholder="Найти узел…"
-            className="pl-9 bg-[#1a1a1a]/90 backdrop-blur border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+            className="pl-9 bg-bg-elevated/90 backdrop-blur border-border text-foreground placeholder:text-foreground/40 h-9"
           />
         </div>
       </div>
 
       {/* Controls */}
-      <div className="absolute bottom-4 right-4 z-10 flex flex-col gap-1 rounded-md border border-[#2a2a2a] bg-[#1a1a1a]/90 backdrop-blur p-1">
+      <div className="absolute bottom-4 right-4 z-10 flex flex-col gap-1 rounded-md border border-border bg-bg-elevated/90 backdrop-blur p-1">
         <button
           onClick={() => setZoom((z) => Math.min(2.5, z + 0.2))}
-          className="p-2 rounded hover:bg-[#2a2a2a] text-white/80"
+          className="p-2 rounded hover:bg-bg-soft text-foreground/80"
           aria-label="Zoom in"
         >
           <ZoomIn className="h-4 w-4" />
         </button>
         <button
           onClick={() => setZoom((z) => Math.max(0.4, z - 0.2))}
-          className="p-2 rounded hover:bg-[#2a2a2a] text-white/80"
+          className="p-2 rounded hover:bg-bg-soft text-foreground/80"
           aria-label="Zoom out"
         >
           <ZoomOut className="h-4 w-4" />
         </button>
         <button
           onClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }}
-          className="p-2 rounded hover:bg-[#2a2a2a] text-white/80"
+          className="p-2 rounded hover:bg-bg-soft text-foreground/80"
           aria-label="Reset"
         >
           <RotateCcw className="h-4 w-4" />
@@ -425,9 +425,9 @@ function GraphView({
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-10 flex flex-wrap gap-3 rounded-md border border-[#2a2a2a] bg-[#1a1a1a]/90 backdrop-blur px-3 py-2 text-xs">
+      <div className="absolute bottom-4 left-4 z-10 flex flex-wrap gap-3 rounded-md border border-border bg-bg-elevated/90 backdrop-blur px-3 py-2 text-xs">
         {(Object.keys(CATEGORY_META) as Category[]).map((c) => (
-          <span key={c} className="flex items-center gap-1.5 text-white/70">
+          <span key={c} className="flex items-center gap-1.5 text-foreground/70">
             <span className="h-2.5 w-2.5 rounded-full" style={{ background: CATEGORY_META[c].color }} />
             {CATEGORY_META[c].label}
           </span>
@@ -516,16 +516,16 @@ function ListView({
   return (
     <div className="absolute inset-0 overflow-auto p-6 pt-16">
       {selected.size > 0 && (
-        <div className="sticky top-0 z-10 mb-3 flex items-center justify-between rounded-md border border-[#a8ff57]/30 bg-[#1a1a1a] px-4 py-2">
+        <div className="sticky top-0 z-10 mb-3 flex items-center justify-between rounded-md border border-accent/30 bg-bg-elevated px-4 py-2">
           <span className="text-sm">Выбрано: {selected.size}</span>
           <div className="flex gap-2">
-            <Button size="sm" variant="ghost" className="text-white/80 hover:bg-[#2a2a2a]">Move</Button>
-            <Button size="sm" variant="ghost" className="text-white/80 hover:bg-[#2a2a2a]">Tag</Button>
+            <Button size="sm" variant="ghost" className="text-foreground/80 hover:bg-bg-soft">Move</Button>
+            <Button size="sm" variant="ghost" className="text-foreground/80 hover:bg-bg-soft">Tag</Button>
             <Button
               size="sm"
               variant="ghost"
               onClick={() => onDelete(Array.from(selected))}
-              className="text-red-400 hover:bg-red-500/10"
+              className="text-destructive hover:bg-destructive/10"
             >
               <Trash2 className="h-4 w-4 mr-1" /> Delete
             </Button>
@@ -533,9 +533,9 @@ function ListView({
         </div>
       )}
 
-      <div className="rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] overflow-hidden">
+      <div className="rounded-lg border border-border bg-bg-elevated overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-[#141414] text-white/60">
+          <thead className="bg-bg-elevated text-foreground/60">
             <tr>
               <th className="w-10 p-3"><Checkbox checked={allChecked} onCheckedChange={toggleAll} /></th>
               <th className="text-left p-3 font-medium">Название</th>
@@ -548,36 +548,36 @@ function ListView({
           </thead>
           <tbody>
             {docs.map((d) => (
-              <tr key={d.id} className="border-t border-[#2a2a2a] hover:bg-[#222]">
+              <tr key={d.id} className="border-t border-border hover:bg-bg-soft">
                 <td className="p-3"><Checkbox checked={selected.has(d.id)} onCheckedChange={() => toggleOne(d.id)} /></td>
                 <td className="p-3 cursor-pointer" onClick={() => onOpen(d.id)}>
                   <div className="font-medium">{d.title}</div>
                   <div className="flex gap-1 mt-0.5">
                     {d.tags.slice(0, 3).map((t) => (
-                      <span key={t} className="text-[10px] text-white/50">#{t}</span>
+                      <span key={t} className="text-[10px] text-foreground/50">#{t}</span>
                     ))}
                   </div>
                 </td>
                 <td className="p-3">
-                  <span className="inline-flex items-center gap-1.5 text-white/70">
+                  <span className="inline-flex items-center gap-1.5 text-foreground/70">
                     <span className="h-2 w-2 rounded-full" style={{ background: CATEGORY_META[d.category].color }} />
                     {CATEGORY_META[d.category].label}
                   </span>
                 </td>
-                <td className="p-3 text-white/60 uppercase text-xs">{d.type}</td>
-                <td className="p-3 text-white/70">{d.words.toLocaleString("ru-RU")}</td>
-                <td className="p-3 text-white/50">{d.updated}</td>
+                <td className="p-3 text-foreground/60 uppercase text-xs">{d.type}</td>
+                <td className="p-3 text-foreground/70">{d.words.toLocaleString("ru-RU")}</td>
+                <td className="p-3 text-foreground/50">{d.updated}</td>
                 <td className="p-3">
                   <div className="flex justify-end gap-1">
-                    <button onClick={() => onOpen(d.id)} className="p-1.5 rounded hover:bg-[#2a2a2a] text-white/70" title="Edit"><Pencil className="h-4 w-4" /></button>
-                    <button onClick={() => onOpen(d.id)} className="p-1.5 rounded hover:bg-[#2a2a2a] text-white/70" title="Preview"><Eye className="h-4 w-4" /></button>
-                    <button onClick={() => onDelete([d.id])} className="p-1.5 rounded hover:bg-red-500/10 text-red-400" title="Delete"><Trash2 className="h-4 w-4" /></button>
+                    <button onClick={() => onOpen(d.id)} className="p-1.5 rounded hover:bg-bg-soft text-foreground/70" title="Edit"><Pencil className="h-4 w-4" /></button>
+                    <button onClick={() => onOpen(d.id)} className="p-1.5 rounded hover:bg-bg-soft text-foreground/70" title="Preview"><Eye className="h-4 w-4" /></button>
+                    <button onClick={() => onDelete([d.id])} className="p-1.5 rounded hover:bg-destructive/10 text-destructive" title="Delete"><Trash2 className="h-4 w-4" /></button>
                   </div>
                 </td>
               </tr>
             ))}
             {docs.length === 0 && (
-              <tr><td colSpan={7} className="p-8 text-center text-white/40">Ничего не найдено</td></tr>
+              <tr><td colSpan={7} className="p-8 text-center text-foreground/40">Ничего не найдено</td></tr>
             )}
           </tbody>
         </table>
@@ -623,38 +623,38 @@ function DocumentEditor({
 
   return (
     <div className="fixed inset-0 z-50 flex">
-      <div className="flex-1 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="w-[520px] bg-[#0f0f0f] border-l border-[#2a2a2a] flex flex-col shadow-2xl animate-in slide-in-from-right">
+      <div className="flex-1 bg-foreground/50 backdrop-blur-sm" onClick={onClose} />
+      <div className="w-[520px] bg-bg-base border-l border-border flex flex-col shadow-2xl animate-in slide-in-from-right">
         {/* Header */}
-        <div className="p-4 border-b border-[#2a2a2a] flex items-start justify-between gap-2">
+        <div className="p-4 border-b border-border flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
-            <div className="text-xs text-white/40 mb-1 flex items-center gap-1">
+            <div className="text-xs text-foreground/40 mb-1 flex items-center gap-1">
               <Folder className="h-3 w-3" />
-              {CATEGORY_META[draft.category].label} <span className="text-white/30">/</span>{" "}
-              <span className="text-white/60 truncate">{draft.title || "Без названия"}</span>
+              {CATEGORY_META[draft.category].label} <span className="text-foreground/30">/</span>{" "}
+              <span className="text-foreground/60 truncate">{draft.title || "Без названия"}</span>
             </div>
             <Input
               value={draft.title}
               onChange={(e) => setDraft({ ...draft, title: e.target.value })}
-              className="bg-transparent border-0 text-xl font-semibold text-white px-0 focus-visible:ring-0 h-auto"
+              className="bg-transparent border-0 text-xl font-semibold text-foreground px-0 focus-visible:ring-0 h-auto"
               placeholder="Название документа"
             />
           </div>
-          <button onClick={onClose} className="p-2 rounded hover:bg-[#2a2a2a] text-white/60">
+          <button onClick={onClose} className="p-2 rounded hover:bg-bg-soft text-foreground/60">
             <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Toolbar */}
-        <div className="px-4 py-2 border-b border-[#2a2a2a] flex flex-wrap gap-1 text-white/70">
+        <div className="px-4 py-2 border-b border-border flex flex-wrap gap-1 text-foreground/70">
           <ToolBtn onClick={() => insert("**", "**")}><Bold className="h-4 w-4" /></ToolBtn>
           <ToolBtn onClick={() => insert("*", "*")}><Italic className="h-4 w-4" /></ToolBtn>
           <ToolBtn onClick={() => insert("[", "](url)")}><LinkIcon className="h-4 w-4" /></ToolBtn>
-          <span className="w-px bg-[#2a2a2a] mx-1" />
+          <span className="w-px bg-bg-soft mx-1" />
           <ToolBtn onClick={() => insert("# ", "")}><Heading1 className="h-4 w-4" /></ToolBtn>
           <ToolBtn onClick={() => insert("## ", "")}><Heading2 className="h-4 w-4" /></ToolBtn>
           <ToolBtn onClick={() => insert("### ", "")}><Heading3 className="h-4 w-4" /></ToolBtn>
-          <span className="w-px bg-[#2a2a2a] mx-1" />
+          <span className="w-px bg-bg-soft mx-1" />
           <ToolBtn onClick={() => insert("- ", "")}><ListBulletIcon className="h-4 w-4" /></ToolBtn>
           <ToolBtn onClick={() => insert("`", "`")}><Code className="h-4 w-4" /></ToolBtn>
         </div>
@@ -664,24 +664,24 @@ function DocumentEditor({
           <Textarea
             value={draft.body}
             onChange={(e) => setDraft({ ...draft, body: e.target.value })}
-            className="min-h-[260px] bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 font-mono text-sm"
+            className="min-h-[260px] bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 font-mono text-sm"
             placeholder="Markdown-содержимое…"
           />
 
-          <div className="rounded-md border border-[#2a2a2a] bg-[#141414] p-3 text-sm text-white/70">
-            <div className="text-xs uppercase tracking-wider text-white/40 mb-2">Превью</div>
+          <div className="rounded-md border border-border bg-bg-elevated p-3 text-sm text-foreground/70">
+            <div className="text-xs uppercase tracking-wider text-foreground/40 mb-2">Превью</div>
             <pre className="whitespace-pre-wrap font-sans">{draft.body || "—"}</pre>
           </div>
 
           {/* Sidebar within panel */}
           <div className="space-y-4 pt-2">
             <div>
-              <div className="text-xs uppercase tracking-wider text-white/40 mb-2">Теги</div>
+              <div className="text-xs uppercase tracking-wider text-foreground/40 mb-2">Теги</div>
               <div className="flex flex-wrap gap-1.5 mb-2">
                 {draft.tags.map((t) => (
-                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] text-white/80 inline-flex items-center gap-1">
+                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-bg-elevated border border-border text-foreground/80 inline-flex items-center gap-1">
                     #{t}
-                    <button onClick={() => removeTag(t)} className="text-white/40 hover:text-white">
+                    <button onClick={() => removeTag(t)} className="text-foreground/40 hover:text-foreground">
                       <X className="h-3 w-3" />
                     </button>
                   </span>
@@ -693,19 +693,19 @@ function DocumentEditor({
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
                   placeholder="Добавить тег и Enter"
-                  className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+                  className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
                 />
-                <Button size="sm" onClick={addTag} variant="secondary" className="bg-[#2a2a2a] hover:bg-[#333] text-white">+</Button>
+                <Button size="sm" onClick={addTag} variant="secondary" className="bg-bg-soft hover:bg-bg-soft-hover text-foreground">+</Button>
               </div>
             </div>
 
             <div>
-              <div className="text-xs uppercase tracking-wider text-white/40 mb-2">Категория</div>
+              <div className="text-xs uppercase tracking-wider text-foreground/40 mb-2">Категория</div>
               <Select value={draft.category} onValueChange={(v) => setDraft({ ...draft, category: v as Category })}>
-                <SelectTrigger className="bg-[#1a1a1a] border-[#2a2a2a] text-white">
+                <SelectTrigger className="bg-bg-elevated border-border text-foreground">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-[#1a1a1a] border-[#2a2a2a] text-white">
+                <SelectContent className="bg-bg-elevated border-border text-foreground">
                   {(Object.keys(CATEGORY_META) as Category[]).map((c) => (
                     <SelectItem key={c} value={c}>{CATEGORY_META[c].label}</SelectItem>
                   ))}
@@ -714,13 +714,13 @@ function DocumentEditor({
             </div>
 
             <div>
-              <div className="text-xs uppercase tracking-wider text-white/40 mb-2">Связанные документы</div>
+              <div className="text-xs uppercase tracking-wider text-foreground/40 mb-2">Связанные документы</div>
               {related.length === 0 ? (
-                <div className="text-sm text-white/40">Нет связанных</div>
+                <div className="text-sm text-foreground/40">Нет связанных</div>
               ) : (
                 <ul className="space-y-1">
                   {related.map((r) => (
-                    <li key={r.id} className="text-sm text-white/80 flex items-center gap-2">
+                    <li key={r.id} className="text-sm text-foreground/80 flex items-center gap-2">
                       <span className="h-1.5 w-1.5 rounded-full" style={{ background: CATEGORY_META[r.category].color }} />
                       {r.title}
                     </li>
@@ -730,11 +730,11 @@ function DocumentEditor({
             </div>
 
             <div>
-              <div className="text-xs uppercase tracking-wider text-white/40 mb-2">Используется ассистентами</div>
+              <div className="text-xs uppercase tracking-wider text-foreground/40 mb-2">Используется ассистентами</div>
               <div className="flex flex-wrap gap-1.5">
-                {draft.assistants.length === 0 && <span className="text-sm text-white/40">—</span>}
+                {draft.assistants.length === 0 && <span className="text-sm text-foreground/40">—</span>}
                 {draft.assistants.map((a) => (
-                  <span key={a} className="text-xs px-2 py-1 rounded-full bg-[#a8ff57]/10 border border-[#a8ff57]/30 text-[#a8ff57]">
+                  <span key={a} className="text-xs px-2 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent">
                     {a}
                   </span>
                 ))}
@@ -744,9 +744,9 @@ function DocumentEditor({
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-[#2a2a2a] flex justify-end gap-2">
-          <Button variant="ghost" onClick={onClose} className="text-white/70 hover:bg-[#2a2a2a]">Отмена</Button>
-          <Button onClick={() => onSave(draft)} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+        <div className="p-4 border-t border-border flex justify-end gap-2">
+          <Button variant="ghost" onClick={onClose} className="text-foreground/70 hover:bg-bg-soft">Отмена</Button>
+          <Button onClick={() => onSave(draft)} className="bg-accent text-background hover:bg-accent-hover">
             Сохранить
           </Button>
         </div>
@@ -757,7 +757,7 @@ function DocumentEditor({
 
 function ToolBtn({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
-    <button onClick={onClick} className="p-2 rounded hover:bg-[#2a2a2a]">
+    <button onClick={onClick} className="p-2 rounded hover:bg-bg-soft">
       {children}
     </button>
   );
@@ -795,17 +795,17 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="bg-[#0f0f0f] border-[#2a2a2a] text-white max-w-xl">
+      <DialogContent className="bg-bg-base border-border text-foreground max-w-xl">
         <DialogHeader>
           <DialogTitle>Добавить в базу знаний</DialogTitle>
         </DialogHeader>
 
         <Tabs defaultValue="file">
-          <TabsList className="bg-[#1a1a1a] border border-[#2a2a2a]">
-            <TabsTrigger value="file" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Загрузить файл</TabsTrigger>
-            <TabsTrigger value="url" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">URL</TabsTrigger>
-            <TabsTrigger value="text" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Текст</TabsTrigger>
-            <TabsTrigger value="obsidian" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Obsidian sync</TabsTrigger>
+          <TabsList className="bg-bg-elevated border border-border">
+            <TabsTrigger value="file" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Загрузить файл</TabsTrigger>
+            <TabsTrigger value="url" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">URL</TabsTrigger>
+            <TabsTrigger value="text" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Текст</TabsTrigger>
+            <TabsTrigger value="obsidian" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Obsidian sync</TabsTrigger>
           </TabsList>
 
           <TabsContent value="file" className="mt-4 space-y-3">
@@ -813,11 +813,11 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               onClick={() => inputRef.current?.click()}
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => { e.preventDefault(); handleFiles(e.dataTransfer.files); }}
-              className="border-2 border-dashed border-[#2a2a2a] rounded-lg p-8 text-center cursor-pointer hover:border-[#a8ff57]/40 hover:bg-[#1a1a1a] transition"
+              className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-accent/40 hover:bg-bg-elevated transition"
             >
-              <Upload className="h-8 w-8 mx-auto text-white/40 mb-2" />
-              <div className="text-sm text-white/80">Перетащите файлы сюда или нажмите чтобы выбрать</div>
-              <div className="text-xs text-white/40 mt-1">PDF, DOCX, MD, TXT — до 20MB</div>
+              <Upload className="h-8 w-8 mx-auto text-foreground/40 mb-2" />
+              <div className="text-sm text-foreground/80">Перетащите файлы сюда или нажмите чтобы выбрать</div>
+              <div className="text-xs text-foreground/40 mt-1">PDF, DOCX, MD, TXT — до 20MB</div>
               <input
                 ref={inputRef}
                 type="file"
@@ -829,13 +829,13 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
             {files.length > 0 && (
               <div className="space-y-2">
                 {files.map((f, i) => (
-                  <div key={i} className="rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-2">
-                    <div className="flex justify-between text-xs text-white/70 mb-1">
+                  <div key={i} className="rounded-md border border-border bg-bg-elevated p-2">
+                    <div className="flex justify-between text-xs text-foreground/70 mb-1">
                       <span className="truncate">{f.name}</span>
                       <span>{f.progress}%</span>
                     </div>
-                    <div className="h-1.5 bg-[#2a2a2a] rounded overflow-hidden">
-                      <div className="h-full bg-[#a8ff57] transition-all" style={{ width: `${f.progress}%` }} />
+                    <div className="h-1.5 bg-bg-soft rounded overflow-hidden">
+                      <div className="h-full bg-accent transition-all" style={{ width: `${f.progress}%` }} />
                     </div>
                   </div>
                 ))}
@@ -848,9 +848,9 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://example.com/page"
-              className="bg-[#1a1a1a] border-[#2a2a2a] text-white"
+              className="bg-bg-elevated border-border text-foreground"
             />
-            <div className="text-xs text-white/40">Мы загрузим страницу и извлечём текст для базы знаний.</div>
+            <div className="text-xs text-foreground/40">Мы загрузим страницу и извлечём текст для базы знаний.</div>
           </TabsContent>
 
           <TabsContent value="text" className="mt-4 space-y-3">
@@ -858,23 +858,23 @@ function UploadModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Вставьте текст…"
-              className="min-h-[180px] bg-[#1a1a1a] border-[#2a2a2a] text-white"
+              className="min-h-[180px] bg-bg-elevated border-border text-foreground"
             />
           </TabsContent>
 
           <TabsContent value="obsidian" className="mt-4">
-            <div className="rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-4 text-sm text-white/70">
+            <div className="rounded-md border border-border bg-bg-elevated p-4 text-sm text-foreground/70">
               Подключите ваш vault Obsidian для автоматической синхронизации заметок.
-              <Button className="mt-3 bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">Подключить Obsidian</Button>
+              <Button className="mt-3 bg-accent text-background hover:bg-accent-hover">Подключить Obsidian</Button>
             </div>
           </TabsContent>
         </Tabs>
 
         <div className="flex justify-end gap-2 pt-2">
-          <Button variant="ghost" onClick={onClose} className="text-white/70 hover:bg-[#2a2a2a]">Отмена</Button>
+          <Button variant="ghost" onClick={onClose} className="text-foreground/70 hover:bg-bg-soft">Отмена</Button>
           <Button
             onClick={() => { toast.success("Добавлено в базу знаний"); onClose(); }}
-            className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90"
+            className="bg-accent text-background hover:bg-accent-hover"
           >
             Добавить
           </Button>

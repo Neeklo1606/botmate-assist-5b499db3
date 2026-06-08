@@ -209,9 +209,9 @@ const STATUS_BORDER: Record<Status, string> = {
 };
 
 const STATUS_DOT: Record<Status, string> = {
-  active: "bg-[#a8ff57]",
-  recent: "bg-[#facc15]",
-  inactive: "bg-[#666]",
+  active: "bg-accent",
+  recent: "bg-warning",
+  inactive: "bg-muted",
 };
 
 const DeviceIcon = ({ type }: { type: DeviceType }) => {
@@ -252,18 +252,18 @@ function VisitorsPage() {
   const openVisitor = visitors.find((v) => v.id === openId) ?? null;
 
   return (
-    <div className="min-h-full bg-[#141414] text-white">
+    <div className="min-h-full bg-bg-elevated text-foreground">
       {/* Top bar */}
-      <div className="sticky top-0 z-20 border-b border-[#2a2a2a] bg-[#141414]/95 backdrop-blur">
+      <div className="sticky top-0 z-20 border-b border-border bg-bg-elevated/95 backdrop-blur">
         <div className="px-6 py-5 flex flex-wrap items-center gap-4">
           <h1 className="text-2xl font-semibold">Посетители</h1>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#a8ff57]/10 border border-[#a8ff57]/30">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/30">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#a8ff57] opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#a8ff57]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
             </span>
-            <span className="text-sm text-[#a8ff57] font-medium">
+            <span className="text-sm text-accent font-medium">
               {liveCount} {pluralize(liveCount, "человек", "человека", "человек")} сейчас на сайте
             </span>
           </div>
@@ -271,7 +271,7 @@ function VisitorsPage() {
           <div className="flex-1" />
 
           {/* Filter pills */}
-          <div className="inline-flex rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-1">
+          <div className="inline-flex rounded-md border border-border bg-bg-elevated p-1">
             {([
               ["all", "Все"],
               ["active", "Активные"],
@@ -283,7 +283,7 @@ function VisitorsPage() {
                 onClick={() => setFilter(k)}
                 className={cn(
                   "px-3 py-1.5 text-sm rounded transition-colors",
-                  filter === k ? "bg-[#2a2a2a] text-white" : "text-white/60 hover:text-white"
+                  filter === k ? "bg-bg-soft text-foreground" : "text-foreground/60 hover:text-foreground"
                 )}
               >
                 {label}
@@ -292,7 +292,7 @@ function VisitorsPage() {
           </div>
 
           {/* Time range */}
-          <div className="inline-flex rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-1">
+          <div className="inline-flex rounded-md border border-border bg-bg-elevated p-1">
             {([
               ["today", "Сегодня"],
               ["7d", "7 дней"],
@@ -303,7 +303,7 @@ function VisitorsPage() {
                 onClick={() => setRange(k)}
                 className={cn(
                   "px-3 py-1.5 text-sm rounded transition-colors",
-                  range === k ? "bg-[#2a2a2a] text-white" : "text-white/60 hover:text-white"
+                  range === k ? "bg-bg-soft text-foreground" : "text-foreground/60 hover:text-foreground"
                 )}
               >
                 {label}
@@ -349,21 +349,21 @@ function VisitorCard({ visitor, onOpen }: { visitor: Visitor; onOpen: () => void
     <div
       onClick={onOpen}
       className={cn(
-        "group relative flex items-center gap-4 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] p-4 pl-5 cursor-pointer",
-        "border-l-4 transition-all hover:bg-[#1f1f1f] hover:border-[#3a3a3a]",
+        "group relative flex items-center gap-4 rounded-lg border border-border bg-bg-elevated p-4 pl-5 cursor-pointer",
+        "border-l-4 transition-all hover:bg-bg-soft hover:border-border-strong",
         STATUS_BORDER[visitor.status],
       )}
     >
       {/* Avatar */}
       <div className="relative shrink-0">
         <div
-          className="h-12 w-12 rounded-full flex items-center justify-center font-semibold text-black"
+          className="h-12 w-12 rounded-full flex items-center justify-center font-semibold text-background"
           style={{ background: color }}
         >
           {visitor.number}
         </div>
         <span className={cn(
-          "absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full ring-2 ring-[#1a1a1a]",
+          "absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full ring-2 ring-border",
           STATUS_DOT[visitor.status],
           isActive && "animate-pulse"
         )} />
@@ -372,29 +372,29 @@ function VisitorCard({ visitor, onOpen }: { visitor: Visitor; onOpen: () => void
       {/* Center */}
       <div className="flex-1 min-w-0 space-y-1">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-semibold text-white truncate">{visitor.currentUrl}</span>
-          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[#0f0f0f] border border-[#2a2a2a] text-white/70">
+          <span className="font-semibold text-foreground truncate">{visitor.currentUrl}</span>
+          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-bg-base border border-border text-foreground/70">
             <Clock className="h-3 w-3" />
             {fmtTime(visitor.timeOnSiteSec)}
           </span>
         </div>
 
-        <div className="text-xs text-white/50 truncate">
+        <div className="text-xs text-foreground/50 truncate">
           {visitor.path.map((p, i) => (
             <span key={i}>
-              {i > 0 && <span className="text-white/30 mx-1">→</span>}
-              <span className={i === visitor.path.length - 1 ? "text-white/70" : ""}>{p.title}</span>
+              {i > 0 && <span className="text-foreground/30 mx-1">→</span>}
+              <span className={i === visitor.path.length - 1 ? "text-foreground/70" : ""}>{p.title}</span>
             </span>
           ))}
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-white/60 flex-wrap">
+        <div className="flex items-center gap-2 text-xs text-foreground/60 flex-wrap">
           <span className="inline-flex items-center gap-1"><DeviceIcon type={visitor.device.type} /> {visitor.device.label}</span>
-          <span className="text-white/20">·</span>
+          <span className="text-foreground/20">·</span>
           <span>{visitor.flag} {visitor.city}</span>
           {utmShort && (
             <>
-              <span className="text-white/20">·</span>
+              <span className="text-foreground/20">·</span>
               <span className="truncate">{utmShort}</span>
             </>
           )}
@@ -402,12 +402,12 @@ function VisitorCard({ visitor, onOpen }: { visitor: Visitor; onOpen: () => void
 
         <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
           {visitor.tags.map((t) => (
-            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-[#0f0f0f] border border-[#2a2a2a] text-white/70">
+            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-bg-base border border-border text-foreground/70">
               {t}
             </span>
           ))}
           {visitor.chat.length > 0 && (
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#a8ff57]/10 border border-[#a8ff57]/30 text-[#a8ff57] inline-flex items-center gap-1">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30 text-accent inline-flex items-center gap-1">
               <MessageCircle className="h-2.5 w-2.5" /> {visitor.chat.length}
             </span>
           )}
@@ -422,7 +422,7 @@ function VisitorCard({ visitor, onOpen }: { visitor: Visitor; onOpen: () => void
         <Button
           size="sm"
           onClick={(e) => { e.stopPropagation(); toast.success("Чат открыт"); }}
-          className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90"
+          className="bg-accent text-background hover:bg-accent-hover"
         >
           <MessageCircle className="h-4 w-4 mr-1" /> Написать
         </Button>
@@ -430,7 +430,7 @@ function VisitorCard({ visitor, onOpen }: { visitor: Visitor; onOpen: () => void
           size="sm"
           variant="outline"
           onClick={(e) => { e.stopPropagation(); toast.success("Звоним…"); }}
-          className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]"
+          className="border-border bg-transparent text-foreground hover:bg-bg-soft"
         >
           <Video className="h-4 w-4 mr-1" /> Позвонить
         </Button>
@@ -438,7 +438,7 @@ function VisitorCard({ visitor, onOpen }: { visitor: Visitor; onOpen: () => void
           size="sm"
           variant="ghost"
           onClick={(e) => { e.stopPropagation(); toast("Назначено менеджеру"); }}
-          className="text-white/70 hover:bg-[#2a2a2a]"
+          className="text-foreground/70 hover:bg-bg-soft"
         >
           <UserPlus className="h-4 w-4 mr-1" /> Назначить
         </Button>
@@ -456,29 +456,29 @@ function DetailPanel({ visitor, onClose }: { visitor: Visitor; onClose: () => vo
 
   return (
     <div className="fixed inset-0 z-50 flex">
-      <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <aside className="w-[480px] bg-[#0f0f0f] border-l border-[#2a2a2a] shadow-2xl flex flex-col animate-slide-in-right">
+      <div className="flex-1 bg-foreground/60 backdrop-blur-sm" onClick={onClose} />
+      <aside className="w-[480px] bg-bg-base border-l border-border shadow-2xl flex flex-col animate-slide-in-right">
         {/* Header */}
-        <div className="p-5 border-b border-[#2a2a2a] flex items-start gap-4">
+        <div className="p-5 border-b border-border flex items-start gap-4">
           <div className="relative shrink-0">
             <div
-              className="h-14 w-14 rounded-full flex items-center justify-center font-semibold text-black text-lg"
+              className="h-14 w-14 rounded-full flex items-center justify-center font-semibold text-background text-lg"
               style={{ background: color }}
             >
               {visitor.number}
             </div>
             <span className={cn(
-              "absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full ring-2 ring-[#0f0f0f]",
+              "absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full ring-2 ring-background",
               STATUS_DOT[visitor.status],
               visitor.status === "active" && "animate-pulse"
             )} />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-xs text-white/40 uppercase tracking-wider">Anonymous · #{visitor.id}</div>
+            <div className="text-xs text-foreground/40 uppercase tracking-wider">Anonymous · #{visitor.id}</div>
             <div className="text-lg font-semibold mt-0.5">Посетитель {visitor.number}</div>
-            <div className="text-xs text-white/50 mt-0.5">{visitor.flag} {visitor.city}, {visitor.country}</div>
+            <div className="text-xs text-foreground/50 mt-0.5">{visitor.flag} {visitor.city}, {visitor.country}</div>
           </div>
-          <button onClick={onClose} className="p-2 rounded hover:bg-[#2a2a2a] text-white/60">
+          <button onClick={onClose} className="p-2 rounded hover:bg-bg-soft text-foreground/60">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -530,17 +530,17 @@ function DetailPanel({ visitor, onClose }: { visitor: Visitor; onClose: () => vo
                     <div className={cn(
                       "rounded-md border px-3 py-2 text-xs",
                       isCurrent
-                        ? "bg-[#a8ff57]/10 border-[#a8ff57]/40 text-white"
-                        : "bg-[#1a1a1a] border-[#2a2a2a] text-white/80"
+                        ? "bg-accent/10 border-accent/40 text-foreground"
+                        : "bg-bg-elevated border-border text-foreground/80"
                     )}>
                       <div className="font-medium truncate">{p.title}</div>
-                      <div className="text-[10px] text-white/50 mt-0.5">
+                      <div className="text-[10px] text-foreground/50 mt-0.5">
                         {fmtTime(p.seconds)} {isCurrent && "← сейчас"}
                       </div>
                     </div>
-                    <div className="h-1.5 rounded bg-[#1a1a1a] overflow-hidden">
+                    <div className="h-1.5 rounded bg-bg-elevated overflow-hidden">
                       <div
-                        className={cn("h-full", isCurrent ? "bg-[#a8ff57]" : "bg-white/30")}
+                        className={cn("h-full", isCurrent ? "bg-accent" : "bg-surface/30")}
                         style={{ width: `${Math.max(8, widthPct)}%` }}
                       />
                     </div>
@@ -554,7 +554,7 @@ function DetailPanel({ visitor, onClose }: { visitor: Visitor; onClose: () => vo
           <Section title="Теги">
             <div className="flex flex-wrap gap-1.5">
               {visitor.tags.map((t) => (
-                <span key={t} className="text-xs px-2 py-1 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] text-white/80">
+                <span key={t} className="text-xs px-2 py-1 rounded-full bg-bg-elevated border border-border text-foreground/80">
                   {t}
                 </span>
               ))}
@@ -566,7 +566,7 @@ function DetailPanel({ visitor, onClose }: { visitor: Visitor; onClose: () => vo
             <Section title={`Диалог (${visitor.chat.length})`}>
               <button
                 onClick={() => setChatOpen((v) => !v)}
-                className="w-full flex items-center justify-between text-sm text-white/70 hover:text-white"
+                className="w-full flex items-center justify-between text-sm text-foreground/70 hover:text-foreground"
               >
                 <span>{chatOpen ? "Свернуть" : "Развернуть"}</span>
                 {chatOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -579,14 +579,14 @@ function DetailPanel({ visitor, onClose }: { visitor: Visitor; onClose: () => vo
                       className={cn(
                         "rounded-md p-2.5 text-sm",
                         m.who === "visitor"
-                          ? "bg-[#1a1a1a] border border-[#2a2a2a]"
-                          : "bg-[#a8ff57]/10 border border-[#a8ff57]/20 ml-6"
+                          ? "bg-bg-elevated border border-border"
+                          : "bg-accent/10 border border-accent/20 ml-6"
                       )}
                     >
-                      <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">
+                      <div className="text-[10px] uppercase tracking-wider text-foreground/40 mb-1">
                         {m.who === "visitor" ? "Посетитель" : "Ассистент"} · {m.at}
                       </div>
-                      <div className="text-white/90">{m.text}</div>
+                      <div className="text-foreground/90">{m.text}</div>
                     </div>
                   ))}
                 </div>
@@ -596,24 +596,24 @@ function DetailPanel({ visitor, onClose }: { visitor: Visitor; onClose: () => vo
         </div>
 
         {/* Footer actions */}
-        <div className="p-4 border-t border-[#2a2a2a] grid grid-cols-3 gap-2">
+        <div className="p-4 border-t border-border grid grid-cols-3 gap-2">
           <Button
             onClick={() => toast.success("Чат открыт")}
-            className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90"
+            className="bg-accent text-background hover:bg-accent-hover"
           >
             <MessageCircle className="h-4 w-4 mr-1" /> Чат
           </Button>
           <Button
             variant="outline"
             onClick={() => toast.success("Звоним…")}
-            className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]"
+            className="border-border bg-transparent text-foreground hover:bg-bg-soft"
           >
             <Video className="h-4 w-4 mr-1" /> Позвонить
           </Button>
           <Button
             variant="ghost"
             onClick={() => toast("Тег добавлен")}
-            className="text-white/80 hover:bg-[#2a2a2a]"
+            className="text-foreground/80 hover:bg-bg-soft"
           >
             <UserPlus className="h-4 w-4 mr-1" /> Тег
           </Button>
@@ -625,8 +625,8 @@ function DetailPanel({ visitor, onClose }: { visitor: Visitor; onClose: () => vo
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="px-5 py-4 border-b border-[#2a2a2a]">
-      <div className="text-xs uppercase tracking-wider text-white/40 mb-3">{title}</div>
+    <div className="px-5 py-4 border-b border-border">
+      <div className="text-xs uppercase tracking-wider text-foreground/40 mb-3">{title}</div>
       {children}
     </div>
   );
@@ -635,8 +635,8 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Stat({ label, value, icon, mono }: { label: string; value: string; icon?: React.ReactNode; mono?: boolean }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-wider text-white/40">{label}</div>
-      <div className={cn("text-white/90 mt-0.5 inline-flex items-center gap-1.5", mono && "font-mono text-xs")}>
+      <div className="text-[10px] uppercase tracking-wider text-foreground/40">{label}</div>
+      <div className={cn("text-foreground/90 mt-0.5 inline-flex items-center gap-1.5", mono && "font-mono text-xs")}>
         {icon}{value}
       </div>
     </div>
@@ -647,15 +647,15 @@ function Stat({ label, value, icon, mono }: { label: string; value: string; icon
 
 function EmptyState() {
   return (
-    <div className="rounded-xl border border-dashed border-[#2a2a2a] bg-[#1a1a1a]/50 py-16 px-6 text-center">
-      <div className="mx-auto h-14 w-14 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center mb-4">
-        <UsersIcon className="h-6 w-6 text-white/40" />
+    <div className="rounded-xl border border-dashed border-border bg-bg-soft/60 py-16 px-6 text-center">
+      <div className="mx-auto h-14 w-14 rounded-full bg-bg-elevated border border-border flex items-center justify-center mb-4">
+        <UsersIcon className="h-6 w-6 text-foreground/40" />
       </div>
-      <div className="text-lg font-medium text-white">Никого нет на сайте прямо сейчас</div>
-      <div className="text-sm text-white/50 mt-1 max-w-sm mx-auto">
+      <div className="text-lg font-medium text-foreground">Никого нет на сайте прямо сейчас</div>
+      <div className="text-sm text-foreground/50 mt-1 max-w-sm mx-auto">
         Установите виджет на ваш сайт, чтобы видеть посетителей в реальном времени.
       </div>
-      <Button className="mt-5 bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+      <Button className="mt-5 bg-accent text-background hover:bg-accent-hover">
         Установить виджет
       </Button>
     </div>

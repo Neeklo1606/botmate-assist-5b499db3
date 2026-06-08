@@ -56,7 +56,7 @@ export const Route = createFileRoute("/_app/projects/$projectId")({
   head: () => ({ meta: [{ title: "Проект — botme" }] }),
   component: ProjectDetailPage,
   notFoundComponent: () => (
-    <div className="text-white">
+    <div className="text-foreground">
       <h1 className="font-display text-xl font-semibold">Проект не найден</h1>
       <Link to="/projects" className="mt-3 inline-block text-sm" style={{ color: "#a8ff57" }}>
         ← К списку проектов
@@ -78,7 +78,7 @@ function ProjectDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="text-white">
+      <div className="text-foreground">
         <div className="h-44 animate-pulse rounded-xl" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }} />
       </div>
     );
@@ -94,11 +94,11 @@ function Detail({ project }: { project: Project }) {
   const Icon = meta.icon;
 
   return (
-    <div className="space-y-5 text-white">
+    <div className="space-y-5 text-foreground">
       {/* Top bar */}
       <Link
         to="/projects"
-        className="inline-flex items-center gap-1 text-sm transition-colors hover:text-white"
+        className="inline-flex items-center gap-1 text-sm transition-colors hover:text-foreground"
         style={{ color: "rgba(255,255,255,0.6)" }}
       >
         <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} />
@@ -117,7 +117,7 @@ function Detail({ project }: { project: Project }) {
             <div className="text-[11px] font-medium uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>
               {meta.label}
             </div>
-            <h1 className="font-display text-2xl font-semibold tracking-tight text-white">
+            <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
               {project.name}
             </h1>
           </div>
@@ -129,10 +129,10 @@ function Detail({ project }: { project: Project }) {
         <PreparingState project={project} />
       ) : (
         <Tabs defaultValue="overview">
-          <TabsList className="bg-[#1a1a1a] border border-[#2a2a2a]">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Обзор</TabsTrigger>
-            <TabsTrigger value="brief"    className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Бриф</TabsTrigger>
-            <TabsTrigger value="settings" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Настройки</TabsTrigger>
+          <TabsList className="bg-bg-elevated border border-border">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Обзор</TabsTrigger>
+            <TabsTrigger value="brief"    className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Бриф</TabsTrigger>
+            <TabsTrigger value="settings" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Настройки</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="mt-5">
             {project.kind === "assistant" && <AssistantOverview project={project} />}
@@ -165,7 +165,7 @@ function PreparingState({ project }: { project: Project }) {
         style={{ background: "rgba(251,191,36,0.10)", border: "1px solid rgba(251,191,36,0.25)" }}>
         <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#fbbf24" }} strokeWidth={2} />
       </div>
-      <h2 className="mt-4 font-display text-lg font-semibold text-white">Проект готовится</h2>
+      <h2 className="mt-4 font-display text-lg font-semibold text-foreground">Проект готовится</h2>
       <p className="mx-auto mt-2 max-w-md text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
         Настраиваем под ваш бриф. Обычно занимает ~30 секунд. Можно закрыть страницу — мы пришлём уведомление.
       </p>
@@ -237,7 +237,7 @@ function ProjectSettings({ project }: { project: Project }) {
   return (
     <div className="space-y-4">
       <section className="rounded-xl p-5" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-        <h3 className="font-display text-base font-semibold text-white">Состояние</h3>
+        <h3 className="font-display text-base font-semibold text-foreground">Состояние</h3>
         <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
           {project.status === "paused"
             ? "Проект на паузе — все каналы и публикации остановлены."
@@ -266,7 +266,7 @@ function ProjectSettings({ project }: { project: Project }) {
         <div className="flex items-start gap-3">
           <AlertTriangle className="h-4 w-4 flex-none" style={{ color: "#ef4444" }} strokeWidth={2} />
           <div>
-            <h3 className="font-display text-base font-semibold text-white">Удалить проект</h3>
+            <h3 className="font-display text-base font-semibold text-foreground">Удалить проект</h3>
             <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
               Действие необратимо. Все данные брифа и статистика будут удалены.
             </p>

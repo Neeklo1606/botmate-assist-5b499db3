@@ -120,7 +120,7 @@ function OnboardingWizard() {
           </span>
           <Link
             to="/app"
-            className="text-sm font-medium transition-colors hover:text-white"
+            className="text-sm font-medium transition-colors hover:text-foreground"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
             Пропустить →
@@ -224,7 +224,7 @@ function StepHeader({ step }: { step: number }) {
         <Icon className="h-5 w-5" strokeWidth={1.75} />
       </span>
       <div>
-        <h1 className="font-display text-xl font-semibold text-white md:text-2xl">
+        <h1 className="font-display text-xl font-semibold text-foreground md:text-2xl">
           {STEP_TITLES[step - 1]}
         </h1>
         <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
@@ -257,7 +257,7 @@ function Step1Assistant({
           value={state.assistantName}
           onChange={(e) => update("assistantName", e.target.value)}
           placeholder="Например: Алекс"
-          className="h-11 border-white/10 bg-white/5 text-white placeholder:text-white/30 focus-visible:ring-white/20"
+          className="h-11 border-border bg-foreground/5 text-foreground placeholder:text-foreground/30 focus-visible:ring-border-strong"
         />
       </Field>
 
@@ -267,7 +267,7 @@ function Step1Assistant({
           onChange={(e) => update("assistantTask", e.target.value)}
           placeholder="Помогает клиентам выбрать квартиру, отвечает на вопросы о ценах…"
           rows={4}
-          className="resize-none border-white/10 bg-white/5 text-white placeholder:text-white/30 focus-visible:ring-white/20"
+          className="resize-none border-border bg-foreground/5 text-foreground placeholder:text-foreground/30 focus-visible:ring-border-strong"
         />
       </Field>
 
@@ -406,7 +406,7 @@ function Step2Knowledge({
           >
             <Upload className="h-5 w-5" strokeWidth={1.75} />
           </span>
-          <p className="text-sm font-medium text-white">
+          <p className="text-sm font-medium text-foreground">
             Перетащите файлы или нажмите
           </p>
           <p className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
@@ -430,7 +430,7 @@ function Step2Knowledge({
             value={urlValue}
             onChange={(e) => setUrlValue(e.target.value)}
             placeholder="https://example.com/faq"
-            className="h-11 flex-1 border-white/10 bg-white/5 text-white placeholder:text-white/30 focus-visible:ring-white/20"
+            className="h-11 flex-1 border-border bg-foreground/5 text-foreground placeholder:text-foreground/30 focus-visible:ring-border-strong"
           />
           <button
             type="submit"
@@ -449,7 +449,7 @@ function Step2Knowledge({
             onChange={(e) => setTextValue(e.target.value)}
             placeholder="Вставьте сюда любую информацию: прайс, описание услуг, FAQ…"
             rows={5}
-            className="resize-none border-white/10 bg-white/5 text-white placeholder:text-white/30 focus-visible:ring-white/20"
+            className="resize-none border-border bg-foreground/5 text-foreground placeholder:text-foreground/30 focus-visible:ring-border-strong"
           />
           <button
             type="button"
@@ -480,11 +480,11 @@ function Step2Knowledge({
                 style={{ background: "rgba(255,255,255,0.06)", border: "1px solid #2a2a2a" }}
               >
                 <ChipIcon kind={c.kind} />
-                <span className="max-w-[220px] truncate text-white">{c.label}</span>
+                <span className="max-w-[220px] truncate text-foreground">{c.label}</span>
                 <button
                   type="button"
                   onClick={() => removeChip(c.id)}
-                  className="flex h-5 w-5 items-center justify-center rounded-full transition-colors hover:bg-white/10"
+                  className="flex h-5 w-5 items-center justify-center rounded-full transition-colors hover:bg-foreground/10"
                   aria-label={`Удалить ${c.label}`}
                 >
                   <X className="h-3 w-3" style={{ color: "rgba(255,255,255,0.6)" }} strokeWidth={2} />
@@ -661,7 +661,7 @@ function Step3Widget({
             <Check className="h-3 w-3" style={{ color: "#0a0a0a" }} strokeWidth={3} />
           )}
         </span>
-        <span className="text-sm font-medium text-white">Я уже установил виджет на сайт</span>
+        <span className="text-sm font-medium text-foreground">Я уже установил виджет на сайт</span>
       </label>
     </div>
   );
@@ -768,7 +768,7 @@ function Step4Chat({ assistantName }: { assistantName: string }) {
           <Bot className="h-4 w-4" strokeWidth={2} />
         </span>
         <div>
-          <div className="text-sm font-semibold text-white">{assistantName}</div>
+          <div className="text-sm font-semibold text-foreground">{assistantName}</div>
           <div className="flex items-center gap-1.5 text-[11px]" style={{ color: "rgba(255,255,255,0.55)" }}>
             <span className="inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "#a8ff57" }} />
             онлайн
@@ -794,7 +794,7 @@ function Step4Chat({ assistantName }: { assistantName: string }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Напишите сообщение…"
-          className="h-10 flex-1 rounded-md border-0 bg-white/5 px-3 text-sm text-white outline-none placeholder:text-white/30 focus:ring-1 focus:ring-white/20"
+          className="h-10 flex-1 rounded-md border-0 bg-foreground/5 px-3 text-sm text-foreground outline-none placeholder:text-foreground/30 focus:ring-1 focus:ring-border-strong"
         />
         <button
           type="submit"

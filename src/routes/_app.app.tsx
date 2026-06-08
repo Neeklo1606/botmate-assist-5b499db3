@@ -148,7 +148,7 @@ function DashboardPage() {
   const firstName = user?.name?.split(" ")[0];
 
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6 text-foreground">
       {hasProjects ? (
         <ProjectsSection projects={projects!} firstName={firstName} />
       ) : (
@@ -183,7 +183,7 @@ function ProjectsSection({
     <section aria-label="Ваши проекты" className="space-y-3">
       <div className="flex items-end justify-between gap-3">
         <div>
-          <h1 className="font-display text-xl font-semibold tracking-tight text-white md:text-2xl">
+          <h1 className="font-display text-xl font-semibold tracking-tight text-foreground md:text-2xl">
             {firstName ? `${firstName}, ваши проекты` : "Ваши проекты"}
           </h1>
           <p
@@ -229,7 +229,7 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
               <Check className="h-4 w-4" strokeWidth={3} />
             </span>
             <div>
-              <div className="text-sm font-semibold text-white">
+              <div className="text-sm font-semibold text-foreground">
                 Система готова к работе
               </div>
               <div className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>
@@ -246,7 +246,7 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
   return (
     <Card>
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="font-display text-base font-semibold text-white">
+        <h2 className="font-display text-base font-semibold text-foreground">
           Готовность к запуску
         </h2>
         <span className="text-xs tabular-nums" style={{ color: "rgba(255,255,255,0.5)" }}>
@@ -315,7 +315,7 @@ function LiveVisitorsSection() {
     <Card>
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h2 className="flex items-center gap-2 font-display text-base font-semibold text-white">
+          <h2 className="flex items-center gap-2 font-display text-base font-semibold text-foreground">
             <span
               className="relative inline-flex h-2.5 w-2.5"
               aria-hidden
@@ -340,7 +340,7 @@ function LiveVisitorsSection() {
         </div>
         <Link
           to="/visitors"
-          className="text-sm font-medium transition-colors hover:text-white"
+          className="text-sm font-medium transition-colors hover:text-foreground"
           style={{ color: "rgba(255,255,255,0.65)" }}
         >
           Смотреть всех →
@@ -385,7 +385,7 @@ function VisitorRow({ v }: { v: Visitor }) {
       {/* Main info */}
       <div className="min-w-0 flex-1 space-y-1">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="font-mono text-sm font-semibold text-white">
+          <span className="font-mono text-sm font-semibold text-foreground">
             {v.currentPage}
           </span>
           <span
@@ -456,7 +456,7 @@ function VisitorRow({ v }: { v: Visitor }) {
         </button>
         <button
           type="button"
-          className="inline-flex h-8 items-center gap-1.5 rounded-md px-3 text-xs font-semibold text-white transition-colors hover:bg-white/10"
+          className="inline-flex h-8 items-center gap-1.5 rounded-md px-3 text-xs font-semibold text-foreground transition-colors hover:bg-foreground/10"
           style={{ background: "rgba(255,255,255,0.06)", border: "1px solid #2a2a2a" }}
         >
           <Video className="h-3.5 w-3.5" strokeWidth={2} />
@@ -565,7 +565,7 @@ function QuickActionsSection() {
       </Link>
       <Link
         to="/chat"
-        className="inline-flex h-10 items-center gap-2 rounded-md px-4 text-sm font-medium text-white transition-colors hover:bg-white/10"
+        className="inline-flex h-10 items-center gap-2 rounded-md px-4 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
         style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
       >
         <MessageCircle className="h-4 w-4" strokeWidth={1.75} />
@@ -573,7 +573,7 @@ function QuickActionsSection() {
       </Link>
       <Link
         to="/leads"
-        className="inline-flex h-10 items-center gap-2 rounded-md px-4 text-sm font-medium text-white transition-colors hover:bg-white/10"
+        className="inline-flex h-10 items-center gap-2 rounded-md px-4 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
         style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
       >
         <Inbox className="h-4 w-4" strokeWidth={1.75} />

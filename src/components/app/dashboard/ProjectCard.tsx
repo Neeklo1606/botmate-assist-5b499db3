@@ -77,7 +77,7 @@ export function ProjectCard({ project }: Props) {
             >
               {meta.label}
             </div>
-            <div className="mt-0.5 line-clamp-1 font-display text-[15px] font-semibold text-white">
+            <div className="mt-0.5 line-clamp-1 font-display text-[15px] font-semibold text-foreground">
               {project.name}
             </div>
           </div>

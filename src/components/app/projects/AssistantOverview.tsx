@@ -43,7 +43,7 @@ export function AssistantOverview({ project }: { project: Project }) {
           style={{ borderColor: "#2a2a2a" }}>
           <div className="flex items-center gap-2">
             <Bot className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
-            <h3 className="font-display text-sm font-semibold text-white">Последние диалоги</h3>
+            <h3 className="font-display text-sm font-semibold text-foreground">Последние диалоги</h3>
           </div>
           <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
             mock — реальные данные после запуска ассистента
@@ -51,7 +51,7 @@ export function AssistantOverview({ project }: { project: Project }) {
         </header>
         <ul className="divide-y" style={{ borderColor: "#2a2a2a" }}>
           {MOCK_CONVERSATIONS.map((c) => (
-            <li key={c.id} className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-white/[0.02]">
+            <li key={c.id} className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-surface/[0.02]">
               <span
                 className="flex h-9 w-9 flex-none items-center justify-center rounded-full"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
@@ -60,7 +60,7 @@ export function AssistantOverview({ project }: { project: Project }) {
               </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-sm font-semibold text-white">{c.visitor}</span>
+                  <span className="text-sm font-semibold text-foreground">{c.visitor}</span>
                   <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.45)" }}>· {c.channel}</span>
                 </div>
                 <div className="mt-0.5 line-clamp-1 text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>
@@ -104,7 +104,7 @@ function KpiCard({ label, value, accent }: { label: string; value: string; accen
     <div className="rounded-xl p-4" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
       <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</div>
       <div
-        className={"mt-1 font-display text-2xl font-semibold tabular-nums " + (accent ? "text-accent" : "text-white")}
+        className={"mt-1 font-display text-2xl font-semibold tabular-nums " + (accent ? "text-accent" : "text-foreground")}
       >
         {value}
       </div>

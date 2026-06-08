@@ -47,10 +47,10 @@ function IntegrationsPage() {
   const [active, setActive] = useState<Integration | null>(null);
 
   return (
-    <div className="min-h-full bg-[#141414] text-white">
-      <div className="px-6 py-5 border-b border-[#2a2a2a]">
+    <div className="min-h-full bg-bg-elevated text-foreground">
+      <div className="px-6 py-5 border-b border-border">
         <h1 className="text-2xl font-semibold">Интеграции</h1>
-        <p className="text-sm text-white/50 mt-1">Подключите сервисы и расширьте возможности ассистента</p>
+        <p className="text-sm text-foreground/50 mt-1">Подключите сервисы и расширьте возможности ассистента</p>
       </div>
 
       <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -62,12 +62,12 @@ function IntegrationsPage() {
               className={cn(
                 "rounded-lg border p-5 flex items-start gap-4 transition-colors",
                 it.comingSoon
-                  ? "border-[#2a2a2a] bg-[#1a1a1a]/40 opacity-60"
-                  : "border-[#2a2a2a] bg-[#1a1a1a] hover:border-[#3a3a3a]"
+                  ? "border-border bg-bg-soft/50 opacity-60"
+                  : "border-border bg-bg-elevated hover:border-border-strong"
               )}
             >
               <div
-                className="h-12 w-12 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0"
+                className="h-12 w-12 rounded-lg flex items-center justify-center text-foreground text-xs font-bold shrink-0"
                 style={{ background: it.logoBg }}
               >
                 {it.logo}
@@ -77,23 +77,23 @@ function IntegrationsPage() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-base font-medium">{it.name}</span>
                   {it.comingSoon && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#2a2a2a] text-white/60 border border-[#3a3a3a]">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-soft text-foreground/60 border border-border-strong">
                       Coming soon
                     </span>
                   )}
                   {isConnected && !it.comingSoon && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#a8ff57]/15 text-[#a8ff57] border border-[#a8ff57]/30 inline-flex items-center gap-1">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/30 inline-flex items-center gap-1">
                       <Check className="h-2.5 w-2.5" /> Подключён
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-white/60 mt-1">{it.description}</p>
+                <p className="text-sm text-foreground/60 mt-1">{it.description}</p>
 
                 <div className="mt-3 flex gap-2">
                   {it.comingSoon ? (
                     <Button
                       size="sm" variant="outline" disabled
-                      className="border-[#2a2a2a] bg-transparent text-white/40"
+                      className="border-border bg-transparent text-foreground/40"
                     >
                       Скоро
                     </Button>
@@ -102,7 +102,7 @@ function IntegrationsPage() {
                       <Button
                         size="sm" variant="outline"
                         onClick={() => setActive(it)}
-                        className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]"
+                        className="border-border bg-transparent text-foreground hover:bg-bg-soft"
                       >
                         Настроить
                       </Button>
@@ -112,7 +112,7 @@ function IntegrationsPage() {
                           setConnected((s) => { const n = new Set(s); n.delete(it.id); return n; });
                           toast("Отключено");
                         }}
-                        className="text-white/60 hover:bg-[#2a2a2a] hover:text-red-400"
+                        className="text-foreground/60 hover:bg-bg-soft hover:text-destructive"
                       >
                         Отключить
                       </Button>
@@ -121,7 +121,7 @@ function IntegrationsPage() {
                     <Button
                       size="sm"
                       onClick={() => setActive(it)}
-                      className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90"
+                      className="bg-accent text-background hover:bg-accent-hover"
                     >
                       Подключить
                     </Button>
@@ -161,11 +161,11 @@ function ConnectModal({
 
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="bg-[#0f0f0f] border-[#2a2a2a] text-white max-w-md">
+      <DialogContent className="bg-bg-base border-border text-foreground max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
             <span
-              className="h-8 w-8 rounded flex items-center justify-center text-white text-[10px] font-bold"
+              className="h-8 w-8 rounded flex items-center justify-center text-foreground text-[10px] font-bold"
               style={{ background: integration.logoBg }}
             >{integration.logo}</span>
             {isConnected ? "Настроить" : "Подключить"} {integration.name}
@@ -174,7 +174,7 @@ function ConnectModal({
 
         {integration.method === "apikey" ? (
           <div className="space-y-3 py-2">
-            <div className="text-sm text-white/70">
+            <div className="text-sm text-foreground/70">
               Вставьте API ключ из личного кабинета {integration.name}.
             </div>
             <Input
@@ -182,23 +182,23 @@ function ConnectModal({
               placeholder={integration.id === "openai" ? "sk-..." : "API key"}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 font-mono"
+              className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 font-mono"
             />
             <a
               href="#"
               onClick={(e) => e.preventDefault()}
-              className="inline-flex items-center gap-1 text-xs text-[#a8ff57] hover:underline"
+              className="inline-flex items-center gap-1 text-xs text-accent hover:underline"
             >
               Где взять ключ? <ExternalLink className="h-3 w-3" />
             </a>
           </div>
         ) : (
           <div className="space-y-3 py-2">
-            <div className="rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-4 text-sm text-white/80 space-y-2">
-              <div className="flex items-center gap-2 text-[#a8ff57]">
+            <div className="rounded-md border border-border bg-bg-elevated p-4 text-sm text-foreground/80 space-y-2">
+              <div className="flex items-center gap-2 text-accent">
                 <Sparkles className="h-4 w-4" /> OAuth подключение
               </div>
-              <ol className="list-decimal list-inside space-y-1 text-white/70 text-xs">
+              <ol className="list-decimal list-inside space-y-1 text-foreground/70 text-xs">
                 <li>Нажмите «Подключить через OAuth»</li>
                 <li>Авторизуйтесь в {integration.name}</li>
                 <li>Разрешите доступ Botmate к вашим данным</li>
@@ -208,11 +208,11 @@ function ConnectModal({
         )}
 
         <div className="flex justify-end gap-2 pt-2">
-          <Button variant="ghost" onClick={onClose} className="text-white/70 hover:bg-[#2a2a2a]">Отмена</Button>
+          <Button variant="ghost" onClick={onClose} className="text-foreground/70 hover:bg-bg-soft">Отмена</Button>
           <Button
             onClick={onConnect}
             disabled={integration.method === "apikey" && !apiKey.trim()}
-            className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90 disabled:opacity-40"
+            className="bg-accent text-background hover:bg-accent-hover disabled:opacity-40"
           >
             {integration.method === "apikey" ? "Сохранить ключ" : "Подключить через OAuth"}
           </Button>

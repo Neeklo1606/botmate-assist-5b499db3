@@ -37,10 +37,10 @@ function ProjectsListPage() {
   }, [projects, filter]);
 
   return (
-    <div className="space-y-5 text-white">
+    <div className="space-y-5 text-foreground">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-white">
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
             Проекты
           </h1>
           <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
@@ -139,7 +139,7 @@ function EmptyState({ filter, hasAny }: { filter: FilterValue; hasAny: boolean }
           </Link>
           <Link
             to="/onboarding/media"
-            className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-xs font-semibold text-white transition-colors hover:bg-white/10"
+            className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-xs font-semibold text-foreground transition-colors hover:bg-foreground/10"
             style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
           >
             <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
@@ -147,7 +147,7 @@ function EmptyState({ filter, hasAny }: { filter: FilterValue; hasAny: boolean }
           </Link>
           <Link
             to="/onboarding/site"
-            className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-xs font-semibold text-white transition-colors hover:bg-white/10"
+            className="inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-xs font-semibold text-foreground transition-colors hover:bg-foreground/10"
             style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
           >
             <Globe className="h-3.5 w-3.5" strokeWidth={2} />

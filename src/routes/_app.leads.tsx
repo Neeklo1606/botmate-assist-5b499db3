@@ -292,19 +292,19 @@ function LeadsPage() {
   };
 
   return (
-    <div className="min-h-full bg-[#141414] text-white">
+    <div className="min-h-full bg-bg-elevated text-foreground">
       {/* Header */}
-      <div className="sticky top-0 z-20 border-b border-[#2a2a2a] bg-[#141414]/95 backdrop-blur">
+      <div className="sticky top-0 z-20 border-b border-border bg-bg-elevated/95 backdrop-blur">
         <div className="px-6 py-5 flex flex-wrap items-center gap-3">
           <h1 className="text-2xl font-semibold">Лиды</h1>
-          <span className="text-sm text-white/50">{leads.length} всего</span>
+          <span className="text-sm text-foreground/50">{leads.length} всего</span>
           <div className="flex-1" />
-          <Button onClick={exportCsv} variant="outline" className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]">
+          <Button onClick={exportCsv} variant="outline" className="border-border bg-transparent text-foreground hover:bg-bg-soft">
             <Download className="h-4 w-4 mr-1.5" /> CSV
           </Button>
           <Button
             onClick={() => toast("Откройте чат, чтобы создать лид из диалога")}
-            className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90"
+            className="bg-accent text-background hover:bg-accent-hover"
           >
             <Plus className="h-4 w-4 mr-1.5" /> Добавить лид
           </Button>
@@ -312,12 +312,12 @@ function LeadsPage() {
 
         <div className="px-6 pb-4 flex flex-wrap items-center gap-3">
           <div className="relative flex-1 min-w-[220px] max-w-xs">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Поиск по имени, телефону, интересу…"
-              className="pl-9 bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+              className="pl-9 bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
             />
           </div>
 
@@ -359,14 +359,14 @@ function LeadsPage() {
 
           <div className="flex-1" />
 
-          <div className="inline-flex rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-1">
+          <div className="inline-flex rounded-md border border-border bg-bg-elevated p-1">
             <button
               onClick={() => setView("kanban")}
-              className={cn("px-3 py-1.5 text-sm rounded", view === "kanban" ? "bg-[#2a2a2a] text-white" : "text-white/60 hover:text-white")}
+              className={cn("px-3 py-1.5 text-sm rounded", view === "kanban" ? "bg-bg-soft text-foreground" : "text-foreground/60 hover:text-foreground")}
             >Kanban</button>
             <button
               onClick={() => setView("table")}
-              className={cn("px-3 py-1.5 text-sm rounded", view === "table" ? "bg-[#2a2a2a] text-white" : "text-white/60 hover:text-white")}
+              className={cn("px-3 py-1.5 text-sm rounded", view === "table" ? "bg-bg-soft text-foreground" : "text-foreground/60 hover:text-foreground")}
             >Таблица</button>
           </div>
         </div>
@@ -405,12 +405,12 @@ function FilterSelect({
 }) {
   return (
     <div className="flex items-center gap-1.5">
-      <span className="text-xs text-white/40">{label}:</span>
+      <span className="text-xs text-foreground/40">{label}:</span>
       <Select value={value} onValueChange={onValueChange}>
-        <SelectTrigger className="h-9 min-w-[130px] bg-[#1a1a1a] border-[#2a2a2a] text-white">
+        <SelectTrigger className="h-9 min-w-[130px] bg-bg-elevated border-border text-foreground">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="bg-[#1a1a1a] border-[#2a2a2a] text-white">
+        <SelectContent className="bg-bg-elevated border-border text-foreground">
           {options.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
         </SelectContent>
       </Select>
@@ -442,18 +442,18 @@ function KanbanView({
               if (dragId.current) onMove(dragId.current, status);
               dragId.current = null;
             }}
-            className="rounded-lg border border-[#2a2a2a] bg-[#1a1a1a]/40 flex flex-col min-h-[400px]"
+            className="rounded-lg border border-border bg-bg-soft/50 flex flex-col min-h-[400px]"
           >
-            <div className="px-3 py-2.5 border-b border-[#2a2a2a] flex items-center justify-between">
+            <div className="px-3 py-2.5 border-b border-border flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full" style={{ background: meta.color }} />
                 <span className="text-sm font-medium">{meta.label}</span>
               </div>
-              <span className="text-xs text-white/50 px-1.5 py-0.5 rounded bg-[#2a2a2a]">{items.length}</span>
+              <span className="text-xs text-foreground/50 px-1.5 py-0.5 rounded bg-bg-soft">{items.length}</span>
             </div>
             <div className="p-2 space-y-2 flex-1 overflow-y-auto">
               {items.length === 0 && (
-                <div className="text-center text-xs text-white/30 py-8">Нет лидов</div>
+                <div className="text-center text-xs text-foreground/30 py-8">Нет лидов</div>
               )}
               {items.map((lead) => (
                 <KanbanCard
@@ -485,12 +485,12 @@ function KanbanCard({
       draggable
       onDragStart={onDragStart}
       onClick={onOpen}
-      className="group rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-3 cursor-pointer hover:border-[#3a3a3a] hover:bg-[#1f1f1f] transition-colors"
+      className="group rounded-md border border-border bg-bg-elevated p-3 cursor-pointer hover:border-border-strong hover:bg-bg-soft transition-colors"
     >
       <div className="flex items-start justify-between gap-2 mb-2">
         <div className="min-w-0">
-          <div className="text-sm font-medium text-white truncate">{lead.name}</div>
-          <div className="text-xs text-white/60 mt-0.5">{lead.phone}</div>
+          <div className="text-sm font-medium text-foreground truncate">{lead.name}</div>
+          <div className="text-xs text-foreground/60 mt-0.5">{lead.phone}</div>
         </div>
         <span
           className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full border shrink-0"
@@ -501,26 +501,26 @@ function KanbanCard({
         </span>
       </div>
 
-      <div className="text-xs text-white/80 line-clamp-2 mb-2">{lead.interest}</div>
+      <div className="text-xs text-foreground/80 line-clamp-2 mb-2">{lead.interest}</div>
 
       <div className="flex items-center justify-between gap-2">
-        <span className="text-[10px] text-white/40">{lead.createdAgo}</span>
+        <span className="text-[10px] text-foreground/40">{lead.createdAgo}</span>
         <div className="flex items-center gap-1">
           <div
-            className="h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-semibold text-black"
+            className="h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-semibold text-background"
             style={{ background: color }}
             title={lead.manager.name}
           >
             {lead.manager.avatar}
           </div>
           <div className="opacity-0 group-hover:opacity-100 flex transition-opacity">
-            <button onClick={(e) => { e.stopPropagation(); toast("Чат открыт"); }} className="p-1 rounded hover:bg-[#2a2a2a] text-white/60" title="Чат">
+            <button onClick={(e) => { e.stopPropagation(); toast("Чат открыт"); }} className="p-1 rounded hover:bg-bg-soft text-foreground/60" title="Чат">
               <MessageCircle className="h-3.5 w-3.5" />
             </button>
-            <button onClick={(e) => { e.stopPropagation(); toast("Звоним…"); }} className="p-1 rounded hover:bg-[#2a2a2a] text-white/60" title="Позвонить">
+            <button onClick={(e) => { e.stopPropagation(); toast("Звоним…"); }} className="p-1 rounded hover:bg-bg-soft text-foreground/60" title="Позвонить">
               <Phone className="h-3.5 w-3.5" />
             </button>
-            <button onClick={(e) => { e.stopPropagation(); onOpen(); }} className="p-1 rounded hover:bg-[#2a2a2a] text-white/60" title="Меню">
+            <button onClick={(e) => { e.stopPropagation(); onOpen(); }} className="p-1 rounded hover:bg-bg-soft text-foreground/60" title="Меню">
               <MoreHorizontal className="h-3.5 w-3.5" />
             </button>
           </div>
@@ -561,7 +561,7 @@ function TableView({ leads, onOpen }: { leads: Lead[]; onOpen: (id: string) => v
   const Th = ({ k, children }: { k: SortKey; children: React.ReactNode }) => (
     <th
       onClick={() => toggle(k)}
-      className="text-left p-3 font-medium cursor-pointer select-none hover:text-white"
+      className="text-left p-3 font-medium cursor-pointer select-none hover:text-foreground"
     >
       <span className="inline-flex items-center gap-1">
         {children}
@@ -571,9 +571,9 @@ function TableView({ leads, onOpen }: { leads: Lead[]; onOpen: (id: string) => v
   );
 
   return (
-    <div className="rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] overflow-hidden">
+    <div className="rounded-lg border border-border bg-bg-elevated overflow-hidden">
       <table className="w-full text-sm">
-        <thead className="bg-[#141414] text-white/60">
+        <thead className="bg-bg-elevated text-foreground/60">
           <tr>
             <Th k="name">Имя</Th>
             <Th k="phone">Телефон</Th>
@@ -594,17 +594,17 @@ function TableView({ leads, onOpen }: { leads: Lead[]; onOpen: (id: string) => v
               <tr
                 key={l.id}
                 onClick={() => onOpen(l.id)}
-                className="border-t border-[#2a2a2a] hover:bg-[#222] cursor-pointer"
+                className="border-t border-border hover:bg-bg-soft cursor-pointer"
               >
                 <td className="p-3 font-medium">{l.name}</td>
-                <td className="p-3 text-white/70">{l.phone}</td>
+                <td className="p-3 text-foreground/70">{l.phone}</td>
                 <td className="p-3">
-                  <span className="inline-flex items-center gap-1.5 text-xs text-white/70">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-foreground/70">
                     <SourceIcon className="h-3.5 w-3.5" />
                     {SOURCE_META[l.source].label}
                   </span>
                 </td>
-                <td className="p-3 text-white/80 max-w-xs truncate">{l.interest}</td>
+                <td className="p-3 text-foreground/80 max-w-xs truncate">{l.interest}</td>
                 <td className="p-3">
                   <span
                     className="inline-flex items-center gap-1.5 text-xs px-2 py-0.5 rounded-full border"
@@ -615,27 +615,27 @@ function TableView({ leads, onOpen }: { leads: Lead[]; onOpen: (id: string) => v
                   </span>
                 </td>
                 <td className="p-3">
-                  <span className="inline-flex items-center gap-2 text-white/80">
+                  <span className="inline-flex items-center gap-2 text-foreground/80">
                     <span
-                      className="h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-semibold text-black"
+                      className="h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-semibold text-background"
                       style={{ background: color }}
                     >{l.manager.avatar}</span>
                     {l.manager.name}
                   </span>
                 </td>
-                <td className="p-3 text-white/50">{l.createdAgo}</td>
+                <td className="p-3 text-foreground/50">{l.createdAgo}</td>
                 <td className="p-3">
                   <div className="flex justify-end gap-1">
-                    <button onClick={(e) => { e.stopPropagation(); toast("Чат открыт"); }} className="p-1.5 rounded hover:bg-[#2a2a2a] text-white/70"><MessageCircle className="h-4 w-4" /></button>
-                    <button onClick={(e) => { e.stopPropagation(); toast("Звоним…"); }} className="p-1.5 rounded hover:bg-[#2a2a2a] text-white/70"><Phone className="h-4 w-4" /></button>
-                    <button onClick={(e) => { e.stopPropagation(); onOpen(l.id); }} className="p-1.5 rounded hover:bg-[#2a2a2a] text-white/70"><MoreHorizontal className="h-4 w-4" /></button>
+                    <button onClick={(e) => { e.stopPropagation(); toast("Чат открыт"); }} className="p-1.5 rounded hover:bg-bg-soft text-foreground/70"><MessageCircle className="h-4 w-4" /></button>
+                    <button onClick={(e) => { e.stopPropagation(); toast("Звоним…"); }} className="p-1.5 rounded hover:bg-bg-soft text-foreground/70"><Phone className="h-4 w-4" /></button>
+                    <button onClick={(e) => { e.stopPropagation(); onOpen(l.id); }} className="p-1.5 rounded hover:bg-bg-soft text-foreground/70"><MoreHorizontal className="h-4 w-4" /></button>
                   </div>
                 </td>
               </tr>
             );
           })}
           {sorted.length === 0 && (
-            <tr><td colSpan={8} className="p-8 text-center text-white/40">Лидов не найдено</td></tr>
+            <tr><td colSpan={8} className="p-8 text-center text-foreground/40">Лидов не найдено</td></tr>
           )}
         </tbody>
       </table>
@@ -661,18 +661,18 @@ function DetailPanel({
 
   return (
     <div className="fixed inset-0 z-50 flex">
-      <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <aside className="w-[520px] bg-[#0f0f0f] border-l border-[#2a2a2a] flex flex-col shadow-2xl animate-slide-in-right">
+      <div className="flex-1 bg-foreground/60 backdrop-blur-sm" onClick={onClose} />
+      <aside className="w-[520px] bg-bg-base border-l border-border flex flex-col shadow-2xl animate-slide-in-right">
         {/* Header */}
-        <div className="p-5 border-b border-[#2a2a2a] flex items-start gap-3">
+        <div className="p-5 border-b border-border flex items-start gap-3">
           <div
-            className="h-12 w-12 rounded-full flex items-center justify-center font-semibold text-black shrink-0"
+            className="h-12 w-12 rounded-full flex items-center justify-center font-semibold text-background shrink-0"
             style={{ background: color }}
           >
             {lead.name.slice(0, 1)}
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-xs text-white/40 uppercase tracking-wider mb-0.5">Лид #{lead.number}</div>
+            <div className="text-xs text-foreground/40 uppercase tracking-wider mb-0.5">Лид #{lead.number}</div>
             {editName ? (
               <Input
                 autoFocus
@@ -680,34 +680,34 @@ function DetailPanel({
                 onChange={(e) => set("name", e.target.value)}
                 onBlur={() => setEditName(false)}
                 onKeyDown={(e) => e.key === "Enter" && setEditName(false)}
-                className="bg-transparent border-0 text-lg font-semibold text-white px-0 focus-visible:ring-0 h-auto"
+                className="bg-transparent border-0 text-lg font-semibold text-foreground px-0 focus-visible:ring-0 h-auto"
               />
             ) : (
               <button
                 onClick={() => setEditName(true)}
-                className="text-lg font-semibold text-white inline-flex items-center gap-2 hover:text-white/80"
+                className="text-lg font-semibold text-foreground inline-flex items-center gap-2 hover:text-foreground/80"
               >
                 {lead.name}
-                <Pencil className="h-3.5 w-3.5 text-white/40" />
+                <Pencil className="h-3.5 w-3.5 text-foreground/40" />
               </button>
             )}
           </div>
-          <button onClick={onClose} className="p-2 rounded hover:bg-[#2a2a2a] text-white/60">
+          <button onClick={onClose} className="p-2 rounded hover:bg-bg-soft text-foreground/60">
             <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Status selector */}
-        <div className="px-5 py-3 border-b border-[#2a2a2a] flex items-center gap-3">
-          <span className="text-xs text-white/40 uppercase tracking-wider">Статус</span>
+        <div className="px-5 py-3 border-b border-border flex items-center gap-3">
+          <span className="text-xs text-foreground/40 uppercase tracking-wider">Статус</span>
           <Select value={lead.status} onValueChange={(v) => set("status", v as LeadStatus)}>
             <SelectTrigger
-              className="h-9 flex-1 bg-[#1a1a1a] border text-white"
+              className="h-9 flex-1 bg-bg-elevated border text-foreground"
               style={{ borderColor: STATUS_META[lead.status].border, color: STATUS_META[lead.status].color }}
             >
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-[#1a1a1a] border-[#2a2a2a] text-white">
+            <SelectContent className="bg-bg-elevated border-border text-foreground">
               {(Object.keys(STATUS_META) as LeadStatus[]).map((s) => (
                 <SelectItem key={s} value={s}>
                   <span className="inline-flex items-center gap-2">
@@ -722,10 +722,10 @@ function DetailPanel({
 
         {/* Tabs */}
         <Tabs defaultValue="info" className="flex-1 flex flex-col min-h-0">
-          <TabsList className="mx-5 mt-3 bg-[#1a1a1a] border border-[#2a2a2a] grid grid-cols-3">
-            <TabsTrigger value="info" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Инфо</TabsTrigger>
-            <TabsTrigger value="history" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">История</TabsTrigger>
-            <TabsTrigger value="tasks" className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-white">Задачи</TabsTrigger>
+          <TabsList className="mx-5 mt-3 bg-bg-elevated border border-border grid grid-cols-3">
+            <TabsTrigger value="info" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Инфо</TabsTrigger>
+            <TabsTrigger value="history" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">История</TabsTrigger>
+            <TabsTrigger value="tasks" className="data-[state=active]:bg-bg-soft data-[state=active]:text-foreground">Задачи</TabsTrigger>
           </TabsList>
 
           <div className="flex-1 overflow-y-auto">
@@ -742,15 +742,15 @@ function DetailPanel({
         </Tabs>
 
         {/* Bottom bar */}
-        <div className="p-4 border-t border-[#2a2a2a] flex gap-2">
-          <Button variant="ghost" onClick={onDelete} className="text-red-400 hover:bg-red-500/10">
+        <div className="p-4 border-t border-border flex gap-2">
+          <Button variant="ghost" onClick={onDelete} className="text-destructive hover:bg-destructive/10">
             <Trash2 className="h-4 w-4 mr-1.5" /> Удалить
           </Button>
-          <Button variant="outline" onClick={() => toast.success("Экспортировано")} className="border-[#2a2a2a] bg-transparent text-white hover:bg-[#2a2a2a]">
+          <Button variant="outline" onClick={() => toast.success("Экспортировано")} className="border-border bg-transparent text-foreground hover:bg-bg-soft">
             <Download className="h-4 w-4 mr-1.5" /> Экспорт
           </Button>
           <div className="flex-1" />
-          <Button onClick={() => setCrmOpen(true)} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90">
+          <Button onClick={() => setCrmOpen(true)} className="bg-accent text-background hover:bg-accent-hover">
             <Send className="h-4 w-4 mr-1.5" /> Отправить в CRM
           </Button>
         </div>
@@ -780,7 +780,7 @@ function InfoTab({ lead, onUpdate }: { lead: Lead; onUpdate: (l: Lead) => void }
         <Input
           value={lead.phone}
           onChange={(e) => set("phone", e.target.value)}
-          className="bg-[#1a1a1a] border-[#2a2a2a] text-white h-9"
+          className="bg-bg-elevated border-border text-foreground h-9"
         />
       </Field>
       <Field label="Email">
@@ -788,13 +788,13 @@ function InfoTab({ lead, onUpdate }: { lead: Lead; onUpdate: (l: Lead) => void }
           value={lead.email ?? ""}
           onChange={(e) => set("email", e.target.value)}
           placeholder="—"
-          className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+          className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
         />
       </Field>
 
       <div>
-        <div className="text-xs uppercase tracking-wider text-white/40 mb-2">Источник / UTM</div>
-        <div className="rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-3 space-y-1.5 text-sm">
+        <div className="text-xs uppercase tracking-wider text-foreground/40 mb-2">Источник / UTM</div>
+        <div className="rounded-md border border-border bg-bg-elevated p-3 space-y-1.5 text-sm">
           <Row label="Канал" value={SOURCE_META[lead.source].label} />
           <Row label="source"   value={lead.utm?.source ?? "—"} mono />
           <Row label="medium"   value={lead.utm?.medium ?? "—"} mono />
@@ -807,7 +807,7 @@ function InfoTab({ lead, onUpdate }: { lead: Lead; onUpdate: (l: Lead) => void }
           value={lead.interest}
           onChange={(e) => set("interest", e.target.value)}
           rows={2}
-          className="bg-[#1a1a1a] border-[#2a2a2a] text-white resize-none"
+          className="bg-bg-elevated border-border text-foreground resize-none"
         />
       </Field>
 
@@ -817,21 +817,21 @@ function InfoTab({ lead, onUpdate }: { lead: Lead; onUpdate: (l: Lead) => void }
           onChange={(e) => set("notes", e.target.value)}
           rows={4}
           placeholder="Добавьте заметки о клиенте…"
-          className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 resize-none"
+          className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 resize-none"
         />
       </Field>
 
       <Field label="Теги">
         <div className="flex flex-wrap gap-1.5 mb-2">
           {lead.tags.map((t) => (
-            <span key={t} className="text-xs px-2 py-1 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] text-white/80 inline-flex items-center gap-1">
+            <span key={t} className="text-xs px-2 py-1 rounded-full bg-bg-elevated border border-border text-foreground/80 inline-flex items-center gap-1">
               {t}
-              <button onClick={() => set("tags", lead.tags.filter((x) => x !== t))} className="text-white/40 hover:text-white">
+              <button onClick={() => set("tags", lead.tags.filter((x) => x !== t))} className="text-foreground/40 hover:text-foreground">
                 <X className="h-3 w-3" />
               </button>
             </span>
           ))}
-          {lead.tags.length === 0 && <span className="text-sm text-white/40">Нет тегов</span>}
+          {lead.tags.length === 0 && <span className="text-sm text-foreground/40">Нет тегов</span>}
         </div>
         <div className="flex gap-2">
           <Input
@@ -839,9 +839,9 @@ function InfoTab({ lead, onUpdate }: { lead: Lead; onUpdate: (l: Lead) => void }
             onChange={(e) => setTagInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
             placeholder="Добавить тег и Enter"
-            className="bg-[#1a1a1a] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+            className="bg-bg-elevated border-border text-foreground placeholder:text-foreground/40 h-9"
           />
-          <Button size="sm" onClick={addTag} variant="secondary" className="bg-[#2a2a2a] hover:bg-[#333] text-white">+</Button>
+          <Button size="sm" onClick={addTag} variant="secondary" className="bg-bg-soft hover:bg-bg-soft-hover text-foreground">+</Button>
         </div>
       </Field>
 
@@ -853,14 +853,14 @@ function InfoTab({ lead, onUpdate }: { lead: Lead; onUpdate: (l: Lead) => void }
             if (m) set("manager", m);
           }}
         >
-          <SelectTrigger className="bg-[#1a1a1a] border-[#2a2a2a] text-white h-9">
+          <SelectTrigger className="bg-bg-elevated border-border text-foreground h-9">
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="bg-[#1a1a1a] border-[#2a2a2a] text-white">
+          <SelectContent className="bg-bg-elevated border-border text-foreground">
             {MANAGERS.map((m) => (
               <SelectItem key={m.name} value={m.name}>
                 <span className="inline-flex items-center gap-2">
-                  <span className="h-5 w-5 rounded-full bg-[#a8ff57] text-black text-[10px] font-semibold inline-flex items-center justify-center">
+                  <span className="h-5 w-5 rounded-full bg-accent text-background text-[10px] font-semibold inline-flex items-center justify-center">
                     {m.avatar}
                   </span>
                   {m.name}
@@ -878,24 +878,24 @@ function HistoryTab({ lead }: { lead: Lead }) {
   const [transcriptOpen, setTranscriptOpen] = useState(false);
 
   const eventIcon = (kind: TimelineEvent["kind"]) => {
-    if (kind === "ai") return <Bot className="h-3.5 w-3.5 text-[#a8ff57]" />;
-    if (kind === "visitor") return <MessageCircle className="h-3.5 w-3.5 text-white/70" />;
-    if (kind === "operator") return <User className="h-3.5 w-3.5 text-[#57c7ff]" />;
-    if (kind === "call") return <Video className="h-3.5 w-3.5 text-[#facc15]" />;
-    return <CheckCircle2 className="h-3.5 w-3.5 text-[#86efac]" />;
+    if (kind === "ai") return <Bot className="h-3.5 w-3.5 text-accent" />;
+    if (kind === "visitor") return <MessageCircle className="h-3.5 w-3.5 text-foreground/70" />;
+    if (kind === "operator") return <User className="h-3.5 w-3.5 text-accent" />;
+    if (kind === "call") return <Video className="h-3.5 w-3.5 text-warning" />;
+    return <CheckCircle2 className="h-3.5 w-3.5 text-success" />;
   };
 
   return (
     <>
-      <div className="text-xs uppercase tracking-wider text-white/40 mb-3">Таймлайн</div>
-      <ol className="relative border-l border-[#2a2a2a] ml-2 space-y-3 pb-2">
+      <div className="text-xs uppercase tracking-wider text-foreground/40 mb-3">Таймлайн</div>
+      <ol className="relative border-l border-border ml-2 space-y-3 pb-2">
         {lead.timeline.map((e) => (
           <li key={e.id} className="ml-4">
-            <span className="absolute -left-[7px] flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#1a1a1a] border border-[#2a2a2a]">
+            <span className="absolute -left-[7px] flex h-3.5 w-3.5 items-center justify-center rounded-full bg-bg-elevated border border-border">
               {eventIcon(e.kind)}
             </span>
-            <div className="text-sm text-white/90">{e.text}</div>
-            <div className="text-[11px] text-white/40 mt-0.5">{e.at}</div>
+            <div className="text-sm text-foreground/90">{e.text}</div>
+            <div className="text-[11px] text-foreground/40 mt-0.5">{e.at}</div>
           </li>
         ))}
       </ol>
@@ -903,19 +903,19 @@ function HistoryTab({ lead }: { lead: Lead }) {
       <div className="mt-5">
         <button
           onClick={() => setTranscriptOpen((v) => !v)}
-          className="w-full flex items-center justify-between text-xs uppercase tracking-wider text-white/40 hover:text-white/70"
+          className="w-full flex items-center justify-between text-xs uppercase tracking-wider text-foreground/40 hover:text-foreground/70"
         >
           <span>Полный транскрипт диалога</span>
           {transcriptOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </button>
         {transcriptOpen && (
-          <div className="mt-3 rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-3 space-y-2 text-sm">
+          <div className="mt-3 rounded-md border border-border bg-bg-elevated p-3 space-y-2 text-sm">
             {lead.timeline.filter((e) => e.kind === "visitor" || e.kind === "ai" || e.kind === "operator").map((e) => (
               <div key={e.id} className="flex gap-2">
-                <span className="text-[10px] uppercase tracking-wider text-white/40 shrink-0 mt-0.5 w-16">
+                <span className="text-[10px] uppercase tracking-wider text-foreground/40 shrink-0 mt-0.5 w-16">
                   {e.kind === "visitor" ? "Клиент" : e.kind === "ai" ? "AI" : "Оператор"}
                 </span>
-                <span className="text-white/85">{e.text}</span>
+                <span className="text-foreground/85">{e.text}</span>
               </div>
             ))}
           </div>
@@ -953,49 +953,49 @@ function TasksTab({ lead, onUpdate }: { lead: Lead; onUpdate: (l: Lead) => void 
     <>
       <div className="space-y-2 mb-5">
         {lead.tasks.length === 0 && (
-          <div className="text-sm text-white/40 text-center py-6">Нет задач</div>
+          <div className="text-sm text-foreground/40 text-center py-6">Нет задач</div>
         )}
         {lead.tasks.map((t) => (
           <div
             key={t.id}
-            className="flex items-start gap-2 rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-3"
+            className="flex items-start gap-2 rounded-md border border-border bg-bg-elevated p-3"
           >
             <button onClick={() => toggle(t.id)} className="mt-0.5">
               {t.done
-                ? <CheckCircle2 className="h-4 w-4 text-[#a8ff57]" />
-                : <Circle className="h-4 w-4 text-white/40" />}
+                ? <CheckCircle2 className="h-4 w-4 text-accent" />
+                : <Circle className="h-4 w-4 text-foreground/40" />}
             </button>
             <div className="flex-1 min-w-0">
-              <div className={cn("text-sm", t.done ? "text-white/40 line-through" : "text-white/90")}>
+              <div className={cn("text-sm", t.done ? "text-foreground/40 line-through" : "text-foreground/90")}>
                 {t.text}
               </div>
-              <div className="text-[11px] text-white/40 mt-0.5 inline-flex items-center gap-1">
+              <div className="text-[11px] text-foreground/40 mt-0.5 inline-flex items-center gap-1">
                 <Calendar className="h-3 w-3" /> {t.due}
               </div>
             </div>
-            <button onClick={() => remove(t.id)} className="p-1 rounded hover:bg-[#2a2a2a] text-white/40 hover:text-red-400">
+            <button onClick={() => remove(t.id)} className="p-1 rounded hover:bg-bg-soft text-foreground/40 hover:text-destructive">
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
         ))}
       </div>
 
-      <div className="rounded-md border border-[#2a2a2a] bg-[#1a1a1a] p-3 space-y-2">
+      <div className="rounded-md border border-border bg-bg-elevated p-3 space-y-2">
         <Input
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), add())}
           placeholder="Что нужно сделать?"
-          className="bg-[#0f0f0f] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+          className="bg-bg-base border-border text-foreground placeholder:text-foreground/40 h-9"
         />
         <div className="flex gap-2">
           <Input
             value={due}
             onChange={(e) => setDue(e.target.value)}
             placeholder="Срок (например, завтра 18:00)"
-            className="bg-[#0f0f0f] border-[#2a2a2a] text-white placeholder:text-white/40 h-9"
+            className="bg-bg-base border-border text-foreground placeholder:text-foreground/40 h-9"
           />
-          <Button onClick={add} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90 h-9">
+          <Button onClick={add} className="bg-accent text-background hover:bg-accent-hover h-9">
             <Plus className="h-4 w-4 mr-1" /> Добавить задачу
           </Button>
         </div>
@@ -1018,7 +1018,7 @@ function CrmModal({ open, onClose, leadName }: { open: boolean; onClose: () => v
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="bg-[#0f0f0f] border-[#2a2a2a] text-white max-w-md">
+      <DialogContent className="bg-bg-base border-border text-foreground max-w-md">
         <DialogHeader>
           <DialogTitle>Отправить в CRM</DialogTitle>
         </DialogHeader>
@@ -1034,19 +1034,19 @@ function CrmModal({ open, onClose, leadName }: { open: boolean; onClose: () => v
               className={cn(
                 "rounded-lg border p-4 text-left transition-colors",
                 picked === opt.id
-                  ? "border-[#a8ff57] bg-[#a8ff57]/5"
-                  : "border-[#2a2a2a] bg-[#1a1a1a] hover:border-[#3a3a3a]",
+                  ? "border-accent bg-accent/5"
+                  : "border-border bg-bg-elevated hover:border-border-strong",
               )}
             >
-              <div className="text-base font-medium text-white">{opt.name}</div>
-              <div className="text-xs text-white/50 mt-1">{opt.desc}</div>
+              <div className="text-base font-medium text-foreground">{opt.name}</div>
+              <div className="text-xs text-foreground/50 mt-1">{opt.desc}</div>
             </button>
           ))}
         </div>
 
         <div className="flex justify-end gap-2 pt-2">
-          <Button variant="ghost" onClick={onClose} className="text-white/70 hover:bg-[#2a2a2a]">Отмена</Button>
-          <Button onClick={send} disabled={!picked} className="bg-[#a8ff57] text-black hover:bg-[#a8ff57]/90 disabled:opacity-40">
+          <Button variant="ghost" onClick={onClose} className="text-foreground/70 hover:bg-bg-soft">Отмена</Button>
+          <Button onClick={send} disabled={!picked} className="bg-accent text-background hover:bg-accent-hover disabled:opacity-40">
             Отправить
           </Button>
         </div>
@@ -1060,7 +1060,7 @@ function CrmModal({ open, onClose, leadName }: { open: boolean; onClose: () => v
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="text-xs uppercase tracking-wider text-white/40 mb-2">{label}</div>
+      <div className="text-xs uppercase tracking-wider text-foreground/40 mb-2">{label}</div>
       {children}
     </div>
   );
@@ -1069,8 +1069,8 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 function Row({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
     <div className="flex items-center justify-between gap-2">
-      <span className="text-xs text-white/40">{label}</span>
-      <span className={cn("text-white/85 truncate", mono && "font-mono text-xs")}>{value}</span>
+      <span className="text-xs text-foreground/40">{label}</span>
+      <span className={cn("text-foreground/85 truncate", mono && "font-mono text-xs")}>{value}</span>
     </div>
   );
 }
