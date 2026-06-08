@@ -138,8 +138,16 @@ function Hero() {
               <br />
               упущенной
               <br />
-              заявки. <span className="text-foreground/30">Никогда.</span>
+              заявки.{" "}
+              <span className="relative inline-block italic font-medium text-foreground/55">
+                Никогда.
+                <span
+                  aria-hidden
+                  className="absolute -bottom-1 left-1 right-2 h-[2px] rounded-full bg-accent/60"
+                />
+              </span>
             </h1>
+
 
             <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
               AI-сотрудник для входящих обращений. Принимает заявку с сайта,
