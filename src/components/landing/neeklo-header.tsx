@@ -89,7 +89,7 @@ export function NeekloHeader() {
                   >
                     {item.label}
                     {item.soon && (
-                      <span className="rounded-full bg-foreground/8 px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-[0.08em] text-ink-subtle">
+                      <span className="rounded-full bg-foreground/10 px-1.5 py-[1px] text-[9px] font-semibold uppercase tracking-[0.08em] text-ink-subtle">
                         скоро
                       </span>
                     )}
