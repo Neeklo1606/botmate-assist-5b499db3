@@ -991,29 +991,59 @@ function Ecosystem() {
           desc="Сейчас фокус на одном продукте. В том же аккаунте позже появятся ещё два."
         />
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {items.map((it) => (
+          {items.map((it, i) => (
             <div
               key={it.tag}
-              className="relative flex flex-col rounded-2xl border border-border bg-surface p-7 md:p-9"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface p-7 md:p-9"
             >
-              <span className="absolute right-5 top-5 rounded-full border border-foreground/30 bg-background px-2.5 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-foreground">
-                скоро
-              </span>
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background">
-                <it.icon className="h-4 w-4" strokeWidth={1.75} />
+              {/* faint diagonal hatch to read as "in progress" */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.035]"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(135deg, var(--color-foreground) 0 1px, transparent 1px 10px)",
+                }}
+              />
+              {/* progress rail */}
+              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-border">
+                <div
+                  className="h-full bg-accent/70"
+                  style={{ width: i === 0 ? "65%" : "32%" }}
+                />
               </div>
-              <div className="mt-5 text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+
+              <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted backdrop-blur">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                Скоро
+              </span>
+
+              <div className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background text-foreground">
+                <it.icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+              </div>
+
+              <div className="relative mt-6 inline-flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+                <span className="h-1 w-1 rounded-full bg-accent" />
                 {it.tag}
               </div>
-              <h3 className="mt-2 font-display text-[22px] font-semibold tracking-[-0.01em] text-foreground md:text-[26px]">
+              <h3 className="relative mt-2 font-display text-[22px] font-semibold leading-snug tracking-[-0.02em] text-foreground md:text-[26px]">
                 {it.title}
               </h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-ink-muted">{it.desc}</p>
-              <div className="mt-6">
+              <p className="relative mt-3 max-w-md text-[14px] leading-relaxed text-ink-muted">
+                {it.desc}
+              </p>
+
+              <div className="relative mt-6 flex items-center justify-between border-t border-border pt-5">
+                <span className="font-mono text-[10.5px] tabular text-ink-subtle">
+                  ETA · {i === 0 ? "Q3 / 2026" : "Q4 / 2026"}
+                </span>
                 <button
                   type="button"
                   disabled
-                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-[12.5px] font-medium text-ink-muted"
+                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-[12px] font-medium text-ink-muted"
                 >
                   В разработке
                 </button>
