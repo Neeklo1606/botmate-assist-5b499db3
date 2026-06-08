@@ -310,7 +310,8 @@ function HeroScene() {
       </div>
 
       {/* Chat Context Underlay */}
-      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-border bg-surface-muted/85 p-5 opacity-95 backdrop-blur-md shadow-sm">
+      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-border/70 bg-surface-muted/90 p-5 opacity-95 backdrop-blur-md shadow-[var(--shadow-md),var(--shadow-rim)]">
+
         <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
           <span className="inline-flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
