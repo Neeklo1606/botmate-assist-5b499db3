@@ -113,10 +113,10 @@ function Hero() {
       />
       <Container>
 
-        <div className="relative grid items-center gap-12 pt-8 pb-14 md:grid-cols-12 md:gap-10 md:pt-12 md:pb-20 lg:pt-14 lg:pb-24">
+        <div className="relative grid items-center gap-10 pt-3 pb-8 md:grid-cols-12 md:gap-10 md:pt-5 md:pb-12 lg:pt-6 lg:pb-14">
           {/* LEFT — strategic hierarchy */}
           <div className="z-10 flex flex-col items-start md:col-span-6">
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface/70 py-1 pl-1.5 pr-3 backdrop-blur shadow-xs">
+            <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface/70 py-1 pl-1.5 pr-3 backdrop-blur shadow-xs">
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-accent-ink">
                 N
               </span>
@@ -153,12 +153,12 @@ function Hero() {
             </h1>
 
 
-            <p className="mt-8 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
+            <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
               AI-сотрудник для входящих обращений. Принимает заявку с сайта,
               Telegram и форм, задаёт нужные вопросы и передаёт готовый лид в CRM.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-5">
+            <div className="mt-7 flex flex-wrap items-center gap-5">
               <Link
                 to="/onboarding/assistant"
                 className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-foreground pl-7 pr-8 text-[14px] font-semibold text-background shadow-lift ring-1 ring-foreground/0 transition-[transform,box-shadow,padding] duration-300 ease-quart hover:-translate-y-0.5 hover:shadow-soft-lift"
@@ -401,7 +401,7 @@ function TrustBar() {
 
   return (
     <section className="border-b border-border bg-surface-sunken/50">
-      <div className="py-3 md:py-3.5">
+      <div className="py-2 md:py-2.5">
         <div
           className="marquee-mask pause-on-hover group/marquee relative overflow-hidden"
           style={{ ["--marquee-duration" as string]: "90s" }}
