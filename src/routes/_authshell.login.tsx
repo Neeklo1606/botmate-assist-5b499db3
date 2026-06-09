@@ -13,7 +13,7 @@ interface LoginSearch {
   redirect?: string;
 }
 
-export const Route = createFileRoute("/_auth/login")({
+export const Route = createFileRoute("/_authshell/login")({
   validateSearch: (search: Record<string, unknown>): LoginSearch => ({
     redirect: typeof search.redirect === "string" ? search.redirect : undefined,
   }),
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_auth/login")({
 });
 
 function LoginPage() {
-  const { redirect } = useSearch({ from: "/_auth/login" });
+  const { redirect } = useSearch({ from: "/_authshell/login" });
   const navigate = useNavigate();
   const login = useLoginWithEmail();
   const [email, setEmail] = useState("");

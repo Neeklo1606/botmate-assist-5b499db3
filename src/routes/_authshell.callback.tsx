@@ -11,7 +11,7 @@ interface CallbackSearch {
   redirect?: string;
 }
 
-export const Route = createFileRoute("/_auth/callback")({
+export const Route = createFileRoute("/_authshell/callback")({
   validateSearch: (search: Record<string, unknown>): CallbackSearch => ({
     redirect: typeof search.redirect === "string" ? search.redirect : undefined,
   }),
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/_auth/callback")({
 
 function CallbackPage() {
   const navigate = useNavigate();
-  const { redirect } = useSearch({ from: "/_auth/callback" });
+  const { redirect } = useSearch({ from: "/_authshell/callback" });
   const login = useLoginWithTelegram();
 
   useEffect(() => {
