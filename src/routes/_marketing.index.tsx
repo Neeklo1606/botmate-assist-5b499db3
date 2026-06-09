@@ -1428,80 +1428,57 @@ function BentoCell({
 /* ─────────────────── Integrations ─────────────────── */
 
 function Integrations() {
-  const channels = [
-    { t: "Telegram", s: "бот и чат" },
-    { t: "Сайт", s: "виджет на любой страницы" },
-    { t: "WhatsApp", s: "через провайдера" },
-    { t: "Avito", s: "сообщения и заявки" },
-    { t: "VK", s: "сообщения сообщества" },
-    { t: "Звонки", s: "обработка пропущенных" },
-  ];
-  const handoffs = [
-    { t: "amoCRM", s: "сделка в воронке" },
-    { t: "Bitrix24", s: "лид и задача" },
-    { t: "Google Sheets", s: "строка по заявке" },
-    { t: "Telegram-чат", s: "уведомление команде" },
-    { t: "Email", s: "карточка лида" },
-    { t: "Webhook", s: "ваш сценарий" },
-  ];
+  const channels = ["Telegram", "Сайт", "WhatsApp", "Avito", "VK", "MAX", "Звонки"];
+  const handoffs = ["amoCRM", "Bitrix24", "Google Sheets", "Telegram-чат", "Email", "Webhook"];
 
   return (
     <section
       id="integrations"
-      className="border-y border-border bg-surface-muted/40 py-20 md:py-28"
+      className="border-y border-border bg-surface-muted/40 py-14 md:py-16"
     >
       <Container>
         <SectionHead
           eyebrow="Интеграции"
           title="Принимаем там, где пишут. Отдаём туда, где работаете"
-          desc="Один менеджер на все каналы и любые маршруты заявок."
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <IntegrationList title="Каналы" items={channels} />
-          <IntegrationList title="Куда уходит заявка" items={handoffs} />
+
+        <div className="mt-8 space-y-5">
+          <IntegrationRow label="Принимаем" items={channels} />
+          <IntegrationRow label="Отдаём" items={handoffs} />
         </div>
       </Container>
     </section>
   );
 }
 
-function IntegrationList({
-  title,
-  items,
-}: {
-  title: string;
-  items: { t: string; s: string }[];
-}) {
+function IntegrationRow({ label, items }: { label: string; items: string[] }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 md:p-8">
-      <div className="flex items-baseline justify-between">
-        <div className="inline-flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
-            {title}
-          </div>
-        </div>
-        <div className="font-mono text-[10.5px] tabular text-ink-subtle">
-          {String(items.length).padStart(2, "0")}
-        </div>
+    <div>
+      <div
+        className="mb-3 inline-flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.16em]"
+        style={{ color: "var(--ink-subtle)" }}
+      >
+        <span className="h-1 w-1 rounded-full" style={{ background: "var(--accent)" }} />
+        {label}
       </div>
-      <ul className="mt-5 divide-y divide-border">
-        {items.map((it) => (
-          <li
-            key={it.t}
-            className="group flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0"
-          >
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background text-[11px] font-semibold uppercase tracking-tight text-foreground transition-colors group-hover:border-foreground/25">
-                {it.t.slice(0, 2)}
+      <ul className="flex flex-wrap gap-2">
+        {items.map((t) => (
+          <li key={t}>
+            <span
+              className="group inline-flex items-center gap-2 rounded-full border px-3.5 py-2 transition-all hover:-translate-y-0.5"
+              style={{ background: "var(--surface)", borderColor: "var(--border)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--border)")}
+            >
+              <span
+                className="inline-flex h-6 w-6 items-center justify-center rounded-md text-[10px] font-bold uppercase tracking-tight"
+                style={{ background: "var(--surface-muted)", color: "var(--foreground)" }}
+              >
+                {t.slice(0, 2)}
               </span>
-              <div>
-                <div className="text-[14px] font-semibold text-foreground">{it.t}</div>
-                <div className="text-[12px] text-ink-subtle">{it.s}</div>
-              </div>
-            </div>
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent/15 text-accent">
-              <Check className="h-3 w-3" strokeWidth={2.5} />
+              <span className="text-[13.5px] font-semibold" style={{ color: "var(--foreground)" }}>
+                {t}
+              </span>
             </span>
           </li>
         ))}
@@ -1509,6 +1486,7 @@ function IntegrationList({
     </div>
   );
 }
+
 
 /* ─────────────────── Why Avreya ─────────────────── */
 
