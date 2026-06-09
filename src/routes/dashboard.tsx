@@ -248,8 +248,7 @@ const CHANNEL_META: Record<Agent["channels"][number], { label: string; render: (
   max: { label: "MAX", render: () => <span className="text-[10px] font-bold tracking-tight">M</span> },
 };
 
-function AgentsSection({ onCreate }: { onCreate: () => void }) {
-  const [agents] = useState<Agent[]>(INITIAL_AGENTS);
+function AgentsSection({ agents, onCreate }: { agents: Agent[]; onCreate: () => void }) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   if (agents.length === 0) {
