@@ -53,7 +53,16 @@ function DashboardPage() {
   const [wizardOpen, setWizardOpen] = useState(false);
   const current = SECTIONS.find((s) => s.id === active)!;
   const handleCreateAgent = () => setWizardOpen(true);
-  const handleSaveAgent = (agent: Agent) => {
+  const handleSaveAgent = (draft: AgentDraft) => {
+    const agent: Agent = {
+      id: draft.id,
+      name: draft.name,
+      niche: draft.niche,
+      status: "draft",
+      channels: [],
+      dialogsToday: 0,
+      leads: 0,
+    };
     setAgents((prev) => [agent, ...prev]);
     setActive("agents");
     setWizardOpen(false);
