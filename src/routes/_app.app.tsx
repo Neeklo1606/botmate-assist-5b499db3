@@ -2,8 +2,8 @@
  * /app — Dashboard (Botmate dark theme).
  *
  * Палитра по спеке:
- *   bg #141414 · cards #1a1a1a · borders #2a2a2a · text #ffffff
- *   accent #a8ff57 (status, CTA)
+ *   bg var(--color-surface-sunken) · cards var(--color-surface) · borders var(--color-border) · text #ffffff
+ *   accent var(--color-accent) (status, CTA)
  *
  * Секции:
  *   1) Readiness checklist
@@ -73,7 +73,7 @@ const VISITORS: Visitor[] = [
   {
     id: "v1",
     number: 1,
-    color: "#a8ff57",
+    color: "var(--color-accent)",
     currentPage: "/pricing",
     timeOnSite: "2:34",
     pathTrail: ["Главная", "Услуги", "Цены"],
@@ -188,7 +188,7 @@ function ProjectsSection({
           </h1>
           <p
             className="mt-0.5 text-sm"
-            style={{ color: "rgba(255,255,255,0.6)" }}
+            style={{ color: "var(--color-ink-muted)" }}
           >
             Каждый проект — это отдельный продукт avreya: ассистент, медиа или сайт.
           </p>
@@ -196,7 +196,7 @@ function ProjectsSection({
         <Link
           to="/onboarding/assistant"
           className="hidden h-9 items-center gap-1.5 rounded-md px-3 text-xs font-semibold transition-opacity hover:opacity-90 sm:inline-flex"
-          style={{ background: "#a8ff57", color: "#0a0a0a" }}
+          style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
         >
           <Plus className="h-3.5 w-3.5" strokeWidth={2.25} />
           Новый проект
@@ -219,12 +219,12 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
       <Card>
         <div
           className="flex items-center justify-between rounded-lg px-5 py-4"
-          style={{ background: "rgba(168,255,87,0.08)", border: "1px solid rgba(168,255,87,0.25)" }}
+          style={{ background: "color-mix(in oklab, var(--color-accent) 8%, transparent)", border: "1px solid color-mix(in oklab, var(--color-accent) 25%, transparent)" }}
         >
           <div className="flex items-center gap-3">
             <span
               className="flex h-8 w-8 items-center justify-center rounded-full"
-              style={{ background: "#a8ff57", color: "#0a0a0a" }}
+              style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
             >
               <Check className="h-4 w-4" strokeWidth={3} />
             </span>
@@ -232,12 +232,12 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
               <div className="text-sm font-semibold text-foreground">
                 Система готова к работе
               </div>
-              <div className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>
+              <div className="text-xs" style={{ color: "var(--color-ink-muted)" }}>
                 Все проверки пройдены — ассистент работает на ваших каналах.
               </div>
             </div>
           </div>
-          <Check className="h-5 w-5" style={{ color: "#a8ff57" }} strokeWidth={2.5} />
+          <Check className="h-5 w-5" style={{ color: "var(--color-accent)" }} strokeWidth={2.5} />
         </div>
       </Card>
     );
@@ -249,7 +249,7 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
         <h2 className="font-display text-base font-semibold text-foreground">
           Готовность к запуску
         </h2>
-        <span className="text-xs tabular-nums" style={{ color: "rgba(255,255,255,0.5)" }}>
+        <span className="text-xs tabular-nums" style={{ color: "var(--color-ink-muted)" }}>
           {READINESS.filter((r) => r.done).length} / {READINESS.length}
         </span>
       </div>
@@ -258,13 +258,13 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
           <li
             key={item.id}
             className="flex items-center justify-between gap-3 rounded-lg px-4 py-3"
-            style={{ background: "#141414", border: "1px solid #2a2a2a" }}
+            style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border)" }}
           >
             <div className="flex min-w-0 items-center gap-2.5">
               {item.done ? (
                 <span
                   className="flex h-5 w-5 flex-none items-center justify-center rounded-full"
-                  style={{ background: "#a8ff57", color: "#0a0a0a" }}
+                  style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
                 >
                   <Check className="h-3 w-3" strokeWidth={3} />
                 </span>
@@ -278,7 +278,7 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
               )}
               <span
                 className="truncate text-sm"
-                style={{ color: item.done ? "rgba(255,255,255,0.85)" : "#ffffff" }}
+                style={{ color: item.done ? "var(--color-ink-muted)" : "var(--color-foreground)" }}
               >
                 {item.label}
               </span>
@@ -293,7 +293,7 @@ function ReadinessSection({ allReady }: { allReady: boolean }) {
                 <Link
                   to={item.href}
                   className="text-xs font-medium transition-colors hover:underline"
-                  style={{ color: "#a8ff57" }}
+                  style={{ color: "var(--color-accent)" }}
                 >
                   Настроить →
                 </Link>
@@ -322,18 +322,18 @@ function LiveVisitorsSection() {
             >
               <span
                 className="absolute inset-0 animate-ping rounded-full"
-                style={{ background: "#a8ff57", opacity: 0.6 }}
+                style={{ background: "var(--color-accent)", opacity: 0.6 }}
               />
               <span
                 className="relative inline-flex h-2.5 w-2.5 rounded-full"
-                style={{ background: "#a8ff57" }}
+                style={{ background: "var(--color-accent)" }}
               />
             </span>
             Сейчас на сайте
           </h2>
           <span
             className="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
-            style={{ background: "rgba(168,255,87,0.12)", color: "#a8ff57" }}
+            style={{ background: "color-mix(in oklab, var(--color-accent) 12%, transparent)", color: "var(--color-accent)" }}
           >
             {count} {pluralize(count, ["посетитель", "посетителя", "посетителей"])}
           </span>
@@ -341,7 +341,7 @@ function LiveVisitorsSection() {
         <Link
           to="/visitors"
           className="text-sm font-medium transition-colors hover:text-foreground"
-          style={{ color: "rgba(255,255,255,0.65)" }}
+          style={{ color: "var(--color-ink-muted)" }}
         >
           Смотреть всех →
         </Link>
@@ -365,18 +365,18 @@ function VisitorRow({ v }: { v: Visitor }) {
   return (
     <li
       className="group flex flex-col gap-3 rounded-lg p-4 transition-colors md:flex-row md:items-center"
-      style={{ background: "#141414", border: "1px solid #2a2a2a" }}
+      style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border)" }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(168,255,87,0.35)";
+        (e.currentTarget as HTMLElement).style.borderColor = "color-mix(in oklab, var(--color-accent) 35%, transparent)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "#2a2a2a";
+        (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
       }}
     >
       {/* Avatar */}
       <div
         className="flex h-10 w-10 flex-none items-center justify-center rounded-full text-sm font-bold tabular-nums"
-        style={{ background: v.color, color: "#0a0a0a" }}
+        style={{ background: v.color, color: "var(--color-accent-ink)" }}
         aria-label={`Анонимный посетитель #${v.number}`}
       >
         #{v.number}
@@ -390,7 +390,7 @@ function VisitorRow({ v }: { v: Visitor }) {
           </span>
           <span
             className="rounded-md px-1.5 py-0.5 text-[11px] font-medium tabular-nums"
-            style={{ background: "rgba(168,255,87,0.12)", color: "#a8ff57" }}
+            style={{ background: "color-mix(in oklab, var(--color-accent) 12%, transparent)", color: "var(--color-accent)" }}
           >
             ⏱ {v.timeOnSite}
           </span>
@@ -399,7 +399,7 @@ function VisitorRow({ v }: { v: Visitor }) {
         {/* Path trail */}
         <div
           className="flex flex-wrap items-center gap-1 text-xs"
-          style={{ color: "rgba(255,255,255,0.45)" }}
+          style={{ color: "var(--color-ink-subtle)" }}
         >
           {v.pathTrail.map((p, i) => (
             <span key={i} className="inline-flex items-center gap-1">
@@ -414,27 +414,27 @@ function VisitorRow({ v }: { v: Visitor }) {
         {/* Meta row */}
         <div
           className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs"
-          style={{ color: "rgba(255,255,255,0.6)" }}
+          style={{ color: "var(--color-ink-muted)" }}
         >
           <span className="inline-flex items-center gap-1">
             <DeviceIcon className="h-3.5 w-3.5" strokeWidth={1.75} />
             {v.deviceLabel}
           </span>
-          <span style={{ color: "rgba(255,255,255,0.25)" }}>·</span>
+          <span style={{ color: "var(--color-ink-subtle)" }}>·</span>
           <span className="inline-flex items-center gap-1">
             <MapPin className="h-3.5 w-3.5" strokeWidth={1.75} />
             {v.city}
           </span>
-          <span style={{ color: "rgba(255,255,255,0.25)" }}>·</span>
+          <span style={{ color: "var(--color-ink-subtle)" }}>·</span>
           <span className="inline-flex items-center gap-1.5">
-            <span style={{ color: "rgba(255,255,255,0.85)" }}>{v.source}</span>
+            <span style={{ color: "var(--color-ink-muted)" }}>{v.source}</span>
             {v.utm && (
               <span
                 className="rounded px-1.5 py-0.5 text-[10px] font-mono uppercase tracking-wide"
                 style={{
-                  background: "rgba(255,255,255,0.06)",
-                  color: "rgba(255,255,255,0.7)",
-                  border: "1px solid #2a2a2a",
+                  background: "var(--color-surface-muted)",
+                  color: "var(--color-ink-muted)",
+                  border: "1px solid var(--color-border)",
                 }}
               >
                 UTM
@@ -449,7 +449,7 @@ function VisitorRow({ v }: { v: Visitor }) {
         <button
           type="button"
           className="inline-flex h-8 items-center gap-1.5 rounded-md px-3 text-xs font-semibold transition-opacity hover:opacity-90"
-          style={{ background: "#a8ff57", color: "#0a0a0a" }}
+          style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
         >
           <MessageSquare className="h-3.5 w-3.5" strokeWidth={2} />
           Написать
@@ -457,7 +457,7 @@ function VisitorRow({ v }: { v: Visitor }) {
         <button
           type="button"
           className="inline-flex h-8 items-center gap-1.5 rounded-md px-3 text-xs font-semibold text-foreground transition-colors hover:bg-foreground/10"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid #2a2a2a" }}
+          style={{ background: "var(--color-surface-muted)", border: "1px solid var(--color-border)" }}
         >
           <Video className="h-3.5 w-3.5" strokeWidth={2} />
           Позвонить
@@ -471,15 +471,15 @@ function EmptyVisitors() {
   return (
     <div
       className="flex flex-col items-center justify-center gap-3 rounded-lg px-6 py-10 text-center"
-      style={{ background: "#141414", border: "1px dashed #2a2a2a" }}
+      style={{ background: "var(--color-surface-sunken)", border: "1px dashed var(--color-border)" }}
     >
       <div
         className="flex h-10 w-10 items-center justify-center rounded-full"
-        style={{ background: "rgba(255,255,255,0.05)" }}
+        style={{ background: "var(--color-surface-muted)" }}
       >
-        <Monitor className="h-5 w-5" style={{ color: "rgba(255,255,255,0.4)" }} strokeWidth={1.5} />
+        <Monitor className="h-5 w-5" style={{ color: "var(--color-ink-subtle)" }} strokeWidth={1.5} />
       </div>
-      <p className="text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
+      <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
         Никого нет на сайте прямо сейчас.
         <br />
         Установите виджет, чтобы начать.
@@ -487,7 +487,7 @@ function EmptyVisitors() {
       <Link
         to="/app-integrations"
         className="mt-1 inline-flex h-9 items-center rounded-md px-4 text-sm font-semibold transition-opacity hover:opacity-90"
-        style={{ background: "#a8ff57", color: "#0a0a0a" }}
+        style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
       >
         Установить виджет
       </Link>
@@ -511,16 +511,16 @@ function QuickStatsSection() {
 }
 
 function StatCard({ stat }: { stat: QuickStat }) {
-  const color = stat.highlight ? "#a8ff57" : "#ffffff";
+  const color = stat.highlight ? "var(--color-accent)" : "var(--color-foreground)";
   const data = stat.spark.map((y, i) => ({ x: i, y }));
   return (
     <div
       className="rounded-xl p-4"
-      style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}
+      style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
     >
       <div
         className="text-[11px] font-medium uppercase tracking-wide"
-        style={{ color: "rgba(255,255,255,0.5)" }}
+        style={{ color: "var(--color-ink-muted)" }}
       >
         {stat.label}
       </div>
@@ -558,7 +558,7 @@ function QuickActionsSection() {
       <Link
         to="/assistants"
         className="inline-flex h-10 items-center gap-2 rounded-md px-4 text-sm font-semibold transition-opacity hover:opacity-90"
-        style={{ background: "#a8ff57", color: "#0a0a0a" }}
+        style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
       >
         <Plus className="h-4 w-4" strokeWidth={2.25} />
         Создать ассистента
@@ -566,7 +566,7 @@ function QuickActionsSection() {
       <Link
         to="/chat"
         className="inline-flex h-10 items-center gap-2 rounded-md px-4 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
-        style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
+        style={{ background: "var(--color-surface-muted)", border: "1px solid var(--color-border)" }}
       >
         <MessageCircle className="h-4 w-4" strokeWidth={1.75} />
         Открыть чат
@@ -574,7 +574,7 @@ function QuickActionsSection() {
       <Link
         to="/leads"
         className="inline-flex h-10 items-center gap-2 rounded-md px-4 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
-        style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
+        style={{ background: "var(--color-surface-muted)", border: "1px solid var(--color-border)" }}
       >
         <Inbox className="h-4 w-4" strokeWidth={1.75} />
         Посмотреть лиды
@@ -589,7 +589,7 @@ function Card({ children }: { children: React.ReactNode }) {
   return (
     <section
       className="rounded-xl p-5 md:p-6"
-      style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}
+      style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
     >
       {children}
     </section>

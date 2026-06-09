@@ -40,14 +40,14 @@ export function WelcomeBanner({ userName }: Props) {
       className="overflow-hidden rounded-2xl p-6 md:p-8"
       style={{
         background:
-          "radial-gradient(120% 100% at 0% 0%, rgba(168,255,87,0.10) 0%, transparent 55%), #1a1a1a",
-        border: "1px solid #2a2a2a",
+          "radial-gradient(120% 100% at 0% 0%, color-mix(in oklab, var(--color-accent) 10%, transparent) 0%, transparent 55%), var(--color-surface)",
+        border: "1px solid var(--color-border)",
       }}
     >
       <div className="mb-5 flex items-start gap-3">
         <span
           className="hidden h-10 w-10 flex-none items-center justify-center rounded-full text-base font-bold sm:inline-flex"
-          style={{ background: "#a8ff57", color: "#0a0a0a" }}
+          style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
           aria-hidden
         >
           ✨
@@ -58,7 +58,7 @@ export function WelcomeBanner({ userName }: Props) {
           </h1>
           <p
             className="mt-1 text-sm md:text-[15px]"
-            style={{ color: "rgba(255,255,255,0.65)" }}
+            style={{ color: "var(--color-ink-muted)" }}
           >
             Выберите продукт — пройдите короткий бриф, и через 30 секунд
             проект появится здесь, в кабинете.
@@ -73,24 +73,24 @@ export function WelcomeBanner({ userName }: Props) {
               to={p.to}
               className="group block h-full rounded-xl p-4 transition-colors"
               style={{
-                background: "#141414",
-                border: "1px solid #2a2a2a",
+                background: "var(--color-surface-sunken)",
+                border: "1px solid var(--color-border)",
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.borderColor =
-                  "rgba(168,255,87,0.45)";
+                  "color-mix(in oklab, var(--color-accent) 45%, transparent)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "#2a2a2a";
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)";
               }}
             >
               <div className="flex items-center justify-between">
                 <span
                   className="flex h-9 w-9 items-center justify-center rounded-lg"
                   style={{
-                    background: "rgba(168,255,87,0.10)",
-                    color: "#a8ff57",
-                    border: "1px solid rgba(168,255,87,0.25)",
+                    background: "color-mix(in oklab, var(--color-accent) 10%, transparent)",
+                    color: "var(--color-accent)",
+                    border: "1px solid color-mix(in oklab, var(--color-accent) 25%, transparent)",
                   }}
                 >
                   <p.icon className="h-4 w-4" strokeWidth={1.75} />
@@ -98,9 +98,9 @@ export function WelcomeBanner({ userName }: Props) {
                 <span
                   className="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
                   style={{
-                    background: "rgba(255,255,255,0.05)",
-                    color: "rgba(255,255,255,0.6)",
-                    border: "1px solid #2a2a2a",
+                    background: "var(--color-surface-muted)",
+                    color: "var(--color-ink-muted)",
+                    border: "1px solid var(--color-border)",
                   }}
                 >
                   {p.minutes}
@@ -111,13 +111,13 @@ export function WelcomeBanner({ userName }: Props) {
               </div>
               <div
                 className="mt-1 text-xs leading-snug"
-                style={{ color: "rgba(255,255,255,0.6)" }}
+                style={{ color: "var(--color-ink-muted)" }}
               >
                 {p.desc}
               </div>
               <div
                 className="mt-3 inline-flex items-center gap-1 text-xs font-medium transition-transform group-hover:translate-x-0.5"
-                style={{ color: "#a8ff57" }}
+                style={{ color: "var(--color-accent)" }}
               >
                 Начать <ArrowRight className="h-3 w-3" strokeWidth={2} />
               </div>
