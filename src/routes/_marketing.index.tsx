@@ -1440,7 +1440,9 @@ function Integrations() {
         <SectionHead
           eyebrow="Интеграции"
           title="Принимаем там, где пишут. Отдаём туда, где работаете"
+          desc="Один менеджер на все каналы и любые маршруты заявок."
         />
+
 
         <div className="mt-8 space-y-5">
           <IntegrationRow label="Принимаем" items={channels} />
