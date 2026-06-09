@@ -360,6 +360,90 @@
     }
   }
 
+  /* Unified design-system helpers */
+  .container-ds {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .container-ds { padding-inline: 32px; }
+  }
+
+  .section-py {
+    padding-block: 56px;
+  }
+  @media (min-width: 768px) {
+    .section-py { padding-block: 96px; }
+  }
+
+  .card-soft {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-foreground);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pill-badge::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background-color: var(--color-accent);
+  }
+  .pill-badge[data-tone="terracotta"]::before { background-color: var(--color-signal); }
+  .pill-badge[data-tone="ink"]::before { background-color: var(--color-foreground); }
+
+  .btn-primary-ds {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding-inline: 24px;
+    border-radius: 999px;
+    background-color: var(--color-accent);
+    color: var(--color-accent-foreground);
+    font-weight: 600;
+    transition: background-color 180ms var(--ease-out-quart);
+  }
+  .btn-primary-ds:hover { background-color: var(--color-accent-hover); }
+
+  .btn-outline-ds {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding-inline: 24px;
+    border-radius: 999px;
+    background-color: transparent;
+    color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+    font-weight: 600;
+    transition: border-color 180ms var(--ease-out-quart), background-color 180ms var(--ease-out-quart);
+  }
+  .btn-outline-ds:hover {
+    border-color: var(--color-border-strong);
+    background-color: var(--color-surface);
+  }
+
   /* Тонкая hairline-сетка для премиальных фонов hero / секций */
   .bg-dot-grid {
     background-image: radial-gradient(
