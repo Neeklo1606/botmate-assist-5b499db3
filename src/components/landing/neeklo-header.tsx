@@ -225,7 +225,7 @@ export function NeekloHeader() {
                 size="sm"
                 className="h-9 rounded-full px-4 text-[13px]"
               >
-                <Link to="/app">В кабинет</Link>
+                <Link to="/dashboard">В кабинет</Link>
               </Button>
             ) : (
               <>
@@ -235,7 +235,7 @@ export function NeekloHeader() {
                   size="sm"
                   className="h-9 rounded-full px-3.5 text-[13px] text-ink-muted hover:text-foreground"
                 >
-                  <Link to="/login">Войти</Link>
+                  <Link to="/auth">Войти</Link>
                 </Button>
                 <Button
                   asChild
@@ -246,7 +246,7 @@ export function NeekloHeader() {
                     "shadow-xs transition-shadow duration-200 hover:shadow-sm",
                   )}
                 >
-                  <Link to="/onboarding/assistant" className="gap-2">
+                  <Link to="/auth" className="gap-2">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
@@ -371,7 +371,7 @@ export function NeekloHeader() {
               <div className="rounded-3xl border border-border/70 bg-surface/80 p-3 shadow-[var(--shadow-rim),var(--shadow-md)] backdrop-blur">
                 {isAuthed ? (
                   <Button asChild variant="brand" size="lg" className="w-full rounded-2xl">
-                    <Link to="/app" onClick={() => setOpen(false)}>
+                    <Link to="/dashboard" onClick={() => setOpen(false)}>
                       В кабинет
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
@@ -384,7 +384,7 @@ export function NeekloHeader() {
                       size="lg"
                       className="flex-1 rounded-2xl text-ink-muted"
                     >
-                      <Link to="/login" onClick={() => setOpen(false)}>
+                      <Link to="/auth" onClick={() => setOpen(false)}>
                         Войти
                       </Link>
                     </Button>
@@ -395,7 +395,7 @@ export function NeekloHeader() {
                       className="group/m flex-1 rounded-2xl"
                     >
                       <Link
-                        to="/onboarding/assistant"
+                        to="/auth"
                         onClick={() => setOpen(false)}
                         className="gap-2"
                       >
