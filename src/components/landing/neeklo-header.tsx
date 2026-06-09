@@ -235,7 +235,7 @@ export function NeekloHeader() {
                   size="sm"
                   className="h-9 rounded-full px-3.5 text-[13px] text-ink-muted hover:text-foreground"
                 >
-                  <Link to="/login">Войти</Link>
+                  <Link to="/auth">Войти</Link>
                 </Button>
                 <Button
                   asChild
