@@ -14,7 +14,7 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as MarketingRouteImport } from './routes/_marketing'
-import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as AuthshellRouteImport } from './routes/_authshell'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as OnboardingIndexRouteImport } from './routes/onboarding.index'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing.index'
@@ -34,9 +34,9 @@ import { Route as MarketingContactsRouteImport } from './routes/_marketing.conta
 import { Route as MarketingCasesRouteImport } from './routes/_marketing.cases'
 import { Route as MarketingAssistantRouteImport } from './routes/_marketing.assistant'
 import { Route as MarketingAboutRouteImport } from './routes/_marketing.about'
-import { Route as AuthSignupRouteImport } from './routes/_auth.signup'
-import { Route as AuthLoginRouteImport } from './routes/_auth.login'
-import { Route as AuthCallbackRouteImport } from './routes/_auth.callback'
+import { Route as AuthshellSignupRouteImport } from './routes/_authshell.signup'
+import { Route as AuthshellLoginRouteImport } from './routes/_authshell.login'
+import { Route as AuthshellCallbackRouteImport } from './routes/_authshell.callback'
 import { Route as AppVisitorsRouteImport } from './routes/_app.visitors'
 import { Route as AppTeamRouteImport } from './routes/_app.team'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
@@ -81,8 +81,8 @@ const MarketingRoute = MarketingRouteImport.update({
   id: '/_marketing',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/_auth',
+const AuthshellRoute = AuthshellRouteImport.update({
+  id: '/_authshell',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -179,20 +179,20 @@ const MarketingAboutRoute = MarketingAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => MarketingRoute,
 } as any)
-const AuthSignupRoute = AuthSignupRouteImport.update({
+const AuthshellSignupRoute = AuthshellSignupRouteImport.update({
   id: '/signup',
   path: '/signup',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AuthshellRoute,
 } as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
+const AuthshellLoginRoute = AuthshellLoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AuthshellRoute,
 } as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
+const AuthshellCallbackRoute = AuthshellCallbackRouteImport.update({
   id: '/callback',
   path: '/callback',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AuthshellRoute,
 } as any)
 const AppVisitorsRoute = AppVisitorsRouteImport.update({
   id: '/visitors',
@@ -310,9 +310,9 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AppSettingsRoute
   '/team': typeof AppTeamRoute
   '/visitors': typeof AppVisitorsRoute
-  '/callback': typeof AuthCallbackRoute
-  '/login': typeof AuthLoginRoute
-  '/signup': typeof AuthSignupRoute
+  '/callback': typeof AuthshellCallbackRoute
+  '/login': typeof AuthshellLoginRoute
+  '/signup': typeof AuthshellSignupRoute
   '/about': typeof MarketingAboutRoute
   '/assistant': typeof MarketingAssistantRoute
   '/cases': typeof MarketingCasesRouteWithChildren
@@ -356,9 +356,9 @@ export interface FileRoutesByTo {
   '/settings': typeof AppSettingsRoute
   '/team': typeof AppTeamRoute
   '/visitors': typeof AppVisitorsRoute
-  '/callback': typeof AuthCallbackRoute
-  '/login': typeof AuthLoginRoute
-  '/signup': typeof AuthSignupRoute
+  '/callback': typeof AuthshellCallbackRoute
+  '/login': typeof AuthshellLoginRoute
+  '/signup': typeof AuthshellSignupRoute
   '/about': typeof MarketingAboutRoute
   '/assistant': typeof MarketingAssistantRoute
   '/cases': typeof MarketingCasesRouteWithChildren
@@ -385,7 +385,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
-  '/_auth': typeof AuthRouteWithChildren
+  '/_authshell': typeof AuthshellRouteWithChildren
   '/_marketing': typeof MarketingRouteWithChildren
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
@@ -405,9 +405,9 @@ export interface FileRoutesById {
   '/_app/settings': typeof AppSettingsRoute
   '/_app/team': typeof AppTeamRoute
   '/_app/visitors': typeof AppVisitorsRoute
-  '/_auth/callback': typeof AuthCallbackRoute
-  '/_auth/login': typeof AuthLoginRoute
-  '/_auth/signup': typeof AuthSignupRoute
+  '/_authshell/callback': typeof AuthshellCallbackRoute
+  '/_authshell/login': typeof AuthshellLoginRoute
+  '/_authshell/signup': typeof AuthshellSignupRoute
   '/_marketing/about': typeof MarketingAboutRoute
   '/_marketing/assistant': typeof MarketingAssistantRoute
   '/_marketing/cases': typeof MarketingCasesRouteWithChildren
@@ -528,7 +528,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_app'
-    | '/_auth'
+    | '/_authshell'
     | '/_marketing'
     | '/auth'
     | '/dashboard'
@@ -548,9 +548,9 @@ export interface FileRouteTypes {
     | '/_app/settings'
     | '/_app/team'
     | '/_app/visitors'
-    | '/_auth/callback'
-    | '/_auth/login'
-    | '/_auth/signup'
+    | '/_authshell/callback'
+    | '/_authshell/login'
+    | '/_authshell/signup'
     | '/_marketing/about'
     | '/_marketing/assistant'
     | '/_marketing/cases'
@@ -578,7 +578,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
-  AuthRoute: typeof AuthRouteWithChildren
+  AuthshellRoute: typeof AuthshellRouteWithChildren
   MarketingRoute: typeof MarketingRouteWithChildren
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
@@ -628,11 +628,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth': {
-      id: '/_auth'
+    '/_authshell': {
+      id: '/_authshell'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof AuthRouteImport
+      preLoaderRoute: typeof AuthshellRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app': {
@@ -768,26 +768,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingAboutRouteImport
       parentRoute: typeof MarketingRoute
     }
-    '/_auth/signup': {
-      id: '/_auth/signup'
+    '/_authshell/signup': {
+      id: '/_authshell/signup'
       path: '/signup'
       fullPath: '/signup'
-      preLoaderRoute: typeof AuthSignupRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AuthshellSignupRouteImport
+      parentRoute: typeof AuthshellRoute
     }
-    '/_auth/login': {
-      id: '/_auth/login'
+    '/_authshell/login': {
+      id: '/_authshell/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AuthshellLoginRouteImport
+      parentRoute: typeof AuthshellRoute
     }
-    '/_auth/callback': {
-      id: '/_auth/callback'
+    '/_authshell/callback': {
+      id: '/_authshell/callback'
       path: '/callback'
       fullPath: '/callback'
-      preLoaderRoute: typeof AuthCallbackRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AuthshellCallbackRouteImport
+      parentRoute: typeof AuthshellRoute
     }
     '/_app/visitors': {
       id: '/_app/visitors'
@@ -973,19 +973,21 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
-interface AuthRouteChildren {
-  AuthCallbackRoute: typeof AuthCallbackRoute
-  AuthLoginRoute: typeof AuthLoginRoute
-  AuthSignupRoute: typeof AuthSignupRoute
+interface AuthshellRouteChildren {
+  AuthshellCallbackRoute: typeof AuthshellCallbackRoute
+  AuthshellLoginRoute: typeof AuthshellLoginRoute
+  AuthshellSignupRoute: typeof AuthshellSignupRoute
 }
 
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthCallbackRoute: AuthCallbackRoute,
-  AuthLoginRoute: AuthLoginRoute,
-  AuthSignupRoute: AuthSignupRoute,
+const AuthshellRouteChildren: AuthshellRouteChildren = {
+  AuthshellCallbackRoute: AuthshellCallbackRoute,
+  AuthshellLoginRoute: AuthshellLoginRoute,
+  AuthshellSignupRoute: AuthshellSignupRoute,
 }
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+const AuthshellRouteWithChildren = AuthshellRoute._addFileChildren(
+  AuthshellRouteChildren,
+)
 
 interface MarketingCasesRouteChildren {
   MarketingCasesSlugRoute: typeof MarketingCasesSlugRoute
@@ -1052,7 +1054,7 @@ const MarketingRouteWithChildren = MarketingRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
-  AuthRoute: AuthRouteWithChildren,
+  AuthshellRoute: AuthshellRouteWithChildren,
   MarketingRoute: MarketingRouteWithChildren,
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
@@ -1067,3 +1069,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
