@@ -371,7 +371,7 @@ export function NeekloHeader() {
               <div className="rounded-3xl border border-border/70 bg-surface/80 p-3 shadow-[var(--shadow-rim),var(--shadow-md)] backdrop-blur">
                 {isAuthed ? (
                   <Button asChild variant="brand" size="lg" className="w-full rounded-2xl">
-                    <Link to="/app" onClick={() => setOpen(false)}>
+                    <Link to="/dashboard" onClick={() => setOpen(false)}>
                       В кабинет
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
