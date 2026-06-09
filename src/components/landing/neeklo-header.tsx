@@ -225,7 +225,7 @@ export function NeekloHeader() {
                 size="sm"
                 className="h-9 rounded-full px-4 text-[13px]"
               >
-                <Link to="/app">В кабинет</Link>
+                <Link to="/dashboard">В кабинет</Link>
               </Button>
             ) : (
               <>
