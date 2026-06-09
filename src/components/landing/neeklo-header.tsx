@@ -395,7 +395,7 @@ export function NeekloHeader() {
                       className="group/m flex-1 rounded-2xl"
                     >
                       <Link
-                        to="/onboarding/assistant"
+                        to="/auth"
                         onClick={() => setOpen(false)}
                         className="gap-2"
                       >
