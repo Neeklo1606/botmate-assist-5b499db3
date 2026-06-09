@@ -49,6 +49,10 @@ const SECTIONS: Section[] = [
 function DashboardPage() {
   const [active, setActive] = useState<SectionId>("agents");
   const current = SECTIONS.find((s) => s.id === active)!;
+  const handleCreateAgent = () => {
+    // Мастер создания агента — следующий промпт
+    toast("Мастер создания агента появится в следующем шаге");
+  };
 
   return (
     <div className="flex min-h-screen bg-bg-alt">
