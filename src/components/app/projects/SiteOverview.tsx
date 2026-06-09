@@ -56,7 +56,7 @@ export function SiteOverview({ project }: { project: Project }) {
 
         {/* Browser-mock */}
         <div className="p-5">
-          <div className="overflow-hidden rounded-lg" style={{ border: "1px solid var(--color-border)", background: "#0f0f0f" }}>
+          <div className="overflow-hidden rounded-lg" style={{ border: "1px solid var(--color-border)", background: "var(--color-surface-sunken)" }}>
             <div className="flex items-center gap-1.5 px-3 py-2" style={{ background: "var(--color-surface-sunken)", borderBottom: "1px solid var(--color-border)" }}>
               <span className="h-2 w-2 rounded-full" style={{ background: "#ff5f57" }} />
               <span className="h-2 w-2 rounded-full" style={{ background: "#febc2e" }} />
@@ -74,7 +74,7 @@ export function SiteOverview({ project }: { project: Project }) {
                 type="button"
                 disabled
                 className="mt-5 inline-flex h-10 items-center rounded-md px-5 text-sm font-semibold opacity-90"
-                style={{ background: "var(--color-accent)", color: "#0a0a0a" }}
+                style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
               >
                 Оставить заявку
               </button>
