@@ -48,10 +48,15 @@ const SECTIONS: Section[] = [
 
 function DashboardPage() {
   const [active, setActive] = useState<SectionId>("agents");
+  const [agents, setAgents] = useState<Agent[]>(INITIAL_AGENTS);
+  const [wizardOpen, setWizardOpen] = useState(false);
   const current = SECTIONS.find((s) => s.id === active)!;
-  const handleCreateAgent = () => {
-    // Мастер создания агента — следующий промпт
-    toast("Мастер создания агента появится в следующем шаге");
+  const handleCreateAgent = () => setWizardOpen(true);
+  const handleSaveAgent = (agent: Agent) => {
+    setAgents((prev) => [agent, ...prev]);
+    setActive("agents");
+    setWizardOpen(false);
+    toast.success("Агент создан");
   };
 
   return (
