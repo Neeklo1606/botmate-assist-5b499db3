@@ -75,6 +75,7 @@ function HomePage() {
     <div className="bg-background">
       <Hero />
       <TrustBar />
+      <ProductsTrio />
       <ProductScene />
       <HowItWorks />
       <Benefits />
@@ -389,6 +390,175 @@ function TrustBar() {
           ))}
         </ul>
       </div>
+    </section>
+  );
+}
+
+/* ─────────────────── Products trio ─────────────────── */
+
+function ProductsTrio() {
+  const cards = [
+    {
+      icon: "💬",
+      badge: { label: "Хит продаж", bg: "var(--accent)", fg: "var(--accent-ink)" },
+      title: "AI-менеджер заявок",
+      desc:
+        "Отвечает клиентам за 7 секунд, квалифицирует лидов и передаёт готовую заявку в CRM. Работает 24/7 без менеджера.",
+      features: [
+        "Telegram, сайт, WhatsApp",
+        "Квалификация и скоринг лидов",
+        "Передача в CRM / Google Sheets",
+        "Данные хранятся на вашем сервере",
+      ],
+      price: "от 9 900 ₽/мес",
+      cta: { label: "Подключить", variant: "filled" as const, to: "/onboarding/assistant" as const },
+    },
+    {
+      icon: "🎬",
+      badge: { label: "Скоро", bg: "var(--signal)", fg: "var(--signal-foreground)" },
+      title: "AI-продюсер контента",
+      desc:
+        "Нодовая система генерации: сценарий → визуал → монтаж → публикация. Reels, Shorts, рекламные ролики без съёмочной группы.",
+      features: [
+        "Нодовый редактор сценариев",
+        "Генерация видео через Kling / Runway",
+        "Автомонтаж и субтитры",
+        "Пакетное производство до 50 роликов/мес",
+      ],
+      price: "от 14 900 ₽/мес",
+      cta: { label: "В лист ожидания", variant: "outline" as const, to: "/media" as const },
+    },
+    {
+      icon: "🌐",
+      badge: { label: "Скоро", bg: "var(--signal)", fg: "var(--signal-foreground)" },
+      title: "AI-конструктор сайтов",
+      desc:
+        "Опиши бизнес текстом — AI соберёт готовый сайт с дизайном, текстами и интеграциями. Как Lovable, но для малого бизнеса в РФ.",
+      features: [
+        "Промпт → готовый лендинг",
+        "SEO-тексты под нишу",
+        "Форма + AI-ассистент встроен",
+        "Хостинг в РФ включён",
+      ],
+      price: "от 4 900 ₽/мес",
+      cta: { label: "В лист ожидания", variant: "outline" as const, to: "/site" as const },
+    },
+  ];
+
+  return (
+    <section id="products" className="py-20 md:py-28" style={{ background: "var(--background)" }}>
+      <Container>
+        <div className="mx-auto max-w-3xl text-center">
+          <div
+            className="text-[12px] font-semibold uppercase tracking-[0.18em]"
+            style={{ color: "var(--accent)" }}
+          >
+            Продукт
+          </div>
+          <h2
+            className="mt-4 font-display text-[36px] leading-[1.05] md:text-[52px]"
+            style={{ fontWeight: 800, letterSpacing: "-0.03em", color: "var(--foreground)" }}
+          >
+            Три AI-инструмента.
+            <br />
+            Одна платформа.
+          </h2>
+          <p
+            className="mt-4 text-[16px] md:text-[18px]"
+            style={{ color: "var(--ink-muted)", lineHeight: 1.7, fontWeight: 500 }}
+          >
+            Не набор ботов — единая система для роста бизнеса
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {cards.map((c) => (
+            <div
+              key={c.title}
+              className="flex flex-col rounded-2xl border transition-transform hover:-translate-y-0.5"
+              style={{
+                background: "var(--surface)",
+                borderColor: "var(--border)",
+                padding: 32,
+              }}
+            >
+              <div className="flex items-start justify-between">
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
+                  style={{ background: "var(--surface-muted)" }}
+                  aria-hidden
+                >
+                  {c.icon}
+                </div>
+                <span
+                  className="rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.1em]"
+                  style={{ background: c.badge.bg, color: c.badge.fg }}
+                >
+                  {c.badge.label}
+                </span>
+              </div>
+
+              <h3
+                className="mt-6 font-display text-[22px]"
+                style={{ fontWeight: 800, letterSpacing: "-0.02em", color: "var(--foreground)" }}
+              >
+                {c.title}
+              </h3>
+              <p
+                className="mt-3 text-[15px]"
+                style={{ color: "var(--ink-muted)", lineHeight: 1.65 }}
+              >
+                {c.desc}
+              </p>
+
+              <ul className="mt-6 space-y-2.5">
+                {c.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-[14px]" style={{ color: "var(--foreground)" }}>
+                    <Check
+                      className="mt-0.5 h-4 w-4 flex-none"
+                      strokeWidth={2.5}
+                      style={{ color: "var(--accent)" }}
+                    />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-auto pt-8">
+                <div
+                  className="mb-4 text-[18px] font-bold tabular"
+                  style={{ color: "var(--foreground)", letterSpacing: "-0.02em" }}
+                >
+                  {c.price}
+                </div>
+                {c.cta.variant === "filled" ? (
+                  <Link
+                    to={c.cta.to}
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl text-[14px] font-semibold transition-colors"
+                    style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+                  >
+                    {c.cta.label}
+                    <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                  </Link>
+                ) : (
+                  <Link
+                    to={c.cta.to}
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border text-[14px] font-semibold transition-colors"
+                    style={{
+                      borderColor: "var(--border-strong)",
+                      color: "var(--foreground)",
+                      background: "transparent",
+                    }}
+                  >
+                    {c.cta.label}
+                    <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                  </Link>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }
