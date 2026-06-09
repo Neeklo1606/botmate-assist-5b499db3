@@ -295,8 +295,8 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: 1.55;
+    font-size: 16px;
+    line-height: 1.7;
     font-weight: 400;
     letter-spacing: -0.005em;
     text-wrap: pretty;
@@ -304,9 +304,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
     text-wrap: balance;
   }
 
@@ -315,7 +315,6 @@
     line-height: 0.98;
   }
 
-  /* Числа — табличные везде по умолчанию */
   .tabular,
   table,
   [data-tabular] {
@@ -323,7 +322,7 @@
   }
 
   ::selection {
-    background-color: oklch(0.54 0.062 118 / 0.28);
+    background-color: rgba(45, 106, 79, 0.28);
     color: var(--color-foreground);
   }
 
