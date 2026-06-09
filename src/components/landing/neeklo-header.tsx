@@ -246,7 +246,7 @@ export function NeekloHeader() {
                     "shadow-xs transition-shadow duration-200 hover:shadow-sm",
                   )}
                 >
-                  <Link to="/onboarding/assistant" className="gap-2">
+                  <Link to="/auth" className="gap-2">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
