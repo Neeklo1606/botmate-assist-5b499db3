@@ -262,7 +262,7 @@ function AssistantTabBody() {
               className="flex h-9 w-9 items-center justify-center rounded-full"
               style={{ background: "var(--surface-muted)", color: "var(--foreground)" }}
             >
-              <User className="h-4.5 w-4.5" strokeWidth={1.75} />
+              <User className="h-4 w-4" strokeWidth={1.75} />
             </div>
             <div className="leading-tight">
               <div className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink-subtle)" }}>
