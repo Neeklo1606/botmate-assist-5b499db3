@@ -2,7 +2,7 @@
  * AgentWizard — полноэкранная модалка создания агента.
  * Левая колонка: 4 шага. Правая: живой превью карточки.
  */
-import { useMemo, useState, type ComponentType } from "react";
+import { useMemo, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
