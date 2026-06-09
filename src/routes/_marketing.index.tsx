@@ -88,122 +88,91 @@ function HomePage() {
   );
 }
 
-/* ─────────────────── Hero — Editorial stack ─────────────────── */
+/* ─────────────────── Hero — new system (cream / emerald) ─────────────────── */
 
 function Hero() {
   return (
-    <section className="hero-shell relative overflow-hidden border-b border-border bg-background">
-      {/* Soft ambient olive wash, top-right */}
+    <section className="relative overflow-hidden bg-background">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-40 h-[560px] w-[560px] rounded-full opacity-70 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, var(--color-accent-glow), transparent 70%)" }}
-      />
-      {/* Cool secondary wash, bottom-left — adds layered depth without color noise */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-40 -left-32 h-[460px] w-[460px] rounded-full opacity-50 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, color-mix(in oklab, var(--color-foreground) 6%, transparent), transparent 70%)" }}
-      />
-      {/* Hairline bottom rule — anchors hero to next section */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, color-mix(in oklab, var(--color-border-strong) 80%, transparent), transparent)" }}
+        className="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full opacity-60 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, rgba(45,106,79,0.18), transparent 70%)" }}
       />
       <Container>
+        <div className="relative grid items-center gap-12 pt-12 pb-16 md:grid-cols-12 md:gap-10 md:pt-20 md:pb-24">
+          {/* LEFT */}
+          <div className="md:col-span-6">
+            <span
+              className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[12px] font-medium"
+              style={{
+                borderColor: "var(--border)",
+                background: "var(--surface)",
+                color: "var(--ink-muted)",
+              }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--accent)" }} />
+              Технология упаковки бизнеса
+            </span>
 
-        <div className="hero-grid relative grid items-center gap-10 pt-3 pb-8 md:grid-cols-12 md:gap-10 md:pt-5 md:pb-12 lg:pt-6 lg:pb-14">
-
-          {/* LEFT — strategic hierarchy */}
-          <div className="z-10 flex flex-col items-start md:col-span-6">
-            <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-border/80 bg-surface/70 py-1 pl-1.5 pr-3 backdrop-blur shadow-xs">
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-accent-ink">
-                N
-              </span>
-              <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
-                AI-менеджер заявок
-              </span>
-              <span className="h-3 w-px bg-border" />
-              <span className="inline-flex items-center gap-1.5 text-[10.5px] font-medium text-ink-muted">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-                </span>
-                online
-              </span>
-            </div>
-
-            <h1 className="hero-h1 font-display text-[48px] font-bold leading-[0.95] tracking-[-0.035em] text-foreground md:text-[68px] lg:text-[80px]">
-              Ни одной
+            <h1
+              className="mt-6 font-display text-[44px] leading-[1.02] md:text-[68px] lg:text-[80px]"
+              style={{ fontWeight: 800, letterSpacing: "-0.03em", color: "var(--foreground)" }}
+            >
+              Твой бизнес
               <br />
-              упущенной
+              работает, пока
               <br />
-              заявки.{" "}
-              <span className="relative inline-block font-display italic font-semibold tracking-[-0.04em] text-foreground/85">
-                Никогда.
-                <span
-                  aria-hidden
-                  className="absolute -bottom-1.5 left-0.5 right-1.5 h-[3px] rounded-full"
-                  style={{
-                    background:
-                      "linear-gradient(to right, transparent, var(--color-accent) 22%, var(--color-accent) 78%, transparent)",
-                  }}
-                />
-              </span>
+              ты&nbsp;спишь.
             </h1>
 
-
-            <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-ink-muted md:text-[19px]">
-              ИИ-менеджер заявок отвечает за секунды, собирает данные клиента
-              и передаёт готовый лид в CRM.
+            <p
+              className="mt-6 max-w-xl text-[16px] md:text-[18px]"
+              style={{ lineHeight: 1.7, color: "var(--ink-muted)", fontWeight: 500 }}
+            >
+              AI-сотрудник отвечает на заявки, создаёт контент и собирает сайты — на твоей
+              инфраструктуре, без разработчиков.
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center gap-5">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 to="/onboarding/assistant"
-                className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-foreground pl-7 pr-8 text-[14px] font-semibold text-background shadow-lift ring-1 ring-foreground/0 transition-[transform,box-shadow,padding] duration-300 ease-quart hover:-translate-y-0.5 hover:shadow-soft-lift"
+                className="inline-flex h-12 items-center gap-2 rounded-xl px-6 text-[15px] font-semibold transition-colors"
+                style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--signal)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
               >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-                </span>
-                Запустить менеджера
-                <ArrowRight
-                  className="h-[18px] w-[18px] transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                  strokeWidth={1.75}
-                />
+                Запустить агента
+                <ArrowRight className="h-4 w-4" strokeWidth={2} />
               </Link>
-
               <Link
                 to="/"
                 hash="product"
-                className="group inline-flex h-14 items-center gap-3 px-2 text-[14px] font-semibold text-foreground"
+                className="inline-flex h-12 items-center gap-2 rounded-xl border px-6 text-[15px] font-semibold transition-colors"
+                style={{
+                  borderColor: "var(--border-strong)",
+                  color: "var(--foreground)",
+                  background: "transparent",
+                }}
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/60 transition-colors group-hover:border-foreground/40 group-hover:bg-surface">
-                  <span className="ml-[2px] h-0 w-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-foreground" />
-                </span>
-                Смотреть демо
+                <span className="text-[10px]">▶</span> Смотреть демо
               </Link>
             </div>
 
+            <div
+              className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13.5px]"
+              style={{ color: "var(--ink-muted)", fontWeight: 500 }}
+            >
+              <span className="inline-flex items-center gap-1.5">🔒 Данные в РФ</span>
+              <span aria-hidden style={{ color: "var(--border-strong)" }}>•</span>
+              <span className="inline-flex items-center gap-1.5">⚡ Запуск за 3 дня</span>
+              <span aria-hidden style={{ color: "var(--border-strong)" }}>•</span>
+              <span className="inline-flex items-center gap-1.5">💰 Оплата в рублях</span>
+            </div>
           </div>
 
-          {/* RIGHT — unified system canvas */}
-          <div className="hero-right relative flex h-[560px] items-center justify-center md:col-span-6 md:h-[640px]">
-            {/* subtle grid foundation */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.04]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(var(--color-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-                maskImage:
-                  "radial-gradient(ellipse at center, black 0%, transparent 75%)",
-              }}
-            />
-            <HeroScene />
+          {/* RIGHT — tabbed product mockup */}
+          <div className="md:col-span-6">
+            <HeroMockup />
           </div>
         </div>
       </Container>
@@ -211,135 +180,142 @@ function Hero() {
   );
 }
 
+function HeroMockup() {
+  const [tab, setTab] = useState<"assistant" | "media" | "site">("assistant");
+  const tabs: { k: typeof tab; label: string }[] = [
+    { k: "assistant", label: "Ассистент" },
+    { k: "media", label: "Медиа" },
+    { k: "site", label: "Сайт" },
+  ];
 
-function HeroScene() {
   return (
-      <div className="relative w-full max-w-md overflow-visible">
-      {/* Soft accent halo behind main card — depth without color noise */}
+    <div
+      className="relative overflow-hidden rounded-2xl border shadow-lift"
+      style={{ background: "var(--surface)", borderColor: "var(--border)" }}
+    >
+      {/* Tabs */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-6 -z-10 rounded-[32px] opacity-70 blur-2xl"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 70% 30%, var(--color-accent-glow), transparent 70%)",
-        }}
-      />
+        className="flex items-center gap-1 border-b px-3 pt-3"
+        style={{ borderColor: "var(--border)", background: "var(--surface-tint)" }}
+      >
+        {tabs.map((t) => {
+          const active = tab === t.k;
+          return (
+            <button
+              key={t.k}
+              onClick={() => setTab(t.k)}
+              className="rounded-t-lg px-4 py-2.5 text-[13px] font-semibold transition-colors"
+              style={{
+                background: active ? "var(--surface)" : "transparent",
+                color: active ? "var(--foreground)" : "var(--ink-muted)",
+                borderTop: active ? `2px solid var(--accent)` : "2px solid transparent",
+              }}
+            >
+              {t.label}
+            </button>
+          );
+        })}
+      </div>
 
-      {/* Main Lead Processing Card — product window */}
-      <div className="relative z-30 translate-x-4 overflow-hidden rounded-2xl border border-border/80 bg-background shadow-[var(--shadow-lg),var(--shadow-rim)] ring-1 ring-foreground/[0.02]">
-        {/* window chrome */}
-        <div className="flex items-center justify-between border-b border-border/80 bg-surface-muted/70 px-4 py-2.5">
-          <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
-            <span className="h-2.5 w-2.5 rounded-full bg-border-strong/55" />
+      {/* Body */}
+      <div className="p-5 md:p-6">
+        {tab === "assistant" && <AssistantTabBody />}
+        {tab === "media" && (
+          <div
+            className="flex h-[260px] items-center justify-center rounded-xl border text-[14px]"
+            style={{ borderColor: "var(--border)", background: "var(--surface-muted)", color: "var(--ink-muted)" }}
+          >
+            <div className="text-center">
+              <ImageIcon className="mx-auto h-8 w-8" strokeWidth={1.5} />
+              <div className="mt-2 font-semibold" style={{ color: "var(--foreground)" }}>AI-Медиа</div>
+              <div>Генерация постов, баннеров и сторис</div>
+            </div>
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-subtle">
-            avreya / leads / live
+        )}
+        {tab === "site" && (
+          <div
+            className="flex h-[260px] items-center justify-center rounded-xl border text-[14px]"
+            style={{ borderColor: "var(--border)", background: "var(--surface-muted)", color: "var(--ink-muted)" }}
+          >
+            <div className="text-center">
+              <Layout className="mx-auto h-8 w-8" strokeWidth={1.5} />
+              <div className="mt-2 font-semibold" style={{ color: "var(--foreground)" }}>AI-Сайт</div>
+              <div>Конструктор лендингов под бриф</div>
+            </div>
           </div>
-          <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-accent">
-            <span className="h-1 w-1 rounded-full bg-accent" />
-            live
+        )}
+      </div>
+    </div>
+  );
+}
+
+function AssistantTabBody() {
+  return (
+    <div className="space-y-4">
+      <div
+        className="rounded-xl border p-4"
+        style={{ background: "var(--background)", borderColor: "var(--border)" }}
+      >
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div
+              className="flex h-9 w-9 items-center justify-center rounded-full"
+              style={{ background: "var(--surface-muted)", color: "var(--foreground)" }}
+            >
+              <User className="h-4.5 w-4.5" strokeWidth={1.75} />
+            </div>
+            <div className="leading-tight">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink-subtle)" }}>
+                Новая заявка
+              </div>
+              <div className="text-[14px] font-semibold" style={{ color: "var(--foreground)" }}>
+                Мария Волкова
+              </div>
+            </div>
+          </div>
+          <span
+            className="rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em]"
+            style={{ background: "var(--signal)", color: "var(--signal-foreground)" }}
+          >
+            Горячий
           </span>
         </div>
 
-
-        <div className="p-6">
-          <div className="mb-6 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-surface-muted ring-1 ring-border">
-                <User className="h-5 w-5 text-foreground" strokeWidth={1.75} />
-                <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-accent ring-2 ring-background" />
-              </div>
-              <div className="leading-tight">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-subtle">
-                  Новая заявка · #L-2849
-                </div>
-                <div className="text-[14px] font-semibold text-foreground">
-                  Мария Волкова
-                </div>
-              </div>
-            </div>
-            <span className="rounded-md bg-foreground px-2 py-1 text-[9.5px] font-bold uppercase tracking-[0.12em] text-background">
+        <dl className="space-y-2 text-[13px]">
+          <MockRow k="Имя" v="Мария Волкова" />
+          <MockRow k="Телефон" v="+7 921 555 12 34" />
+          <MockRow k="Бюджет" v="до 800 000 ₽" />
+          <div className="flex justify-between">
+            <dt style={{ color: "var(--ink-subtle)" }}>Статус</dt>
+            <dd className="flex items-center gap-1.5 font-semibold" style={{ color: "var(--accent)" }}>
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--accent)" }} />
               Горячий
-            </span>
+            </dd>
           </div>
-
-          <div className="mb-5 space-y-3">
-            <SceneRow k="Услуга" v="Ремонт под ключ" />
-            <SceneRow k="Объект" v="42 м², Невский р-н" />
-            <SceneRow k="Бюджет" v="до 800 000 ₽" />
-            <div className="flex justify-between text-[12px]">
-              <span className="text-ink-subtle">Статус</span>
-              <span className="flex items-center gap-1.5 font-semibold text-foreground">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-                </span>
-                Квалифицирован AI
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between border-t border-border pt-4">
-            <div className="flex items-center gap-2">
-              <div className="flex h-6 w-6 items-center justify-center rounded-md border border-border bg-surface-muted text-[10px] font-bold text-foreground">
-                C
-              </div>
-              <span className="text-[11.5px] font-medium text-ink-muted">
-                amoCRM · сделка создана
-              </span>
-            </div>
-            <span className="font-mono text-[10px] tabular text-ink-subtle">00:12</span>
-          </div>
-        </div>
+        </dl>
       </div>
 
-      {/* Chat Context Underlay */}
-      <div className="absolute -left-12 -top-12 z-20 w-full origin-bottom-right scale-95 rounded-2xl border border-border/70 bg-surface-muted/90 p-5 opacity-95 backdrop-blur-md shadow-[var(--shadow-md),var(--shadow-rim)]">
-
-        <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-foreground/35" />
-            Telegram · вход
-          </span>
-          <span className="font-mono">14:02</span>
-        </div>
-        <div className="mb-3 flex gap-3">
-          <div className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-foreground text-[9.5px] font-bold text-background">
-            AI
-          </div>
-          <div className="flex-1">
-            <div className="rounded-xl rounded-tl-none bg-background p-3 text-[12px] leading-snug text-foreground shadow-xs">
-              Здравствуйте! Делаете ремонт под ключ?
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-end">
-          <div className="max-w-[82%]">
-            <div className="rounded-xl rounded-tr-none bg-foreground p-3 text-[12px] leading-snug text-background shadow-xs">
-              Да. Подскажите метраж и район, соберу точную смету.
-            </div>
-          </div>
-        </div>
+      <div
+        className="flex items-center justify-between rounded-xl border px-4 py-3 text-[13px]"
+        style={{ background: "var(--surface-muted)", borderColor: "var(--border)" }}
+      >
+        <span style={{ color: "var(--ink-muted)" }}>
+          Лидов сегодня: <span className="font-bold tabular" style={{ color: "var(--foreground)" }}>23</span>
+        </span>
+        <span aria-hidden style={{ color: "var(--border-strong)" }}>•</span>
+        <span style={{ color: "var(--ink-muted)" }}>
+          Конверсия <span className="font-bold tabular" style={{ color: "var(--accent)" }}>67%</span>
+        </span>
       </div>
+    </div>
+  );
+}
 
-      {/* Bottom live counter — refined */}
-      <div className="absolute -bottom-8 -left-12 z-[35] flex items-center gap-3.5 rounded-2xl bg-foreground p-3.5 pr-5 text-background shadow-[var(--shadow-lg)] ring-1 ring-foreground/10 md:-left-20">
-
-        <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-[12px] font-bold tabular text-accent-ink">
-          23
-          <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-background ring-2 ring-foreground">
-            <span className="absolute inset-0 animate-ping rounded-full bg-accent opacity-60" />
-          </span>
-        </div>
-        <div className="leading-tight">
-          <div className="text-[9.5px] font-semibold uppercase tracking-[0.14em] text-background/55">
-            Сегодня
-          </div>
-          <div className="text-[12.5px] font-semibold">Лидов обработано</div>
-        </div>
-      </div>
+function MockRow({ k, v }: { k: string; v: string }) {
+  return (
+    <div className="flex justify-between">
+      <dt style={{ color: "var(--ink-subtle)" }}>{k}</dt>
+      <dd className="font-medium" style={{ color: "var(--foreground)" }}>{v}</dd>
     </div>
   );
 }
@@ -357,13 +333,7 @@ function Row({ k, v, mono }: { k: string; v: string; mono?: boolean }) {
   return (
     <div className="flex items-baseline justify-between gap-3">
       <span className="text-ink-subtle">{k}</span>
-      <span
-        className={
-          "text-foreground " + (mono ? "font-medium tabular" : "font-medium")
-        }
-      >
-        {v}
-      </span>
+      <span className={"text-foreground " + (mono ? "font-medium tabular" : "font-medium")}>{v}</span>
     </div>
   );
 }
@@ -386,47 +356,38 @@ function Bubble({ side, children }: { side: "left" | "right"; children: React.Re
   );
 }
 
-/* ─────────────────── Trust bar ─────────────────── */
+/* ─────────────────── Trust bar — uppercase marquee ─────────────────── */
 
 function TrustBar() {
   const items = [
-    { icon: Server, t: "Своя инфраструктура", s: "серверы Avreya" },
-    { icon: Shield, t: "Данные в РФ", s: "ДЦ в России" },
-    { icon: CreditCard, t: "Оплата в рублях", s: "ЮKassa, акты" },
-    { icon: MessageSquare, t: "Поддержка", s: "Telegram, 24/7" },
-    { icon: Zap, t: "Отклик 7 сек", s: "среднее по AI" },
-    { icon: Database, t: "Свои данные", s: "никаких утечек" },
+    "AI-Ассистент",
+    "AI-Медиа",
+    "AI-Сайт",
+    "Данные в РФ",
+    "Запуск за 3 дня",
+    "Своя инфраструктура",
+    "Оплата в рублях",
   ];
-  // Дубль массива — нужен для бесшовной анимации translate(-50%).
-  const track = [...items, ...items];
+  const track = [...items, ...items, ...items];
 
   return (
-    <section className="trust-marquee border-b border-border bg-surface-sunken/50">
-      <div className="py-2 md:py-2.5">
-
-        <div
-          className="marquee-mask pause-on-hover group/marquee relative overflow-hidden"
-          style={{ ["--marquee-duration" as string]: "90s" }}
-        >
-          <ul
-            className="animate-marquee flex w-max items-center gap-8 md:gap-10"
-            aria-label="Преимущества Avreya"
-          >
-            {track.map((it, i) => (
-              <li
-                key={`${it.t}-${i}`}
-                className="flex flex-none items-center gap-2 text-foreground/75"
-                aria-hidden={i >= items.length ? "true" : undefined}
-              >
-                <it.icon className="h-3.5 w-3.5 text-ink-subtle" strokeWidth={1.75} />
-                <span className="text-[11.5px] font-medium uppercase tracking-[0.14em]">
-                  {it.t}
-                </span>
-                <span aria-hidden className="ml-2 h-1 w-1 rounded-full bg-foreground/20" />
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section style={{ background: "#1C1C1C", color: "#F0EBE1" }}>
+      <div
+        className="marquee-mask pause-on-hover relative overflow-hidden py-3"
+        style={{ ["--marquee-duration" as string]: "60s" }}
+      >
+        <ul className="animate-marquee flex w-max items-center gap-8">
+          {track.map((label, i) => (
+            <li
+              key={`${label}-${i}`}
+              className="flex flex-none items-center gap-8 text-[11px] font-semibold uppercase tracking-[0.18em]"
+              aria-hidden={i >= items.length ? "true" : undefined}
+            >
+              <span>{label}</span>
+              <span aria-hidden style={{ color: "rgba(240,235,225,0.4)" }}>•</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
