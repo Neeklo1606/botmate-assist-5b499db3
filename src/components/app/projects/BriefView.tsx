@@ -12,9 +12,9 @@ export function BriefView({ project }: { project: Project }) {
 
   return (
     <div className="space-y-5">
-      <div className="rounded-xl p-5" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
+      <div className="rounded-xl p-5" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
         <h3 className="font-display text-base font-semibold text-foreground">Ваш бриф</h3>
-        <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+        <p className="mt-1 text-sm" style={{ color: "var(--color-ink-muted)" }}>
           На основе этих ответов мы настраиваем проект. Чтобы изменить — свяжитесь с поддержкой.
         </p>
       </div>
@@ -26,15 +26,15 @@ export function BriefView({ project }: { project: Project }) {
           <section
             key={step.id}
             className="rounded-xl"
-            style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}
+            style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
           >
-            <header className="border-b px-5 py-3" style={{ borderColor: "#2a2a2a" }}>
+            <header className="border-b px-5 py-3" style={{ borderColor: "var(--color-border)" }}>
               <h4 className="font-display text-sm font-semibold text-foreground">{step.title}</h4>
             </header>
-            <dl className="divide-y" style={{ borderColor: "#2a2a2a" }}>
+            <dl className="divide-y" style={{ borderColor: "var(--color-border)" }}>
               {visible.map((f) => (
                 <div key={f.name} className="grid grid-cols-1 gap-1 px-5 py-3 sm:grid-cols-[200px_1fr] sm:gap-4">
-                  <dt className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>{f.label}</dt>
+                  <dt className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>{f.label}</dt>
                   <dd className="text-sm text-foreground">{formatValue(f, data[f.name])}</dd>
                 </div>
               ))}
