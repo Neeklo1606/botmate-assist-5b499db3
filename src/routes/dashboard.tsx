@@ -14,6 +14,12 @@ import {
   Plus,
   LogOut,
   Sparkles,
+  Send,
+  Globe,
+  Copy,
+  MoreHorizontal,
+  MessageSquare,
+  Inbox,
 } from "lucide-react";
 import { toast } from "sonner";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
