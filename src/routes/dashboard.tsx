@@ -166,10 +166,10 @@ function DashboardPage() {
 
 /* ---------- Sections ---------- */
 
-function SectionView({ id }: { id: SectionId }) {
+function SectionView({ id, onCreateAgent }: { id: SectionId; onCreateAgent: () => void }) {
   switch (id) {
     case "agents":
-      return <AgentsSection />;
+      return <AgentsSection onCreate={onCreateAgent} />;
     case "knowledge":
       return <KnowledgeSection />;
     case "channels":
