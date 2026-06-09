@@ -737,28 +737,32 @@ function ProductsTrio() {
             Не набор ботов — единая система для роста бизнеса
           </p>
 
-          {/* Tabs */}
-          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border p-1.5"
-            style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-          >
-            {tabs.map((t) => {
-              const active = tab === t.k;
-              return (
-                <button
-                  key={t.k}
-                  type="button"
-                  onClick={() => setTab(t.k)}
-                  className="rounded-full px-4 py-2 text-[13px] font-semibold transition-colors"
-                  style={{
-                    background: active ? "var(--accent)" : "transparent",
-                    color: active ? "var(--accent-ink)" : "var(--ink-muted)",
-                  }}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
+          {/* Tabs — horizontal scroll on mobile */}
+          <div className="mt-8 -mx-5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:px-0">
+            <div
+              className="inline-flex items-center justify-center gap-2 rounded-full border p-1.5"
+              style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+            >
+              {tabs.map((t) => {
+                const active = tab === t.k;
+                return (
+                  <button
+                    key={t.k}
+                    type="button"
+                    onClick={() => setTab(t.k)}
+                    className="whitespace-nowrap rounded-full px-4 py-2 text-[13px] font-semibold transition-colors"
+                    style={{
+                      background: active ? "var(--accent)" : "transparent",
+                      color: active ? "var(--accent-ink)" : "var(--ink-muted)",
+                    }}
+                  >
+                    {t.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
+
         </div>
 
         <div className="mt-12 grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
