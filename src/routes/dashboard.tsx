@@ -20,6 +20,9 @@ import {
   MoreHorizontal,
   MessageSquare,
   Inbox,
+  UploadCloud,
+  FileText,
+  Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
@@ -198,7 +201,7 @@ function SectionView({
     case "agents":
       return <AgentsSection agents={agents} onCreate={onCreateAgent} />;
     case "knowledge":
-      return <KnowledgeSection />;
+      return <KnowledgeSection agents={agents} />;
     case "channels":
       return <ChannelsSection />;
     case "leads":
@@ -423,21 +426,251 @@ function Metric({
   );
 }
 
-function KnowledgeSection() {
-  const items = ["Прайс автосервиса.pdf", "FAQ.docx", "Условия записи.txt"];
+interface KbFile {
+  id: string;
+  name: string;
+  size: string;
+}
+
+interface QAPair {
+  id: string;
+  q: string;
+  a: string;
+}
+
+function KnowledgeSection({ agents }: { agents: Agent[] }) {
+  const [agentId, setAgentId] = useState(agents[0]?.id ?? "");
+  const [tab, setTab] = useState<"docs" | "text" | "qa">("docs");
+  const [files, setFiles] = useState<KbFile[]>([
+    { id: "f1", name: "Прайс автосервиса.pdf", size: "248 КБ" },
+    { id: "f2", name: "FAQ.docx", size: "62 КБ" },
+    { id: "f3", name: "Условия записи.txt", size: "4 КБ" },
+  ]);
+  const [text, setText] = useState("");
+  const [pairs, setPairs] = useState<QAPair[]>([
+    { id: "p1", q: "Сколько стоит замена масла?", a: "От 1 500 ₽ + стоимость масла." },
+    { id: "p2", q: "Работаете в выходные?", a: "Да, сб–вс с 10:00 до 18:00." },
+  ]);
+  const [dragOver, setDragOver] = useState(false);
+
+  const handleFiles = (list: FileList | null) => {
+    if (!list) return;
+    const next: KbFile[] = Array.from(list).map((f, i) => ({
+      id: `f${Date.now()}-${i}`,
+      name: f.name,
+      size: `${Math.max(1, Math.round(f.size / 1024))} КБ`,
+    }));
+    setFiles((prev) => [...next, ...prev]);
+    toast.success(`Загружено файлов: ${next.length}`);
+  };
+
+  const tabs: { id: typeof tab; label: string }[] = [
+    { id: "docs", label: "Документы" },
+    { id: "text", label: "Текст" },
+    { id: "qa", label: "Вопрос-ответ" },
+  ];
+
   return (
-    <Card>
-      <h2 className="text-[15px] font-semibold text-foreground">Документы</h2>
-      <p className="mt-1 text-[13px] text-ink-muted">Файлы, на которых обучается агент.</p>
-      <ul className="mt-4 divide-y divide-border">
-        {items.map((f) => (
-          <li key={f} className="flex items-center justify-between py-3 text-[13.5px] text-foreground">
-            <span>{f}</span>
-            <span className="text-[12px] text-ink-subtle">обновлено сегодня</span>
-          </li>
-        ))}
-      </ul>
-    </Card>
+    <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
+      <div className="space-y-5">
+        <Card>
+          <label className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+            Агент
+          </label>
+          <select
+            value={agentId}
+            onChange={(e) => setAgentId(e.target.value)}
+            className="mt-2 w-full rounded-xl border border-border bg-bg-alt px-3.5 py-2.5 text-[14px] text-foreground outline-none transition focus:border-accent"
+          >
+            {agents.map((a) => (
+              <option key={a.id} value={a.id}>
+                {a.name} · {a.niche}
+              </option>
+            ))}
+          </select>
+        </Card>
+
+        <Card>
+          <div className="flex gap-1 rounded-xl border border-border bg-bg-alt p-1">
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setTab(t.id)}
+                className={`flex-1 rounded-lg px-3 py-2 text-[13.5px] font-medium transition ${
+                  tab === t.id
+                    ? "bg-surface text-foreground shadow-[var(--shadow-sm)]"
+                    : "text-ink-muted hover:text-foreground"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-5">
+            {tab === "docs" && (
+              <div>
+                <label
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setDragOver(true);
+                  }}
+                  onDragLeave={() => setDragOver(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setDragOver(false);
+                    handleFiles(e.dataTransfer.files);
+                  }}
+                  className={`flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-10 text-center transition ${
+                    dragOver
+                      ? "border-accent bg-accent/5"
+                      : "border-border bg-bg-alt/40 hover:border-accent/60"
+                  }`}
+                >
+                  <UploadCloud className="h-8 w-8 text-ink-subtle" />
+                  <p className="mt-3 text-[14px] font-medium text-foreground">
+                    Перетащите прайс, FAQ, регламент
+                  </p>
+                  <p className="mt-1 text-[12.5px] text-ink-muted">
+                    или нажмите, чтобы выбрать файлы
+                  </p>
+                  <input
+                    type="file"
+                    multiple
+                    className="hidden"
+                    onChange={(e) => handleFiles(e.target.files)}
+                  />
+                </label>
+
+                <ul className="mt-5 divide-y divide-border">
+                  {files.length === 0 && (
+                    <li className="py-6 text-center text-[13px] text-ink-muted">
+                      Файлы не загружены
+                    </li>
+                  )}
+                  {files.map((f) => (
+                    <li key={f.id} className="flex items-center justify-between gap-3 py-3">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <FileText className="h-4 w-4 shrink-0 text-ink-subtle" />
+                        <div className="min-w-0">
+                          <p className="truncate text-[13.5px] text-foreground">{f.name}</p>
+                          <p className="text-[12px] text-ink-subtle">{f.size}</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setFiles((prev) => prev.filter((x) => x.id !== f.id))}
+                        className="rounded-lg p-2 text-ink-muted transition hover:bg-bg-alt hover:text-foreground"
+                        aria-label="Удалить"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {tab === "text" && (
+              <div>
+                <textarea
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder="Вставьте информацию о бизнесе, услугах, ценах"
+                  className="min-h-[260px] w-full resize-y rounded-xl border border-border bg-bg-alt px-3.5 py-3 text-[14px] text-foreground outline-none transition focus:border-accent"
+                />
+                <div className="mt-3 flex justify-end">
+                  <button
+                    onClick={() => toast.success("Текст сохранён")}
+                    className="rounded-xl bg-accent px-4 py-2 text-[13.5px] font-medium text-accent-foreground transition hover:opacity-90"
+                  >
+                    Сохранить
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {tab === "qa" && (
+              <div className="space-y-3">
+                {pairs.map((p, idx) => (
+                  <div key={p.id} className="rounded-xl border border-border bg-bg-alt/50 p-3.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+                        Пара {idx + 1}
+                      </span>
+                      <button
+                        onClick={() => setPairs((prev) => prev.filter((x) => x.id !== p.id))}
+                        className="rounded-lg p-1.5 text-ink-muted transition hover:bg-surface hover:text-foreground"
+                        aria-label="Удалить"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                    <input
+                      value={p.q}
+                      onChange={(e) =>
+                        setPairs((prev) =>
+                          prev.map((x) => (x.id === p.id ? { ...x, q: e.target.value } : x)),
+                        )
+                      }
+                      placeholder="Вопрос"
+                      className="mt-2 w-full rounded-lg border border-border bg-surface px-3 py-2 text-[13.5px] text-foreground outline-none focus:border-accent"
+                    />
+                    <textarea
+                      value={p.a}
+                      onChange={(e) =>
+                        setPairs((prev) =>
+                          prev.map((x) => (x.id === p.id ? { ...x, a: e.target.value } : x)),
+                        )
+                      }
+                      placeholder="Ответ"
+                      className="mt-2 min-h-[72px] w-full resize-y rounded-lg border border-border bg-surface px-3 py-2 text-[13.5px] text-foreground outline-none focus:border-accent"
+                    />
+                  </div>
+                ))}
+                <button
+                  onClick={() =>
+                    setPairs((prev) => [
+                      ...prev,
+                      { id: `p${Date.now()}`, q: "", a: "" },
+                    ])
+                  }
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-bg-alt/30 py-3 text-[13.5px] font-medium text-ink-muted transition hover:border-accent hover:text-foreground"
+                >
+                  <Plus className="h-4 w-4" /> Добавить пару
+                </button>
+              </div>
+            )}
+          </div>
+        </Card>
+      </div>
+
+      <div className="space-y-5">
+        <Card>
+          <h3 className="text-[15px] font-semibold text-foreground">Статус обучения</h3>
+          <div className="mt-4">
+            <div className="flex items-center justify-between text-[12.5px] text-ink-muted">
+              <span>Готовность</span>
+              <span className="font-medium text-foreground">72%</span>
+            </div>
+            <div className="mt-2 h-2 overflow-hidden rounded-full bg-bg-alt">
+              <div className="h-full rounded-full bg-accent" style={{ width: "72%" }} />
+            </div>
+          </div>
+          <p className="mt-4 text-[13px] leading-relaxed text-ink-muted">
+            Агент знает:{" "}
+            <span className="font-medium text-foreground">24 факта</span>,{" "}
+            <span className="font-medium text-foreground">8 услуг</span>,{" "}
+            <span className="font-medium text-foreground">12 ответов</span>.
+          </p>
+          <button
+            onClick={() => toast.success("Переобучение запущено")}
+            className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-bg-alt px-4 py-2.5 text-[13.5px] font-medium text-foreground transition hover:bg-surface"
+          >
+            <Sparkles className="h-4 w-4" /> Переобучить агента
+          </button>
+        </Card>
+      </div>
+    </div>
   );
 }
 
