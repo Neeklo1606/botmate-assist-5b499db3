@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as OnboardingIndexRouteImport } from './routes/onboarding.index'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing.index'
 import { Route as OnboardingSiteRouteImport } from './routes/onboarding.site'
 import { Route as OnboardingMediaRouteImport } from './routes/onboarding.media'
@@ -39,7 +40,6 @@ import { Route as AppVisitorsRouteImport } from './routes/_app.visitors'
 import { Route as AppTeamRouteImport } from './routes/_app.team'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppProjectsRouteImport } from './routes/_app.projects'
-import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
 import { Route as AppLeadsRouteImport } from './routes/_app.leads'
 import { Route as AppKnowledgeRouteImport } from './routes/_app.knowledge'
 import { Route as AppChatRouteImport } from './routes/_app.chat'
@@ -81,6 +81,11 @@ const AuthRoute = AuthRouteImport.update({
 } as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
+  id: '/onboarding/',
+  path: '/onboarding/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketingIndexRoute = MarketingIndexRouteImport.update({
@@ -203,11 +208,6 @@ const AppProjectsRoute = AppProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => AppRoute,
 } as any)
-const AppOnboardingRoute = AppOnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppLeadsRoute = AppLeadsRouteImport.update({
   id: '/leads',
   path: '/leads',
@@ -299,7 +299,6 @@ export interface FileRoutesByFullPath {
   '/chat': typeof AppChatRoute
   '/knowledge': typeof AppKnowledgeRoute
   '/leads': typeof AppLeadsRoute
-  '/onboarding': typeof AppOnboardingRoute
   '/projects': typeof AppProjectsRouteWithChildren
   '/settings': typeof AppSettingsRoute
   '/team': typeof AppTeamRoute
@@ -323,6 +322,7 @@ export interface FileRoutesByFullPath {
   '/onboarding/complete': typeof OnboardingCompleteRoute
   '/onboarding/media': typeof OnboardingMediaRoute
   '/onboarding/site': typeof OnboardingSiteRoute
+  '/onboarding/': typeof OnboardingIndexRoute
   '/projects/$projectId': typeof AppProjectsProjectIdRoute
   '/cases/$slug': typeof MarketingCasesSlugRoute
   '/legal/offer': typeof MarketingLegalOfferRoute
@@ -344,7 +344,6 @@ export interface FileRoutesByTo {
   '/chat': typeof AppChatRoute
   '/knowledge': typeof AppKnowledgeRoute
   '/leads': typeof AppLeadsRoute
-  '/onboarding': typeof AppOnboardingRoute
   '/projects': typeof AppProjectsRouteWithChildren
   '/settings': typeof AppSettingsRoute
   '/team': typeof AppTeamRoute
@@ -368,6 +367,7 @@ export interface FileRoutesByTo {
   '/onboarding/complete': typeof OnboardingCompleteRoute
   '/onboarding/media': typeof OnboardingMediaRoute
   '/onboarding/site': typeof OnboardingSiteRoute
+  '/onboarding': typeof OnboardingIndexRoute
   '/projects/$projectId': typeof AppProjectsProjectIdRoute
   '/cases/$slug': typeof MarketingCasesSlugRoute
   '/legal/offer': typeof MarketingLegalOfferRoute
@@ -392,7 +392,6 @@ export interface FileRoutesById {
   '/_app/chat': typeof AppChatRoute
   '/_app/knowledge': typeof AppKnowledgeRoute
   '/_app/leads': typeof AppLeadsRoute
-  '/_app/onboarding': typeof AppOnboardingRoute
   '/_app/projects': typeof AppProjectsRouteWithChildren
   '/_app/settings': typeof AppSettingsRoute
   '/_app/team': typeof AppTeamRoute
@@ -417,6 +416,7 @@ export interface FileRoutesById {
   '/onboarding/media': typeof OnboardingMediaRoute
   '/onboarding/site': typeof OnboardingSiteRoute
   '/_marketing/': typeof MarketingIndexRoute
+  '/onboarding/': typeof OnboardingIndexRoute
   '/_app/projects/$projectId': typeof AppProjectsProjectIdRoute
   '/_marketing/cases/$slug': typeof MarketingCasesSlugRoute
   '/_marketing/legal/offer': typeof MarketingLegalOfferRoute
@@ -440,7 +440,6 @@ export interface FileRouteTypes {
     | '/chat'
     | '/knowledge'
     | '/leads'
-    | '/onboarding'
     | '/projects'
     | '/settings'
     | '/team'
@@ -464,6 +463,7 @@ export interface FileRouteTypes {
     | '/onboarding/complete'
     | '/onboarding/media'
     | '/onboarding/site'
+    | '/onboarding/'
     | '/projects/$projectId'
     | '/cases/$slug'
     | '/legal/offer'
@@ -485,7 +485,6 @@ export interface FileRouteTypes {
     | '/chat'
     | '/knowledge'
     | '/leads'
-    | '/onboarding'
     | '/projects'
     | '/settings'
     | '/team'
@@ -509,6 +508,7 @@ export interface FileRouteTypes {
     | '/onboarding/complete'
     | '/onboarding/media'
     | '/onboarding/site'
+    | '/onboarding'
     | '/projects/$projectId'
     | '/cases/$slug'
     | '/legal/offer'
@@ -532,7 +532,6 @@ export interface FileRouteTypes {
     | '/_app/chat'
     | '/_app/knowledge'
     | '/_app/leads'
-    | '/_app/onboarding'
     | '/_app/projects'
     | '/_app/settings'
     | '/_app/team'
@@ -557,6 +556,7 @@ export interface FileRouteTypes {
     | '/onboarding/media'
     | '/onboarding/site'
     | '/_marketing/'
+    | '/onboarding/'
     | '/_app/projects/$projectId'
     | '/_marketing/cases/$slug'
     | '/_marketing/legal/offer'
@@ -575,6 +575,7 @@ export interface RootRouteChildren {
   OnboardingCompleteRoute: typeof OnboardingCompleteRoute
   OnboardingMediaRoute: typeof OnboardingMediaRoute
   OnboardingSiteRoute: typeof OnboardingSiteRoute
+  OnboardingIndexRoute: typeof OnboardingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -619,6 +620,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/': {
+      id: '/onboarding/'
+      path: '/onboarding'
+      fullPath: '/onboarding/'
+      preLoaderRoute: typeof OnboardingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_marketing/': {
@@ -789,13 +797,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProjectsRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/onboarding': {
-      id: '/_app/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AppOnboardingRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/_app/leads': {
       id: '/_app/leads'
       path: '/leads'
@@ -927,7 +928,6 @@ interface AppRouteChildren {
   AppChatRoute: typeof AppChatRoute
   AppKnowledgeRoute: typeof AppKnowledgeRoute
   AppLeadsRoute: typeof AppLeadsRoute
-  AppOnboardingRoute: typeof AppOnboardingRoute
   AppProjectsRoute: typeof AppProjectsRouteWithChildren
   AppSettingsRoute: typeof AppSettingsRoute
   AppTeamRoute: typeof AppTeamRoute
@@ -945,7 +945,6 @@ const AppRouteChildren: AppRouteChildren = {
   AppChatRoute: AppChatRoute,
   AppKnowledgeRoute: AppKnowledgeRoute,
   AppLeadsRoute: AppLeadsRoute,
-  AppOnboardingRoute: AppOnboardingRoute,
   AppProjectsRoute: AppProjectsRouteWithChildren,
   AppSettingsRoute: AppSettingsRoute,
   AppTeamRoute: AppTeamRoute,
@@ -1042,6 +1041,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingCompleteRoute: OnboardingCompleteRoute,
   OnboardingMediaRoute: OnboardingMediaRoute,
   OnboardingSiteRoute: OnboardingSiteRoute,
+  OnboardingIndexRoute: OnboardingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
