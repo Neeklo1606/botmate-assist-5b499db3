@@ -581,7 +581,7 @@ function LaunchSteps() {
   ];
 
   return (
-    <section className="py-20 md:py-28" style={{ background: "var(--surface-muted)" }}>
+    <section className="py-14 md:py-28" style={{ background: "var(--surface-muted)" }}>
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <div
@@ -712,7 +712,7 @@ function ProductsTrio() {
   ];
 
   return (
-    <section id="products" className="py-20 md:py-28" style={{ background: "var(--background)" }}>
+    <section id="products" className="py-14 md:py-28" style={{ background: "var(--background)" }}>
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <div
@@ -1002,7 +1002,7 @@ function PreviewCrm() {
 function ProductScene() {
   const [tab, setTab] = useState<"chat" | "lead" | "handoff">("chat");
   return (
-    <section id="product" className="py-20 md:py-28">
+    <section id="product" className="py-14 md:py-28">
       <Container>
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
@@ -1194,7 +1194,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section id="how" className="border-t border-border bg-surface-muted/40 py-20 md:py-28">
+    <section id="how" className="border-t border-border bg-surface-muted/40 py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Как это работает"
@@ -1274,7 +1274,7 @@ function Benefits() {
   ];
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Что вы получаете"
@@ -1516,7 +1516,7 @@ function WhyAvreya() {
     },
   ];
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 md:py-28">
       <Container>
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
@@ -1582,7 +1582,7 @@ function Ecosystem() {
     },
   ];
   return (
-    <section className="border-y border-border bg-surface-muted/40 py-20 md:py-28">
+    <section className="border-y border-border bg-surface-muted/40 py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Экосистема Avreya · Скоро"
@@ -1705,7 +1705,7 @@ function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-20 md:py-28">
+    <section id="pricing" className="py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Тарифы в рублях"
@@ -1868,7 +1868,7 @@ const faq = [
 
 function Faq() {
   return (
-    <section id="faq" className="border-t border-border bg-surface-muted/40 py-20 md:py-28">
+    <section id="faq" className="border-t border-border bg-surface-muted/40 py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Частые вопросы"
@@ -1958,7 +1958,7 @@ function FaqRow({ q, a, n }: { q: string; a: string; n: number }) {
 
 function FinalCta() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 md:py-28">
       <Container>
         <div className="relative overflow-hidden rounded-3xl border border-foreground bg-foreground px-8 py-14 text-background md:px-14 md:py-20">
           <div className="mx-auto max-w-[680px] text-center">
