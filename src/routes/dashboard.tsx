@@ -116,7 +116,7 @@ function DashboardPage() {
             </div>
             <button
               type="button"
-              onClick={() => toast.success("Открываем мастер создания агента")}
+              onClick={handleCreateAgent}
               className="inline-flex h-10 items-center gap-1.5 rounded-full bg-accent px-4 text-[13px] font-semibold text-accent-foreground shadow-xs transition-[transform] hover:-translate-y-px"
             >
               <Plus className="h-4 w-4" />
