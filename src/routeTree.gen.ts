@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AuthRouteImport } from './routes/_auth'
@@ -64,6 +65,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   id: '/robots.txt',
   path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -287,6 +293,7 @@ const AppProjectsProjectIdRoute = AppProjectsProjectIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/analytics': typeof AppAnalyticsRoute
@@ -332,6 +339,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/analytics': typeof AppAnalyticsRoute
@@ -380,6 +388,7 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/_marketing': typeof MarketingRouteWithChildren
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_app/analytics': typeof AppAnalyticsRoute
@@ -428,6 +437,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/dashboard'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/analytics'
@@ -473,6 +483,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/dashboard'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/analytics'
@@ -520,6 +531,7 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/_marketing'
     | '/auth'
+    | '/dashboard'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/_app/analytics'
@@ -569,6 +581,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRouteWithChildren
   MarketingRoute: typeof MarketingRouteWithChildren
   AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   OnboardingAssistantRoute: typeof OnboardingAssistantRoute
@@ -592,6 +605,13 @@ declare module '@tanstack/react-router' {
       path: '/robots.txt'
       fullPath: '/robots.txt'
       preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -1035,6 +1055,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   MarketingRoute: MarketingRouteWithChildren,
   AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   OnboardingAssistantRoute: OnboardingAssistantRoute,
