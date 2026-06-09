@@ -198,7 +198,7 @@ function SectionView({
     case "agents":
       return <AgentsSection agents={agents} onCreate={onCreateAgent} />;
     case "knowledge":
-      return <KnowledgeSection />;
+      return <KnowledgeSection agents={agents} />;
     case "channels":
       return <ChannelsSection />;
     case "leads":
