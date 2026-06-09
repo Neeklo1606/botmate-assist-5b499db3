@@ -674,38 +674,235 @@ function KnowledgeSection({ agents }: { agents: Agent[] }) {
   );
 }
 
-function ChannelsSection() {
-  const channels = [
-    { name: "Telegram", on: true },
-    { name: "Сайт", on: true },
-    { name: "WhatsApp", on: false },
-    { name: "Avito", on: false },
-    { name: "MAX", on: false },
-    { name: "VK", on: false },
-  ];
+type ChannelKey = "telegram" | "site" | "avito" | "max" | "whatsapp" | "vk";
+
+interface ChannelDef {
+  key: ChannelKey;
+  name: string;
+  cta: string;
+  modal: "token" | "code" | "stub";
+  hint: string;
+}
+
+const CHANNELS: ChannelDef[] = [
+  { key: "telegram", name: "Telegram", cta: "Подключить бота", modal: "token", hint: "Бот в Telegram через @BotFather" },
+  { key: "site", name: "Сайт", cta: "Получить код виджета", modal: "code", hint: "Виджет-чат на ваш сайт" },
+  { key: "avito", name: "Avito", cta: "Подключить аккаунт Avito", modal: "stub", hint: "Ответы в сообщениях Avito" },
+  { key: "max", name: "MAX", cta: "Подключить MAX", modal: "stub", hint: "Мессенджер MAX от VK" },
+  { key: "whatsapp", name: "WhatsApp", cta: "Подключить через провайдера", modal: "stub", hint: "Через официального BSP" },
+  { key: "vk", name: "VK", cta: "Подключить сообщество", modal: "stub", hint: "Сообщения сообщества VK" },
+];
+
+const CRM_TARGETS: { key: string; label: string }[] = [
+  { key: "amocrm", label: "amoCRM" },
+  { key: "bitrix24", label: "Bitrix24" },
+  { key: "sheets", label: "Google Sheets" },
+  { key: "tg_chat", label: "Telegram-чат" },
+  { key: "email", label: "Email" },
+];
+
+const WIDGET_SNIPPET = `<script src="https://cdn.avreya.ai/widget.js"
+  data-agent="AGENT_ID" async></script>`;
+
+function ChannelsSection({ agents }: { agents: Agent[] }) {
+  const [agentId, setAgentId] = useState(agents[0]?.id ?? "");
+  const [connected, setConnected] = useState<Record<ChannelKey, boolean>>({
+    telegram: true,
+    site: true,
+    avito: false,
+    max: false,
+    whatsapp: false,
+    vk: false,
+  });
+  const [modal, setModal] = useState<ChannelDef | null>(null);
+  const [token, setToken] = useState("");
+  const [targets, setTargets] = useState<Record<string, boolean>>({
+    amocrm: false,
+    bitrix24: false,
+    sheets: true,
+    tg_chat: true,
+    email: false,
+  });
+
+  const handleConnect = (ch: ChannelDef) => {
+    setConnected((p) => ({ ...p, [ch.key]: true }));
+    toast.success(`${ch.name} подключён`);
+    setModal(null);
+    setToken("");
+  };
+
+  const handleDisconnect = (ch: ChannelDef) => {
+    setConnected((p) => ({ ...p, [ch.key]: false }));
+    toast(`${ch.name} отключён`);
+  };
+
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {channels.map((c) => (
-        <Card key={c.name} className="!p-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-[14px] font-semibold text-foreground">{c.name}</h3>
-              <p className="mt-0.5 text-[12px] text-ink-muted">
-                {c.on ? "Подключён" : "Не подключён"}
-              </p>
+    <div className="space-y-5">
+      <Card>
+        <label className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+          Агент
+        </label>
+        <select
+          value={agentId}
+          onChange={(e) => setAgentId(e.target.value)}
+          className="mt-2 w-full rounded-xl border border-border bg-bg-alt px-3.5 py-2.5 text-[14px] text-foreground outline-none transition focus:border-accent"
+        >
+          {agents.map((a) => (
+            <option key={a.id} value={a.id}>
+              {a.name} · {a.niche}
+            </option>
+          ))}
+        </select>
+      </Card>
+
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {CHANNELS.map((ch) => {
+          const on = connected[ch.key];
+          return (
+            <Card key={ch.key} className="!p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <h3 className="text-[14.5px] font-semibold text-foreground">{ch.name}</h3>
+                  <p className="mt-1 text-[12.5px] text-ink-muted">{ch.hint}</p>
+                </div>
+                <span
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium ${
+                    on
+                      ? "bg-emerald-500/15 text-emerald-500"
+                      : "border border-border bg-bg-alt text-ink-muted"
+                  }`}
+                >
+                  {on ? "Подключён" : "Не подключён"}
+                </span>
+              </div>
+
+              <div className="mt-5">
+                {on ? (
+                  <button
+                    onClick={() => handleDisconnect(ch)}
+                    className="w-full rounded-xl border border-border bg-bg-alt px-4 py-2 text-[13px] font-medium text-foreground transition hover:bg-surface"
+                  >
+                    Отключить
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setModal(ch)}
+                    className="w-full rounded-xl bg-accent px-4 py-2 text-[13px] font-medium text-accent-foreground transition hover:opacity-90"
+                  >
+                    {ch.cta}
+                  </button>
+                )}
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+
+      <Card>
+        <h3 className="text-[15px] font-semibold text-foreground">Куда уходят заявки</h3>
+        <p className="mt-1 text-[13px] text-ink-muted">
+          Горячие лиды дублируются в выбранные системы.
+        </p>
+        <ul className="mt-4 divide-y divide-border">
+          {CRM_TARGETS.map((t) => {
+            const on = targets[t.key];
+            return (
+              <li key={t.key} className="flex items-center justify-between py-3">
+                <span className="text-[13.5px] text-foreground">{t.label}</span>
+                <button
+                  onClick={() =>
+                    setTargets((p) => ({ ...p, [t.key]: !p[t.key] }))
+                  }
+                  role="switch"
+                  aria-checked={on}
+                  className={`relative h-6 w-11 rounded-full transition ${
+                    on ? "bg-accent" : "bg-bg-alt border border-border"
+                  }`}
+                >
+                  <span
+                    className={`absolute top-0.5 h-5 w-5 rounded-full bg-surface shadow-[var(--shadow-sm)] transition ${
+                      on ? "left-[22px]" : "left-0.5"
+                    }`}
+                  />
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </Card>
+
+      {modal && (
+        <div
+          onClick={() => setModal(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-md rounded-[20px] border border-border bg-surface p-6 shadow-[var(--shadow-md),var(--shadow-rim)]"
+          >
+            <h3 className="text-[16px] font-semibold text-foreground">{modal.cta}</h3>
+            <p className="mt-1 text-[13px] text-ink-muted">{modal.name} · {modal.hint}</p>
+
+            {modal.modal === "token" && (
+              <div className="mt-5">
+                <label className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+                  Токен бота
+                </label>
+                <input
+                  value={token}
+                  onChange={(e) => setToken(e.target.value)}
+                  placeholder="123456:ABC-DEF..."
+                  className="mt-2 w-full rounded-xl border border-border bg-bg-alt px-3.5 py-2.5 text-[14px] text-foreground outline-none focus:border-accent"
+                />
+                <p className="mt-2 text-[12px] text-ink-subtle">
+                  Статус: <span className="text-ink-muted">ожидает подключения</span>
+                </p>
+              </div>
+            )}
+
+            {modal.modal === "code" && (
+              <div className="mt-5">
+                <label className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+                  Код для вставки в &lt;head&gt;
+                </label>
+                <pre className="mt-2 overflow-x-auto rounded-xl border border-border bg-bg-alt p-3.5 text-[12.5px] leading-relaxed text-foreground">
+{WIDGET_SNIPPET}
+                </pre>
+                <button
+                  onClick={() => {
+                    navigator.clipboard?.writeText(WIDGET_SNIPPET);
+                    toast.success("Код скопирован");
+                  }}
+                  className="mt-3 w-full rounded-xl border border-border bg-bg-alt px-4 py-2 text-[13px] font-medium text-foreground transition hover:bg-surface"
+                >
+                  Скопировать код
+                </button>
+              </div>
+            )}
+
+            {modal.modal === "stub" && (
+              <div className="mt-5 rounded-xl border border-dashed border-border bg-bg-alt/40 p-4 text-[13px] text-ink-muted">
+                Откроется окно авторизации провайдера. Подключение пока в режиме демо.
+              </div>
+            )}
+
+            <div className="mt-6 flex justify-end gap-2">
+              <button
+                onClick={() => setModal(null)}
+                className="rounded-xl border border-border bg-bg-alt px-4 py-2 text-[13px] font-medium text-foreground transition hover:bg-surface"
+              >
+                Отмена
+              </button>
+              <button
+                onClick={() => handleConnect(modal)}
+                className="rounded-xl bg-accent px-4 py-2 text-[13px] font-medium text-accent-foreground transition hover:opacity-90"
+              >
+                Подключить
+              </button>
             </div>
-            <span
-              className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
-                c.on
-                  ? "bg-accent text-accent-foreground"
-                  : "border border-border bg-surface-muted text-ink-muted"
-              }`}
-            >
-              {c.on ? "вкл" : "выкл"}
-            </span>
           </div>
-        </Card>
-      ))}
+        </div>
+      )}
     </div>
   );
 }
