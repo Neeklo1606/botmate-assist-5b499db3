@@ -384,7 +384,7 @@ export function NeekloHeader() {
                       size="lg"
                       className="flex-1 rounded-2xl text-ink-muted"
                     >
-                      <Link to="/login" onClick={() => setOpen(false)}>
+                      <Link to="/auth" onClick={() => setOpen(false)}>
                         Войти
                       </Link>
                     </Button>
