@@ -203,7 +203,7 @@ function SectionView({
     case "knowledge":
       return <KnowledgeSection agents={agents} />;
     case "channels":
-      return <ChannelsSection />;
+      return <ChannelsSection agents={agents} />;
     case "leads":
       return <LeadsSection />;
     case "billing":
