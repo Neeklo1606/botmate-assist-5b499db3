@@ -673,51 +673,41 @@ function LaunchSteps() {
 /* ─────────────────── Products trio ─────────────────── */
 
 function ProductsTrio() {
-  const cards = [
+  const [tab, setTab] = useState<"dialog" | "lead" | "crm">("dialog");
+
+  const tabs: { k: typeof tab; label: string }[] = [
+    { k: "dialog", label: "Диалог" },
+    { k: "lead", label: "Карточка лида" },
+    { k: "crm", label: "Передача в CRM" },
+  ];
+
+  const cards: {
+    icon: string;
+    badge: { label: string; bg: string; fg: string };
+    title: string;
+    desc: string;
+    to: "/assistant" | "/media" | "/site";
+  }[] = [
     {
       icon: "💬",
-      badge: { label: "Хит продаж", bg: "var(--accent)", fg: "var(--accent-ink)" },
+      badge: { label: "Хит", bg: "var(--accent)", fg: "var(--accent-ink)" },
       title: "AI-менеджер заявок",
-      desc:
-        "Отвечает клиентам за 7 секунд, квалифицирует лидов и передаёт готовую заявку в CRM. Работает 24/7 без менеджера.",
-      features: [
-        "Telegram, сайт, WhatsApp",
-        "Квалификация и скоринг лидов",
-        "Передача в CRM / Google Sheets",
-        "Данные хранятся на вашем сервере",
-      ],
-      price: "от 9 900 ₽/мес",
-      cta: { label: "Подключить", variant: "filled" as const, to: "/onboarding/assistant" as const },
+      desc: "Отвечает за 7 секунд, квалифицирует лидов и сразу передаёт в CRM.",
+      to: "/assistant",
     },
     {
       icon: "🎬",
       badge: { label: "Скоро", bg: "var(--signal)", fg: "var(--signal-foreground)" },
       title: "AI-продюсер контента",
-      desc:
-        "Нодовая система генерации: сценарий → визуал → монтаж → публикация. Reels, Shorts, рекламные ролики без съёмочной группы.",
-      features: [
-        "Нодовый редактор сценариев",
-        "Генерация видео через Kling / Runway",
-        "Автомонтаж и субтитры",
-        "Пакетное производство до 50 роликов/мес",
-      ],
-      price: "от 14 900 ₽/мес",
-      cta: { label: "В лист ожидания", variant: "outline" as const, to: "/media" as const },
+      desc: "Нодовая система: сценарий → видео → монтаж → публикация.",
+      to: "/media",
     },
     {
       icon: "🌐",
       badge: { label: "Скоро", bg: "var(--signal)", fg: "var(--signal-foreground)" },
       title: "AI-конструктор сайтов",
-      desc:
-        "Опиши бизнес текстом — AI соберёт готовый сайт с дизайном, текстами и интеграциями. Как Lovable, но для малого бизнеса в РФ.",
-      features: [
-        "Промпт → готовый лендинг",
-        "SEO-тексты под нишу",
-        "Форма + AI-ассистент встроен",
-        "Хостинг в РФ включён",
-      ],
-      price: "от 4 900 ₽/мес",
-      cta: { label: "В лист ожидания", variant: "outline" as const, to: "/site" as const },
+      desc: "Опиши бизнес текстом — AI соберёт сайт с дизайном и интеграциями.",
+      to: "/site",
     },
   ];
 
@@ -745,99 +735,267 @@ function ProductsTrio() {
           >
             Не набор ботов — единая система для роста бизнеса
           </p>
+
+          {/* Tabs */}
+          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border p-1.5"
+            style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+          >
+            {tabs.map((t) => {
+              const active = tab === t.k;
+              return (
+                <button
+                  key={t.k}
+                  type="button"
+                  onClick={() => setTab(t.k)}
+                  className="rounded-full px-4 py-2 text-[13px] font-semibold transition-colors"
+                  style={{
+                    background: active ? "var(--accent)" : "transparent",
+                    color: active ? "var(--accent-ink)" : "var(--ink-muted)",
+                  }}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {cards.map((c) => (
-            <div
-              key={c.title}
-              className="flex flex-col rounded-2xl border transition-transform hover:-translate-y-0.5"
-              style={{
-                background: "var(--surface)",
-                borderColor: "var(--border)",
-                padding: 32,
-              }}
-            >
-              <div className="flex items-start justify-between">
+        <div className="mt-12 grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
+          {/* Left: clickable product cards */}
+          <div className="grid gap-4">
+            {cards.map((c) => (
+              <Link
+                key={c.title}
+                to={c.to}
+                className="group flex items-start gap-4 border transition-all hover:-translate-y-0.5 hover:shadow-soft"
+                style={{
+                  background: "var(--surface)",
+                  borderColor: "var(--border)",
+                  borderRadius: 20,
+                  padding: 24,
+                }}
+              >
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
+                  className="flex h-12 w-12 flex-none items-center justify-center rounded-xl text-2xl"
                   style={{ background: "var(--surface-muted)" }}
                   aria-hidden
                 >
                   {c.icon}
                 </div>
-                <span
-                  className="rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.1em]"
-                  style={{ background: c.badge.bg, color: c.badge.fg }}
-                >
-                  {c.badge.label}
-                </span>
-              </div>
-
-              <h3
-                className="mt-6 font-display text-[22px]"
-                style={{ fontWeight: 800, letterSpacing: "-0.02em", color: "var(--foreground)" }}
-              >
-                {c.title}
-              </h3>
-              <p
-                className="mt-3 text-[15px]"
-                style={{ color: "var(--ink-muted)", lineHeight: 1.65 }}
-              >
-                {c.desc}
-              </p>
-
-              <ul className="mt-6 space-y-2.5">
-                {c.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-[14px]" style={{ color: "var(--foreground)" }}>
-                    <Check
-                      className="mt-0.5 h-4 w-4 flex-none"
-                      strokeWidth={2.5}
-                      style={{ color: "var(--accent)" }}
-                    />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-auto pt-8">
-                <div
-                  className="mb-4 text-[18px] font-bold tabular"
-                  style={{ color: "var(--foreground)", letterSpacing: "-0.02em" }}
-                >
-                  {c.price}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-3">
+                    <h3
+                      className="font-display text-[18px]"
+                      style={{ fontWeight: 800, letterSpacing: "-0.02em", color: "var(--foreground)" }}
+                    >
+                      {c.title}
+                    </h3>
+                    <span
+                      className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em]"
+                      style={{ background: c.badge.bg, color: c.badge.fg }}
+                    >
+                      {c.badge.label}
+                    </span>
+                  </div>
+                  <p
+                    className="mt-1.5 text-[14px]"
+                    style={{ color: "var(--ink-muted)", lineHeight: 1.55 }}
+                  >
+                    {c.desc}
+                  </p>
                 </div>
-                {c.cta.variant === "filled" ? (
-                  <Link
-                    to={c.cta.to}
-                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl text-[14px] font-semibold transition-colors"
-                    style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
-                  >
-                    {c.cta.label}
-                    <ArrowRight className="h-4 w-4" strokeWidth={2} />
-                  </Link>
-                ) : (
-                  <Link
-                    to={c.cta.to}
-                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border text-[14px] font-semibold transition-colors"
-                    style={{
-                      borderColor: "var(--border-strong)",
-                      color: "var(--foreground)",
-                      background: "transparent",
-                    }}
-                  >
-                    {c.cta.label}
-                    <ArrowRight className="h-4 w-4" strokeWidth={2} />
-                  </Link>
-                )}
-              </div>
+                <ArrowRight
+                  className="mt-2 h-4 w-4 flex-none translate-x-0 transition-transform group-hover:translate-x-1"
+                  style={{ color: "var(--ink-muted)" }}
+                  strokeWidth={2}
+                />
+              </Link>
+            ))}
+          </div>
+
+          {/* Right: animated preview */}
+          <div
+            className="border shadow-soft"
+            style={{
+              background: "var(--surface)",
+              borderColor: "var(--border)",
+              borderRadius: 20,
+              padding: 24,
+              minHeight: 380,
+            }}
+          >
+            <div key={tab} className="animate-fade-in">
+              {tab === "dialog" && <PreviewDialog />}
+              {tab === "lead" && <PreviewLead />}
+              {tab === "crm" && <PreviewCrm />}
             </div>
-          ))}
+          </div>
         </div>
       </Container>
     </section>
   );
 }
+
+function PreviewDialog() {
+  const lines: { side: "client" | "agent"; text: string }[] = [
+    { side: "client", text: "Здравствуйте! Сколько стоит установка под ключ?" },
+    { side: "agent", text: "Добрый день! Уточню по площади — сколько квадратных метров?" },
+    { side: "client", text: "Около 48 м². Нужно к концу месяца." },
+    { side: "agent", text: "Беру в работу. Назначу звонок мастера на сегодня в 17:00, удобно?" },
+  ];
+  return (
+    <div className="space-y-2.5">
+      <div
+        className="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]"
+        style={{ color: "var(--ink-subtle)" }}
+      >
+        Telegram · AI-менеджер
+      </div>
+      {lines.map((l, i) => {
+        const isAgent = l.side === "agent";
+        return (
+          <div
+            key={i}
+            className="animate-fade-in flex"
+            style={{
+              justifyContent: isAgent ? "flex-start" : "flex-end",
+              animationDelay: `${i * 120}ms`,
+            }}
+          >
+            <div
+              className="max-w-[82%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-snug"
+              style={
+                isAgent
+                  ? {
+                      background: "var(--surface-muted)",
+                      color: "var(--foreground)",
+                      borderTopLeftRadius: 6,
+                    }
+                  : {
+                      background: "var(--accent)",
+                      color: "var(--accent-ink)",
+                      borderTopRightRadius: 6,
+                    }
+              }
+            >
+              {l.text}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function PreviewLead() {
+  return (
+    <div>
+      <div
+        className="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]"
+        style={{ color: "var(--ink-subtle)" }}
+      >
+        Карточка лида
+      </div>
+      <div
+        className="rounded-2xl border p-4"
+        style={{ background: "var(--background)", borderColor: "var(--border)" }}
+      >
+        <div className="mb-4 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div
+              className="flex h-10 w-10 items-center justify-center rounded-full"
+              style={{ background: "var(--surface-muted)" }}
+            >
+              <User className="h-4 w-4" strokeWidth={1.75} />
+            </div>
+            <div className="leading-tight">
+              <div
+                className="text-[10px] font-semibold uppercase tracking-[0.14em]"
+                style={{ color: "var(--ink-subtle)" }}
+              >
+                Новая заявка
+              </div>
+              <div className="text-[15px] font-semibold" style={{ color: "var(--foreground)" }}>
+                Мария Волкова
+              </div>
+            </div>
+          </div>
+          <span
+            className="rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em]"
+            style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+          >
+            Горячий
+          </span>
+        </div>
+        <dl className="space-y-2 text-[13.5px]">
+          <MockRow k="Имя" v="Мария Волкова" />
+          <MockRow k="Телефон" v="+7 921 555 12 34" />
+          <MockRow k="Бюджет" v="до 800 000 ₽" />
+          <div className="flex justify-between">
+            <dt style={{ color: "var(--ink-subtle)" }}>Статус</dt>
+            <dd className="flex items-center gap-1.5 font-semibold" style={{ color: "var(--accent)" }}>
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--accent)" }} />
+              Горячий
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  );
+}
+
+function PreviewCrm() {
+  const items = [
+    { name: "amoCRM", desc: "Сделка в воронке «Новые»" },
+    { name: "Bitrix24", desc: "Лид с тегом «Горячий»" },
+    { name: "Google Sheets", desc: "Строка в таблице заявок" },
+  ];
+  return (
+    <div>
+      <div
+        className="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em]"
+        style={{ color: "var(--ink-subtle)" }}
+      >
+        Передача заявки
+      </div>
+      <ul className="space-y-2.5">
+        {items.map((it, i) => (
+          <li
+            key={it.name}
+            className="animate-fade-in flex items-center gap-3 rounded-2xl border px-4 py-3"
+            style={{
+              background: "var(--background)",
+              borderColor: "var(--border)",
+              animationDelay: `${i * 140}ms`,
+            }}
+          >
+            <span
+              className="flex h-7 w-7 flex-none items-center justify-center rounded-full"
+              style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+            >
+              <Check className="h-3.5 w-3.5" strokeWidth={3} />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="text-[14px] font-semibold" style={{ color: "var(--foreground)" }}>
+                {it.name}
+              </div>
+              <div className="text-[12.5px]" style={{ color: "var(--ink-muted)" }}>
+                {it.desc}
+              </div>
+            </div>
+            <span
+              className="text-[11px] font-semibold uppercase tracking-[0.12em]"
+              style={{ color: "var(--accent)" }}
+            >
+              Отправлено
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 
 /* ─────────────────── Product scene ─────────────────── */
 
