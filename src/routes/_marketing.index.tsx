@@ -76,6 +76,7 @@ function HomePage() {
       <Hero />
       <TrustBar />
       <ProductsTrio />
+      <LaunchSteps />
       <ProductScene />
       <HowItWorks />
       <Benefits />
