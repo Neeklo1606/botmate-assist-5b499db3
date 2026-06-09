@@ -77,18 +77,15 @@ function HomePage() {
       <TrustBar />
       <ProductsTrio />
       <LaunchSteps />
-      <ProductScene />
-      <HowItWorks />
       <Benefits />
       <Integrations />
-      <WhyAvreya />
-      <Ecosystem />
       <Pricing />
       <Faq />
       <FinalCta />
     </div>
   );
 }
+
 
 /* ─────────────────── Hero — new system (cream / emerald) ─────────────────── */
 
