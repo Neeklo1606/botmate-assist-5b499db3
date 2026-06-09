@@ -43,6 +43,7 @@
 
   /* Colors → Tailwind utilities */
   --color-background: var(--background);
+  --color-bg-alt: var(--bg-alt);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
