@@ -23,6 +23,8 @@ import {
   UploadCloud,
   FileText,
   Trash2,
+  Search,
+  X,
 } from "lucide-react";
 import { toast } from "sonner";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
@@ -205,7 +207,7 @@ function SectionView({
     case "channels":
       return <ChannelsSection agents={agents} />;
     case "leads":
-      return <LeadsSection />;
+      return <LeadsSection agents={agents} />;
     case "billing":
       return <BillingSection />;
     case "settings":
@@ -907,32 +909,344 @@ function ChannelsSection({ agents }: { agents: Agent[] }) {
   );
 }
 
-function LeadsSection() {
-  const leads = [
-    { name: "Алексей К.", phone: "+7 999 123-45-67", status: "Горячий", time: "5 мин назад" },
-    { name: "Марина С.", phone: "+7 905 222-11-00", status: "Тёплый", time: "1 час назад" },
-    { name: "Дмитрий П.", phone: "+7 911 555-77-88", status: "Новый", time: "вчера" },
+
+type LeadStatus = "hot" | "warm" | "cold";
+
+interface Lead {
+  id: string;
+  name: string;
+  phone: string;
+  channel: ChannelKey;
+  service: string;
+  status: LeadStatus;
+  time: string;
+  budget?: string;
+  city?: string;
+  source?: string;
+  chat: { from: "user" | "bot"; text: string; time: string }[];
+}
+
+const STATUS_META: Record<LeadStatus, { label: string; cls: string }> = {
+  hot: { label: "Горячий", cls: "bg-red-500/15 text-red-500" },
+  warm: { label: "Тёплый", cls: "bg-amber-500/15 text-amber-500" },
+  cold: { label: "Холодный", cls: "bg-sky-500/15 text-sky-500" },
+};
+
+const CHANNEL_ICON: Record<ChannelKey, React.ReactNode> = {
+  telegram: <Send className="h-3.5 w-3.5" />,
+  site: <Globe className="h-3.5 w-3.5" />,
+  avito: <span className="text-[10px] font-bold">AV</span>,
+  max: <span className="text-[10px] font-bold">M</span>,
+  whatsapp: <MessageSquare className="h-3.5 w-3.5" />,
+  vk: <span className="text-[10px] font-bold">VK</span>,
+};
+
+const LEADS_MOCK: Lead[] = [
+  {
+    id: "l1", name: "Алексей К.", phone: "+7 999 123-45-67", channel: "telegram",
+    service: "Замена масла", status: "hot", time: "5 мин назад",
+    budget: "до 5 000 ₽", city: "Москва", source: "Telegram-бот",
+    chat: [
+      { from: "user", text: "Здравствуйте, нужна замена масла на Camry", time: "14:02" },
+      { from: "bot", text: "Добрый день! Какой год выпуска авто?", time: "14:02" },
+      { from: "user", text: "2019", time: "14:03" },
+      { from: "bot", text: "Запишу на завтра в 10:00, удобно?", time: "14:03" },
+      { from: "user", text: "Да, подходит", time: "14:04" },
+    ],
+  },
+  {
+    id: "l2", name: "Марина С.", phone: "+7 905 222-11-00", channel: "site",
+    service: "Диагностика", status: "warm", time: "1 час назад",
+    budget: "1 500 ₽", city: "Москва", source: "Виджет на сайте",
+    chat: [
+      { from: "user", text: "Сколько стоит диагностика подвески?", time: "13:10" },
+      { from: "bot", text: "1 500 ₽, занимает около часа", time: "13:10" },
+      { from: "user", text: "Подумаю", time: "13:12" },
+    ],
+  },
+  {
+    id: "l3", name: "Дмитрий П.", phone: "+7 911 555-77-88", channel: "avito",
+    service: "Шиномонтаж", status: "cold", time: "вчера",
+    budget: "—", city: "СПб", source: "Avito",
+    chat: [
+      { from: "user", text: "Здравствуйте", time: "вчера 18:20" },
+      { from: "bot", text: "Чем могу помочь?", time: "вчера 18:20" },
+    ],
+  },
+  {
+    id: "l4", name: "Ольга В.", phone: "+7 916 444-22-11", channel: "whatsapp",
+    service: "Запись к врачу", status: "hot", time: "12 мин назад",
+    budget: "—", city: "Москва", source: "WhatsApp",
+    chat: [
+      { from: "user", text: "Можно записаться к терапевту на сегодня?", time: "14:15" },
+      { from: "bot", text: "Есть окно в 17:30, подходит?", time: "14:15" },
+      { from: "user", text: "Да!", time: "14:16" },
+    ],
+  },
+  {
+    id: "l5", name: "Игорь М.", phone: "+7 903 111-99-44", channel: "max",
+    service: "Консультация", status: "warm", time: "3 часа назад",
+    budget: "—", city: "Казань", source: "MAX",
+    chat: [
+      { from: "user", text: "Какие есть услуги?", time: "11:00" },
+      { from: "bot", text: "Отправляю список и цены", time: "11:00" },
+    ],
+  },
+  {
+    id: "l6", name: "Светлана Р.", phone: "+7 921 333-66-77", channel: "vk",
+    service: "Маникюр", status: "hot", time: "30 мин назад",
+    budget: "2 500 ₽", city: "СПб", source: "VK",
+    chat: [
+      { from: "user", text: "Запишите на маникюр в субботу", time: "13:40" },
+      { from: "bot", text: "В 12:00 свободно, бронирую?", time: "13:40" },
+      { from: "user", text: "Да", time: "13:41" },
+    ],
+  },
+  {
+    id: "l7", name: "Никита Б.", phone: "+7 926 777-12-34", channel: "telegram",
+    service: "Ремонт квартиры", status: "warm", time: "вчера",
+    budget: "от 300 000 ₽", city: "Москва", source: "Telegram-бот",
+    chat: [
+      { from: "user", text: "Нужен ремонт 2-комнатной", time: "вчера 20:10" },
+      { from: "bot", text: "Какой площадь и какой ремонт?", time: "вчера 20:10" },
+    ],
+  },
+  {
+    id: "l8", name: "Анна Т.", phone: "+7 962 888-55-22", channel: "site",
+    service: "Подбор недвижимости", status: "cold", time: "2 дня назад",
+    budget: "до 12 млн ₽", city: "Москва", source: "Виджет на сайте",
+    chat: [
+      { from: "user", text: "Ищу 1-комнатную у метро", time: "пн 10:00" },
+      { from: "bot", text: "Какой район интересует?", time: "пн 10:00" },
+    ],
+  },
+];
+
+function LeadsSection({ agents }: { agents: Agent[] }) {
+  const [agentId, setAgentId] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<"all" | LeadStatus>("all");
+  const [search, setSearch] = useState("");
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  const filtered = LEADS_MOCK.filter((l) => {
+    if (statusFilter !== "all" && l.status !== statusFilter) return false;
+    if (search) {
+      const s = search.toLowerCase();
+      if (!l.name.toLowerCase().includes(s) && !l.phone.includes(s) && !l.service.toLowerCase().includes(s))
+        return false;
+    }
+    return true;
+  });
+
+  const open = LEADS_MOCK.find((l) => l.id === openId) ?? null;
+
+  const metrics = [
+    { label: "Лидов сегодня", value: "14" },
+    { label: "За неделю", value: "87" },
+    { label: "Конверсия", value: "34%" },
+    { label: "Ср. время ответа", value: "8 сек" },
   ];
+
   return (
-    <Card className="!p-0">
-      <div className="border-b border-border px-5 py-4 md:px-6">
-        <h2 className="text-[15px] font-semibold text-foreground">Последние лиды</h2>
-      </div>
-      <ul className="divide-y divide-border">
-        {leads.map((l) => (
-          <li key={l.phone} className="flex items-center justify-between gap-4 px-5 py-4 md:px-6">
-            <div className="min-w-0">
-              <p className="truncate text-[14px] font-semibold text-foreground">{l.name}</p>
-              <p className="truncate text-[12.5px] text-ink-muted">{l.phone}</p>
-            </div>
-            <span className="hidden rounded-full border border-border bg-surface-muted px-2.5 py-1 text-[11px] font-medium text-foreground sm:inline-block">
-              {l.status}
-            </span>
-            <span className="shrink-0 text-[12px] text-ink-subtle">{l.time}</span>
-          </li>
+    <div className="space-y-5">
+      <Card>
+        <div className="grid gap-3 sm:grid-cols-[1fr_1fr_1.5fr]">
+          <select
+            value={agentId}
+            onChange={(e) => setAgentId(e.target.value)}
+            className="rounded-xl border border-border bg-bg-alt px-3.5 py-2.5 text-[14px] text-foreground outline-none focus:border-accent"
+          >
+            <option value="all">Все агенты</option>
+            {agents.map((a) => (
+              <option key={a.id} value={a.id}>{a.name}</option>
+            ))}
+          </select>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value as typeof statusFilter)}
+            className="rounded-xl border border-border bg-bg-alt px-3.5 py-2.5 text-[14px] text-foreground outline-none focus:border-accent"
+          >
+            <option value="all">Все статусы</option>
+            <option value="hot">Горячий</option>
+            <option value="warm">Тёплый</option>
+            <option value="cold">Холодный</option>
+          </select>
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-subtle" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Поиск по имени, телефону, услуге"
+              className="w-full rounded-xl border border-border bg-bg-alt py-2.5 pl-10 pr-3.5 text-[14px] text-foreground outline-none focus:border-accent"
+            />
+          </div>
+        </div>
+      </Card>
+
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {metrics.map((m) => (
+          <Card key={m.label} className="!p-4">
+            <p className="text-[12px] uppercase tracking-wide text-ink-subtle">{m.label}</p>
+            <p className="mt-2 font-display text-[24px] font-semibold tracking-[-0.02em] text-foreground">
+              {m.value}
+            </p>
+          </Card>
         ))}
-      </ul>
-    </Card>
+      </div>
+
+      <Card className="!p-0 overflow-hidden">
+        {/* Desktop table */}
+        <div className="hidden md:block">
+          <div className="grid grid-cols-[1.5fr_1fr_1.5fr_1fr_0.8fr] gap-4 border-b border-border bg-bg-alt/40 px-6 py-3 text-[11.5px] font-medium uppercase tracking-wide text-ink-subtle">
+            <span>Имя</span>
+            <span>Канал</span>
+            <span>Услуга</span>
+            <span>Статус</span>
+            <span className="text-right">Время</span>
+          </div>
+          <ul className="divide-y divide-border">
+            {filtered.map((l) => (
+              <li
+                key={l.id}
+                onClick={() => setOpenId(l.id)}
+                className="grid cursor-pointer grid-cols-[1.5fr_1fr_1.5fr_1fr_0.8fr] items-center gap-4 px-6 py-4 transition hover:bg-bg-alt/40"
+              >
+                <div className="min-w-0">
+                  <p className="truncate text-[14px] font-semibold text-foreground">{l.name}</p>
+                  <p className="truncate text-[12.5px] text-ink-muted">{l.phone}</p>
+                </div>
+                <div className="flex items-center gap-2 text-[13px] text-foreground">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md bg-bg-alt text-ink-muted">
+                    {CHANNEL_ICON[l.channel]}
+                  </span>
+                </div>
+                <span className="truncate text-[13.5px] text-foreground">{l.service}</span>
+                <span className={`inline-flex w-fit rounded-full px-2.5 py-1 text-[11px] font-medium ${STATUS_META[l.status].cls}`}>
+                  {STATUS_META[l.status].label}
+                </span>
+                <span className="text-right text-[12.5px] text-ink-subtle">{l.time}</span>
+              </li>
+            ))}
+            {filtered.length === 0 && (
+              <li className="px-6 py-10 text-center text-[13px] text-ink-muted">Ничего не найдено</li>
+            )}
+          </ul>
+        </div>
+
+        {/* Mobile cards */}
+        <ul className="divide-y divide-border md:hidden">
+          {filtered.map((l) => (
+            <li
+              key={l.id}
+              onClick={() => setOpenId(l.id)}
+              className="cursor-pointer px-5 py-4"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate text-[14px] font-semibold text-foreground">{l.name}</p>
+                  <p className="truncate text-[12.5px] text-ink-muted">{l.phone}</p>
+                </div>
+                <span className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium ${STATUS_META[l.status].cls}`}>
+                  {STATUS_META[l.status].label}
+                </span>
+              </div>
+              <div className="mt-3 flex items-center justify-between text-[12.5px] text-ink-muted">
+                <span className="flex items-center gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded bg-bg-alt">
+                    {CHANNEL_ICON[l.channel]}
+                  </span>
+                  {l.service}
+                </span>
+                <span className="text-ink-subtle">{l.time}</span>
+              </div>
+            </li>
+          ))}
+          {filtered.length === 0 && (
+            <li className="px-5 py-10 text-center text-[13px] text-ink-muted">Ничего не найдено</li>
+          )}
+        </ul>
+      </Card>
+
+      {open && (
+        <>
+          <div
+            onClick={() => setOpenId(null)}
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+          />
+          <aside className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col border-l border-border bg-surface shadow-[var(--shadow-md)]">
+            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+              <div className="min-w-0">
+                <p className="truncate text-[15px] font-semibold text-foreground">{open.name}</p>
+                <p className="truncate text-[12.5px] text-ink-muted">{open.phone}</p>
+              </div>
+              <button
+                onClick={() => setOpenId(null)}
+                className="rounded-lg p-2 text-ink-muted transition hover:bg-bg-alt hover:text-foreground"
+                aria-label="Закрыть"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-5 py-4">
+              <div className="grid grid-cols-2 gap-3">
+                <Field label="Статус">
+                  <span className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-medium ${STATUS_META[open.status].cls}`}>
+                    {STATUS_META[open.status].label}
+                  </span>
+                </Field>
+                <Field label="Канал">{open.source}</Field>
+                <Field label="Услуга">{open.service}</Field>
+                <Field label="Бюджет">{open.budget ?? "—"}</Field>
+                <Field label="Город">{open.city ?? "—"}</Field>
+                <Field label="Когда">{open.time}</Field>
+              </div>
+
+              <div className="mt-6">
+                <p className="text-[12px] font-medium uppercase tracking-wide text-ink-subtle">
+                  История диалога
+                </p>
+                <div className="mt-3 space-y-2">
+                  {open.chat.map((m, i) => (
+                    <div
+                      key={i}
+                      className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-[13.5px] ${
+                        m.from === "user"
+                          ? "ml-auto bg-accent text-accent-foreground"
+                          : "bg-bg-alt text-foreground"
+                      }`}
+                    >
+                      <p>{m.text}</p>
+                      <p className={`mt-1 text-[10.5px] ${m.from === "user" ? "text-accent-foreground/70" : "text-ink-subtle"}`}>
+                        {m.time}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-border px-5 py-4">
+              <button
+                onClick={() => toast.success("Лид передан менеджеру")}
+                className="w-full rounded-xl bg-accent px-4 py-2.5 text-[13.5px] font-medium text-accent-foreground transition hover:opacity-90"
+              >
+                Передать менеджеру
+              </button>
+            </div>
+          </aside>
+        </>
+      )}
+    </div>
+  );
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border border-border bg-bg-alt/50 p-3">
+      <p className="text-[11px] uppercase tracking-wide text-ink-subtle">{label}</p>
+      <div className="mt-1 text-[13.5px] text-foreground">{children}</div>
+    </div>
   );
 }
 
