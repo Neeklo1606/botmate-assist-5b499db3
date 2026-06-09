@@ -11,7 +11,7 @@ interface CallbackSearch {
   redirect?: string;
 }
 
-export const Route = createFileRoute("/_auth/callback")({
+export const Route = createFileRoute("/_authshell/callback")({
   validateSearch: (search: Record<string, unknown>): CallbackSearch => ({
     redirect: typeof search.redirect === "string" ? search.redirect : undefined,
   }),

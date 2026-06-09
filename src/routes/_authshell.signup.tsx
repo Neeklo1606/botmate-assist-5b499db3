@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { useSignupWithEmail } from "@/lib/hooks/use-auth";
 
-export const Route = createFileRoute("/_auth/signup")({
+export const Route = createFileRoute("/_authshell/signup")({
   component: SignupPage,
 });
 

@@ -6,7 +6,7 @@
 import { Outlet, Link, createFileRoute, redirect } from "@tanstack/react-router";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
 
-export const Route = createFileRoute("/_auth")({
+export const Route = createFileRoute("/_authshell")({
   beforeLoad: ({ context }) => {
     if (context.auth.isAuthenticated) {
       throw redirect({ to: "/app" });
