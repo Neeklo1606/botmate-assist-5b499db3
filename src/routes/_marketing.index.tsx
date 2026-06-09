@@ -98,7 +98,7 @@ function Hero() {
         style={{ background: "radial-gradient(closest-side, rgba(45,106,79,0.18), transparent 70%)" }}
       />
       <Container>
-        <div className="relative grid items-center gap-12 pt-12 pb-16 md:grid-cols-12 md:gap-10 md:pt-20 md:pb-24">
+        <div className="relative grid items-center gap-10 pt-10 pb-14 md:grid-cols-12 md:gap-10 md:pt-20 md:pb-24">
           {/* LEFT */}
           <div className="md:col-span-6">
             <span
@@ -114,7 +114,7 @@ function Hero() {
             </span>
 
             <h1
-              className="mt-6 font-display text-[44px] leading-[1.02] md:text-[68px] lg:text-[80px]"
+              className="mt-6 font-display text-[40px] leading-[1.02] md:text-[68px] lg:text-[80px]"
               style={{ fontWeight: 800, letterSpacing: "-0.03em", color: "var(--foreground)" }}
             >
               Твой бизнес
@@ -132,10 +132,10 @@ function Hero() {
               инфраструктуре, без разработчиков.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 to="/onboarding/assistant"
-                className="inline-flex h-12 items-center gap-2 rounded-xl px-6 text-[15px] font-semibold transition-colors"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl px-6 text-[15px] font-semibold transition-colors sm:w-auto"
                 style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "var(--signal)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
@@ -146,7 +146,7 @@ function Hero() {
               <Link
                 to="/"
                 hash="product"
-                className="inline-flex h-12 items-center gap-2 rounded-xl border px-6 text-[15px] font-semibold transition-colors"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border px-6 text-[15px] font-semibold transition-colors sm:w-auto"
                 style={{
                   borderColor: "var(--border-strong)",
                   color: "var(--foreground)",
@@ -156,6 +156,7 @@ function Hero() {
                 <span className="text-[10px]">▶</span> Смотреть демо
               </Link>
             </div>
+
 
             <div
               className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13.5px]"
