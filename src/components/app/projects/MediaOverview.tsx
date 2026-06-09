@@ -45,30 +45,30 @@ export function MediaOverview({ project }: { project: Project }) {
       {/* Posts grid */}
       <section
         className="rounded-xl"
-        style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}
+        style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
       >
-        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "#2a2a2a" }}>
+        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "var(--color-border)" }}>
           <div className="flex items-center gap-2">
-            <ImageIcon className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
+            <ImageIcon className="h-4 w-4" style={{ color: "var(--color-accent)" }} strokeWidth={1.75} />
             <h3 className="font-display text-sm font-semibold text-foreground">Сгенерированные посты</h3>
           </div>
-          <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>mock-превью</span>
+          <span className="text-xs" style={{ color: "var(--color-ink-muted)" }}>mock-превью</span>
         </header>
         <div className="grid grid-cols-2 gap-3 p-5 md:grid-cols-3 lg:grid-cols-5">
           {POSTS.map((p) => (
-            <div key={p.id} className="overflow-hidden rounded-lg" style={{ border: "1px solid #2a2a2a" }}>
+            <div key={p.id} className="overflow-hidden rounded-lg" style={{ border: "1px solid var(--color-border)" }}>
               <div
                 className="aspect-square w-full"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(244,114,182,0.18), rgba(168,255,87,0.10))",
+                    "linear-gradient(135deg, rgba(244,114,182,0.18), color-mix(in oklab, var(--color-accent) 10%, transparent))",
                 }}
               />
               <div className="px-2.5 py-2">
                 <div className="line-clamp-2 text-[11px] font-medium text-foreground">{p.title}</div>
-                <div className="mt-1 flex items-center justify-between text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <div className="mt-1 flex items-center justify-between text-[10px]" style={{ color: "var(--color-ink-muted)" }}>
                   <span>{p.type}</span>
-                  <span style={{ color: p.status === "scheduled" ? "#a8ff57" : "rgba(255,255,255,0.5)" }}>
+                  <span style={{ color: p.status === "scheduled" ? "var(--color-accent)" : "var(--color-ink-muted)" }}>
                     {p.status === "scheduled" ? p.date : "черновик"}
                   </span>
                 </div>
@@ -79,23 +79,23 @@ export function MediaOverview({ project }: { project: Project }) {
       </section>
 
       {/* Calendar */}
-      <section className="rounded-xl" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "#2a2a2a" }}>
+      <section className="rounded-xl" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "var(--color-border)" }}>
           <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
+            <Calendar className="h-4 w-4" style={{ color: "var(--color-accent)" }} strokeWidth={1.75} />
             <h3 className="font-display text-sm font-semibold text-foreground">Календарь публикаций (неделя)</h3>
           </div>
-          <TrendingUp className="h-4 w-4" style={{ color: "rgba(255,255,255,0.4)" }} strokeWidth={1.75} />
+          <TrendingUp className="h-4 w-4" style={{ color: "var(--color-ink-subtle)" }} strokeWidth={1.75} />
         </header>
-        <div className="grid grid-cols-7 gap-px p-3" style={{ background: "#2a2a2a" }}>
+        <div className="grid grid-cols-7 gap-px p-3" style={{ background: "var(--color-border)" }}>
           {WEEK.map((d) => (
-            <div key={d} className="flex min-h-[72px] flex-col gap-1 p-2" style={{ background: "#141414" }}>
-              <span className="text-[10px] font-semibold uppercase" style={{ color: "rgba(255,255,255,0.45)" }}>{d}</span>
+            <div key={d} className="flex min-h-[72px] flex-col gap-1 p-2" style={{ background: "var(--color-surface-sunken)" }}>
+              <span className="text-[10px] font-semibold uppercase" style={{ color: "var(--color-ink-subtle)" }}>{d}</span>
               {SLOTS[d]!.map((slot, i) => (
                 <span
                   key={i}
                   className="h-1.5 rounded-full"
-                  style={{ background: slot ? "#a8ff57" : "rgba(255,255,255,0.06)" }}
+                  style={{ background: slot ? "var(--color-accent)" : "var(--color-surface-muted)" }}
                 />
               ))}
             </div>
@@ -108,9 +108,9 @@ export function MediaOverview({ project }: { project: Project }) {
 
 function Kpi({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <div className="rounded-xl p-4" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-      <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</div>
-      <div className="mt-1 font-display text-2xl font-semibold tabular-nums" style={{ color: accent ? "#a8ff57" : "#ffffff" }}>
+    <div className="rounded-xl p-4" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+      <div className="text-[11px] uppercase tracking-wide" style={{ color: "var(--color-ink-muted)" }}>{label}</div>
+      <div className="mt-1 font-display text-2xl font-semibold tabular-nums" style={{ color: accent ? "var(--color-accent)" : "var(--color-foreground)" }}>
         {value}
       </div>
     </div>

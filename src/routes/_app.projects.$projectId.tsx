@@ -58,7 +58,7 @@ export const Route = createFileRoute("/_app/projects/$projectId")({
   notFoundComponent: () => (
     <div className="text-foreground">
       <h1 className="font-display text-xl font-semibold">Проект не найден</h1>
-      <Link to="/projects" className="mt-3 inline-block text-sm" style={{ color: "#a8ff57" }}>
+      <Link to="/projects" className="mt-3 inline-block text-sm" style={{ color: "var(--color-accent)" }}>
         ← К списку проектов
       </Link>
     </div>
@@ -79,7 +79,7 @@ function ProjectDetailPage() {
   if (isLoading) {
     return (
       <div className="text-foreground">
-        <div className="h-44 animate-pulse rounded-xl" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }} />
+        <div className="h-44 animate-pulse rounded-xl" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }} />
       </div>
     );
   }
@@ -99,7 +99,7 @@ function Detail({ project }: { project: Project }) {
       <Link
         to="/projects"
         className="inline-flex items-center gap-1 text-sm transition-colors hover:text-foreground"
-        style={{ color: "rgba(255,255,255,0.6)" }}
+        style={{ color: "var(--color-ink-muted)" }}
       >
         <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2} />
         Все проекты
@@ -109,12 +109,12 @@ function Detail({ project }: { project: Project }) {
         <div className="flex items-center gap-3">
           <span
             className="flex h-12 w-12 items-center justify-center rounded-xl"
-            style={{ background: "rgba(168,255,87,0.10)", border: "1px solid rgba(168,255,87,0.25)", color: "#a8ff57" }}
+            style={{ background: "color-mix(in oklab, var(--color-accent) 10%, transparent)", border: "1px solid color-mix(in oklab, var(--color-accent) 25%, transparent)", color: "var(--color-accent)" }}
           >
             <Icon className="h-5 w-5" strokeWidth={1.75} />
           </span>
           <div>
-            <div className="text-[11px] font-medium uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <div className="text-[11px] font-medium uppercase tracking-wide" style={{ color: "var(--color-ink-muted)" }}>
               {meta.label}
             </div>
             <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
@@ -159,18 +159,18 @@ function PreparingState({ project }: { project: Project }) {
   return (
     <section
       className="rounded-xl p-8 text-center"
-      style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}
+      style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
     >
       <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
         style={{ background: "rgba(251,191,36,0.10)", border: "1px solid rgba(251,191,36,0.25)" }}>
         <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#fbbf24" }} strokeWidth={2} />
       </div>
       <h2 className="mt-4 font-display text-lg font-semibold text-foreground">Проект готовится</h2>
-      <p className="mx-auto mt-2 max-w-md text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
+      <p className="mx-auto mt-2 max-w-md text-sm" style={{ color: "var(--color-ink-muted)" }}>
         Настраиваем под ваш бриф. Обычно занимает ~30 секунд. Можно закрыть страницу — мы пришлём уведомление.
       </p>
-      <div className="mx-auto mt-5 h-1.5 w-full max-w-md overflow-hidden rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}>
-        <div className="h-full transition-[width] duration-500 ease-linear" style={{ width: `${pct}%`, background: "#a8ff57" }} />
+      <div className="mx-auto mt-5 h-1.5 w-full max-w-md overflow-hidden rounded-full" style={{ background: "var(--color-surface-muted)" }}>
+        <div className="h-full transition-[width] duration-500 ease-linear" style={{ width: `${pct}%`, background: "var(--color-accent)" }} />
       </div>
     </section>
   );
@@ -182,8 +182,8 @@ function StatusBadge({ status }: { status: Project["status"] }) {
   if (status === "ready") {
     return (
       <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold"
-        style={{ background: "rgba(168,255,87,0.12)", color: "#a8ff57", border: "1px solid rgba(168,255,87,0.25)" }}>
-        <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#a8ff57" }} />
+        style={{ background: "color-mix(in oklab, var(--color-accent) 12%, transparent)", color: "var(--color-accent)", border: "1px solid color-mix(in oklab, var(--color-accent) 25%, transparent)" }}>
+        <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--color-accent)" }} />
         Готов и работает
       </span>
     );
@@ -200,7 +200,7 @@ function StatusBadge({ status }: { status: Project["status"] }) {
   if (status === "paused") {
     return (
       <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold"
-        style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", border: "1px solid #2a2a2a" }}>
+        style={{ background: "var(--color-surface-muted)", color: "var(--color-ink-muted)", border: "1px solid var(--color-border)" }}>
         На паузе
       </span>
     );
@@ -236,9 +236,9 @@ function ProjectSettings({ project }: { project: Project }) {
 
   return (
     <div className="space-y-4">
-      <section className="rounded-xl p-5" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
+      <section className="rounded-xl p-5" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
         <h3 className="font-display text-base font-semibold text-foreground">Состояние</h3>
-        <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+        <p className="mt-1 text-sm" style={{ color: "var(--color-ink-muted)" }}>
           {project.status === "paused"
             ? "Проект на паузе — все каналы и публикации остановлены."
             : "Проект активен. Можно временно поставить на паузу — это не удаляет данные."}
@@ -248,7 +248,7 @@ function ProjectSettings({ project }: { project: Project }) {
           onClick={togglePause}
           disabled={busy || project.status === "preparing"}
           className="mt-3 inline-flex h-9 items-center gap-1.5 rounded-md px-4 text-sm font-semibold transition-colors disabled:opacity-50"
-          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a", color: "#ffffff" }}
+          style={{ background: "var(--color-surface-muted)", border: "1px solid var(--color-border)", color: "var(--color-foreground)" }}
         >
           {project.status === "paused" ? (
             <>
@@ -262,12 +262,12 @@ function ProjectSettings({ project }: { project: Project }) {
         </button>
       </section>
 
-      <section className="rounded-xl p-5" style={{ background: "#1a1a1a", border: "1px solid rgba(239,68,68,0.30)" }}>
+      <section className="rounded-xl p-5" style={{ background: "var(--color-surface)", border: "1px solid rgba(239,68,68,0.30)" }}>
         <div className="flex items-start gap-3">
           <AlertTriangle className="h-4 w-4 flex-none" style={{ color: "#ef4444" }} strokeWidth={2} />
           <div>
             <h3 className="font-display text-base font-semibold text-foreground">Удалить проект</h3>
-            <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <p className="mt-1 text-sm" style={{ color: "var(--color-ink-muted)" }}>
               Действие необратимо. Все данные брифа и статистика будут удалены.
             </p>
           </div>

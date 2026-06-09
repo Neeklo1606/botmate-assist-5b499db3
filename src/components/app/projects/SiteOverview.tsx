@@ -37,17 +37,17 @@ export function SiteOverview({ project }: { project: Project }) {
       </div>
 
       {/* Site preview */}
-      <section className="rounded-xl overflow-hidden" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "#2a2a2a" }}>
+      <section className="rounded-xl overflow-hidden" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "var(--color-border)" }}>
           <div className="flex items-center gap-2">
-            <Globe className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
+            <Globe className="h-4 w-4" style={{ color: "var(--color-accent)" }} strokeWidth={1.75} />
             <h3 className="font-display text-sm font-semibold text-foreground">Превью лендинга</h3>
           </div>
           <a
             href={previewUrl}
             onClick={(e) => e.preventDefault()}
             className="inline-flex items-center gap-1 text-xs font-semibold"
-            style={{ color: "#a8ff57" }}
+            style={{ color: "var(--color-accent)" }}
             title="Откроется после публикации"
           >
             {previewUrl} <ExternalLink className="h-3 w-3" strokeWidth={2} />
@@ -56,25 +56,25 @@ export function SiteOverview({ project }: { project: Project }) {
 
         {/* Browser-mock */}
         <div className="p-5">
-          <div className="overflow-hidden rounded-lg" style={{ border: "1px solid #2a2a2a", background: "#0f0f0f" }}>
-            <div className="flex items-center gap-1.5 px-3 py-2" style={{ background: "#141414", borderBottom: "1px solid #2a2a2a" }}>
+          <div className="overflow-hidden rounded-lg" style={{ border: "1px solid var(--color-border)", background: "#0f0f0f" }}>
+            <div className="flex items-center gap-1.5 px-3 py-2" style={{ background: "var(--color-surface-sunken)", borderBottom: "1px solid var(--color-border)" }}>
               <span className="h-2 w-2 rounded-full" style={{ background: "#ff5f57" }} />
               <span className="h-2 w-2 rounded-full" style={{ background: "#febc2e" }} />
               <span className="h-2 w-2 rounded-full" style={{ background: "#28c840" }} />
-              <span className="ml-3 truncate font-mono text-[11px]" style={{ color: "rgba(255,255,255,0.45)" }}>{previewUrl}</span>
+              <span className="ml-3 truncate font-mono text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>{previewUrl}</span>
             </div>
             <div className="px-6 py-10 text-center">
               <h4 className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 {offer}
               </h4>
-              <p className="mx-auto mt-3 max-w-md text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+              <p className="mx-auto mt-3 max-w-md text-sm" style={{ color: "var(--color-ink-muted)" }}>
                 Для {audience}. Оставьте заявку — свяжемся за 15 минут.
               </p>
               <button
                 type="button"
                 disabled
                 className="mt-5 inline-flex h-10 items-center rounded-md px-5 text-sm font-semibold opacity-90"
-                style={{ background: "#a8ff57", color: "#0a0a0a" }}
+                style={{ background: "var(--color-accent)", color: "#0a0a0a" }}
               >
                 Оставить заявку
               </button>
@@ -84,23 +84,23 @@ export function SiteOverview({ project }: { project: Project }) {
       </section>
 
       {/* Leads */}
-      <section className="rounded-xl" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "#2a2a2a" }}>
+      <section className="rounded-xl" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+        <header className="flex items-center justify-between border-b px-5 py-3.5" style={{ borderColor: "var(--color-border)" }}>
           <div className="flex items-center gap-2">
-            <Inbox className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
+            <Inbox className="h-4 w-4" style={{ color: "var(--color-accent)" }} strokeWidth={1.75} />
             <h3 className="font-display text-sm font-semibold text-foreground">Заявки с лендинга</h3>
           </div>
-          <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>mock</span>
+          <span className="text-xs" style={{ color: "var(--color-ink-muted)" }}>mock</span>
         </header>
-        <ul className="divide-y" style={{ borderColor: "#2a2a2a" }}>
+        <ul className="divide-y" style={{ borderColor: "var(--color-border)" }}>
           {LEADS.map((l) => (
             <li key={l.id} className="grid grid-cols-1 gap-1 px-5 py-3 sm:grid-cols-[1fr_1fr_auto] sm:items-center sm:gap-4">
               <div>
                 <div className="text-sm font-semibold text-foreground">{l.name}</div>
-                <div className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>{l.contact}</div>
+                <div className="text-xs" style={{ color: "var(--color-ink-muted)" }}>{l.contact}</div>
               </div>
-              <div className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>{l.source}</div>
-              <div className="text-xs tabular-nums sm:text-right" style={{ color: "rgba(255,255,255,0.45)" }}>{l.time}</div>
+              <div className="text-xs" style={{ color: "var(--color-ink-muted)" }}>{l.source}</div>
+              <div className="text-xs tabular-nums sm:text-right" style={{ color: "var(--color-ink-subtle)" }}>{l.time}</div>
             </li>
           ))}
         </ul>
@@ -111,9 +111,9 @@ export function SiteOverview({ project }: { project: Project }) {
 
 function Kpi({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <div className="rounded-xl p-4" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-      <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</div>
-      <div className="mt-1 font-display text-2xl font-semibold tabular-nums" style={{ color: accent ? "#a8ff57" : "#ffffff" }}>
+    <div className="rounded-xl p-4" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+      <div className="text-[11px] uppercase tracking-wide" style={{ color: "var(--color-ink-muted)" }}>{label}</div>
+      <div className="mt-1 font-display text-2xl font-semibold tabular-nums" style={{ color: accent ? "var(--color-accent)" : "var(--color-foreground)" }}>
         {value}
       </div>
     </div>

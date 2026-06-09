@@ -37,38 +37,38 @@ export function AssistantOverview({ project }: { project: Project }) {
       {/* Inbox */}
       <section
         className="rounded-xl"
-        style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}
+        style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
       >
         <header className="flex items-center justify-between border-b px-5 py-3.5"
-          style={{ borderColor: "#2a2a2a" }}>
+          style={{ borderColor: "var(--color-border)" }}>
           <div className="flex items-center gap-2">
-            <Bot className="h-4 w-4" style={{ color: "#a8ff57" }} strokeWidth={1.75} />
+            <Bot className="h-4 w-4" style={{ color: "var(--color-accent)" }} strokeWidth={1.75} />
             <h3 className="font-display text-sm font-semibold text-foreground">Последние диалоги</h3>
           </div>
-          <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <span className="text-xs" style={{ color: "var(--color-ink-muted)" }}>
             mock — реальные данные после запуска ассистента
           </span>
         </header>
-        <ul className="divide-y" style={{ borderColor: "#2a2a2a" }}>
+        <ul className="divide-y" style={{ borderColor: "var(--color-border)" }}>
           {MOCK_CONVERSATIONS.map((c) => (
             <li key={c.id} className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-surface/[0.02]">
               <span
                 className="flex h-9 w-9 flex-none items-center justify-center rounded-full"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2a2a2a" }}
+                style={{ background: "var(--color-surface-muted)", border: "1px solid var(--color-border)" }}
               >
-                <User className="h-4 w-4" style={{ color: "rgba(255,255,255,0.6)" }} strokeWidth={1.75} />
+                <User className="h-4 w-4" style={{ color: "var(--color-ink-muted)" }} strokeWidth={1.75} />
               </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-baseline gap-2">
                   <span className="text-sm font-semibold text-foreground">{c.visitor}</span>
-                  <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.45)" }}>· {c.channel}</span>
+                  <span className="text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>· {c.channel}</span>
                 </div>
-                <div className="mt-0.5 line-clamp-1 text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>
+                <div className="mt-0.5 line-clamp-1 text-xs" style={{ color: "var(--color-ink-muted)" }}>
                   {c.lastMessage}
                 </div>
               </div>
               <StatusPill status={c.status} />
-              <span className="hidden text-[11px] tabular-nums sm:inline" style={{ color: "rgba(255,255,255,0.4)" }}>
+              <span className="hidden text-[11px] tabular-nums sm:inline" style={{ color: "var(--color-ink-subtle)" }}>
                 {c.time}
               </span>
             </li>
@@ -85,7 +85,7 @@ export function AssistantOverview({ project }: { project: Project }) {
         }}
       >
         <Sparkles className="h-4 w-4 flex-none text-accent" strokeWidth={1.75} />
-        <div className="text-sm" style={{ color: "rgba(255,255,255,0.85)" }}>
+        <div className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
           Совет: добавьте 5 типовых вопросов клиентов в раздел знаний — это поднимет точность ответов на ~20%.
           <Link
             to="/knowledge"
@@ -101,8 +101,8 @@ export function AssistantOverview({ project }: { project: Project }) {
 
 function KpiCard({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <div className="rounded-xl p-4" style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-      <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</div>
+    <div className="rounded-xl p-4" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+      <div className="text-[11px] uppercase tracking-wide" style={{ color: "var(--color-ink-muted)" }}>{label}</div>
       <div
         className={"mt-1 font-display text-2xl font-semibold tabular-nums " + (accent ? "text-accent" : "text-foreground")}
       >
@@ -124,7 +124,7 @@ function StatusPill({ status }: { status: Conversation["status"] }) {
   }
   const map = {
     active: { label: "Активный", bg: "rgba(125,211,252,0.10)", fg: "#7dd3fc" },
-    closed: { label: "Закрыт",  bg: "rgba(255,255,255,0.05)", fg: "rgba(255,255,255,0.55)" },
+    closed: { label: "Закрыт",  bg: "var(--color-surface-muted)", fg: "var(--color-ink-muted)" },
   } as const;
   const c = map[status];
   return (
