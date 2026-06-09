@@ -23,6 +23,8 @@ import {
   UploadCloud,
   FileText,
   Trash2,
+  Search,
+  X,
 } from "lucide-react";
 import { toast } from "sonner";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
