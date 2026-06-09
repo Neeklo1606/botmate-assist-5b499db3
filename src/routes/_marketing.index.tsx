@@ -98,7 +98,7 @@ function Hero() {
         style={{ background: "radial-gradient(closest-side, rgba(45,106,79,0.18), transparent 70%)" }}
       />
       <Container>
-        <div className="relative grid items-center gap-12 pt-12 pb-16 md:grid-cols-12 md:gap-10 md:pt-20 md:pb-24">
+        <div className="relative grid items-center gap-10 pt-10 pb-14 md:grid-cols-12 md:gap-10 md:pt-20 md:pb-24">
           {/* LEFT */}
           <div className="md:col-span-6">
             <span
@@ -114,7 +114,7 @@ function Hero() {
             </span>
 
             <h1
-              className="mt-6 font-display text-[44px] leading-[1.02] md:text-[68px] lg:text-[80px]"
+              className="mt-6 font-display text-[40px] leading-[1.02] md:text-[68px] lg:text-[80px]"
               style={{ fontWeight: 800, letterSpacing: "-0.03em", color: "var(--foreground)" }}
             >
               Твой бизнес
@@ -132,10 +132,10 @@ function Hero() {
               инфраструктуре, без разработчиков.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 to="/onboarding/assistant"
-                className="inline-flex h-12 items-center gap-2 rounded-xl px-6 text-[15px] font-semibold transition-colors"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl px-6 text-[15px] font-semibold transition-colors sm:w-auto"
                 style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "var(--signal)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
@@ -146,7 +146,7 @@ function Hero() {
               <Link
                 to="/"
                 hash="product"
-                className="inline-flex h-12 items-center gap-2 rounded-xl border px-6 text-[15px] font-semibold transition-colors"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border px-6 text-[15px] font-semibold transition-colors sm:w-auto"
                 style={{
                   borderColor: "var(--border-strong)",
                   color: "var(--foreground)",
@@ -156,6 +156,7 @@ function Hero() {
                 <span className="text-[10px]">▶</span> Смотреть демо
               </Link>
             </div>
+
 
             <div
               className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13.5px]"
@@ -581,7 +582,7 @@ function LaunchSteps() {
   ];
 
   return (
-    <section className="py-20 md:py-28" style={{ background: "var(--surface-muted)" }}>
+    <section className="py-14 md:py-28" style={{ background: "var(--surface-muted)" }}>
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <div
@@ -712,7 +713,7 @@ function ProductsTrio() {
   ];
 
   return (
-    <section id="products" className="py-20 md:py-28" style={{ background: "var(--background)" }}>
+    <section id="products" className="py-14 md:py-28" style={{ background: "var(--background)" }}>
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <div
@@ -736,28 +737,32 @@ function ProductsTrio() {
             Не набор ботов — единая система для роста бизнеса
           </p>
 
-          {/* Tabs */}
-          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border p-1.5"
-            style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-          >
-            {tabs.map((t) => {
-              const active = tab === t.k;
-              return (
-                <button
-                  key={t.k}
-                  type="button"
-                  onClick={() => setTab(t.k)}
-                  className="rounded-full px-4 py-2 text-[13px] font-semibold transition-colors"
-                  style={{
-                    background: active ? "var(--accent)" : "transparent",
-                    color: active ? "var(--accent-ink)" : "var(--ink-muted)",
-                  }}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
+          {/* Tabs — horizontal scroll on mobile */}
+          <div className="mt-8 -mx-5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:px-0">
+            <div
+              className="inline-flex items-center justify-center gap-2 rounded-full border p-1.5"
+              style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+            >
+              {tabs.map((t) => {
+                const active = tab === t.k;
+                return (
+                  <button
+                    key={t.k}
+                    type="button"
+                    onClick={() => setTab(t.k)}
+                    className="whitespace-nowrap rounded-full px-4 py-2 text-[13px] font-semibold transition-colors"
+                    style={{
+                      background: active ? "var(--accent)" : "transparent",
+                      color: active ? "var(--accent-ink)" : "var(--ink-muted)",
+                    }}
+                  >
+                    {t.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
+
         </div>
 
         <div className="mt-12 grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
@@ -1002,7 +1007,7 @@ function PreviewCrm() {
 function ProductScene() {
   const [tab, setTab] = useState<"chat" | "lead" | "handoff">("chat");
   return (
-    <section id="product" className="py-20 md:py-28">
+    <section id="product" className="py-14 md:py-28">
       <Container>
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
@@ -1194,7 +1199,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section id="how" className="border-t border-border bg-surface-muted/40 py-20 md:py-28">
+    <section id="how" className="border-t border-border bg-surface-muted/40 py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Как это работает"
@@ -1274,7 +1279,7 @@ function Benefits() {
   ];
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Что вы получаете"
@@ -1516,7 +1521,7 @@ function WhyAvreya() {
     },
   ];
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 md:py-28">
       <Container>
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
@@ -1582,7 +1587,7 @@ function Ecosystem() {
     },
   ];
   return (
-    <section className="border-y border-border bg-surface-muted/40 py-20 md:py-28">
+    <section className="border-y border-border bg-surface-muted/40 py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Экосистема Avreya · Скоро"
@@ -1705,7 +1710,7 @@ function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-20 md:py-28">
+    <section id="pricing" className="py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Тарифы в рублях"
@@ -1868,7 +1873,7 @@ const faq = [
 
 function Faq() {
   return (
-    <section id="faq" className="border-t border-border bg-surface-muted/40 py-20 md:py-28">
+    <section id="faq" className="border-t border-border bg-surface-muted/40 py-14 md:py-28">
       <Container>
         <SectionHead
           eyebrow="Частые вопросы"
@@ -1958,7 +1963,7 @@ function FaqRow({ q, a, n }: { q: string; a: string; n: number }) {
 
 function FinalCta() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 md:py-28">
       <Container>
         <div className="relative overflow-hidden rounded-3xl border border-foreground bg-foreground px-8 py-14 text-background md:px-14 md:py-20">
           <div className="mx-auto max-w-[680px] text-center">

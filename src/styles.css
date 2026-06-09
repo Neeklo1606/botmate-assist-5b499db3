@@ -295,6 +295,10 @@
     scroll-margin-top: 72px;
   }
 
+  html, body {
+    overflow-x: hidden;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -347,7 +351,7 @@
 
 @layer utilities {
   .container-px {
-    padding-inline: 16px;
+    padding-inline: 20px;
   }
   @media (min-width: 768px) {
     .container-px {
