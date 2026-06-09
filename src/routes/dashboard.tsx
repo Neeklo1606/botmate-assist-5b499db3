@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
+import { AgentWizard, type AgentDraft } from "@/components/dashboard/agent-wizard";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({ meta: [{ title: "Кабинет — Avreya" }] }),
