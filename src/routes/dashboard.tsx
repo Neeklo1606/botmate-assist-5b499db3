@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
+import { AgentWizard, type AgentDraft } from "@/components/dashboard/agent-wizard";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({ meta: [{ title: "Кабинет — Avreya" }] }),
@@ -48,10 +49,24 @@ const SECTIONS: Section[] = [
 
 function DashboardPage() {
   const [active, setActive] = useState<SectionId>("agents");
+  const [agents, setAgents] = useState<Agent[]>(INITIAL_AGENTS);
+  const [wizardOpen, setWizardOpen] = useState(false);
   const current = SECTIONS.find((s) => s.id === active)!;
-  const handleCreateAgent = () => {
-    // Мастер создания агента — следующий промпт
-    toast("Мастер создания агента появится в следующем шаге");
+  const handleCreateAgent = () => setWizardOpen(true);
+  const handleSaveAgent = (draft: AgentDraft) => {
+    const agent: Agent = {
+      id: draft.id,
+      name: draft.name,
+      niche: draft.niche,
+      status: "draft",
+      channels: [],
+      dialogsToday: 0,
+      leads: 0,
+    };
+    setAgents((prev) => [agent, ...prev]);
+    setActive("agents");
+    setWizardOpen(false);
+    toast.success("Агент создан");
   };
 
   return (
@@ -132,7 +147,7 @@ function DashboardPage() {
 
         <main className="flex-1 px-5 pb-24 pt-6 md:px-7 md:pb-10 md:pt-8">
           <div key={active} className="animate-in fade-in slide-in-from-bottom-1 duration-200">
-            <SectionView id={active} onCreateAgent={handleCreateAgent} />
+            <SectionView id={active} agents={agents} onCreateAgent={handleCreateAgent} />
           </div>
         </main>
       </div>
@@ -160,16 +175,28 @@ function DashboardPage() {
           })}
         </div>
       </nav>
+
+      {wizardOpen && (
+        <AgentWizard onClose={() => setWizardOpen(false)} onSave={handleSaveAgent} />
+      )}
     </div>
   );
 }
 
 /* ---------- Sections ---------- */
 
-function SectionView({ id, onCreateAgent }: { id: SectionId; onCreateAgent: () => void }) {
+function SectionView({
+  id,
+  agents,
+  onCreateAgent,
+}: {
+  id: SectionId;
+  agents: Agent[];
+  onCreateAgent: () => void;
+}) {
   switch (id) {
     case "agents":
-      return <AgentsSection onCreate={onCreateAgent} />;
+      return <AgentsSection agents={agents} onCreate={onCreateAgent} />;
     case "knowledge":
       return <KnowledgeSection />;
     case "channels":
@@ -231,8 +258,7 @@ const CHANNEL_META: Record<Agent["channels"][number], { label: string; render: (
   max: { label: "MAX", render: () => <span className="text-[10px] font-bold tracking-tight">M</span> },
 };
 
-function AgentsSection({ onCreate }: { onCreate: () => void }) {
-  const [agents] = useState<Agent[]>(INITIAL_AGENTS);
+function AgentsSection({ agents, onCreate }: { agents: Agent[]; onCreate: () => void }) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   if (agents.length === 0) {
