@@ -25,8 +25,8 @@
   --radius-2xl: 28px;
 
   /* Fonts — Sora (display) + Manrope (body), грузятся через <link> в __root */
-  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Sora", "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", "Sora", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* v2 dark palette legacy aliases — для существующих компонентов (Media/Site) */
@@ -120,73 +120,71 @@
 :root {
   --radius: 14px;
 
-  --background: oklch(0.965 0.012 92);          /* milk — чуть глубже, чтобы карточки и floating header читались как поднятые поверхности */
-  --foreground: oklch(0.225 0.008 110);         /* graphite, чуть плотнее для контраста */
-  --surface: oklch(0.995 0.005 92);             /* почти белая карточка — заметно светлее фона */
-  --surface-muted: oklch(0.94 0.014 92);        /* мягкая молочная пыль */
-  --surface-tint:  oklch(0.95 0.018 110);       /* тёплый олив-нейтрал — для ритма секций */
-  --surface-sunken: oklch(0.91 0.014 92);       /* «утопленная» полоса для глубины (footer/ink-edge) */
+  /* Warm cream / emerald / terracotta system */
+  --background: #F0EBE1;          /* warm cream */
+  --foreground: #1C1C1C;          /* main text */
+  --surface: #FAFAF7;             /* card surface */
+  --surface-muted: #ECE6DA;       /* muted band */
+  --surface-tint:  #F5F0E5;
+  --surface-sunken: #E4DECF;
 
-  --card: oklch(0.992 0.006 92);
-  --card-foreground: oklch(0.235 0.008 110);
-  --popover: oklch(0.992 0.006 92);
-  --popover-foreground: oklch(0.235 0.008 110);
+  --card: #FAFAF7;
+  --card-foreground: #1C1C1C;
+  --popover: #FAFAF7;
+  --popover-foreground: #1C1C1C;
 
-  --primary: oklch(0.235 0.008 110);            /* graphite */
-  --primary-foreground: oklch(0.975 0.012 92);
-  --primary-hover: oklch(0.18 0.008 110);
+  --primary: #2D6A4F;             /* emerald CTA */
+  --primary-foreground: #FAFAF7;
+  --primary-hover: #235340;
 
-  --ink: oklch(0.235 0.008 110);
-  --ink-muted: oklch(0.48 0.008 108);
-  --ink-subtle: oklch(0.63 0.008 105);
+  --ink: #1C1C1C;
+  --ink-muted: #5A5248;
+  --ink-subtle: #7A6F62;
 
-  --secondary: oklch(0.935 0.018 90);
-  --secondary-foreground: oklch(0.235 0.008 110);
-  --muted: oklch(0.935 0.018 90);
-  --muted-foreground: oklch(0.5 0.008 108);
+  --secondary: #ECE6DA;
+  --secondary-foreground: #1C1C1C;
+  --muted: #ECE6DA;
+  --muted-foreground: #5A5248;
 
-  /* Акцент — приглушённая олива. Сдержанно, дорого, без неона. */
-  --accent: oklch(0.54 0.062 118);
-  --accent-foreground: oklch(0.985 0.008 92);
-  --accent-ink: oklch(0.985 0.008 92);
-  --accent-hover: oklch(0.47 0.066 118);
-  --accent-glow: oklch(0.54 0.062 118 / 0.14);
+  /* Accent — emerald (primary brand action color) */
+  --accent: #2D6A4F;
+  --accent-foreground: #FAFAF7;
+  --accent-ink: #FAFAF7;
+  --accent-hover: #235340;
+  --accent-glow: rgba(45, 106, 79, 0.14);
 
-  --signal: oklch(0.235 0.008 110);
-  --signal-foreground: oklch(0.975 0.012 92);
+  --signal: #4E3B2D;              /* terracotta — secondary accent */
+  --signal-foreground: #FAFAF7;
 
-  --destructive: oklch(0.55 0.16 27);
-  --destructive-foreground: oklch(0.985 0.008 92);
-  --danger: oklch(0.55 0.16 27);
-  --danger-foreground: oklch(0.985 0.008 92);
-  --success: oklch(0.54 0.062 118);
-  --success-foreground: oklch(0.985 0.008 92);
-  --warning: oklch(0.66 0.12 72);
-  --warning-foreground: oklch(0.235 0.008 110);
+  --destructive: #B23A2A;
+  --destructive-foreground: #FAFAF7;
+  --danger: #B23A2A;
+  --danger-foreground: #FAFAF7;
+  --success: #2D6A4F;
+  --success-foreground: #FAFAF7;
+  --warning: #B57A1F;
+  --warning-foreground: #1C1C1C;
 
-  --border: oklch(0.89 0.012 92);
-  --border-strong: oklch(0.79 0.016 92);
-  --input: oklch(0.89 0.012 92);
-  --ring: oklch(0.54 0.062 118);
+  --border: #E8E3D9;
+  --border-strong: #D3CCBD;
+  --input: #E8E3D9;
+  --ring: #2D6A4F;
 
-  --chart-1: oklch(0.235 0.008 110);
-  --chart-2: oklch(0.54 0.062 118);
-  --chart-3: oklch(0.66 0.05 118);
-  --chart-4: oklch(0.6 0.1 72);
-  --chart-5: oklch(0.5 0.08 200);
+  --chart-1: #1C1C1C;
+  --chart-2: #2D6A4F;
+  --chart-3: #4E3B2D;
+  --chart-4: #B57A1F;
+  --chart-5: #5A5248;
 
-  --sidebar: oklch(0.975 0.012 92);
-  --sidebar-foreground: oklch(0.235 0.008 110);
-  --sidebar-primary: oklch(0.235 0.008 110);
-  --sidebar-primary-foreground: oklch(0.975 0.012 92);
-  --sidebar-accent: oklch(0.935 0.018 90);
-  --sidebar-accent-foreground: oklch(0.235 0.008 110);
-  --sidebar-border: oklch(0.89 0.012 92);
-  --sidebar-ring: oklch(0.54 0.062 118);
+  --sidebar: #FAFAF7;
+  --sidebar-foreground: #1C1C1C;
+  --sidebar-primary: #2D6A4F;
+  --sidebar-primary-foreground: #FAFAF7;
+  --sidebar-accent: #ECE6DA;
+  --sidebar-accent-foreground: #1C1C1C;
+  --sidebar-border: #E8E3D9;
+  --sidebar-ring: #2D6A4F;
 
-  /* legacy v2 палитра — theme-aware алиасы на основной системе токенов.
-     В светлой теме раскрываются в светлые поверхности + тёмный текст,
-     в тёмной — переопределяются ниже в .dark. */
   --bg-base: var(--background);
   --bg-elevated: var(--surface);
   --bg-soft: var(--surface-muted);
@@ -198,8 +196,8 @@
   --ink-dark-subtle: var(--ink-subtle);
 
   --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%,
-    oklch(0.54 0.062 118 / 0.07) 0%,
-    oklch(0.54 0.062 118 / 0) 60%);
+    rgba(45, 106, 79, 0.08) 0%,
+    rgba(45, 106, 79, 0) 60%);
 
   --ease-out-quart: cubic-bezier(0.2, 0.8, 0.2, 1);
   --duration-fast: 180ms;
