@@ -566,6 +566,3 @@ function PreviewMetric({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-
-// Silence unused-import warning for ComponentType in strict environments.
-type _Keep = ComponentType<unknown>;
