@@ -189,43 +189,206 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
   );
 }
 
-function AgentsSection() {
-  const agents = [
-    { name: "Менеджер автосервиса", status: "Активен", channels: "Telegram, Сайт", leads: 124 },
-    { name: "Менеджер клиники", status: "Черновик", channels: "WhatsApp", leads: 0 },
-  ];
+interface Agent {
+  id: string;
+  name: string;
+  niche: string;
+  status: "active" | "draft";
+  channels: ("telegram" | "site" | "avito" | "max")[];
+  dialogsToday: number;
+  leads: number;
+}
+
+const INITIAL_AGENTS: Agent[] = [
+  {
+    id: "a1",
+    name: "Менеджер автосервиса",
+    niche: "Автосервис",
+    status: "active",
+    channels: ["telegram", "site", "avito"],
+    dialogsToday: 42,
+    leads: 124,
+  },
+  {
+    id: "a2",
+    name: "Менеджер клиники",
+    niche: "Клиника",
+    status: "draft",
+    channels: ["max"],
+    dialogsToday: 0,
+    leads: 0,
+  },
+];
+
+const CHANNEL_META: Record<Agent["channels"][number], { label: string; render: () => React.ReactNode }> = {
+  telegram: { label: "Telegram", render: () => <Send className="h-3.5 w-3.5" /> },
+  site: { label: "Сайт", render: () => <Globe className="h-3.5 w-3.5" /> },
+  avito: { label: "Avito", render: () => <span className="text-[10px] font-bold tracking-tight">AV</span> },
+  max: { label: "MAX", render: () => <span className="text-[10px] font-bold tracking-tight">M</span> },
+};
+
+function AgentsSection({ onCreate }: { onCreate: () => void }) {
+  const [agents] = useState<Agent[]>(INITIAL_AGENTS);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+
+  if (agents.length === 0) {
+    return (
+      <div className="rounded-[20px] border border-dashed border-border bg-surface/60 px-6 py-16 text-center">
+        <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-accent/12 text-accent">
+          <Bot className="h-8 w-8" />
+        </div>
+        <h2 className="mt-5 font-display text-[22px] font-semibold tracking-[-0.02em] text-foreground">
+          У вас пока нет агентов
+        </h2>
+        <p className="mx-auto mt-2 max-w-[380px] text-[13.5px] text-ink-muted">
+          Создайте первого AI-агента — это займёт пару минут.
+        </p>
+        <button
+          type="button"
+          onClick={onCreate}
+          className="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-[13.5px] font-semibold text-accent-foreground shadow-xs transition-[transform] hover:-translate-y-px"
+        >
+          <Plus className="h-4 w-4" /> Создать первого агента
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-3">
-      {agents.map((a) => (
-        <Card key={a.name}>
-          <div className="flex items-start gap-4">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent">
-              <Bot className="h-5 w-5" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-[15px] font-semibold text-foreground">{a.name}</h3>
+    <div className="grid gap-4 lg:grid-cols-2">
+      {agents.map((a) => {
+        const isActive = a.status === "active";
+        return (
+          <div
+            key={a.id}
+            className="relative rounded-[20px] border border-border bg-surface p-5 shadow-[var(--shadow-md),var(--shadow-rim)] md:p-6"
+          >
+            <div className="flex items-start gap-4">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent">
+                <Bot className="h-5 w-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h3 className="truncate text-[15.5px] font-semibold text-foreground">{a.name}</h3>
+                <p className="mt-0.5 text-[12.5px] text-ink-muted">{a.niche}</p>
+              </div>
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${
+                  isActive
+                    ? "bg-emerald-500/12 text-emerald-700 dark:text-emerald-400"
+                    : "border border-border bg-surface-muted text-ink-muted"
+                }`}
+              >
                 <span
-                  className={`rounded-full border px-2 py-0.5 text-[11px] font-medium ${
-                    a.status === "Активен"
-                      ? "border-accent/40 bg-accent/10 text-foreground"
-                      : "border-border bg-surface-muted text-ink-muted"
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    isActive ? "bg-emerald-500" : "bg-ink-subtle"
                   }`}
-                >
-                  {a.status}
-                </span>
-              </div>
-              <p className="mt-1 text-[12.5px] text-ink-muted">Каналы: {a.channels}</p>
+                />
+                {isActive ? "Активен" : "Черновик"}
+              </span>
             </div>
-            <div className="text-right">
-              <div className="font-display text-[22px] font-semibold tracking-[-0.02em] text-foreground">
-                {a.leads}
+
+            {/* Channels */}
+            <div className="mt-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-subtle">
+                Каналы
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {a.channels.length === 0 ? (
+                  <span className="text-[12.5px] text-ink-subtle">Не подключены</span>
+                ) : (
+                  a.channels.map((c) => (
+                    <span
+                      key={c}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-muted px-2.5 py-1 text-[11.5px] font-medium text-foreground"
+                    >
+                      <span className="grid h-4 w-4 place-items-center text-ink-muted">
+                        {CHANNEL_META[c].render()}
+                      </span>
+                      {CHANNEL_META[c].label}
+                    </span>
+                  ))
+                )}
               </div>
-              <p className="text-[11px] uppercase tracking-[0.1em] text-ink-subtle">лидов</p>
+            </div>
+
+            {/* Metrics */}
+            <div className="mt-5 grid grid-cols-2 gap-2">
+              <Metric icon={MessageSquare} label="Диалогов сегодня" value={a.dialogsToday} />
+              <Metric icon={Inbox} label="Лидов" value={a.leads} />
+            </div>
+
+            {/* Actions */}
+            <div className="mt-5 flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => toast(`Открываем «${a.name}»`)}
+                className="inline-flex h-10 flex-1 items-center justify-center rounded-full bg-foreground text-[13px] font-semibold text-background transition-[transform] hover:-translate-y-px"
+              >
+                Открыть
+              </button>
+              <button
+                type="button"
+                onClick={() => toast.success("Агент продублирован")}
+                className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-surface px-4 text-[13px] font-semibold text-foreground transition-[transform,border-color] hover:-translate-y-px hover:border-foreground/40"
+              >
+                <Copy className="h-3.5 w-3.5" /> Дублировать
+              </button>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setOpenMenu(openMenu === a.id ? null : a.id)}
+                  aria-label="Действия"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface text-foreground transition-colors hover:border-foreground/40"
+                >
+                  <MoreHorizontal className="h-4 w-4" />
+                </button>
+                {openMenu === a.id && (
+                  <div
+                    className="absolute right-0 top-12 z-10 w-44 overflow-hidden rounded-xl border border-border bg-surface py-1 shadow-[var(--shadow-md),var(--shadow-rim)] animate-in fade-in zoom-in-95 duration-150"
+                    onMouseLeave={() => setOpenMenu(null)}
+                  >
+                    {["Переименовать", "Скачать логи", "Архивировать", "Удалить"].map((item) => (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() => {
+                          setOpenMenu(null);
+                          toast(item);
+                        }}
+                        className="block w-full px-3 py-2 text-left text-[13px] text-foreground transition-colors hover:bg-surface-muted"
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </Card>
-      ))}
+        );
+      })}
+    </div>
+  );
+}
+
+function Metric({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: ComponentType<{ className?: string }>;
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="rounded-xl border border-border bg-bg-alt/60 p-3">
+      <div className="flex items-center gap-1.5 text-ink-muted">
+        <Icon className="h-3.5 w-3.5" />
+        <span className="text-[11px] font-medium uppercase tracking-[0.08em]">{label}</span>
+      </div>
+      <div className="mt-1 font-display text-[22px] font-semibold tracking-[-0.02em] text-foreground">
+        {value}
+      </div>
     </div>
   );
 }
