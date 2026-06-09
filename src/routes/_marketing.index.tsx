@@ -179,136 +179,290 @@ function Hero() {
   );
 }
 
+/* ───────── Hero builder — interactive "Собери своего AI-сотрудника" ───────── */
+
+type BuilderStep = 1 | 2 | 3;
+type Niche =
+  | "Автосервис"
+  | "Клиника"
+  | "Салон красоты"
+  | "Недвижимость"
+  | "Магазин"
+  | "Ремонт"
+  | "Юристы"
+  | "Доставка";
+type Channel = "Telegram" | "Сайт" | "Avito" | "MAX" | "WhatsApp";
+type Tone = "Деловой" | "Дружелюбный" | "Экспертный";
+
+const NICHES: Niche[] = [
+  "Автосервис",
+  "Клиника",
+  "Салон красоты",
+  "Недвижимость",
+  "Магазин",
+  "Ремонт",
+  "Юристы",
+  "Доставка",
+];
+
+const CHANNELS: { k: Channel; icon: string }[] = [
+  { k: "Telegram", icon: "✈" },
+  { k: "Сайт", icon: "🌐" },
+  { k: "Avito", icon: "🅰" },
+  { k: "MAX", icon: "M" },
+  { k: "WhatsApp", icon: "💬" },
+];
+
+const TONES: { k: Tone; desc: string }[] = [
+  { k: "Деловой", desc: "Чётко и по делу. Без воды." },
+  { k: "Дружелюбный", desc: "Тёплый, лёгкий, с эмодзи." },
+  { k: "Экспертный", desc: "Уверенно, со ссылками на опыт." },
+];
+
+const NICHE_META: Record<Niche, { service: string; lead: string; budget: string }> = {
+  "Автосервис":     { service: "Запись на диагностику", lead: "Иван Громов",   budget: "до 25 000 ₽" },
+  "Клиника":         { service: "Запись на приём",       lead: "Анна Соколова", budget: "до 8 000 ₽" },
+  "Салон красоты":   { service: "Запись к мастеру",      lead: "Юлия Орлова",   budget: "до 6 000 ₽" },
+  "Недвижимость":   { service: "Показ квартиры",         lead: "Мария Волкова", budget: "до 12 000 000 ₽" },
+  "Магазин":         { service: "Заказ товара",          lead: "Олег Лебедев",  budget: "до 35 000 ₽" },
+  "Ремонт":         { service: "Смета на ремонт",        lead: "Павел Носов",   budget: "до 800 000 ₽" },
+  "Юристы":          { service: "Консультация юриста",   lead: "Дмитрий Краев", budget: "до 15 000 ₽" },
+  "Доставка":        { service: "Оформление доставки",   lead: "Кирилл Седов",  budget: "до 5 000 ₽" },
+};
+
+function scrollToPricing() {
+  const el = document.getElementById("pricing");
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+}
+
 function HeroMockup() {
-  const [tab, setTab] = useState<"assistant" | "media" | "site">("assistant");
-  const tabs: { k: typeof tab; label: string }[] = [
-    { k: "assistant", label: "Ассистент" },
-    { k: "media", label: "Медиа" },
-    { k: "site", label: "Сайт" },
+  const [step, setStep] = useState<BuilderStep>(1);
+  const [niche, setNiche] = useState<Niche>("Клиника");
+  const [channels, setChannels] = useState<Channel[]>(["Telegram", "Сайт"]);
+  const [tone, setTone] = useState<Tone>("Дружелюбный");
+
+  const toggleChannel = (c: Channel) =>
+    setChannels((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]));
+
+  const steps: { n: BuilderStep; label: string }[] = [
+    { n: 1, label: "Бизнес" },
+    { n: 2, label: "Канал" },
+    { n: 3, label: "Тон" },
   ];
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border shadow-lift"
-      style={{ background: "var(--surface)", borderColor: "var(--border)" }}
+      className="relative overflow-hidden border shadow-soft"
+      style={{ background: "var(--surface)", borderColor: "var(--border)", borderRadius: 20 }}
     >
-      {/* Tabs */}
-      <div
-        className="flex items-center gap-1 border-b px-3 pt-3"
-        style={{ borderColor: "var(--border)", background: "var(--surface-tint)" }}
-      >
-        {tabs.map((t) => {
-          const active = tab === t.k;
+      {/* Header */}
+      <div className="px-5 pt-5 md:px-6 md:pt-6">
+        <div
+          className="text-[10px] font-semibold uppercase tracking-[0.18em]"
+          style={{ color: "var(--accent)" }}
+        >
+          Конструктор
+        </div>
+        <div
+          className="mt-1 font-display text-[18px] md:text-[20px]"
+          style={{ fontWeight: 800, letterSpacing: "-0.02em", color: "var(--foreground)" }}
+        >
+          Собери своего AI-сотрудника за 3&nbsp;минуты
+        </div>
+      </div>
+
+      {/* Step tabs */}
+      <div className="mt-4 flex items-center gap-2 px-5 md:px-6">
+        {steps.map((s) => {
+          const active = step === s.n;
           return (
             <button
-              key={t.k}
-              onClick={() => setTab(t.k)}
-              className="rounded-t-lg px-4 py-2.5 text-[13px] font-semibold transition-colors"
+              key={s.n}
+              type="button"
+              onClick={() => setStep(s.n)}
+              className="flex flex-1 items-center justify-center gap-2 rounded-full border px-3 py-2 text-[12.5px] font-semibold transition-colors"
               style={{
-                background: active ? "var(--surface)" : "transparent",
-                color: active ? "var(--foreground)" : "var(--ink-muted)",
-                borderTop: active ? `2px solid var(--accent)` : "2px solid transparent",
+                background: active ? "var(--accent)" : "transparent",
+                color: active ? "var(--accent-ink)" : "var(--ink-muted)",
+                borderColor: active ? "var(--accent)" : "var(--border)",
               }}
             >
-              {t.label}
+              <span
+                className="inline-flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold"
+                style={{
+                  background: active ? "rgba(255,255,255,0.18)" : "var(--surface-muted)",
+                  color: active ? "var(--accent-ink)" : "var(--foreground)",
+                }}
+              >
+                {s.n}
+              </span>
+              {s.label}
             </button>
           );
         })}
       </div>
 
-      {/* Body */}
-      <div className="p-5 md:p-6">
-        {tab === "assistant" && <AssistantTabBody />}
-        {tab === "media" && (
-          <div
-            className="flex h-[260px] items-center justify-center rounded-xl border text-[14px]"
-            style={{ borderColor: "var(--border)", background: "var(--surface-muted)", color: "var(--ink-muted)" }}
-          >
-            <div className="text-center">
-              <ImageIcon className="mx-auto h-8 w-8" strokeWidth={1.5} />
-              <div className="mt-2 font-semibold" style={{ color: "var(--foreground)" }}>AI-Медиа</div>
-              <div>Генерация постов, баннеров и сторис</div>
+      {/* Step body */}
+      <div className="relative px-5 pt-4 md:px-6">
+        <div key={step} className="animate-fade-in min-h-[176px]">
+          {step === 1 && (
+            <div className="grid grid-cols-2 gap-2">
+              {NICHES.map((n) => {
+                const active = niche === n;
+                return (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => setNiche(n)}
+                    className="rounded-full border px-3 py-2 text-[13px] font-medium transition-colors"
+                    style={{
+                      background: active ? "var(--accent)" : "var(--surface)",
+                      color: active ? "var(--accent-ink)" : "var(--foreground)",
+                      borderColor: active ? "var(--accent)" : "var(--border)",
+                    }}
+                  >
+                    {n}
+                  </button>
+                );
+              })}
             </div>
-          </div>
-        )}
-        {tab === "site" && (
-          <div
-            className="flex h-[260px] items-center justify-center rounded-xl border text-[14px]"
-            style={{ borderColor: "var(--border)", background: "var(--surface-muted)", color: "var(--ink-muted)" }}
-          >
-            <div className="text-center">
-              <Layout className="mx-auto h-8 w-8" strokeWidth={1.5} />
-              <div className="mt-2 font-semibold" style={{ color: "var(--foreground)" }}>AI-Сайт</div>
-              <div>Конструктор лендингов под бриф</div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+          )}
 
-function AssistantTabBody() {
-  return (
-    <div className="space-y-4">
-      <div
-        className="rounded-xl border p-4"
-        style={{ background: "var(--background)", borderColor: "var(--border)" }}
-      >
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div
-              className="flex h-9 w-9 items-center justify-center rounded-full"
-              style={{ background: "var(--surface-muted)", color: "var(--foreground)" }}
-            >
-              <User className="h-4 w-4" strokeWidth={1.75} />
+          {step === 2 && (
+            <div className="flex flex-wrap gap-2">
+              {CHANNELS.map((c) => {
+                const active = channels.includes(c.k);
+                return (
+                  <button
+                    key={c.k}
+                    type="button"
+                    onClick={() => toggleChannel(c.k)}
+                    className="inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[13px] font-medium transition-colors"
+                    style={{
+                      background: active ? "var(--accent)" : "var(--surface)",
+                      color: active ? "var(--accent-ink)" : "var(--foreground)",
+                      borderColor: active ? "var(--accent)" : "var(--border)",
+                    }}
+                  >
+                    <span aria-hidden className="text-[14px] leading-none">{c.icon}</span>
+                    {c.k}
+                  </button>
+                );
+              })}
             </div>
-            <div className="leading-tight">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink-subtle)" }}>
-                Новая заявка
-              </div>
-              <div className="text-[14px] font-semibold" style={{ color: "var(--foreground)" }}>
-                Мария Волкова
-              </div>
+          )}
+
+          {step === 3 && (
+            <div className="grid gap-2">
+              {TONES.map((t) => {
+                const active = tone === t.k;
+                return (
+                  <button
+                    key={t.k}
+                    type="button"
+                    onClick={() => setTone(t.k)}
+                    className="flex items-start justify-between gap-3 rounded-2xl border px-4 py-3 text-left transition-colors"
+                    style={{
+                      background: active ? "rgba(45,106,79,0.08)" : "var(--surface)",
+                      borderColor: active ? "var(--accent)" : "var(--border)",
+                    }}
+                  >
+                    <div>
+                      <div className="text-[14px] font-semibold" style={{ color: "var(--foreground)" }}>
+                        {t.k}
+                      </div>
+                      <div className="text-[12.5px]" style={{ color: "var(--ink-muted)" }}>
+                        {t.desc}
+                      </div>
+                    </div>
+                    <span
+                      className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full border"
+                      style={{
+                        borderColor: active ? "var(--accent)" : "var(--border-strong)",
+                        background: active ? "var(--accent)" : "transparent",
+                      }}
+                    >
+                      {active && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-          </div>
-          <span
-            className="rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em]"
-            style={{ background: "var(--signal)", color: "var(--signal-foreground)" }}
-          >
-            Горячий
-          </span>
+          )}
         </div>
-
-        <dl className="space-y-2 text-[13px]">
-          <MockRow k="Имя" v="Мария Волкова" />
-          <MockRow k="Телефон" v="+7 921 555 12 34" />
-          <MockRow k="Бюджет" v="до 800 000 ₽" />
-          <div className="flex justify-between">
-            <dt style={{ color: "var(--ink-subtle)" }}>Статус</dt>
-            <dd className="flex items-center gap-1.5 font-semibold" style={{ color: "var(--accent)" }}>
-              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--accent)" }} />
-              Горячий
-            </dd>
-          </div>
-        </dl>
       </div>
 
-      <div
-        className="flex items-center justify-between rounded-xl border px-4 py-3 text-[13px]"
-        style={{ background: "var(--surface-muted)", borderColor: "var(--border)" }}
-      >
-        <span style={{ color: "var(--ink-muted)" }}>
-          Лидов сегодня: <span className="font-bold tabular" style={{ color: "var(--foreground)" }}>23</span>
-        </span>
-        <span aria-hidden style={{ color: "var(--border-strong)" }}>•</span>
-        <span style={{ color: "var(--ink-muted)" }}>
-          Конверсия <span className="font-bold tabular" style={{ color: "var(--accent)" }}>67%</span>
-        </span>
+      {/* Live preview lead card */}
+      <div className="px-5 pt-5 md:px-6">
+        <div
+          className="rounded-2xl border p-4"
+          style={{ background: "var(--background)", borderColor: "var(--border)" }}
+        >
+          <div className="mb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div
+                className="flex h-9 w-9 items-center justify-center rounded-full"
+                style={{ background: "var(--surface-muted)", color: "var(--foreground)" }}
+              >
+                <User className="h-4 w-4" strokeWidth={1.75} />
+              </div>
+              <div className="leading-tight">
+                <div
+                  className="text-[10px] font-semibold uppercase tracking-[0.14em]"
+                  style={{ color: "var(--ink-subtle)" }}
+                >
+                  Новая заявка · {niche}
+                </div>
+                <div
+                  key={NICHE_META[niche].lead}
+                  className="animate-fade-in text-[14px] font-semibold"
+                  style={{ color: "var(--foreground)" }}
+                >
+                  {NICHE_META[niche].lead}
+                </div>
+              </div>
+            </div>
+            <span
+              className="rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em]"
+              style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+            >
+              Горячий
+            </span>
+          </div>
+
+          <dl key={niche + tone} className="animate-fade-in space-y-1.5 text-[13px]">
+            <MockRow k="Услуга" v={NICHE_META[niche].service} />
+            <MockRow k="Бюджет" v={NICHE_META[niche].budget} />
+            <MockRow
+              k="Канал"
+              v={channels.length ? channels.join(" · ") : "не выбран"}
+            />
+            <MockRow k="Тон ответа" v={tone} />
+          </dl>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="px-5 pb-5 pt-4 md:px-6 md:pb-6">
+        <button
+          type="button"
+          onClick={scrollToPricing}
+          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full text-[14px] font-semibold transition-colors"
+          style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "var(--accent-hover)")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
+        >
+          Собрать агента
+          <ArrowRight className="h-4 w-4" strokeWidth={2} />
+        </button>
       </div>
     </div>
   );
 }
+
 
 function MockRow({ k, v }: { k: string; v: string }) {
   return (
