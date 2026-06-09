@@ -198,9 +198,9 @@ export function LeadWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Закрыть AI-менеджера" : "Открыть AI-менеджера"}
         aria-expanded={open}
-        className="group fixed bottom-[88px] right-4 z-[55] inline-flex h-14 items-center gap-2.5 rounded-full border border-foreground/15 bg-foreground pl-2 pr-5 text-background shadow-lift transition-[transform,box-shadow] duration-300 ease-quart hover:-translate-y-0.5 active:translate-y-0 md:bottom-6 md:right-6"
+        className="group fixed bottom-[84px] right-3 z-[55] inline-flex h-12 items-center gap-2 rounded-full border border-foreground/15 bg-foreground pl-1.5 pr-2 text-background shadow-lift transition-[transform,box-shadow] duration-300 ease-quart hover:-translate-y-0.5 active:translate-y-0 sm:pr-4 md:bottom-6 md:right-6 md:h-14 md:gap-2.5 md:pl-2 md:pr-5"
       >
-        <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-background/10 ring-1 ring-background/15">
+        <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-background/10 ring-1 ring-background/15 md:h-10 md:w-10">
           {open ? (
             <X className="h-4 w-4" strokeWidth={2} />
           ) : (
@@ -213,7 +213,7 @@ export function LeadWidget() {
             </>
           )}
         </span>
-        <span className="flex flex-col items-start leading-tight">
+        <span className="hidden flex-col items-start leading-tight sm:flex">
           <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-background/60">
             {open ? "" : "Avreya"}
           </span>
@@ -222,6 +222,7 @@ export function LeadWidget() {
           </span>
         </span>
       </button>
+
 
       {/* Backdrop (mobile) */}
       {open && (
