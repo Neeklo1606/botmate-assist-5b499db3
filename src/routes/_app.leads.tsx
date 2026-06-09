@@ -94,10 +94,10 @@ interface Lead {
   tasks: Task[];
 }
 
-const AVATAR_COLORS = ["#a8ff57", "#57c7ff", "#ff9f57", "#d57aff", "#ff6b9d", "#5eead4"];
+const AVATAR_COLORS = ["var(--color-accent)", "#57c7ff", "#ff9f57", "#d57aff", "#ff6b9d", "#5eead4"];
 
 const STATUS_META: Record<LeadStatus, { label: string; color: string; bg: string; border: string }> = {
-  new:      { label: "Новый",    color: "#a8ff57", bg: "#a8ff5710", border: "#a8ff5740" },
+  new:      { label: "Новый",    color: "var(--color-accent)", bg: "var(--color-accent)10", border: "var(--color-accent)40" },
   working:  { label: "В работе", color: "#57c7ff", bg: "#57c7ff10", border: "#57c7ff40" },
   meeting:  { label: "Встреча",  color: "#facc15", bg: "#facc1510", border: "#facc1540" },
   closed:   { label: "Закрыт",   color: "#86efac", bg: "#86efac10", border: "#86efac40" },

@@ -73,7 +73,7 @@ interface Visitor {
 }
 
 // Color palette for avatars
-const AVATAR_COLORS = ["#a8ff57", "#57c7ff", "#ff9f57", "#d57aff", "#ff6b9d", "#5eead4"];
+const AVATAR_COLORS = ["var(--color-accent)", "#57c7ff", "#ff9f57", "#d57aff", "#ff6b9d", "#5eead4"];
 
 // TODO: replace with real API
 const MOCK_VISITORS: Visitor[] = [
@@ -203,7 +203,7 @@ const fmtTotal = (s: number) => {
 };
 
 const STATUS_BORDER: Record<Status, string> = {
-  active: "border-l-[#a8ff57]",
+  active: "border-l-[var(--color-accent)]",
   recent: "border-l-[#facc15]",
   inactive: "border-l-[#3f3f3f]",
 };

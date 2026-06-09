@@ -38,7 +38,7 @@ const KIND_META: Record<
     label: "Сайт",
     icon: Globe,
     gradient:
-      "radial-gradient(80% 80% at 100% 0%, rgba(168,255,87,0.10) 0%, transparent 60%)",
+      "radial-gradient(80% 80% at 100% 0%, color-mix(in oklab, var(--color-accent) 10%, transparent) 0%, transparent 60%)",
   },
 };
 
@@ -52,8 +52,8 @@ export function ProjectCard({ project }: Props) {
     <article
       className="group relative flex h-full flex-col overflow-hidden rounded-xl p-5 transition-colors"
       style={{
-        background: `${meta.gradient}, #1a1a1a`,
-        border: "1px solid #2a2a2a",
+        background: `${meta.gradient}, var(--color-surface)`,
+        border: "1px solid var(--color-border)",
       }}
     >
       {/* Header */}
@@ -62,9 +62,9 @@ export function ProjectCard({ project }: Props) {
           <span
             className="flex h-9 w-9 items-center justify-center rounded-lg"
             style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid #2a2a2a",
-              color: "rgba(255,255,255,0.85)",
+              background: "var(--color-surface-muted)",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-ink-muted)",
             }}
             aria-hidden
           >
@@ -73,7 +73,7 @@ export function ProjectCard({ project }: Props) {
           <div className="min-w-0">
             <div
               className="text-[11px] font-medium uppercase tracking-wide"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              style={{ color: "var(--color-ink-muted)" }}
             >
               {meta.label}
             </div>
@@ -94,7 +94,7 @@ export function ProjectCard({ project }: Props) {
         ) : (
           <p
             className="text-xs"
-            style={{ color: "rgba(255,255,255,0.55)" }}
+            style={{ color: "var(--color-ink-muted)" }}
           >
             Черновик. Завершите бриф, чтобы запустить проект.
           </p>
@@ -105,7 +105,7 @@ export function ProjectCard({ project }: Props) {
       <div className="mt-4 flex items-center justify-between">
         <span
           className="text-[11px] tabular-nums"
-          style={{ color: "rgba(255,255,255,0.4)" }}
+          style={{ color: "var(--color-ink-subtle)" }}
         >
           Создан {formatDate(project.createdAt)}
         </span>
@@ -113,7 +113,7 @@ export function ProjectCard({ project }: Props) {
           to="/projects/$projectId"
           params={{ projectId: project.id }}
           className="inline-flex items-center gap-1 text-xs font-semibold transition-transform group-hover:translate-x-0.5"
-          style={{ color: project.status === "ready" ? "#a8ff57" : "rgba(255,255,255,0.65)" }}
+          style={{ color: project.status === "ready" ? "var(--color-accent)" : "var(--color-ink-muted)" }}
           aria-label={`Открыть проект ${project.name}`}
         >
           {project.status === "ready" ? "Открыть" : "Подробнее"}
@@ -132,15 +132,15 @@ function StatusBadge({ status }: { status: Project["status"] }) {
       <span
         className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
         style={{
-          background: "rgba(168,255,87,0.12)",
-          color: "#a8ff57",
-          border: "1px solid rgba(168,255,87,0.25)",
+          background: "color-mix(in oklab, var(--color-accent) 12%, transparent)",
+          color: "var(--color-accent)",
+          border: "1px solid color-mix(in oklab, var(--color-accent) 25%, transparent)",
         }}
       >
         <span
           aria-hidden
           className="h-1.5 w-1.5 rounded-full"
-          style={{ background: "#a8ff57" }}
+          style={{ background: "var(--color-accent)" }}
         />
         Готов
       </span>
@@ -166,9 +166,9 @@ function StatusBadge({ status }: { status: Project["status"] }) {
       <span
         className="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
         style={{
-          background: "rgba(255,255,255,0.05)",
-          color: "rgba(255,255,255,0.55)",
-          border: "1px solid #2a2a2a",
+          background: "var(--color-surface-muted)",
+          color: "var(--color-ink-muted)",
+          border: "1px solid var(--color-border)",
         }}
       >
         На паузе
@@ -179,9 +179,9 @@ function StatusBadge({ status }: { status: Project["status"] }) {
     <span
       className="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
       style={{
-        background: "rgba(255,255,255,0.05)",
-        color: "rgba(255,255,255,0.55)",
-        border: "1px solid #2a2a2a",
+        background: "var(--color-surface-muted)",
+        color: "var(--color-ink-muted)",
+        border: "1px solid var(--color-border)",
       }}
     >
       Черновик
@@ -201,16 +201,16 @@ function PreparingBody({ createdAt }: { createdAt: string }) {
 
   return (
     <div className="space-y-2">
-      <p className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>
+      <p className="text-xs" style={{ color: "var(--color-ink-muted)" }}>
         Настраиваем проект под ваш бриф. Обычно занимает ~30 секунд.
       </p>
       <div
         className="h-1.5 w-full overflow-hidden rounded-full"
-        style={{ background: "rgba(255,255,255,0.06)" }}
+        style={{ background: "var(--color-surface-muted)" }}
       >
         <div
           className="h-full rounded-full transition-[width] duration-500 ease-linear"
-          style={{ width: `${pct}%`, background: "#a8ff57" }}
+          style={{ width: `${pct}%`, background: "var(--color-accent)" }}
         />
       </div>
     </div>
@@ -270,17 +270,17 @@ function StatsGrid({
         <div
           key={it.label}
           className="rounded-md px-2.5 py-2"
-          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid #2a2a2a" }}
+          style={{ background: "var(--color-surface-muted)", border: "1px solid var(--color-border)" }}
         >
           <div
             className="text-[10px] uppercase tracking-wide"
-            style={{ color: "rgba(255,255,255,0.45)" }}
+            style={{ color: "var(--color-ink-subtle)" }}
           >
             {it.label}
           </div>
           <div
             className="mt-0.5 font-display text-lg font-semibold tabular-nums leading-none"
-            style={{ color: it.accent ? "#a8ff57" : "#ffffff" }}
+            style={{ color: it.accent ? "var(--color-accent)" : "var(--color-foreground)" }}
           >
             {it.value}
           </div>

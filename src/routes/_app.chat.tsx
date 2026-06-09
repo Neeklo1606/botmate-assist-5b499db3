@@ -67,7 +67,7 @@ interface Session {
   messages: Message[];
 }
 
-const AVATAR_COLORS = ["#a8ff57", "#57c7ff", "#ff9f57", "#d57aff", "#ff6b9d", "#5eead4"];
+const AVATAR_COLORS = ["var(--color-accent)", "#57c7ff", "#ff9f57", "#d57aff", "#ff6b9d", "#5eead4"];
 
 const STATUS_META: Record<SessionStatus, { label: string; dot: string; bar: string }> = {
   ai:       { label: "AI",        dot: "bg-accent", bar: "bg-accent" },

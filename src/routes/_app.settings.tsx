@@ -262,7 +262,7 @@ function BillingTab() {
 interface Member { id: string; name: string; email: string; role: "owner" | "admin" | "operator"; avatar: string; }
 
 const ROLE_META: Record<Member["role"], { label: string; color: string; bg: string }> = {
-  owner:    { label: "Владелец", color: "#a8ff57", bg: "#a8ff5710" },
+  owner:    { label: "Владелец", color: "var(--color-accent)", bg: "var(--color-accent)10" },
   admin:    { label: "Админ",    color: "#57c7ff", bg: "#57c7ff10" },
   operator: { label: "Оператор", color: "#facc15", bg: "#facc1510" },
 };
@@ -371,7 +371,7 @@ const POSITIONS = [
 ] as const;
 
 function WidgetTab() {
-  const [color, setColor] = useState("#a8ff57");
+  const [color, setColor] = useState("var(--color-accent)");
   const [position, setPosition] = useState<typeof POSITIONS[number]["id"]>("br");
   const [title, setTitle] = useState("Botmate");
   const [greeting, setGreeting] = useState("Здравствуйте! Чем могу помочь?");

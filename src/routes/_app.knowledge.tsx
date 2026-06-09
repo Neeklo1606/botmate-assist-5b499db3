@@ -87,7 +87,7 @@ const CATEGORY_META: Record<
   Category,
   { label: string; color: string; emoji: string }
 > = {
-  products: { label: "Продукты", color: "#a8ff57", emoji: "📁" },
+  products: { label: "Продукты", color: "var(--color-accent)", emoji: "📁" },
   pricing: { label: "Цены", color: "#57c7ff", emoji: "📁" },
   faq: { label: "FAQ", color: "#ff9f57", emoji: "📁" },
   contacts: { label: "Контакты", color: "#d57aff", emoji: "📁" },
@@ -443,7 +443,7 @@ function GraphView({
               y1={e.a.y}
               x2={e.b.x}
               y2={e.b.y}
-              stroke="#2a2a2a"
+              stroke="var(--color-border)"
               strokeWidth={1}
             />
           ))}
@@ -472,7 +472,7 @@ function GraphView({
                   y={p.y + p.r + 12}
                   textAnchor="middle"
                   fontSize={10}
-                  fill="rgba(255,255,255,0.7)"
+                  fill="var(--color-ink-muted)"
                   pointerEvents="none"
                 >
                   {p.title.length > 22 ? p.title.slice(0, 22) + "…" : p.title}
