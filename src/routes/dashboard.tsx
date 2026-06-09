@@ -205,7 +205,7 @@ function SectionView({
     case "channels":
       return <ChannelsSection agents={agents} />;
     case "leads":
-      return <LeadsSection />;
+      return <LeadsSection agents={agents} />;
     case "billing":
       return <BillingSection />;
     case "settings":
