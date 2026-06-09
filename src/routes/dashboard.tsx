@@ -165,16 +165,28 @@ function DashboardPage() {
           })}
         </div>
       </nav>
+
+      {wizardOpen && (
+        <AgentWizard onClose={() => setWizardOpen(false)} onSave={handleSaveAgent} />
+      )}
     </div>
   );
 }
 
 /* ---------- Sections ---------- */
 
-function SectionView({ id, onCreateAgent }: { id: SectionId; onCreateAgent: () => void }) {
+function SectionView({
+  id,
+  agents,
+  onCreateAgent,
+}: {
+  id: SectionId;
+  agents: Agent[];
+  onCreateAgent: () => void;
+}) {
   switch (id) {
     case "agents":
-      return <AgentsSection onCreate={onCreateAgent} />;
+      return <AgentsSection agents={agents} onCreate={onCreateAgent} />;
     case "knowledge":
       return <KnowledgeSection />;
     case "channels":
