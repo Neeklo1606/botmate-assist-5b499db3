@@ -75,6 +75,7 @@ function HomePage() {
     <div className="bg-background">
       <Hero />
       <TrustBar />
+      <ProductsTrio />
       <ProductScene />
       <HowItWorks />
       <Benefits />
