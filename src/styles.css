@@ -107,6 +107,7 @@
     0 2px 6px -1px oklch(0.2 0.01 110 / 0.05),
     0 24px 60px -24px oklch(0.2 0.01 110 / 0.14);
   --shadow-rim: inset 0 1px 0 0 oklch(1 0 0 / 0.65);
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.06);
   --shadow-focus: 0 0 0 4px oklch(0.54 0.062 118 / 0.18);
 }
 
