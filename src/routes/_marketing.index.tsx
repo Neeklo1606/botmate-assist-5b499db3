@@ -1266,6 +1266,13 @@ function HowItWorks() {
 /* ─────────────────── Benefits ─────────────────── */
 
 function Benefits() {
+  const trust: { icon: React.ComponentType<{ className?: string; strokeWidth?: number }>; label: string }[] = [
+    { icon: Server, label: "Своя инфраструктура" },
+    { icon: Shield, label: "Данные в РФ" },
+    { icon: Database, label: "Логи и история" },
+    { icon: CreditCard, label: "Оплата в рублях" },
+  ];
+
   return (
     <section className="py-20 md:py-28">
       <Container>
@@ -1275,9 +1282,12 @@ function Benefits() {
           desc="Менеджер закрывает первую линию. Вы работаете только с горячими лидами."
         />
 
-        <div className="mt-12 grid auto-rows-[minmax(160px,auto)] grid-cols-1 gap-4 md:grid-cols-6">
-          <div className="relative overflow-hidden rounded-2xl border border-foreground/30 bg-foreground p-7 text-background shadow-lift md:col-span-3 md:row-span-2 md:p-9">
-            {/* soft accent halo */}
+        <div className="mt-12 grid gap-4 lg:grid-cols-5">
+          {/* Dark hero card */}
+          <div
+            className="relative overflow-hidden border border-foreground/30 bg-foreground p-7 text-background shadow-lift md:p-9 lg:col-span-3"
+            style={{ borderRadius: 20 }}
+          >
             <div
               aria-hidden
               className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
@@ -1292,8 +1302,7 @@ function Benefits() {
                 Ни одного потерянного обращения, даже ночью и в выходные
               </h3>
               <p className="mt-4 max-w-md text-[14.5px] leading-relaxed text-background/75">
-                Менеджер на смене 24/7, отвечает за 7 секунд, доводит каждое
-                обращение до заявки.
+                Менеджер на смене 24/7, отвечает за 7 секунд, доводит каждое обращение до заявки.
               </p>
               <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-background/15">
                 <div className="bg-foreground p-4">
@@ -1315,12 +1324,7 @@ function Benefits() {
                   </dd>
                 </div>
               </dl>
-              {/* tiny sparkline */}
-              <svg
-                viewBox="0 0 200 36"
-                className="mt-5 h-8 w-full opacity-80"
-                aria-hidden
-              >
+              <svg viewBox="0 0 200 36" className="mt-5 h-8 w-full opacity-80" aria-hidden>
                 <defs>
                   <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
                     <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.45" />
@@ -1341,42 +1345,56 @@ function Benefits() {
             </div>
           </div>
 
-          <BentoCell
-            className="md:col-span-3"
-            icon={Inbox}
-            title="Готовая заявка, а не «надо перезвонить»"
-            desc="Менеджер сам собирает имя, контакт и нужные поля. Вы получаете карточку, по которой можно работать."
-          />
-          <BentoCell
-            className="md:col-span-3"
-            icon={Workflow}
-            title="Передача в нужное место"
-            desc="Telegram-чат отдела, amoCRM, Bitrix24, Google Sheets. Без копипаста и потерь."
-          />
-
-          <BentoCell
-            className="md:col-span-2"
-            icon={Clock}
-            title="24/7 без выходных"
-            desc="Работает ночью, в праздники, в часы пик. Без выгорания."
-          />
-          <BentoCell
-            className="md:col-span-2"
-            icon={Shield}
-            title="Контроль над данными"
-            desc="Логи диалогов и заявок остаются у вас. Никаких сторонних аккаунтов."
-          />
-          <BentoCell
-            className="md:col-span-2"
-            icon={CreditCard}
-            title="Понятная цена в ₽"
-            desc="Один тариф в месяц. Без зарубежных подписок и пересчётов."
-          />
+          {/* Two light cards stacked */}
+          <div className="grid gap-4 lg:col-span-2">
+            <BentoCell
+              icon={Inbox}
+              title="Готовая заявка, а не «надо перезвонить»"
+              desc="Менеджер сам собирает имя, контакт и нужные поля. Вы получаете карточку, по которой можно работать."
+            />
+            <BentoCell
+              icon={Workflow}
+              title="Передача в нужное место"
+              desc="Telegram-чат отдела, amoCRM, Bitrix24, Google Sheets. Без копипаста и потерь."
+            />
+          </div>
         </div>
+
+        {/* Compact trust strip — 4 in line / 2x2 on mobile */}
+        <ul
+          className="mt-6 grid grid-cols-2 gap-3 border md:grid-cols-4"
+          style={{
+            background: "var(--surface)",
+            borderColor: "var(--border)",
+            borderRadius: 20,
+            padding: 16,
+          }}
+        >
+          {trust.map(({ icon: Icon, label }) => (
+            <li
+              key={label}
+              className="flex items-center gap-3 px-2 py-1.5"
+            >
+              <span
+                className="flex h-9 w-9 flex-none items-center justify-center rounded-xl"
+                style={{ background: "var(--surface-muted)", color: "var(--accent)" }}
+              >
+                <Icon className="h-4 w-4" strokeWidth={1.75} />
+              </span>
+              <span
+                className="text-[13.5px] font-semibold leading-tight"
+                style={{ color: "var(--foreground)" }}
+              >
+                {label}
+              </span>
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
   );
 }
+
 
 function BentoCell({
   icon: Icon,
