@@ -395,6 +395,130 @@ function TrustBar() {
   );
 }
 
+/* ─────────────────── Launch steps — 4 cards ─────────────────── */
+
+function LaunchSteps() {
+  const steps = [
+    {
+      n: "01",
+      icon: "✦",
+      title: "Бриф за 30 минут",
+      text:
+        "Рассказываете о бизнесе, продуктах и типичных вопросах клиентов. Без ТЗ и технических документов.",
+    },
+    {
+      n: "02",
+      icon: "⚙",
+      title: "Настройка под ваш бизнес",
+      text:
+        "Загружаем базу знаний, прайс и скрипты. AI отвечает в вашем стиле, не шаблонами.",
+    },
+    {
+      n: "03",
+      icon: "🔗",
+      title: "Подключение каналов",
+      text:
+        "Telegram, сайт, формы, Avito. Заявки уходят в CRM, Bitrix24 или Google Sheets.",
+    },
+    {
+      n: "04",
+      icon: "⏱",
+      title: "Запуск и поддержка",
+      text:
+        "Работает с первого дня. Поддержка по будням, обновления сценариев включены в тариф.",
+    },
+  ];
+
+  return (
+    <section className="py-20 md:py-28" style={{ background: "var(--surface-muted)" }}>
+      <Container>
+        <div className="mx-auto max-w-3xl text-center">
+          <div
+            className="text-[12px] font-semibold uppercase tracking-[0.18em]"
+            style={{ color: "var(--accent)" }}
+          >
+            Как мы работаем
+          </div>
+          <h2
+            className="mt-4 font-display text-[36px] leading-[1.05] md:text-[52px]"
+            style={{ fontWeight: 800, letterSpacing: "-0.03em", color: "var(--foreground)" }}
+          >
+            От заявки до клиента
+            <br />
+            за 3 дня
+          </h2>
+          <p
+            className="mt-4 text-[16px] md:text-[18px]"
+            style={{ color: "var(--ink-muted)", lineHeight: 1.7, fontWeight: 500 }}
+          >
+            Внедряем сами. Вам не нужен разработчик, интегратор или маркетолог.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <div
+              key={s.n}
+              className="relative flex flex-col overflow-hidden rounded-2xl border"
+              style={{
+                background: "var(--surface)",
+                borderColor: "var(--border)",
+                padding: 28,
+                minHeight: 260,
+              }}
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute font-display tabular"
+                style={{
+                  top: 12,
+                  right: 18,
+                  fontSize: 96,
+                  lineHeight: 1,
+                  fontWeight: 800,
+                  letterSpacing: "-0.04em",
+                  color: "var(--foreground)",
+                  opacity: 0.08,
+                }}
+              >
+                {s.n}
+              </span>
+
+              <div
+                className="relative z-10 flex h-11 w-11 items-center justify-center rounded-xl text-[20px]"
+                style={{ background: "var(--surface-muted)", color: "var(--accent)" }}
+                aria-hidden
+              >
+                {s.icon}
+              </div>
+
+              <h3
+                className="relative z-10 mt-6 font-display text-[18px]"
+                style={{ fontWeight: 800, letterSpacing: "-0.02em", color: "var(--foreground)" }}
+              >
+                {s.title}
+              </h3>
+              <p
+                className="relative z-10 mt-2 text-[14.5px]"
+                style={{ color: "var(--ink-muted)", lineHeight: 1.6 }}
+              >
+                {s.text}
+              </p>
+
+              <div
+                className="relative z-10 mt-auto pt-6 text-[11px] font-semibold uppercase tracking-[0.18em]"
+                style={{ color: "var(--ink-subtle)" }}
+              >
+                • Шаг {i + 1} из 4
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 /* ─────────────────── Products trio ─────────────────── */
 
 function ProductsTrio() {
