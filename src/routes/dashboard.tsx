@@ -909,7 +909,7 @@ function ChannelsSection({ agents }: { agents: Agent[] }) {
   );
 }
 
-function LeadsSection() {
+
 type LeadStatus = "hot" | "warm" | "cold";
 
 interface Lead {
