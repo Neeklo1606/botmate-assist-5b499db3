@@ -20,6 +20,9 @@ import {
   MoreHorizontal,
   MessageSquare,
   Inbox,
+  UploadCloud,
+  FileText,
+  Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { NeekloLogo } from "@/components/brand/neeklo-logo";
