@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_authshell/login")({
 });
 
 function LoginPage() {
-  const { redirect } = useSearch({ from: "/_auth/login" });
+  const { redirect } = useSearch({ from: "/_authshell/login" });
   const navigate = useNavigate();
   const login = useLoginWithEmail();
   const [email, setEmail] = useState("");

@@ -20,7 +20,7 @@ export const Route = createFileRoute("/_authshell/callback")({
 
 function CallbackPage() {
   const navigate = useNavigate();
-  const { redirect } = useSearch({ from: "/_auth/callback" });
+  const { redirect } = useSearch({ from: "/_authshell/callback" });
   const login = useLoginWithTelegram();
 
   useEffect(() => {
